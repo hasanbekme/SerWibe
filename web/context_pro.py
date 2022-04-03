@@ -178,6 +178,7 @@ product = {
         "prod_04": "Rasm",
         "prod_05": "Mavjud",
         "prod_06": "Narx",
+        "prod_06_": "Narx/Tan narx",
         "prod_07": "Kategoriya",
         "prod_08": "Tahrir",
         "prod_09": "O`chirish",
