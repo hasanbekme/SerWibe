@@ -482,6 +482,7 @@ settings_window = {
         "s_18": "Bekor qilish",
         "s_19": "Saqlash",
         "s_20": "Brauzerda ochish",
+        "s_21": "Internet mavjud emas, iltimos tekshirib qayta urining!!!"
     },
     'uzk': {
         "s_1": "Асосий",
@@ -503,7 +504,8 @@ settings_window = {
         "s_17": "Принтер ўлчами:",
         "s_18": "Бекор қилиш",
         "s_19": "Сақлаш",
-        "s_20": "Браузерда очиш"
+        "s_20": "Браузерда очиш",
+        "s_21": "Интернет мавжуд эмас, илтимос текшириб қайта урининг!!!"
     }
 }
 

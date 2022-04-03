@@ -22,6 +22,7 @@ class ActivationDialog(QDialog, activation_dialog.Ui_Dialog):
         self.copy_button.pressed.connect(self.copy_string)
         self.paste_button.pressed.connect(self.paste_key)
         self.activate_button.pressed.connect(self.process_activation)
+        self.encoded_text.textChanged.connect(self.check_input)
         self.translate_ui()
 
     def translate_ui(self):
@@ -35,6 +36,16 @@ class ActivationDialog(QDialog, activation_dialog.Ui_Dialog):
             self.start_date.setMinimumDate(datetime.datetime.today())
             self.end_date.setMinimumDate(datetime.datetime.today() + timedelta(days=6))
 
+    def check_input(self):
+        if self.encoded_text.text() != "":
+            self.start_date.setEnabled(False)
+            self.end_date.setEnabled(False)
+            self.ok_button.setEnabled(False)
+        else:
+            self.start_date.setEnabled(True)
+            self.end_date.setEnabled(True)
+            self.ok_button.setEnabled(True)
+
     def copy_string(self):
         clipboard.copy(self.given_text.text())
 
@@ -42,7 +53,8 @@ class ActivationDialog(QDialog, activation_dialog.Ui_Dialog):
         self.encoded_text.setText(clipboard.paste())
 
     def balance_dates(self):
-        print(self.start_date.date().toPyDate())
+        self.given_text.setText("")
+        self.encoded_text.setText("")
         self.end_date.setMinimumDate(self.start_date.date().toPyDate() + timedelta(days=6))
         self.end_date.setDate(self.start_date.date().toPyDate() + timedelta(days=6))
 
@@ -52,7 +64,7 @@ class ActivationDialog(QDialog, activation_dialog.Ui_Dialog):
         self.given_text.setText(self.cryptography.encrypt(activation_string))
 
     def process_activation(self):
-        if self.encoded_text.text() == encode_string(self.given_text.text()):
+        if self.encoded_text.text() == encode_string(self.given_text.text()) and self.given_text.text() != "":
             if self.license.has_license:
                 self.license.create_license(self.license.start_date, self.end_date.date().toPyDate())
             else:

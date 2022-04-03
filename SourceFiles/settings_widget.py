@@ -15,7 +15,7 @@ from datetime import datetime
 import win32print
 from PyQt5.QtCore import QSettings, QThread, pyqtSignal
 from PyQt5.QtGui import QCloseEvent, QIcon
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QMessageBox
 
 from Resources.ui import settings_widget
 from utils.bot_config import logs_channel, bot
@@ -26,21 +26,31 @@ from utils.system_settings import Settings
 
 
 class LogsThread(QThread):
+    error_msg = pyqtSignal()
+
     def run(self):
-        todays_log = get_env() + "\\" + datetime.today().strftime("logs_%d-%m-%Y.log")
-        doc = open(todays_log, 'r+')
-        text = doc.readlines()
-        if len(text) == 0:
-            doc.write("No logs yet")
-        doc.close()
-        doc = open(todays_log, 'r')
-        bot.send_document(logs_channel, doc, caption=f"#logs <b>{datetime.today().strftime('%d/%M/%Y %H:%M')}</b>")
+        try:
+            todays_log = get_env() + "\\" + datetime.today().strftime("logs_%d-%m-%Y.log")
+            doc = open(todays_log, 'r+')
+            text = doc.readlines()
+            if len(text) == 0:
+                doc.write("No logs yet")
+            doc.close()
+            doc = open(todays_log, 'r')
+            bot.send_document(logs_channel, doc, caption=f"#logs <b>{datetime.today().strftime('%d/%M/%Y %H:%M')}</b>")
+        except:
+            self.error_msg.emit()
 
 
 class ReportThread(QThread):
+    error_msg = pyqtSignal()
+
     def run(self):
-        report_doc = open(get_env() + "\\" + export_archive_data(start_date='today'), 'rb')
-        bot.send_document(chat_id=Settings().get(key='admin_id', tp=int), document=report_doc)
+        try:
+            report_doc = open(get_env() + "\\" + export_archive_data(start_date='today'), 'rb')
+            bot.send_document(chat_id=Settings().get(key='admin_id', tp=int), document=report_doc)
+        except:
+            self.error_msg.emit()
 
 
 def open_id_bot():
@@ -126,11 +136,21 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
 
     def send_admin_report(self):
         self.report_thread = ReportThread()
+        self.report_thread.error_msg.connect(self.connection_error)
         self.report_thread.start()
 
     def send_logs_func(self):
         self.logs_thread = LogsThread()
+        self.logs_thread.error_msg.connect(self.connection_error)
         self.logs_thread.start()
+
+    def connection_error(self):
+        mb = QMessageBox()
+        mb.setIcon(QMessageBox.Critical)
+        mb.setText(_('s_21'))
+        mb.setWindowTitle("Error")
+        mb.setStandardButtons(QMessageBox.Ok)
+        mb.exec_()
 
     def admin_id_changed(self):
         self.settings.set(key='admin_id', value=self.admin_id_edit.text())
