@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="main">
+    <file>open_icon.png</file>
+    <file>stop_icon.png</file>
+    <file>logo.png</file>
+  </qresource>
+</RCC>
