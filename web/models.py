@@ -1,11 +1,13 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+
 
 class Worker(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     first_name = models.CharField(max_length=25, verbose_name="Ism")
     last_name = models.CharField(max_length=25, verbose_name="Familiya")
-    position = models.CharField(max_length=20, verbose_name="Lavozim", choices=(("waiter", "Offitsant"), ("admin", "Admin")))
+    position = models.CharField(max_length=20, verbose_name="Lavozim",
+                                choices=(("waiter", "Offitsant"), ("admin", "Admin")))
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.position})"

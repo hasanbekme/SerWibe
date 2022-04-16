@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+
 
 # Create your views here.
 
@@ -10,13 +12,13 @@ def signin(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
             user = authenticate(request, username=username, password=password)
-            if (user is not None) and username=="admin":
+            if (user is not None) and username == "admin":
                 login(request, user)
                 return redirect('dashboard')
             elif user is not None:
-                #messages.info(request, 'Login yoki parolda xatolik!')
+                # messages.info(request, 'Login yoki parolda xatolik!')
                 login(request, user)
                 return redirect('table')
 
-        context={}
+        context = {}
         return render(request, 'login.html', context)
