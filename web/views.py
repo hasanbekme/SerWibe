@@ -22,3 +22,8 @@ def signin(request):
 
         context = {}
         return render(request, 'login.html', context)
+
+
+#@login_required(login_url='/')
+def dashboard(request):
+    return render(request, 'dashboard.html')

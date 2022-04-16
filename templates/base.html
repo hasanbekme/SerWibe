@@ -13,12 +13,32 @@
     <link rel="stylesheet" href="/static/css/style.css">
     <style>
 
-
-        .bg-primary {
-            background-color: #3445b4 !important;
+        .dcard{
+            height: 150px;
+            text-align: left;
+            position: relative;
         }
-
-
+        .dcard-decimal{
+            font-size: 3em;
+            color: white;
+            width: 90px;
+            padding-left: 15px;
+            text-align: left;
+            display: inline-block;
+        }
+        .dcard>i{
+            font-size: 5.5em;
+            position: absolute;
+            color: black;
+            opacity: 0.1;
+            right: 30px;
+            top: 20px;
+        }
+        .dcard-about{
+            margin-top: 30px;
+            font-size: 1.5em;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
@@ -32,22 +52,22 @@
                 <span class="sr-only">Toggle Menu</span>
             </button>
         </div>
-        <div style="position: fixed; margin:10px">
-            <h1><a href="{% url 'dashboard' %}" class="logo ml-3"><img src="/static/img/logo.png" style="width:150px;"></a>
+        <div style="position: fixed; margin:10px;">
+            <h1 style="text-align: center; width: 100%"><a href="{% url 'dashboard' %}" class="logo ml-4" style="text-align: center;"><img src="/static/img/logo.png" style="width:160px;"></a>
+                <div style="color:#fff; font-weight: 800;" class="mb-3 ml-3">SERWIBE</div>
             </h1>
 
 
             <ul class="list-unstyled components ml-2">
+                <li><a href="{% url 'dashboard' %}"><i class="fa fa-tachometer" aria-hidden="true"></i> DASHBOARD</a></li>
                 <li><a href="{% url 'dashboard' %}"><i class="fa fa-money"></i> TUSHUM</a></li>
-                <li><a href="/signup"><i class="fa fa-user"></i> ISHCHI</a></li>
+                <li><a href="/signup"><i class="fa fa-user"></i> XODIMLAR</a></li>
                 <li><a href="/products"><i class="fa fa-cutlery" aria-hidden="true"></i> TAOMLAR</a></li>
-                <li><a href="/ombor"><i class="fa fa-shopping-cart"></i> OMBOR</a></li>
-                <li><a href="/admin"><i class="fa fa-cog" aria-hidden="true"></i> ADMIN</a></li>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
+                <li><a href="/ombor"><i class="fa fa-list-alt" aria-hidden="true"></i> KATEGORIYA</a></li>
+                <li><a href="/ombor"><i class="fa fa-table"></i> STOLLAR</a></li>
+                <li><a href="/admin"><i class="fa fa-server" aria-hidden="true"></i> SERVER</a></li>
+                <li><a href="/admin"><i class="fa fa-file" aria-hidden="true"></i> HUJJAT</a></li>
+                
                 <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> CHIQISH</a></li>
 
 
