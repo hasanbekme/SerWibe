@@ -3,8 +3,8 @@ from django.contrib import admin
 from web.models import *
 
 
-@admin.register(User)
-class UserAdmin(admin.ModelAdmin):
+@admin.register(Worker)
+class WorkerAdmin(admin.ModelAdmin):
     pass
 
 
