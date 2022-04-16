@@ -1,6 +1,7 @@
 from web import views
 from django.urls import path
 
-urlpatterns = [
 
+urlpatterns = [
+	path('', views.signin, name='signin'),
 ]

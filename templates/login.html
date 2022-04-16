@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<link rel="shortcut icon" href="/static/img/logo.png" type="image/x-icon" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="/static/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/css/style.css">
+
+	<title>SERWIBE</title>
+	<style type="text/css">
+		.text-left{
+			border: 2px solid gray;
+		}
+	</style>
+</head>
+<body >
+<div class="login-form col-11 col-sm-4 shadow mt-5 p-4 " style="background-color:white; margin: auto;">
+   			<form method="POST" >
+			{% csrf_token %}
+        <h2 class="text-center">
+        	<img src="/static/img/logo.png" style="width:230px; box-shadow: 3px 2px 5px 2px #00000055; border-radius: 50%;" class="m-2 mb-">
+        	<div style="color:#075295; font-weight: 800;" class="mb-3">SERWIBE</div>
+        </h2>       
+        <div class="form-group">
+            <input type="text" class="input-group btn text-left" placeholder="Username" required="required">
+        </div>
+        <div class="form-group">
+            <input type="password" class="input-group btn text-left" placeholder="Password" required="required">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Kirish</button>
+        </div>
+        <div class="clearfix">
+        </div>        
+  </form>
+
+</div>
+			
+
+			
+
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/main.js"></script>
+	</body>
+</html>

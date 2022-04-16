@@ -1,0 +1,123 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+
+  	<title>Halol Cafe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="shortcut icon" href="/static/img/logo.png" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+		<link rel="stylesheet" href="/static/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/static/css/style.css">
+		<style>
+
+
+			.bg-primary{
+				background-color: #3445b4 !important;
+			}
+
+  
+
+  
+
+		</style>
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar" >
+				<div class="custom-menu" id="siljish">
+					<button type="button" id="sidebarCollapse" class="btn btn-primary" style="position: fixed; margin:0 0 0 -60px">
+	          <i class="fa fa-bars"></i>
+	          <span class="sr-only">Toggle Menu</span>
+	        </button>
+        </div>
+				<div style="position: fixed; margin:10px">
+				  <h1 ><a href="{% url 'dashboard' %}" class="logo ml-3"><img src="/static/img/logo.png" style="width:150px;"></a></h1>
+				  
+			
+				
+	        <ul class="list-unstyled components ml-2">
+	        	<li><a href="{% url 'dashboard' %}"><i class="fa fa-money"></i> TUSHUM</a></li>
+				<li><a href="/signup"><i class="fa fa-user"></i> ISHCHI</a></li>
+				<li><a href="/products"><i class="fa fa-cutlery" aria-hidden="true"></i> TAOMLAR</a></li>
+				<li><a href="/ombor"><i class="fa fa-shopping-cart"></i> OMBOR</a></li>
+				<li><a href="/admin"><i class="fa fa-cog" aria-hidden="true"></i> ADMIN</a></li>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> CHIQISH</a></li>
+
+
+				</ul>
+
+	       
+	       
+
+	      </div>
+    	</nav>
+
+      
+<div class="container" onmousemove="sichqon(event)">
+  <!-- Page Content  -->
+  <div id="content"  style="padding: 10px 10px 0 20px; ">
+	
+{% block content %}
+
+
+{% endblock %}
+</div>
+
+
+<span id="myUL" class="d-flex align-content-stretch flex-wrap" style="list-style-type:none;">
+
+  
+
+
+	
+</span>
+
+<script>
+function dsd(soz){
+input = soz;
+document.getElementById('myInput').value = input;
+myFunction();
+}
+
+function myFunction() {
+var input, filter, ul, li, a, i, txtValue;
+input = document.getElementById("myInput");
+filter = input.value.toUpperCase();
+ul = document.getElementById("myUL");
+li = ul.getElementsByTagName("li");
+for (i = 0; i < li.length; i++) {
+	a = li[i].getElementsByTagName("a")[0];
+	txtValue = a.textContent || a.innerText;
+	if (txtValue.toUpperCase().indexOf(filter) > -1) {
+		li[i].style.display = "";
+	} else {
+		li[i].style.display = "none";
+	}
+}
+}
+</script>
+	</div>
+
+</div>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/main.js"></script>
+	
+	<script>
+		function sichqon(e) {
+		  var y = e.clientY;
+			document.getElementById('siljish').style.top = y-30 + 'px';
+		}
+	</script>
+  </body>
+</html>

@@ -1,7 +1,8 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class User(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     first_name = models.CharField(max_length=25, verbose_name="Ism")
     last_name = models.CharField(max_length=25, verbose_name="Familiya")
     middle_name = models.CharField(max_length=25, verbose_name="Sharif", blank=True)
@@ -12,8 +13,8 @@ class User(models.Model):
         return f"{self.first_name} {self.last_name} ({self.position})"
 
     class Meta:
-        verbose_name = "Foydalanuvchi"
-        verbose_name_plural = "Foydalanuvchilar"
+        verbose_name = "Xodim"
+        verbose_name_plural = "Xodimlar"
 
 
 class Room(models.Model):
