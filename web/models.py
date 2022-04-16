@@ -5,9 +5,7 @@ class User(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     first_name = models.CharField(max_length=25, verbose_name="Ism")
     last_name = models.CharField(max_length=25, verbose_name="Familiya")
-    middle_name = models.CharField(max_length=25, verbose_name="Sharif", blank=True)
     position = models.CharField(max_length=20, verbose_name="Lavozim", choices=(("waiter", "Offitsant"), ("admin", "Admin")))
-    password = models.CharField(max_length=50)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.position})"
