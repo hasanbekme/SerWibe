@@ -11,7 +11,10 @@ def print_receipt(order: Order):
     doc.begin_document()
     y = 0
     doc.set_font(family="Arial", size=20, bold=True)
-    doc.aligned_text(Settings().get(key="company_name", tp=str), y=y, align="center")
+    company_name = Settings().get(key="company_name", tp=str)
+    if company_name == "":
+        company_name = "SerWibe"
+    doc.aligned_text(company_name, y=y, align="center")
     y += 400
     doc.set_font(family="Arial", size=8, bold=False)
     if Settings().get("address", tp=str):
