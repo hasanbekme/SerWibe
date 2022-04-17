@@ -12,6 +12,10 @@ class Worker(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.position})"
 
+    @property
+    def full_name(self):
+        return f"{self.last_name} {self.first_name}"
+
     class Meta:
         verbose_name = "Xodim"
         verbose_name_plural = "Xodimlar"
@@ -69,7 +73,7 @@ class Food(models.Model):
 
 
 class Order(models.Model):
-    waiter = models.ForeignKey(to=User, verbose_name="Offitsant", on_delete=models.PROTECT)
+    waiter = models.ForeignKey(to=Worker, verbose_name="Offitsant", on_delete=models.PROTECT)
     created_at = models.DateTimeField(verbose_name="Sanasi", auto_now_add=True)
     table = models.ForeignKey(to=Table, verbose_name="Stol", on_delete=models.PROTECT)
     is_completed = models.BooleanField(default=False)
@@ -97,7 +101,7 @@ class OrderItem(models.Model):
 
     @property
     def total_price(self):
-        return self.meal.price * self.quantity
+        return float(self.meal.price * self.quantity)
 
     def __str__(self):
         return f"{self.order.id}:{self.id}"

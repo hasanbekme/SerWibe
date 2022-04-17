@@ -134,3 +134,4 @@ dmypy.json
 # utils
 logs.log
 resource_updater.py
+test.py

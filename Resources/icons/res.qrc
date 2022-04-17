@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="main">
+    <file>settings.png</file>
     <file>open_icon.png</file>
     <file>stop_icon.png</file>
     <file>logo.png</file>
