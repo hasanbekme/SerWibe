@@ -27,3 +27,18 @@ def signin(request):
 #@login_required(login_url='/')
 def dashboard(request):
     return render(request, 'dashboard.html')
+
+
+#@login_required(login_url='/')
+def income(request):
+    return render(request, 'income.html')
+
+
+#@login_required(login_url='/')
+def worker(request):
+    return render(request, 'worker.html')
+
+
+#@login_required(login_url='/')
+def product(request):
+    return render(request, 'product.html')
