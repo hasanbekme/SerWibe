@@ -1,8 +1,14 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
 
 # Create your views here.
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('signin')
+
 
 def signin(request):
     if request.user.is_authenticated:
@@ -16,9 +22,8 @@ def signin(request):
                 login(request, user)
                 return redirect('dashboard')
             elif user is not None:
-                # messages.info(request, 'Login yoki parolda xatolik!')
                 login(request, user)
-                return redirect('table')
+                return redirect('room')
 
         context = {}
         return render(request, 'login.html', context)
@@ -42,3 +47,23 @@ def worker(request):
 #@login_required(login_url='/')
 def product(request):
     return render(request, 'product.html')
+
+
+#@login_required(login_url='/')
+def category(request):
+    return render(request, 'category.html')
+
+
+#@login_required(login_url='/')
+def table(request):
+    return render(request, 'table.html')
+
+
+#@login_required(login_url='/')
+def order(request):
+    return render(request, 'order.html')
+
+
+#@login_required(login_url='/')
+def document(request):
+    return render(request, 'document.html')

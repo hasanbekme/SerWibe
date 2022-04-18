@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<br>
+
+<form class="container" style="width:100%; background:white; padding:25px; border-radius: 15px; box-shadow: 1px 2px 3px gray;">
+	<input type="date" name="fir" id="fir" class="form-item m-2">dan-
+	<input type="date" name="sec" id="sec" class="form-item m-2">gacha 
+	<button type="sumbit"  class="btn btn-primary m-2"><i class="fa fa-filter"></i>Filter</button>
+</form>
+<br>
+
+<div class="row">
+		<div class="col-lg-3  col-10 dcard2 btn btn-danger m-4">
+			<div class="dcard-decimal">6</div>
+			<i class="fa fa-users"></i>
+			<div class="dcard-about2">Xodimlar</div>
+		</div>
+		<div class="col-lg-3  col-10 dcard2 btn btn-warning m-4">
+			<div class="dcard-decimal">31</div>
+			<i class="fa fa-money"></i>
+			<div class="dcard-about2">Buyurtmalar</div>
+		</div>
+		<div class="col-lg-3  col-10 dcard2 btn btn-info m-4">
+			<div class="dcard-decimal">12</div>
+			<i class="fa fa-shopping-cart"></i>
+			<div class="dcard-about2">Savdo</div>
+		</div>
+</div>
+
+<script type="text/javascript">
+	var year = new URL(location.href).searchParams.get('fir');
+	document.getElementById("fir").value=year;
+	var year = new URL(location.href).searchParams.get('sec');
+	document.getElementById("sec").value=year;
+</script>
+
+
+{% endblock %}

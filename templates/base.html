@@ -37,6 +37,27 @@
             font-size: 1.5em;
             text-transform: uppercase;
         }
+
+        .dcard2{
+            height: 250px;
+            text-align: left;
+            position: relative;
+        }
+
+        .dcard2>i{
+            font-size: 8.5em;
+            position: absolute;
+            color: black;
+            opacity: 0.1;
+            right: 20%;
+            top: 60px;
+        }
+
+        .dcard-about2{
+            margin-top: 130px;
+            font-size: 1.5em;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
@@ -58,13 +79,13 @@
 
             <ul class="list-unstyled components ml-2">
                 <li><a href="{% url 'dashboard' %}"><i class="fa fa-tachometer" aria-hidden="true"></i> DASHBOARD</a></li>
-                <li><a href="{% url 'income' %}"><i class="fa fa-money"></i> TUSHUM</a></li>
+                <li><a href="{% url 'income' %}"><i class="fa fa-shopping-cart"></i> SAVDO</a></li>
                 <li><a href="{% url 'worker' %}"><i class="fa fa-user"></i> XODIMLAR</a></li>
                 <li><a href="{% url 'product' %}"><i class="fa fa-cutlery" aria-hidden="true"></i> TAOMLAR</a></li>
-                <li><a href="/ombor"><i class="fa fa-list-alt" aria-hidden="true"></i> KATEGORIYA</a></li>
-                <li><a href="/ombor"><i class="fa fa-table"></i> STOLLAR</a></li>
-                <li><a href="/admin"><i class="fa fa-server" aria-hidden="true"></i> SERVER</a></li>
-                <li><a href="/admin"><i class="fa fa-file" aria-hidden="true"></i> HUJJAT</a></li>
+                <li><a href="{% url 'category' %}"><i class="fa fa-list-alt" aria-hidden="true"></i> KATEGORIYA</a></li>
+                <li><a href="{% url 'table' %}"><i class="fa fa-table"></i> STOLLAR</a></li>
+                <li><a href="{% url 'order' %}"><i class="fa fa-money" aria-hidden="true"></i> ORDER</a></li>
+                <li><a href="{% url 'document' %}"><i class="fa fa-file" aria-hidden="true"></i> HUJJAT</a></li>
                 
                 <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> CHIQISH</a></li>
 
