@@ -13,16 +13,20 @@
     <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">O`chirish</td>
   </tr>
     
-  <tr>
-    <td>1</td>
-    <td>Bunyodbek Abdurazzaqov</td>
-    <td>username</td>
-    <td>ADMIN</td>
-    <td><a href="#"><button type="button" class="btn btn-info"><i class="fa fa-eye"></i>Tahlil</button></a></td>
-    <td><a href="#"><button type="button" class="btn btn-warning"><i class="fa fa-edit"></i>Tahrir</button></a></td>
-    <td><a href="#"><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>O`chirish</button></a></td>
-  </tr>
-  
+
+    
+
+  {% for i in workers %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.full_name }}</td>
+      <td>{{ i.user.username }}</td>
+      <td>{{ i.position }}</td>
+      <td><a href="#"><button type="button" class="btn btn-info"><i class="fa fa-eye"></i>Tahlil</button></a></td>
+      <td><a href="#"><button type="button" class="btn btn-warning"><i class="fa fa-edit"></i>Tahrir</button></a></td>
+      <td><a href="#"><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>O`chirish</button></a></td>
+    </tr>
+  {% endfor %}
 </table>
 
   
@@ -50,7 +54,9 @@
         <table>
         
           <tr><td style="text-align: right;">Login:</td><td>{{ form.username }}</td></tr>
-          <tr><td style="text-align: right;"><br>Ism Familiyasi:</td><td>{{ pro.name }}</td></tr>
+          <tr><td style="text-align: right;"><br>Ism:</td><td>{{ profil_form.first_name }}</td></tr>
+          <tr><td style="text-align: right;"><br>Familiyasi:</td><td>{{ profil_form.last_name }}</td></tr>
+          <tr><td style="text-align: right;"><br>Turi:</td><td>{{ profil_form.position }}</td></tr>
           <tr><td style="text-align: right;"><br>Parol:</td><td>{{ form.password1 }}</td></tr>
           <tr><td style="text-align: right;"><br>Qayta parol:</td><td>{{ form.password2 }}</td></tr>
 

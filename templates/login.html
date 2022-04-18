@@ -43,13 +43,17 @@
   			<div class="input-group-prepend">
     			<span class="input-group-text btn btn-primary text-white" id="basic-addon1">@</span>
   			</div>
-  			<input type="text" class="form-control" placeholder="Username" name="username">
+  			<select class="form-control" placeholder="Username" name="username">
+  				{% for user in users %}
+  				<option value="{{ user.username }}">{{ user.username }} - {{ user.worker. }}</option>
+  				{% endfor %}
+  			</select>
 		</div>
         <div class="input-group mb-3  rounded">
   			<div class="input-group-prepend">
     			<span class="input-group-text btn btn-primary text-white" id="basic-addon1"> <i class="fa fa-lock"></i> </span>
   			</div>
-  			<input type="text" class="form-control" placeholder="Password" name="password">
+  			<input type="password" class="form-control" placeholder="Password" name="password">
 		</div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">Kirish</button>

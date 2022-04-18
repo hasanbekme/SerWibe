@@ -1,7 +1,9 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-
-
+from django.contrib.auth.models import User
+from .forms import CreateUserForm, ProfileForm
+from .models import Worker
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -14,6 +16,7 @@ def signin(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
     else:
+        users = User.objects.all()
         if request.method == "POST":
             username = request.POST.get('username')
             password = request.POST.get('password')
@@ -25,7 +28,7 @@ def signin(request):
                 login(request, user)
                 return redirect('room')
 
-        context = {}
+        context = {"users":users}
         return render(request, 'login.html', context)
 
 
@@ -39,9 +42,30 @@ def income(request):
     return render(request, 'income.html')
 
 
-#@login_required(login_url='/')
+@login_required(login_url='/')
 def worker(request):
-    return render(request, 'worker.html')
+    if str(request.user)=="admin":
+        workers = Worker.objects.all()
+        form = CreateUserForm()
+        profil_form = ProfileForm()
+        if request.method=="POST":
+            form=CreateUserForm(request.POST)
+            profil_form = ProfileForm(request.POST)
+            if form.is_valid() and profil_form.is_valid():
+                user = form.save()
+                profile = profil_form.save(commit=False)
+                profile.user = user
+                profile.save()
+                user = form.cleaned_data.get('username')
+                #messages.success(request, str(user) + ' yaratildi')
+                return redirect('worker')
+            else:   
+                #messages.success(request, "Xato ma`lumot kiritdingiz")
+                return redirect('worker')
+        context = {'form':form, 'profil_form':profil_form, 'workers':workers}
+        return render(request, 'worker.html', context)
+    else:
+        return redirect('index')
 
 
 #@login_required(login_url='/')
