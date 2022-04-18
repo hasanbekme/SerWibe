@@ -7,7 +7,7 @@ from web.models import Order
 
 def print_receipt(order: Order):
     border_string = "-" * 200
-    doc = Document(width=4266)
+    doc = Document(width=int(Settings().get("printer_width", int) * 53.325))
     doc.begin_document()
     y = 0
     doc.set_font(family="Arial", size=20, bold=True)
@@ -20,7 +20,8 @@ def print_receipt(order: Order):
     if Settings().get("address", tp=str):
         doc.aligned_text("Manzil: " + Settings().get(key="address", tp=str), y=y, align="center")
         y += 150
-    if Settings().get("phone_number", tp=str):
+    phone_number = Settings().get("phone_number", tp=str)
+    if len(phone_number) != 17:
         doc.aligned_text("Tel: " + Settings().get(key="phone_number", tp=str), y=y, align="center")
         y += 150
     doc.set_font(family="Arial", size=12, bold=False)

@@ -18,6 +18,7 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.number_edit.setText(self.settings.get(key="phone_number", tp=str))
         self.last_message_edit.setText(self.settings.get(key="last_message", tp=str))
         self.tax_edit.setValue(self.settings.get(key="tax", tp=int))
+        self.printer_width_edit.setValue(self.settings.get(key="printer_width", tp=int))
 
     def save(self):
         self.settings.set(key="company_name", value=self.company_name_edit.text())
@@ -25,6 +26,7 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.settings.set(key="phone_number", value=self.number_edit.text())
         self.settings.set(key="last_message", value=self.last_message_edit.text())
         self.settings.set(key="tax", value=self.tax_edit.value())
+        self.settings.set(key="printer_width", value=self.printer_width_edit.value())
         self.hide()
         
     def show(self) -> None:
