@@ -43,9 +43,9 @@
   			<div class="input-group-prepend">
     			<span class="input-group-text btn btn-primary text-white" id="basic-addon1">@</span>
   			</div>
-  			<select class="form-control" placeholder="Username" name="username">
+  			<select class="form-control" placeholder="Username" name="username" style="font-size:1rem; padding:3px">
   				{% for user in users %}
-  				<option value="{{ user.username }}">{{ user.username }} - {{ user.worker. }}</option>
+  				<option value="{{ user.username }}">{{ user.username }}  {{ user.worker.full_name }}</option>
   				{% endfor %}
   			</select>
 		</div>
