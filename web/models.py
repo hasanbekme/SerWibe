@@ -50,7 +50,8 @@ class Category(models.Model):
     title = models.CharField(max_length=25, verbose_name="Nomi")
     image = models.ImageField(verbose_name="Rasmi", upload_to="categories/", null=True)
     is_available = models.BooleanField(default=True)
-    printer = models.CharField(max_length=250, verbose_name="Printer", default=win32print.GetDefaultPrinter(), blank=True, null=True)
+    printer = models.CharField(max_length=250, verbose_name="Printer", default=win32print.GetDefaultPrinter(),
+                               blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -80,7 +81,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(verbose_name="Sanasi", auto_now_add=True)
     table = models.ForeignKey(to=Table, verbose_name="Stol", on_delete=models.PROTECT)
     is_completed = models.BooleanField(default=False)
-    paid_money = models.IntegerField(verbose_name="To'langan summa")
+    paid_money = models.IntegerField(verbose_name="To'langan summa", null=True)
 
     def __str__(self):
         return str(self.id)
@@ -101,6 +102,7 @@ class OrderItem(models.Model):
     order = models.ForeignKey(to=Order, on_delete=models.CASCADE)
     meal = models.ForeignKey(to=Food, on_delete=models.CASCADE)
     quantity = models.IntegerField(verbose_name="Soni", default=1)
+    paid_amount = models.IntegerField(null=True)
 
     @property
     def total_price(self):
@@ -108,3 +110,7 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.order.id}:{self.id}"
+
+    def save(self, *args, **kwargs):
+        super(OrderItem, self).save()
+        self.paid_amount = self.total_price
