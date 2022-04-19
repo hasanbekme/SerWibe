@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .forms import CreateUserForm, ProfileForm
 from .models import Worker
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -16,19 +17,25 @@ def signin(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
     else:
-        users = User.objects.all()
+        waiters = Worker.objects.filter(position="waiter")
+        admins = Worker.objects.filter(position="admin")
+        print(waiters)
+        s_admin = User.objects.filter(is_superuser=True)
         if request.method == "POST":
             username = request.POST.get('username')
             password = request.POST.get('password')
             user = authenticate(request, username=username, password=password)
-            if (user is not None) and username == "admin":
-                login(request, user)
-                return redirect('dashboard')
-            elif user is not None:
-                login(request, user)
-                return redirect('room')
-
-        context = {"users":users}
+            if user is not None:
+                if user.is_superuser==True or user.worker.position == "admin":
+                    login(request, user)
+                    return redirect('dashboard')
+                elif user.worker.position == "waiter":
+                    login(request, user)
+                    return redirect('room')
+            else:
+                messages.error(request, "Xato! Parol noto`g`ri")
+                return redirect('signin')
+        context = {"waiters":waiters, "admins":admins, "s_admin":s_admin}
         return render(request, 'login.html', context)
 
 

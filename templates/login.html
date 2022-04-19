@@ -30,6 +30,16 @@
 	</style>
 </head>
 <body >
+	{% for message in messages %}
+	<div class="container-fluid p-2">
+	  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+	    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	      <span aria-hidden="True">&times;</span>
+	    </button>
+	    {{ message }}
+	  </div>
+	</div>
+	{% endfor %}
 <div class="login-form col-11 col-sm-6 col-lg-4 shadow mt-5 p-4 " style="background-color:white; margin: auto;">
 		
    			<form method="POST" >
@@ -44,8 +54,16 @@
     			<span class="input-group-text btn btn-primary text-white" id="basic-addon1">@</span>
   			</div>
   			<select class="form-control" placeholder="Username" name="username" style="font-size:1rem; padding:3px">
-  				{% for user in users %}
-  				<option value="{{ user.username }}">{{ user.username }}  {{ user.worker.full_name }}</option>
+
+  				<option>Login</option>
+  				{% for waiter in waiters %}
+  				<option value="{{ waiter.user.username }}">{{ waiter.full_name }} ({{ waiter.user.username }}) </option>
+  				{% endfor %}
+  				{% for admin in admins %}
+  				<option value="{{ admin.user.username }}">{{ admin.full_name }} ({{ admin.user.username }}) </option>
+  				{% endfor %}
+  				{% for sadmin in s_admin %}
+  				<option value="{{ sadmin.username }}">{{ sadmin.username }} </option>
   				{% endfor %}
   			</select>
 		</div>

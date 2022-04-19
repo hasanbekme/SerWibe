@@ -36,8 +36,8 @@
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Ro`yxatdan o`tkazish:</h5>
@@ -54,11 +54,11 @@
         <table>
         
           <tr><td style="text-align: right;">Login:</td><td>{{ form.username }}</td></tr>
-          <tr><td style="text-align: right;"><br>Ism:</td><td>{{ profil_form.first_name }}</td></tr>
-          <tr><td style="text-align: right;"><br>Familiyasi:</td><td>{{ profil_form.last_name }}</td></tr>
-          <tr><td style="text-align: right;"><br>Turi:</td><td>{{ profil_form.position }}</td></tr>
-          <tr><td style="text-align: right;"><br>Parol:</td><td>{{ form.password1 }}</td></tr>
-          <tr><td style="text-align: right;"><br>Qayta parol:</td><td>{{ form.password2 }}</td></tr>
+          <tr><td style="text-align: right;">Ism:</td><td>{{ profil_form.first_name }}</td></tr>
+          <tr><td style="text-align: right;">Familiyasi:</td><td>{{ profil_form.last_name }}</td></tr>
+          <tr><td style="text-align: right;">Turi:</td><td>{{ profil_form.position }}</td></tr>
+          <tr><td style="text-align: right;">Parol:</td><td>{{ form.password1 }}</td></tr>
+          <tr><td style="text-align: right;">Qayta parol:</td><td>{{ form.password2 }}</td></tr>
 
 
         
@@ -68,9 +68,11 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Yopish</button>
-        
+        <div class="mr-auto">
+          
+        <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">Yopish</button>
         <button type="sumbit" class="btn btn-primary">Jo`natish</button>
+        </div>
       </div>
       </form>
     </div>
