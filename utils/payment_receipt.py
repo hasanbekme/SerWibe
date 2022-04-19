@@ -7,7 +7,7 @@ from web.models import Order
 
 def print_receipt(order: Order):
     border_string = "-" * 200
-    doc = Document(width=int(Settings().get("printer_width", int) * 53.325))
+    doc = Document(width=int(Settings().get("printer_width", int) * 51))
     doc.begin_document()
     y = 0
     doc.set_font(family="Arial", size=20, bold=True)
