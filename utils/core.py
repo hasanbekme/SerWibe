@@ -2,6 +2,7 @@ import logging
 import socket
 import threading
 import webbrowser
+import os
 
 import requests
 
@@ -47,3 +48,8 @@ def run_server():
     except Exception as exc:
         logging.error(exc)
         return
+
+
+def get_env():
+    res = os.getenv("APPDATA") + "\SerWibe"
+    return res
