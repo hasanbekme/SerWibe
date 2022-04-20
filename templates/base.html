@@ -12,19 +12,21 @@
     <link rel="stylesheet" href="/static/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
     <style>
-        .dcard{
+        .dcard {
             height: 150px;
             text-align: left;
             position: relative;
         }
-        .dcard-decimal{
+
+        .dcard-decimal {
             font-size: 3em;
             color: white;
             padding-left: 15px;
             text-align: left;
             display: inline-block;
         }
-        .dcard>i{
+
+        .dcard > i {
             font-size: 5.5em;
             position: absolute;
             color: black;
@@ -32,19 +34,20 @@
             right: 30px;
             top: 20px;
         }
-        .dcard-about{
+
+        .dcard-about {
             margin-top: 30px;
             font-size: 1.5em;
             text-transform: uppercase;
         }
 
-        .dcard2{
+        .dcard2 {
             height: 250px;
             text-align: left;
             position: relative;
         }
 
-        .dcard2>i{
+        .dcard2 > i {
             font-size: 8.5em;
             position: absolute;
             color: black;
@@ -53,7 +56,7 @@
             top: 60px;
         }
 
-        .dcard-about2{
+        .dcard-about2 {
             margin-top: 130px;
             font-size: 1.5em;
             text-transform: uppercase;
@@ -72,13 +75,16 @@
             </button>
         </div>
         <div style="position: fixed; margin:10px;">
-            <h1 style="text-align: center; width: 100%"><a href="{% url 'dashboard' %}" class="logo ml-4" style="text-align: center;"><img src="/static/img/logo.png" style="width:160px;"></a>
+            <h1 style="text-align: center; width: 100%"><a href="{% url 'dashboard' %}" class="logo ml-4"
+                                                           style="text-align: center;"><img src="/static/img/logo.png"
+                                                                                            style="width:160px;"></a>
                 <div style="color:#fff; font-weight: 800;" class="mb-3 ml-3">SERWIBE</div>
             </h1>
 
 
             <ul class="list-unstyled components ml-2">
-                <li><a href="{% url 'dashboard' %}"><i class="fa fa-tachometer" aria-hidden="true"></i> DASHBOARD</a></li>
+                <li><a href="{% url 'dashboard' %}"><i class="fa fa-tachometer" aria-hidden="true"></i> DASHBOARD</a>
+                </li>
                 <li><a href="{% url 'income' %}"><i class="fa fa-shopping-cart"></i> SAVDO</a></li>
                 <li><a href="{% url 'worker' %}"><i class="fa fa-user"></i> XODIMLAR</a></li>
                 <li><a href="{% url 'product' %}"><i class="fa fa-cutlery" aria-hidden="true"></i> TAOMLAR</a></li>
@@ -86,7 +92,7 @@
                 <li><a href="{% url 'table' %}"><i class="fa fa-table"></i> STOLLAR</a></li>
                 <li><a href="{% url 'order' %}"><i class="fa fa-money" aria-hidden="true"></i> ORDER</a></li>
                 <li><a href="{% url 'document' %}"><i class="fa fa-file" aria-hidden="true"></i> HUJJAT</a></li>
-                
+
                 <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> CHIQISH</a></li>
 
 

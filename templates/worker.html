@@ -1,83 +1,105 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<table class="table table-hover mt-4" >
+    <table class="table table-hover mt-4">
 
-  <tr>
-    <td class="bg-primary text-white" style="border-radius: 10px 0 0 0">№</td>
-    <td class="bg-primary text-white" >Ism Familiyasi</td>
-    <td class="bg-primary text-white" >Login</td>
-    <td class="bg-primary text-white" >Turi</td>
-    <td class="bg-primary text-white" >Tahlil</td>
-    <td class="bg-primary text-white" >Tahrir</td>
-    <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">O`chirish</td>
-  </tr>
-    
-
-    
-
-  {% for i in workers %}
-    <tr>
-      <td>{{ forloop.counter }}</td>
-      <td>{{ i.full_name }}</td>
-      <td>{{ i.user.username }}</td>
-      <td>{{ i.position }}</td>
-      <td><a href="#"><button type="button" class="btn btn-info"><i class="fa fa-eye"></i>Tahlil</button></a></td>
-      <td><a href="#"><button type="button" class="btn btn-warning"><i class="fa fa-edit"></i>Tahrir</button></a></td>
-      <td><a href="#"><button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>O`chirish</button></a></td>
-    </tr>
-  {% endfor %}
-</table>
-
-  
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Qo`shish
-</button>
-
-<!-- Modal -->
-<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ro`yxatdan o`tkazish:</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form method="POST">
-      <div class="modal-body">
-        
-
- 
-        {% csrf_token %}
-        <table>
-        
-          <tr><td style="text-align: right;">Login:</td><td>{{ form.username }}</td></tr>
-          <tr><td style="text-align: right;">Ism:</td><td>{{ profil_form.first_name }}</td></tr>
-          <tr><td style="text-align: right;">Familiyasi:</td><td>{{ profil_form.last_name }}</td></tr>
-          <tr><td style="text-align: right;">Turi:</td><td>{{ profil_form.position }}</td></tr>
-          <tr><td style="text-align: right;">Parol:</td><td>{{ form.password1 }}</td></tr>
-          <tr><td style="text-align: right;">Qayta parol:</td><td>{{ form.password2 }}</td></tr>
-
-
-        
-        </table>
+        <tr>
+            <td class="bg-primary text-white" style="border-radius: 10px 0 0 0">№</td>
+            <td class="bg-primary text-white">Ism Familiyasi</td>
+            <td class="bg-primary text-white">Login</td>
+            <td class="bg-primary text-white">Turi</td>
+            <td class="bg-primary text-white">Tahlil</td>
+            <td class="bg-primary text-white">Tahrir</td>
+            <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">O`chirish</td>
+        </tr>
 
 
 
-      </div>
-      <div class="modal-footer">
-        <div class="mr-auto">
-          
-        <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">Yopish</button>
-        <button type="sumbit" class="btn btn-primary">Jo`natish</button>
+
+        {% for i in workers %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.full_name }}</td>
+                <td>{{ i.user.username }}</td>
+                <td>{{ i.position }}</td>
+                <td><a href="#">
+                    <button type="button" class="btn btn-info"><i class="fa fa-eye"></i>Tahlil</button>
+                </a></td>
+                <td><a href="#">
+                    <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i>Tahrir</button>
+                </a></td>
+                <td><a href="#">
+                    <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>O`chirish</button>
+                </a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Qo`shish
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ro`yxatdan o`tkazish:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST">
+                    <div class="modal-body">
+
+
+                        {% csrf_token %}
+                        <table>
+
+                            <tr>
+                                <td style="text-align: right;">Login:</td>
+                                <td>{{ form.username }}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">Ism:</td>
+                                <td>{{ profil_form.first_name }}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">Familiyasi:</td>
+                                <td>{{ profil_form.last_name }}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">Turi:</td>
+                                <td>{{ profil_form.position }}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">Parol:</td>
+                                <td>{{ form.password1 }}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">Qayta parol:</td>
+                                <td>{{ form.password2 }}</td>
+                            </tr>
+
+
+                        </table>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="mr-auto">
+
+                            <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">Yopish</button>
+                            <button type="sumbit" class="btn btn-primary">Jo`natish</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
-      </form>
     </div>
-  </div>
-</div>
 
 
 {% endblock %}
