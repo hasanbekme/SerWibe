@@ -61,6 +61,10 @@
             font-size: 1.5em;
             text-transform: uppercase;
         }
+        .nav-link-style.active{
+            background-color: #075295!important;
+            color: white!important;
+        }
     </style>
 </head>
 <body>
@@ -88,7 +92,6 @@
                 <li><a href="{% url 'income' %}"><i class="fa fa-shopping-cart"></i> SAVDO</a></li>
                 <li><a href="{% url 'worker' %}"><i class="fa fa-user"></i> XODIMLAR</a></li>
                 <li><a href="{% url 'product' %}"><i class="fa fa-cutlery" aria-hidden="true"></i> TAOMLAR</a></li>
-                <li><a href="{% url 'category' %}"><i class="fa fa-list-alt" aria-hidden="true"></i> KATEGORIYA</a></li>
                 <li><a href="{% url 'table' %}"><i class="fa fa-table"></i> STOLLAR</a></li>
                 <li><a href="{% url 'order' %}"><i class="fa fa-money" aria-hidden="true"></i> ORDER</a></li>
                 <li><a href="{% url 'document' %}"><i class="fa fa-file" aria-hidden="true"></i> HUJJAT</a></li>

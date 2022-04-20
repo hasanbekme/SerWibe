@@ -1,48 +1,139 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <table class="table table-hover mt-4">
 
-        <tr>
-            <td class="bg-primary text-white" style="border-radius: 10px 0 0 0">№</td>
-            <td class="bg-primary text-white">Nomi</td>
-            <td class="bg-primary text-white">Rasmi</td>
-            <td class="bg-primary text-white">Narxi</td>
-            <td class="bg-primary text-white">Kategoriyasi</td>
-            <td class="bg-primary text-white">Tahlil</td>
-            <td class="bg-primary text-white">Tahrir</td>
-            <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">O`chirish</td>
-        </tr>
 
-        <tr>
-            <td>1</td>
-            <td>Gamburger</td>
-            <td><img src="/static/img/hotdog.png" style="width: 50px;"></td>
-            <td>10000</td>
-            <td>Fastfoot</td>
-            <td><a href="#">
-                <button type="button" class="btn btn-info"><i class="fa fa-eye"></i>Tahlil</button>
-            </a></td>
-            <td><a href="#">
-                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i>Tahrir</button>
-            </a></td>
-            <td><a href="#">
-                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>O`chirish</button>
-            </a></td>
-        </tr>
 
-    </table>
+
+
+
+
+
+
+
+
+
+
+
+  <ul id="tabs" class="nav nav-tabs nav-tabs-style" role="tablist" style=" border: none;">
+    <li class="nav-item ">
+      <a id="tab-A" href="#pane-A" class="nav-link nav-link-style active border-0" data-toggle="tab" role="tab">TAOMLAR</a>
+    </li>
+    <li class="nav-item">
+      <a id="tab-B" href="#pane-B" class="nav-link nav-link-style border-0" data-toggle="tab" role="tab">KATEGORIYALAR</a>
+    </li>
+  </ul>
+
+  <div id="content" class="tab-content" role="tablist">
+
+    <div id="pane-A" class=" border-top-0 tab-pane fade show active" role="tabpanel" aria-labelledby="tab-A">
+      <div  role="tab" id="heading-A">
+        <table class="table table-hover m">
+    
+            <tr>
+                <td class="bg-primary text-white">№</td>
+                <td class="bg-primary text-white">Nomi</td>
+                <td class="bg-primary text-white">Rasmi</td>
+                <td class="bg-primary text-white text-center">Mavjud</td>
+                <td class="bg-primary text-white">Narxi</td>
+                <td class="bg-primary text-white">Kategoriyasi</td>
+                <td class="bg-primary text-white">Tahrir</td>
+                <td class="bg-primary text-white">O`chirish</td>
+            </tr>
+    
+            <tr>
+                <td>1</td>
+                <td>Gamburger</td>
+                <td><img src="/static/img/hotdog.png" style="width: 50px;"></td>
+                                <td class="text-center"><i class="fa fa-check-circle" aria-hidden="true"
+                                           style="font-size: 2em; color:green"></i></td>
+                <td>10000</td>
+                <td>Fastfoot</td>
+                <td><a href="#">
+                    <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i>Tahrir</button>
+                </a></td>
+                <td><a href="#">
+                    <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>O`chirish</button>
+                </a></td>
+            </tr>
+    
+        </table>
 
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="#exampleModal">
         Qo`shish
     </button>
+      </div>
+    </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+
+    <div id="pane-B" class=" border-top-0 tab-pane fade" role="tabpanel" aria-labelledby="tab-B">
+      <div  role="tab" id="heading-B">
+        
+        <table class="table table-hover m">
+
+            <tr>
+                <td class="bg-primary text-white text-center">№</td>
+                <td class="bg-primary text-white ">Nomi</td>
+                <td class="bg-primary text-white text-center">Rasmi</td>
+                <td class="bg-primary text-white text-center">Chiqarilsin</td>
+                <td class="bg-primary text-white text-center">Printer</td>
+                <td class="bg-primary text-white text-center">Tahrir</td>
+                <td class="bg-primary text-white text-center">O`chirish</td>
+            </tr>
+
+            <tr>
+                <td class="text-center">1</td>
+                <td>FastFoot</td>
+                <td class="text-center"><img src="/static/img/hotdog.png" style="width: 50px;"></td>
+                <td class="text-center"><i class="fa fa-check-circle" aria-hidden="true"
+                                           style="font-size: 2em; color:green"></i></td>
+                <td class="text-center">CanonL3035</td>
+                <td class="text-center"><a href="#">
+                    <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i>Tahrir</button>
+                </a></td>
+                <td class="text-center"><a href="#">
+                    <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>O`chirish</button>
+                </a></td>
+            </tr>
+
+        </table>
+
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary m-1" data-toggle="modal" data-target="#exampleModal2">
+        Qo`shish
+    </button>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Modal Taomlar -->
+    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ro`yxatdan o`tkazish:</h5>
@@ -58,20 +149,24 @@
                         <table>
 
                             <tr>
-                                <td style="text-align: right;">Login:</td>
-                                <td>{{ form.username }}</td>
+                                <td style="text-align: right;">Nomi:</td>
+                                <td><input type="text" name=""></td>
                             </tr>
                             <tr>
-                                <td style="text-align: right;"><br>Ism Familiyasi:</td>
-                                <td>{{ pro.name }}</td>
+                                <td style="text-align: right;">Rasmi:</td>
+                                <td><input type="file" name=""></td>
                             </tr>
                             <tr>
-                                <td style="text-align: right;"><br>Parol:</td>
-                                <td>{{ form.password1 }}</td>
+                                <td style="text-align: right;">Kategoriya:</td>
+                                <td><input type="text" name=""></td>
                             </tr>
                             <tr>
-                                <td style="text-align: right;"><br>Qayta parol:</td>
-                                <td>{{ form.password2 }}</td>
+                                <td style="text-align: right;">Bor:</td>
+                                <td><input type="checkbox" name=""></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">Joylashuv:</td>
+                                <td><input type="text" name=""></td>
                             </tr>
 
 
@@ -80,9 +175,67 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Yopish</button>
+                        <div class="mr-auto">
 
-                        <button type="sumbit" class="btn btn-primary">Jo`natish</button>
+                            <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">Yopish</button>
+                            <button type="sumbit" class="btn btn-primary">Jo`natish</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>    
+
+    <!-- Modal kategoriya -->
+    <div class="modal fade " id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ro`yxatdan o`tkazish:</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST">
+                    <div class="modal-body">
+
+
+                        {% csrf_token %}
+                        <table>
+
+                            <tr>
+                                <td style="text-align: right;">Nomi:</td>
+                                <td><input type="text" name=""></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">Rasmi:</td>
+                                <td><input type="file" name=""></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">Printer:</td>
+                                <td><input type="text" name=""></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">Chek:</td>
+                                <td><input type="checkbox" name=""></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">Joylashuv:</td>
+                                <td><input type="text" name=""></td>
+                            </tr>
+
+
+                        </table>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <div class="mr-auto">
+
+                            <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">Yopish</button>
+                            <button type="sumbit" class="btn btn-primary">Jo`natish</button>
+                        </div>
                     </div>
                 </form>
             </div>

@@ -81,12 +81,7 @@ def worker(request):
 # @login_required(login_url='/')
 def product(request):
     return render(request, 'product.html')
-
-
-# @login_required(login_url='/')
-def category(request):
-    return render(request, 'category.html')
-
+    
 
 # @login_required(login_url='/')
 def table(request):
