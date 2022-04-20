@@ -81,7 +81,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(verbose_name="Sanasi", auto_now_add=True)
     table = models.ForeignKey(to=Table, verbose_name="Stol", on_delete=models.PROTECT)
     is_completed = models.BooleanField(default=False)
-    paid_money = models.IntegerField(verbose_name="To'langan summa", null=True)
+    paid_money = models.IntegerField(verbose_name="To'langan summa", null=True, blank=True)
 
     def __str__(self):
         return str(self.id)

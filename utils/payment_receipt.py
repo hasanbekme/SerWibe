@@ -2,7 +2,7 @@ from datetime import datetime
 
 from utils.printer import Document
 from utils.system_settings import Settings
-from web.models import Order
+from web.models import Order, OrderItem
 
 
 def print_receipt(order: Order):
@@ -81,4 +81,24 @@ def print_receipt(order: Order):
     y += 200
     doc.set_font(family="Arial", size=8, bold=False)
     doc.aligned_text("Created by serwibe.uz", y, align="right")
+    doc.end_document()
+
+
+def printer_order_item(order_item: OrderItem):
+    doc = Document(width=int(Settings().get("printer_width", int) * 51))
+    doc.begin_document()
+    y = 0
+    doc.set_font(family="Arial", size=12, bold=True)
+    doc.aligned_text('#' + str(order_item.id), y=y, align="left")
+    y += 300
+    doc.set_font(family="Arial", size=12, bold=False)
+    doc.aligned_text(f"Offitsant:   {str(order_item.order.waiter.full_name)}", y=y, align="left")
+    y += 300
+    doc.aligned_text(f"Xona:   {str(order_item.order.table.room.title)}", y=y, align="left")
+    y += 300
+    doc.aligned_text(f"Stol:   {str(order_item.order.table.number)}", y=y, align="left")
+    y += 300
+    doc.aligned_text(f"Buyurtma:    {str(order_item.meal.title)}", y=y, align="left")
+    y += 300
+    doc.aligned_text(f"Soni:    {str(order_item.quantity)}", y=y, align="left")
     doc.end_document()
