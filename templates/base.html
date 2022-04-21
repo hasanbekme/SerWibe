@@ -65,6 +65,9 @@
             background-color: #075295!important;
             color: white!important;
         }
+        .dropdown-toggle:after{
+            right: 30%;
+        }
     </style>
 </head>
 <body>
@@ -93,7 +96,7 @@
                 <li><a href="{% url 'worker' %}"><i class="fa fa-user"></i> XODIMLAR</a></li>
                 <li><a href="{% url 'product' %}"><i class="fa fa-cutlery" aria-hidden="true"></i> TAOMLAR</a></li>
                 <li><a href="{% url 'table' %}"><i class="fa fa-table"></i> STOLLAR</a></li>
-                <li><a href="{% url 'order' %}"><i class="fa fa-money" aria-hidden="true"></i> ORDER</a></li>
+                <li><a href="{% url 'order' %}"><i class="fa fa-money" aria-hidden="true"></i> BUYURTMALAR</a></li>
                 <li><a href="{% url 'document' %}"><i class="fa fa-file" aria-hidden="true"></i> HUJJAT</a></li>
 
                 <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> CHIQISH</a></li>
