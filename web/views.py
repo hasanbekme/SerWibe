@@ -72,7 +72,7 @@ def product(request):
     if request.user.is_superuser:
         categories = Category.objects.all()
         if request.method == "POST":
-            form = CategoryForm(request.POST)
+            form = CategoryForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
                 return redirect("product")

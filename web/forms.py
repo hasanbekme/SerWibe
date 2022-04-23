@@ -43,7 +43,6 @@ class CategoryForm(Form):
         title = self.cleaned_data.get('title')
         image = self.cleaned_data.get('image')
         enabled = self.cleaned_data.get('enabled')
-        printer = self.cleaned_data.get('printer')
-        print(type(image), image)
+        printer = get_printers()[int(self.cleaned_data.get('printer'))]
         category = Category.objects.create(title=title, image=image, is_available=enabled, printer=printer)
         category.save()
