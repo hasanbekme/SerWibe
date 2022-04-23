@@ -1,17 +1,29 @@
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.forms import ModelForm
+from django.forms import Form, CharField, ChoiceField, PasswordInput
 
 from .models import Worker
 
 
-class CreateUserForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ['username', 'password1', 'password2']
+class CreateUserForm(Form):
+    first_name = CharField()
+    last_name = CharField()
+    position = ChoiceField(choices=[("waiter", "Offitsant"), ("admin", "Admin")])
+    password = CharField(widget=PasswordInput)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-class ProfileForm(ModelForm):
-    class Meta:
-        model = Worker
-        fields = ('first_name', 'last_name', 'position')
+    def save(self):
+        first_name = self.cleaned_data.get("first_name")
+        last_name = self.cleaned_data.get("last_name")
+        position = self.cleaned_data.get("position")
+        password = self.cleaned_data.get("password")
+        if position == 'admin':
+            admin = True
+        else:
+            admin = False
+        user = User.objects.create(username=f"{first_name.lower()}_{last_name.lower()}", password=password,
+                                   is_staff=admin, is_superuser=admin)
+        user.save()
+        worker = Worker.objects.create(user=user, first_name=first_name, last_name=last_name, position=position)
+        worker.save()

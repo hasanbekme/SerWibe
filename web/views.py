@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
-from .forms import CreateUserForm, ProfileForm
+from .forms import CreateUserForm
 from .models import Worker
 
 
@@ -19,7 +19,6 @@ def signin(request):
     else:
         waiters = Worker.objects.filter(position="waiter")
         admins = Worker.objects.filter(position="admin")
-        s_admin = User.objects.filter(is_superuser=True)
         if request.method == "POST":
             username = request.POST.get('username')
             password = request.POST.get('password')
@@ -34,7 +33,7 @@ def signin(request):
             else:
                 messages.error(request, "Xato! Parol noto`g`ri")
                 return redirect('signin')
-        context = {"waiters": waiters, "s_admin": s_admin}
+        context = {"waiters": waiters, "admins": admins}
         return render(request, 'login.html', context)
 
 
@@ -52,22 +51,17 @@ def income(request):
 def worker(request):
     if request.user.is_superuser:
         workers = Worker.objects.all()
-        form = CreateUserForm()
-        profil_form = ProfileForm()
         if request.method == "POST":
             form = CreateUserForm(request.POST)
-            profil_form = ProfileForm(request.POST)
-            if form.is_valid() and profil_form.is_valid():
-                print("passed")
-                user = form.save()
-                profile = profil_form.save(commit=False)
-                profile.user = user
-                profile.save()
+            if form.is_valid():
+                form.save()
                 return redirect('worker')
             else:
-                print(form.errors, '\n', profil_form.errors)
+                print(form.errors)
                 return redirect('worker')
-        context = {'form': form, 'profil_form': profil_form, 'workers': workers}
+        else:
+            form = CreateUserForm()
+        context = {'form': form, 'workers': workers}
         return render(request, 'worker.html', context)
     else:
         return redirect('index')
