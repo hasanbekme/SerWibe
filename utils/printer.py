@@ -1,10 +1,14 @@
-import win32print
 import win32con
+import win32print
 import win32ui
-
 from PIL import ImageWin, Image
 
 scale_factor = 20
+
+
+def get_printers():
+    printers = win32print.EnumPrinters(2)
+    return [printer[2] for printer in printers]
 
 
 class Document:

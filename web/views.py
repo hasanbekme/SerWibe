@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
-from .forms import CreateUserForm
-from .models import Worker
+from .forms import CreateUserForm, CategoryForm
+from .models import Worker, Category
 
 
 def logoutUser(request):
@@ -67,9 +67,24 @@ def worker(request):
         return redirect('index')
 
 
-# @login_required(login_url='/')
+@login_required(login_url='/')
 def product(request):
-    return render(request, 'product.html')
+    if request.user.is_superuser:
+        categories = Category.objects.all()
+        if request.method == "POST":
+            form = CategoryForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect("product")
+            else:
+                print(form.errors)
+                return redirect("product")
+        else:
+            form = CategoryForm()
+        context = {'category_form': form, 'categories': categories}
+        return render(request, 'product.html', context)
+    else:
+        return redirect('index')
 
 
 # @login_required(login_url='/')

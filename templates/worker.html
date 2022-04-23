@@ -5,7 +5,8 @@
 
         <tr>
             <td class="bg-primary text-white" style="border-radius: 10px 0 0 0">№</td>
-            <td class="bg-primary text-white">Ism Familiyasi</td>
+            <td class="bg-primary text-white">Ism</td>
+            <td class="bg-primary text-white">Familiya</td>
             <td class="bg-primary text-white">Turi</td>
             <td class="bg-primary text-white">Tahrir</td>
             <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">O`chirish</td>
@@ -17,7 +18,8 @@
         {% for i in workers %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td>{{ i.full_name }}</td>
+                <td>{{ i.first_name }}</td>
+                <td>{{ i.last_name }}</td>
                 <td>{{ i.position }}</td>
                 <td><a href="#">
                     <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i>Tahrir</button>
@@ -48,8 +50,6 @@
                 </div>
                 <form method="POST">
                     <div class="modal-body">
-
-
                         {% csrf_token %}
                         <table>
 
@@ -58,7 +58,7 @@
                                 <td>{{ form.first_name }}</td>
                             </tr>
                             <tr>
-                                <td style="text-align: right;">Familiyasi:</td>
+                                <td style="text-align: right;">Familiya:</td>
                                 <td>{{ form.last_name }}</td>
                             </tr>
                             <tr>
