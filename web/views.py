@@ -58,13 +58,13 @@ def worker(request):
             form = CreateUserForm(request.POST)
             profil_form = ProfileForm(request.POST)
             if form.is_valid() and profil_form.is_valid():
+                print("passed")
                 user = form.save()
                 profile = profil_form.save(commit=False)
                 profile.user = user
-                print("ok")
                 return redirect('worker')
             else:
-                # messages.success(request, "Xato ma`lumot kiritdingiz")
+                messages.success(request, "Xato ma`lumot kiritdingiz")
                 return redirect('worker')
         context = {'form': form, 'profil_form': profil_form, 'workers': workers}
         return render(request, 'worker.html', context)
