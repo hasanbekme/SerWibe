@@ -62,9 +62,10 @@ def worker(request):
                 user = form.save()
                 profile = profil_form.save(commit=False)
                 profile.user = user
+                profile.save()
                 return redirect('worker')
             else:
-                messages.success(request, "Xato ma`lumot kiritdingiz")
+                print(form.errors, '\n', profil_form.errors)
                 return redirect('worker')
         context = {'form': form, 'profil_form': profil_form, 'workers': workers}
         return render(request, 'worker.html', context)
