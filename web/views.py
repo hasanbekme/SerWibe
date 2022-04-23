@@ -25,7 +25,7 @@ def signin(request):
             password = request.POST.get('password')
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                if user.is_superuser or user.worker.position == "admin":
+                if user.is_superuser:
                     login(request, user)
                     return redirect('dashboard')
                 elif user.worker.position == "waiter":
@@ -34,7 +34,7 @@ def signin(request):
             else:
                 messages.error(request, "Xato! Parol noto`g`ri")
                 return redirect('signin')
-        context = {"waiters": waiters, "admins": admins, "s_admin": s_admin}
+        context = {"waiters": waiters, "s_admin": s_admin}
         return render(request, 'login.html', context)
 
 
@@ -61,9 +61,7 @@ def worker(request):
                 user = form.save()
                 profile = profil_form.save(commit=False)
                 profile.user = user
-                profile.save()
-                user = form.cleaned_data.get('username')
-                # messages.success(request, str(user) + ' yaratildi')
+                print("ok")
                 return redirect('worker')
             else:
                 # messages.success(request, "Xato ma`lumot kiritdingiz")
@@ -77,7 +75,7 @@ def worker(request):
 # @login_required(login_url='/')
 def product(request):
     return render(request, 'product.html')
-    
+
 
 # @login_required(login_url='/')
 def table(request):

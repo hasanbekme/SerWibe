@@ -1,6 +1,4 @@
 from django.contrib.auth.forms import UserCreationForm
-
-from .models import Worker
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
