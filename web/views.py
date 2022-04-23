@@ -8,9 +8,6 @@ from .forms import CreateUserForm, ProfileForm
 from .models import Worker
 
 
-# Create your views here.
-
-
 def logoutUser(request):
     logout(request)
     return redirect('signin')
@@ -22,7 +19,6 @@ def signin(request):
     else:
         waiters = Worker.objects.filter(position="waiter")
         admins = Worker.objects.filter(position="admin")
-        print(waiters)
         s_admin = User.objects.filter(is_superuser=True)
         if request.method == "POST":
             username = request.POST.get('username')
@@ -54,7 +50,7 @@ def income(request):
 
 @login_required(login_url='/')
 def worker(request):
-    if str(request.user) == "admin":
+    if request.user.is_superuser:
         workers = Worker.objects.all()
         form = CreateUserForm()
         profil_form = ProfileForm()

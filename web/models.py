@@ -13,6 +13,13 @@ class Worker(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.position})"
 
+    def save(self, *args, **kwargs):
+        super(Worker, self).save()
+        if self.position == "admin":
+            self.user.is_superuser = True
+            self.user.is_staff = True
+            self.user.save()
+
     @property
     def full_name(self):
         return f"{self.last_name} {self.first_name}"
