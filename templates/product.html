@@ -104,7 +104,7 @@
                             <td class="text-center"><a href="{% url 'category' pk=i.pk %}">
                                 <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i>Tahrir</button>
                             </a></td>
-                            <td class="text-center"><a href="#">
+                            <td class="text-center"><a href="{% url 'category_delete' pk=i.pk %}">
                                 <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>O`chirish
                                 </button>
                             </a></td>
@@ -121,7 +121,7 @@
 
     </div>
     <script type="text/javascript">
-        if (window.location.href.slice(-2)=="#C"){
+        if (window.location.href.slice(-2)==="#C"){
             document.getElementById("pane-A").setAttribute("class", " border-top-0 tab-pane fade");
             document.getElementById("pane-B").setAttribute("class", " border-top-0 tab-pane fade show active");
             document.getElementById("tab-B").setAttribute("class", " nav-link nav-link-style active border-0");

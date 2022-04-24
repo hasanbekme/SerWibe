@@ -5,15 +5,14 @@
         <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 ">
             <div class="h2">Kategoriya:
             {% csrf_token %}
-            <span class="text-danger h1">
-                FastFoot
+            <span class="text-danger h2">
+                {{ category.title }}
             </span>
             </div>
-            <div class="mt-2 mb-4">kategoriyasini o`chirib yuborishga rozimisiz. O`chirib yuborgandan so`ng <span class="text-danger">Taomlar</span>ning kategoriyasini qayta ko`rib chiqishingizni so`raymiz!!!</div>
+            <div class="mt-2 mb-4">Kategoriyasini o`chirib yuborishga rozimisiz? O`chirib yuborgandan so`ng <span class="text-danger">Taomlar</span>ning kategoriyasini qayta ko`rib chiqishingizni so`raymiz!!!</div>
             <div class="m-auto">
-                <a href="{% url 'product' %}" type="button" class="btn btn-danger">Yopish</a>
+                <a href="{% url 'product' %}#C" type="button" class="btn btn-danger">Bekor qilish</a>
                 <button type="sumbit" class="btn btn-primary">O`chirish</button>
-                            
             </div>
         </div>
     </div>

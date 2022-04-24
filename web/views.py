@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 
 from .forms import CreateUserForm, CategoryForm
 from .models import Worker, Category
@@ -68,7 +68,7 @@ def worker(request):
         context = {'form': form, 'workers': workers}
         return render(request, 'worker.html', context)
     else:
-        return redirect('room')
+        return redirect('index')
 
 
 @login_required(login_url='/')
@@ -88,7 +88,7 @@ def product(request):
         context = {'category_form': form, 'categories': categories}
         return render(request, 'product.html', context)
     else:
-        return redirect('room')
+        return redirect('index')
 
 
 # @login_required(login_url='/')
@@ -106,6 +106,38 @@ def document(request):
     return render(request, 'document.html')
 
 
+def category_edit(request, pk):
+    post = get_object_or_404(Category, pk=pk)
+    if request.method == "POST":
+        form = CategoryForm(request.POST, instance=post)
+        if form.is_valid():
+            model = form.save(commit=False)
+            model.save()
+            return redirect(reverse('product') + '#C')
+    else:
+        form = CategoryForm(instance=post)
+    return render(request, 'category_edit.html', {'form': form})
+
+
+def category_new(request):
+    if request.method == "POST":
+        form = CategoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            model = form.save(commit=False)
+            model.save()
+            return redirect(reverse('product') + '#C')
+        else:
+            print(form.errors)
+    else:
+        form = CategoryForm()
+    return render(request, 'category_edit.html', {'form': form})
+
+
 def category_delete(request, pk):
-    category = Category.objects.get(pk=pk)
-    return render(request, 'category_edit.html')
+    obj = get_object_or_404(Category, pk=pk)
+
+    if request.method == "POST":
+        obj.delete()
+        return redirect(reverse('product') + '#C')
+
+    return render(request, "category_delete.html", {'category': obj})
