@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    <div class="row mt-5">
+        <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 ">
+            <div class="h2">Kategoriya:
+            {% csrf_token %}
+            <span class="text-danger h1">
+                FastFoot
+            </span>
+            </div>
+            <div class="mt-2 mb-4">kategoriyasini o`chirib yuborishga rozimisiz. O`chirib yuborgandan so`ng <span class="text-danger">Taomlar</span>ning kategoriyasini qayta ko`rib chiqishingizni so`raymiz!!!</div>
+            <div class="m-auto">
+                <a href="{% url 'product' %}" type="button" class="btn btn-danger">Yopish</a>
+                <button type="sumbit" class="btn btn-primary">O`chirish</button>
+                            
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
