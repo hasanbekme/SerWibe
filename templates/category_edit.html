@@ -2,7 +2,7 @@
 {% block content %}
 <form method="POST" enctype="multipart/form-data">
     <div class="row mt-5">
-        <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
+        <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow tableab">
             <div class="h2">Kategoriya:</div>
             {% csrf_token %}
             <table>
@@ -16,7 +16,11 @@
                     </tr>
                     <tr>
                         <td style="text-align: right;">Chop etish:</td>
-                        <td>{{ form.printing_required }}</td>
+                        <td><label class="switch">
+                              {{ form.printing_required }}
+                              <span class="slider"></span>
+                            </label>
+                        </td>
                     </tr>
                     <tr>
                         <td style="text-align: right;">Printer:</td>
@@ -24,7 +28,11 @@
                     </tr>
                     <tr>
                         <td style="text-align: right;">Faolligi:</td>
-                        <td>{{ form.is_available }}</td>
+                        <td><label class="switch">
+                              {{ form.is_available }}
+                              <span class="slider"></span>
+                            </label>
+                        </td>
                     </tr>
             </table>
             <div class="mr-auto">
