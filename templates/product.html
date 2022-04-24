@@ -120,5 +120,12 @@
         </div>
 
     </div>
-
+    <script type="text/javascript">
+        if (window.location.href.slice(-2)=="#C"){
+            document.getElementById("pane-A").setAttribute("class", " border-top-0 tab-pane fade");
+            document.getElementById("pane-B").setAttribute("class", " border-top-0 tab-pane fade show active");
+            document.getElementById("tab-B").setAttribute("class", " nav-link nav-link-style active border-0");
+            document.getElementById("tab-A").setAttribute("class", " nav-link nav-link-style border-0");
+        }
+    </script>
 {% endblock %}
