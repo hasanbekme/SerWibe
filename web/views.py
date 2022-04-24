@@ -42,6 +42,12 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 
+
+# @login_required(login_url='/')
+def room(request):
+    return render(request, 'room.html')
+
+
 # @login_required(login_url='/')
 def income(request):
     return render(request, 'income.html')
