@@ -106,3 +106,9 @@ def order(request):
 # @login_required(login_url='/')
 def document(request):
     return render(request, 'document.html')
+
+
+
+def category(request, ids):
+    categor = Category.objects.get(id=ids)
+    return render(request, 'category_edit.html')
