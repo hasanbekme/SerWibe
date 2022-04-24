@@ -58,11 +58,11 @@
                 <span class="input-group-text btn btn-primary text-white" id="basic-addon1">@</span>
             </div>
             <select class="form-control" placeholder="Username" name="username" style="font-size:1rem; padding:3px">
-                {% for admin in admins %}
-                    <option value="{{ admin.user.username }}">{{ admin.full_name }} (Admin)</option>
-                {% endfor %}
                 {% for waiter in waiters %}
                     <option value="{{ waiter.user.username }}">{{ waiter.full_name }} (Ishchi)</option>
+                {% endfor %}
+                {% for admin in admins %}
+                    <option value="{{ admin.user.username }}">{{ admin.full_name }} (Admin)</option>
                 {% endfor %}
             </select>
         </div>
