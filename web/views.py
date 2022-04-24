@@ -113,7 +113,7 @@ def category_edit(request, pk):
         if form.is_valid():
             model = form.save(commit=False)
             model.save()
-            return redirect(reverse('product') + '#pane-B')
+            return redirect(reverse('product') + '#C')
     else:
         form = CategoryForm(instance=post)
     return render(request, 'category_edit.html', {'form': form})
@@ -125,7 +125,7 @@ def category_new(request):
         if form.is_valid():
             model = form.save(commit=False)
             model.save()
-            return redirect(reverse('product') + '#pane-B')
+            return redirect(reverse('product') + '#C')
         else:
             print(form.errors)
     else:
