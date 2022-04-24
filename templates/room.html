@@ -1,41 +1,42 @@
 {% extends 'base2.html' %}
 {% block content %}
 
-<span class="toptext">XONALAR</span>
+<div class="h1">XONALAR</div>
 <main style="overflow-y: auto; height:80%">
 
-
-<!-- StartFor -->
-<a href="{{ i.id }}" style="text-decoration:none">
-	
-<table class="card">
-	<tr>
-		<td rowspan="2"><img src="/static/img/tables.png" style="width:50px"></td>
-		<td class="card_name">
-			Umumiy
-		</td>
-		<td rowspan="2"> 
-			 {% if i.available %}
-			<button class="available_g">+</button>
-			  {% else %}
-			<button class="available_r">X</button>
-			 {% endif %}
-		</td>
-	</tr>
-	<tr>
-		<td style="font-family: sans-serif;  height: 10px; text-align: left; vertical-align: top;  line-height: 0px; font-weight: 600; color:gray">
-	 {% if i.available %}
-	 	Bo`sh
-	 {% else %}
-		1700 SOM 
-	{% endif %}
-	</td>
-	</tr>
-</table>
-</a>
-
-<!-- EndFor -->
-
+	<div class="container">
+		<div class="row">
+			<div class="col-11 col-md-6 card m-auto shadow h1 text-primary p-5" style="margin-top: 15px!important;">
+				<div class="tableindex">3/12</div>
+				Umumiy
+			</div>
+			<div class="col-11 col-md-6 card m-auto shadow h1 text-primary p-5" style="margin-top: 15px!important;">
+				<div class="tableindex">3/12</div>
+				Tepa
+			</div>
+			<div class="col-11 col-md-6 card m-auto shadow h1 text-primary p-5" style="margin-top: 15px!important;">
+				<div class="tableindex">3/12</div>
+				<a href="product#pane-B">sd</a>Past
+			</div>
+			<div class="col-11 col-md-6 card m-auto shadow h1 text-primary p-5" style="margin-top: 15px!important;">
+				<div class="tableindex">3/12</div>
+				Maxsus
+			</div>
+			<div class="col-11 col-md-6 card m-auto shadow h1 text-primary p-5" style="margin-top: 15px!important;">
+				<div class="tableindex">3/12</div>
+				Maxsus
+			</div>
+			<div class="col-11 col-md-6 card m-auto shadow h1 text-primary p-5" style="margin-top: 15px!important;">
+				<div class="tableindex">3/12</div>
+				Maxsus
+			</div>
+			<div class="col-11 col-md-6 card m-auto shadow h1 text-primary p-5" style="margin-top: 15px!important;">
+				<div class="tableindex">3/12</div>
+				Maxsus
+			</div>
+			
+		</div>
+	</div>
 
 </main>
 

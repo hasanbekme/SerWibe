@@ -6,7 +6,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 
 	<title>SERWIBE</title>
 	<style type="text/css">
@@ -16,30 +19,6 @@
 			background: linear-gradient(150deg,#075295 0%, #0087ffb5 59%, #075295);
 			height: 100%;
 			text-align: center;
-		}
-		.toptext{
-            text-transform: uppercase;
-			position: relative;
-			width: 300px;
-			height: 33px;
-			margin-top: 10px;
-			margin-bottom: 10px;
-			font-style: normal;
-			font-family: Arial;
-			font-weight: 1000;
-			font-size: 30px;
-			display: inline-block;
-			color: white;	
-		}
-		.card{
-			width: 90%;
-			height: 98px;
-			margin: 15px auto;
-			
-			background: white;
-			box-shadow: 0px 0px 5.13235px rgba(255, 255, 255, 0.25);
-			border-radius: 16.6801px;
-			box-shadow: 2px 3px 5px -3px black;
 		}
 		.menu{
 			position: fixed;
@@ -62,32 +41,17 @@
 			font-size: 2em;
 			border-radius: 15px;
 		}
-        .available_g{
-            width:30px;
-            height: 30px;
-            background: green;
-            border:2px solid green;
-            border-radius:5px;
-            color:white;
-        }
-        .available_r{
-            width:30px;
-            height: 30px;
-            background: red;
-            border:2px solid pink;
-            border-radius:5px;
-            color:white;
-        }
-        .card_name{
-            font-family: sans-serif;
-            font-size: 2em;
-            line-height: 10px;
-            font-weight: 600;
-            line-height: 10px;
-            text-align: left;
-            height:15px;
-            color: black;
-        }
+		.h1{
+			font-weight: 600;
+			color: white;
+		}
+		.tableindex{
+			position: absolute;
+			top: 0;
+			right: 10px;
+			font-size: 25px;
+			color: var(--danger);
+		}
 	</style>
 </head>
 <body>
@@ -96,5 +60,10 @@
 
 
 {% endblock %}
+
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/popper.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/main.js"></script>
 	</body>
 </html>
