@@ -18,4 +18,5 @@ urlpatterns = [
     path('table', views.table, name='table'),
     path('order', views.order, name='order'),
     path('document', views.document, name='document'),
+    path('tables', views.tables, name='tables'),
 ]

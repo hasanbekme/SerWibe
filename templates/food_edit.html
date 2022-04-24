@@ -21,7 +21,6 @@
                     <tr>
                         <td style="text-align: right;">Narxi:</td>
                         <td>{{ form.price }}</td>
-                        <td style="text-align: left;">so'm</td>
                     </tr>
                     <tr>
                         <td style="text-align: right;">Mavjud:</td>
@@ -42,4 +41,8 @@
             </div>
         </div>
     </form>
+    <script type="text/javascript">
+        document.getElementById("id_price").placeholder = "(so`m)";
+        document.getElementById("id_price").style="text-align:right"
+    </script>
 {% endblock %}
