@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.forms import Form, CharField, ChoiceField, PasswordInput, ImageField, BooleanField
+from django.forms import Form, CharField, ChoiceField, PasswordInput, ImageField, BooleanField, ModelForm
 
 from utils.printer import get_printers
 from .models import Worker, Category
@@ -30,19 +30,9 @@ class CreateUserForm(Form):
         worker.save()
 
 
-class CategoryForm(Form):
-    title = CharField()
-    image = ImageField(required=False)
-    enabled = BooleanField()
-    printer = ChoiceField(choices=[(i, val) for i, val in enumerate(get_printers())])
+class CategoryForm(ModelForm):
+    printer = ChoiceField(choices=[(printer, printer) for printer in get_printers()])
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def save(self):
-        title = self.cleaned_data.get('title')
-        image = self.cleaned_data.get('image')
-        enabled = self.cleaned_data.get('enabled')
-        printer = get_printers()[int(self.cleaned_data.get('printer'))]
-        category = Category.objects.create(title=title, image=image, is_available=enabled, printer=printer)
-        category.save()
+    class Meta:
+        model = Category
+        fields = '__all__'

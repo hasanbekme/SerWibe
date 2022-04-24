@@ -57,6 +57,7 @@ class Category(models.Model):
     title = models.CharField(max_length=25, verbose_name="Nomi")
     image = models.ImageField(verbose_name="Rasmi", upload_to="categories/", null=True)
     is_available = models.BooleanField(default=True)
+    printing_required = models.BooleanField(default=False)
     printer = models.CharField(max_length=250, verbose_name="Printer", default=win32print.GetDefaultPrinter(),
                                blank=True, null=True)
 

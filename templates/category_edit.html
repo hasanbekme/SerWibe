@@ -1,25 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-<form class="POST" >
+<form method="POST" enctype="multipart/form-data">
     <div class="row mt-5">
         <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 ">
-            <div class="h2">Kategoriya o`zgartirish</div>
+            <div class="h2">Kategoriya:</div>
+            {% csrf_token %}
             <table>
                     <tr>
                         <td style="text-align: right;">Nomi:</td>
-                        <td>{{ category_form.title }}</td>
+                        <td>{{ form.title }}</td>
                     </tr>
                     <tr>
                         <td style="text-align: right;">Rasmi:</td>
-                        <td>{{ category_form.image }}</td>
+                        <td>{{ form.image }}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">Chop etish:</td>
+                        <td>{{ form.printing_required }}</td>
                     </tr>
                     <tr>
                         <td style="text-align: right;">Printer:</td>
-                        <td>{{ category_form.printer }}</td>
+                        <td>{{ form.printer }}</td>
                     </tr>
                     <tr>
                         <td style="text-align: right;">Faolligi:</td>
-                        <td>{{ category_form.enabled }}</td>
+                        <td>{{ form.is_available }}</td>
                     </tr>
             </table>
             <div class="mr-auto">
