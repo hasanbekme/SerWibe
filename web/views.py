@@ -46,7 +46,6 @@ def room(request):
     return render(request, 'room.html')
 
 
-
 # @login_required(login_url='/')
 def tables(request):
     return render(request, 'tables.html')
@@ -61,20 +60,49 @@ def income(request):
 def worker(request):
     if request.user.is_superuser:
         workers = Worker.objects.all()
-        if request.method == "POST":
-            form = CreateUserForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect('worker')
-            else:
-                print(form.errors)
-                return redirect('worker')
-        else:
-            form = CreateUserForm()
-        context = {'form': form, 'workers': workers}
+        context = {'workers': workers}
         return render(request, 'worker.html', context)
     else:
-        return redirect('index')
+        return redirect('room')
+
+
+@login_required(login_url='/')
+def user_new(request):
+    if request.method == "POST":
+        form = CreateUserForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('worker')
+        else:
+            print(form.errors)
+    else:
+        form = CreateUserForm()
+    return render(request, 'user_edit.html', {'form': form})
+
+
+@login_required(login_url='/')
+def user_edit(request, pk):
+    post = get_object_or_404(Worker, pk=pk)
+    if request.method == "POST":
+        form = CreateUserForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('worker')
+    else:
+        form = CreateUserForm(instance=post)
+    return render(request, 'user_edit.html', {'form': form})
+
+
+@login_required(login_url='/')
+def user_delete(request, pk):
+    obj = get_object_or_404(Worker, pk=pk)
+
+    if request.method == "POST":
+        obj.user.delete()
+        obj.delete()
+        return redirect('worker')
+
+    return render(request, "user_delete.html", {'user': obj})
 
 
 @login_required(login_url='/')
@@ -90,21 +118,6 @@ def product(request):
         return render(request, 'product.html', context)
     else:
         return redirect('room')
-
-
-# @login_required(login_url='/')
-def table(request):
-    return render(request, 'table.html')
-
-
-# @login_required(login_url='/')
-def order(request):
-    return render(request, 'order.html')
-
-
-# @login_required(login_url='/')
-def document(request):
-    return render(request, 'document.html')
 
 
 @login_required(login_url='/')
@@ -185,3 +198,17 @@ def food_delete(request, pk):
         return redirect('product')
 
     return render(request, "food_delete.html", {'food': obj})
+
+# @login_required(login_url='/')
+def table(request):
+    return render(request, 'table.html')
+
+
+# @login_required(login_url='/')
+def order(request):
+    return render(request, 'order.html')
+
+
+# @login_required(login_url='/')
+def document(request):
+    return render(request, 'document.html')

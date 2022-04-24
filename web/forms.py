@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
-from django.forms import Form, CharField, ChoiceField, PasswordInput, ModelForm, \
-    ModelChoiceField, IntegerField
+from django.forms import Form, CharField, ChoiceField, PasswordInput, ModelForm
 
 from utils.printer import get_printers
 from .models import Worker, Category, Food
@@ -10,10 +9,20 @@ class CreateUserForm(Form):
     first_name = CharField()
     last_name = CharField()
     position = ChoiceField(choices=[("waiter", "Offitsant"), ("admin", "Admin")])
-    password = CharField(widget=PasswordInput)
+    password = CharField(widget=PasswordInput, required=False)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, instance=None, **kwargs):
+        instance: Worker
         super().__init__(*args, **kwargs)
+        if instance is not None:
+            self.instance: Worker = instance
+            self.initial = {
+                'first_name': instance.first_name,
+                'last_name': instance.last_name,
+                'position': instance.position,
+            }
+        else:
+            self.instance = None
 
     def save(self):
         first_name = self.cleaned_data.get("first_name")
@@ -24,11 +33,25 @@ class CreateUserForm(Form):
             admin = True
         else:
             admin = False
-        user = User.objects.create(username=f"{first_name.lower()}_{last_name.lower()}", password=password,
-                                   is_staff=admin, is_superuser=admin)
-        user.save()
-        worker = Worker.objects.create(user=user, first_name=first_name, last_name=last_name, position=position)
-        worker.save()
+        if self.instance is None:
+            user = User.objects.create(username=f"{first_name.lower()}_{last_name.lower()}", password=password,
+                                       is_staff=admin, is_superuser=admin)
+            user.save()
+            worker = Worker.objects.create(user=user, first_name=first_name, last_name=last_name, position=position)
+            worker.save()
+        else:
+            self.instance: Worker
+            self.instance.user.username = f"{first_name.lower()}_{last_name.lower()}"
+            if password != "":
+                print("updated")
+                self.instance.user.set_password(password)
+            self.instance.user.is_superuser = admin
+            self.instance.user.is_staff = admin
+            self.instance.first_name = first_name
+            self.instance.last_name = last_name
+            self.instance.position = position
+            self.instance.save()
+            self.instance.user.save()
 
 
 class CategoryForm(ModelForm):
