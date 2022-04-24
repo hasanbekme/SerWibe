@@ -1,7 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
 
 from .forms import CreateUserForm, CategoryForm
 from .models import Worker, Category
@@ -41,6 +42,7 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 
+
 # @login_required(login_url='/')
 def room(request):
     return render(request, 'room.html')
@@ -68,7 +70,7 @@ def worker(request):
         context = {'form': form, 'workers': workers}
         return render(request, 'worker.html', context)
     else:
-        return redirect('index')
+        return redirect('room')
 
 
 @login_required(login_url='/')
@@ -88,7 +90,7 @@ def product(request):
         context = {'category_form': form, 'categories': categories}
         return render(request, 'product.html', context)
     else:
-        return redirect('index')
+        return redirect('room')
 
 
 # @login_required(login_url='/')
@@ -106,28 +108,7 @@ def document(request):
     return render(request, 'document.html')
 
 
-def category_edit(request, pk):
-    post = get_object_or_404(Category, pk=pk)
-    if request.method == "POST":
-        form = CategoryForm(request.POST, instance=post)
-        if form.is_valid():
-            model = form.save(commit=False)
-            model.save()
-            return redirect(reverse('product') + '#pane-B')
-    else:
-        form = CategoryForm(instance=post)
-    return render(request, 'category_edit.html', {'form': form})
 
-
-def category_new(request):
-    if request.method == "POST":
-        form = CategoryForm(request.POST, request.FILES)
-        if form.is_valid():
-            model = form.save(commit=False)
-            model.save()
-            return redirect(reverse('product') + '#pane-B')
-        else:
-            print(form.errors)
-    else:
-        form = CategoryForm()
-    return render(request, 'category_edit.html', {'form': form})
+def category(request, ids):
+    categor = Category.objects.get(id=ids)
+    return render(request, 'category_edit.html')
