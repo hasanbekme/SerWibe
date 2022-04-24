@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+            <div class="h4"><span class="text-danger h2">Umumiy</span>dagi Stollar</div>
+            <table class="table table-hover mt-4">
+
+                <tr>
+                    <td class="text-center bg-primary text-white" style="border-radius: 10px 0 0 0">Stol №</td>
+                    <td class="text-center bg-primary text-white">Xona Nomi</td>
+                    <td class="text-center bg-primary text-white">Bandlik</td>
+                    <td class="text-center bg-primary text-white">Tahrir</td>
+                    <td class="text-center bg-primary text-white" style=" border-radius: 0 10px 0 0;">O`chirish</td>
+                </tr>
+
+                <tr>
+                    <td class="text-center">1</td>
+                    <td class="text-center">Umumiy</td>
+                    {% if food.is_available %}
+                        <td class="text-center"><i class="fa fa-check-circle" aria-hidden="true"
+                                                   style="font-size: 2em; color:green"></i></td>
+                    {% else %}
+                        <td class="text-center"><i class="fa fa-times-circle-o" aria-hidden="true"
+                                                   style="font-size: 2em; color:red"></i></td>
+                    {% endif %}
+                    <td class="text-center"><a href="#">
+                        <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                    </a></td>
+                    <td class="text-center"><a href="#">
+                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                    </a></td>
+                </tr>
+
+            </table>
+
+
+                <div class="mr-auto">
+                    <a href="{% url 'table' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
+                                                                                                     aria-hidden="true"></i>
+                        Yopish</a>
+                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-plus"></i> Qo`shish</button>
+
+                </div>
+            
+{% endblock %}

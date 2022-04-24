@@ -42,6 +42,11 @@ def dashboard(request):
 
 
 # @login_required(login_url='/')
+def roomstable_edit(request):
+    return render(request, 'roomstable_edit.html')
+
+
+# @login_required(login_url='/')
 def room(request):
     return render(request, 'room.html')
 

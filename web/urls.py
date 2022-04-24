@@ -22,4 +22,5 @@ urlpatterns = [
     path('order', views.order, name='order'),
     path('document', views.document, name='document'),
     path('tables', views.tables, name='tables'),
+    path('roomstable_edit', views.roomstable_edit, name='roomstable_edit'),
 ]
