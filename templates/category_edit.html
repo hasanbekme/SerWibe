@@ -2,7 +2,7 @@
 {% block content %}
 <form method="POST" enctype="multipart/form-data">
     <div class="row mt-5">
-        <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 ">
+        <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
             <div class="h2">Kategoriya:</div>
             {% csrf_token %}
             <table>
@@ -28,8 +28,8 @@
                     </tr>
             </table>
             <div class="mr-auto">
-                <a href="{% url 'product' %}#C" type="button" class="btn btn-danger">Yopish</a>
-                <button type="sumbit" class="btn btn-primary">Saqlash</button>
+                <a href="{% url 'product' %}#C" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times" aria-hidden="true"></i> Yopish</a>
+                <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> Saqlash</button>
                             
             </div>
         </div>
