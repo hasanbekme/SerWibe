@@ -1,6 +1,6 @@
+import win32print
 from django.contrib.auth.models import User
 from django.db import models
-import win32print
 
 
 class Worker(models.Model):
@@ -51,6 +51,10 @@ class Table(models.Model):
 
     def __str__(self):
         return f"{self.room.title}:{self.number}"
+
+    @property
+    def current_order(self):
+        return self.order_set.filter(is_completed=False).first()
 
     class Meta:
         verbose_name = "Stol"

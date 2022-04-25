@@ -222,7 +222,9 @@ def room_new(request):
 
 @login_required(login_url='/')
 def room_tables(request, pk):
-    return render(request, 'tables/room_tables.html')
+    rm = get_object_or_404(Room, pk=pk)
+    tables = rm.table_set.all()
+    return render(request, 'tables/room_tables.html', {'tables': tables})
 
 
 @login_required(login_url='/')
