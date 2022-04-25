@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 
-from .forms import CreateUserForm, CategoryForm, FoodForm
-from .models import Worker, Category, Food
+from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm
+from .models import Worker, Category, Food, Room
 
 
 def logoutUser(request):
@@ -42,18 +42,8 @@ def dashboard(request):
 
 
 # @login_required(login_url='/')
-def roomstable_edit(request):
-    return render(request, 'roomstable_edit.html')
-
-
-# @login_required(login_url='/')
 def room(request):
     return render(request, 'room.html')
-
-
-# @login_required(login_url='/')
-def tables(request):
-    return render(request, 'tables.html')
 
 
 # @login_required(login_url='/')
@@ -204,9 +194,60 @@ def food_delete(request, pk):
 
     return render(request, "food_delete.html", {'food': obj})
 
-# @login_required(login_url='/')
-def table(request):
-    return render(request, 'table.html')
+
+@login_required(login_url='/')
+def rooms(request):
+    if request.user.is_superuser:
+        models = Room.objects.all()
+        context = {'rooms': models}
+        return render(request, 'tables/rooms.html', context)
+    else:
+        return redirect('room')
+
+
+@login_required(login_url='/')
+def room_new(request):
+    if request.method == "POST":
+        form = RoomForm(request.POST)
+        if form.is_valid():
+            model = form.save(commit=False)
+            model.save()
+            return redirect('rooms')
+        else:
+            print(form.errors)
+    else:
+        form = RoomForm()
+    return render(request, 'tables/room_edit.html', {'form': form})
+
+
+@login_required(login_url='/')
+def room_tables(request, pk):
+    return render(request, 'tables/room_tables.html')
+
+
+@login_required(login_url='/')
+def room_edit(request, pk):
+    room_model = get_object_or_404(Room, pk=pk)
+    if request.method == "POST":
+        form = RoomForm(request.POST, instance=room_model)
+        if form.is_valid():
+            model = form.save(commit=False)
+            model.save()
+            return redirect('rooms')
+    else:
+        form = RoomForm(instance=room_model)
+    return render(request, 'tables/room_edit.html', {'form': form})
+
+
+@login_required(login_url='/')
+def room_delete(request, pk):
+    obj = get_object_or_404(Room, pk=pk)
+
+    if request.method == "POST":
+        obj.delete()
+        return redirect('rooms')
+
+    return render(request, "tables/room_delete.html", {'food': obj})
 
 
 # @login_required(login_url='/')

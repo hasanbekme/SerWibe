@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        <div class="row mt-5">
+            <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
+                <div class="h2">Xona:
+                    {% csrf_token %}
+                    <span class="text-danger h2">
+                {{ room.title }}
+            </span>
+                </div>
+                <div class="mt-2 mb-4">
+                    Rostdan xam bu xonani o'chirmoqchimisiz? Ushbu xona o'chirilsa u bilan birga barcha stollari xam o'chadi!!!
+                </div>
+                <div class="m-auto">
+                    <a href="{% url 'rooms' %}" type="button" class="btn btn-danger mr-4 mb-0 "><i
+                            class="fa fa-times" aria-hidden="true"></i>Bekor qilish</a>
+                    <button type="sumbit" class="btn btn-primary ml-4 mb-0 "><i class="fa fa-trash"></i> O`chirish
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

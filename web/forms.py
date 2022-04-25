@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.forms import Form, CharField, ChoiceField, PasswordInput, ModelForm
 
 from utils.printer import get_printers
-from .models import Worker, Category, Food
+from .models import Worker, Category, Food, Room
 
 
 class CreateUserForm(Form):
@@ -65,4 +65,10 @@ class CategoryForm(ModelForm):
 class FoodForm(ModelForm):
     class Meta:
         model = Food
+        fields = '__all__'
+
+
+class RoomForm(ModelForm):
+    class Meta:
+        model = Room
         fields = '__all__'

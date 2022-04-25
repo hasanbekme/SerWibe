@@ -30,7 +30,8 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                     {% for category in categories %}
-                                        <a class="dropdown-item" href="?category={{ category.id }}">{{ category.title }}</a>
+                                        <a class="dropdown-item"
+                                           href="?category={{ category.id }}">{{ category.title }}</a>
                                     {% endfor %}
                                 </div>
                             </div>

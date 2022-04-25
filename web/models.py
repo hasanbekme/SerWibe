@@ -35,6 +35,10 @@ class Room(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def tables_count(self):
+        return self.table_set.count()
+
     class Meta:
         verbose_name = "Xona"
         verbose_name_plural = "Xonalar"
