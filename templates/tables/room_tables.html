@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="h2 ml-1"><span class="text-danger h1 font-weight-bold">UMUMIY</span> XONA</div>
-<main class="row justify-content-md-center">
+<main class="row">
     {% for table in tables %}
     {% if table.is_available %}
     <!-- CARD of unusing -->
-	<div class="tablecard ml-1 card shadow text-center bg-info " >
+	<div class="tablecard ml-1 mt-1 card shadow text-center bg-info " >
 		<span class="tablenum h1 text-white">{{ table.number }}</span>
 		<div class="icons">
 			<i class="fa fa-edit text-warning"></i>
@@ -15,7 +15,7 @@
 	</div>
     {% else %}
 	<!-- CARD of using -->
-	<div class="tablecard ml-1 card shadow text-center bg-primary " >				
+	<div class="tablecard ml-1 mt-1 card shadow text-center bg-primary " >				
 		<span class="tablenum h1 text-white">{{ table.number }}</span>
 		<span class="tableprice h6 text-white">{{ table.current_order.needed_payment }} so`m</span>
 		<div class="icons">
