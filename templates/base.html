@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="/static/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
     <style>
+        .btn-primary:hover{
+            transition: 0.2s;
+            filter: saturate(50%);
+        }
         .dcard {
             height: 150px;
             text-align: left;
@@ -141,6 +145,10 @@
             width: 150px;
             height: 150px;
             float: right;
+            transition: 0.2s;
+        }
+        .tablecard:hover{
+            filter: saturate(50%);
         }
         .tablenum{
             margin-top: 40px;
@@ -174,7 +182,7 @@
         <div style="position: fixed; margin:10px;">
             <h1 style="text-align: center; width: 100%"><a href="{% url 'dashboard' %}" class="logo ml-4"
                                                            style="text-align: center;"><img src="/static/img/logo.png"
-                                                                                            style="width:160px;"></a>
+                                                      ~                                      style="width:160px;"></a>
                 <div style="color:#fff; font-weight: 800;" class="mb-3 ml-3">SERWIBE</div>
             </h1>
 
