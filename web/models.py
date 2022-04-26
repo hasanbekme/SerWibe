@@ -54,7 +54,7 @@ class Table(models.Model):
 
     @property
     def current_order(self):
-        return self.order_set.filter(is_completed=False).first()
+        return self.order_set.filter(is_completed=False).last()
 
     class Meta:
         verbose_name = "Stol"

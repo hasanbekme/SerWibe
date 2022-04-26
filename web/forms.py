@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
-from django.forms import Form, CharField, ChoiceField, PasswordInput, ModelForm
+from django.forms import Form, CharField, ChoiceField, PasswordInput, ModelForm, IntegerField
 
 from utils.printer import get_printers
-from .models import Worker, Category, Food, Room
+from .models import Worker, Category, Food, Room, Table
 
 
 class CreateUserForm(Form):
@@ -72,3 +72,16 @@ class RoomForm(ModelForm):
     class Meta:
         model = Room
         fields = '__all__'
+
+
+class TableForm(Form):
+    number = IntegerField()
+
+    def __init__(self, *args, room=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.room = room
+
+    def save(self):
+        number = self.cleaned_data.get("number")
+        table = Table.objects.create(number=number, room=self.room)
+        table.save()

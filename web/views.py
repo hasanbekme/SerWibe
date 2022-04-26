@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 
-from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm
-from .models import Worker, Category, Food, Room
+from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm, TableForm
+from .models import Worker, Category, Food, Room, Table
 
 
 def logoutUser(request):
@@ -224,7 +224,7 @@ def room_new(request):
 def room_tables(request, pk):
     rm = get_object_or_404(Room, pk=pk)
     tables = rm.table_set.all()
-    return render(request, 'tables/room_tables.html', {'tables': tables})
+    return render(request, 'tables/room_tables.html', {'tables': tables, 'room': rm})
 
 
 @login_required(login_url='/')
@@ -250,6 +250,33 @@ def room_delete(request, pk):
         return redirect('rooms')
 
     return render(request, "tables/room_delete.html", {'food': obj})
+
+
+@login_required(login_url='/')
+def table_new(request, pk):
+    room_m = get_object_or_404(Room, pk=pk)
+    if request.method == "POST":
+        form = TableForm(request.POST, room=room_m)
+        if form.is_valid():
+            form.save()
+            return redirect('room_tables', pk=pk)
+        else:
+            print(form.errors)
+    else:
+        form = TableForm()
+    return render(request, 'tables/table_add.html', {'form': form, 'room': room_m})
+
+
+@login_required(login_url='/')
+def table_delete(request, pk_room, pk_table):
+    room_obj = get_object_or_404(Room, pk=pk_room)
+    table_obj = get_object_or_404(Table, pk=pk_table)
+
+    if request.method == "POST":
+        table_obj.delete()
+        return redirect('room_tables', pk=pk_room)
+
+    return render(request, "tables/table_delete.html", {'room': room_obj, 'table': table_obj})
 
 
 # @login_required(login_url='/')

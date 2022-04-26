@@ -23,6 +23,8 @@ urlpatterns = [
     path('rooms/<int:pk>/tables', views.room_tables, name='room_tables'),
     path('rooms/<int:pk>/', views.room_edit, name='room_edit'),
     path('rooms/<int:pk>/delete', views.room_delete, name='room_delete'),
+    path('rooms/<int:pk>/table_new', views.table_new, name='table_add'),
+    path('rooms/<int:pk_room>/tables/<int:pk_table>/delete', views.table_delete, name='table_delete'),
     path('order', views.order, name='order'),
     path('document', views.document, name='document'),
 ]
