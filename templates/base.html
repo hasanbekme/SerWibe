@@ -12,9 +12,16 @@
     <link rel="stylesheet" href="/static/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
     <style>
-        .btn-primary:hover{
-            transition: 0.2s;
-            filter: saturate(50%);
+        .btn.btn-primary:hover{
+            transition: 0.1s;
+            background-color: #084982!important;
+        }
+        .btn-info:hover{
+            background-color: #1b71a3!important;
+        }
+
+        .bg-info:hover{
+            background-color: #1b71a3!important;
         }
         .dcard {
             height: 150px;
@@ -142,13 +149,13 @@
         }
         .tablecard{
             position: relative;
-            width: 150px;
-            height: 150px;
+            width: 130px;
+            height: 130px;
             float: right;
             transition: 0.2s;
         }
-        .tablecard:hover{
-            filter: saturate(50%);
+        .tablecardu:hover{
+            background-color:  #57a3ce;
         }
         .tablenum{
             margin-top: 40px;
@@ -161,7 +168,7 @@
         .icons{
             position: absolute;
             font-size: 1.8em;
-            width: 140px;
+            width: 135px;
             bottom: -5px;
             color: white;
             letter-spacing: 5px;
@@ -188,14 +195,14 @@
 
 
             <ul class="list-unstyled components ml-2">
-                <li><a href="{% url 'dashboard' %}"><i class="fa fa-tachometer" aria-hidden="true"></i> DASHBOARD</a>
-                </li>
-                <li><a href="{% url 'income' %}"><i class="fa fa-shopping-cart"></i> SAVDO</a></li>
+                <li><a href="{% url 'dashboard' %}"><i class="fa fa-tachometer" aria-hidden="true"></i> DASHBOARD</a></li>
+                <li><a href="{% url 'order' %}"><i class="fa fa-money" aria-hidden="true"></i> BUYURTMALAR</a></li>
                 <li><a href="{% url 'worker' %}"><i class="fa fa-user"></i> XODIMLAR</a></li>
                 <li><a href="{% url 'product' %}"><i class="fa fa-cutlery" aria-hidden="true"></i> TAOMLAR</a></li>
                 <li><a href="{% url 'rooms' %}"><i class="fa fa-table"></i> STOLLAR</a></li>
-                <li><a href="{% url 'order' %}"><i class="fa fa-money" aria-hidden="true"></i> BUYURTMALAR</a></li>
-                <li><a href="{% url 'document' %}"><i class="fa fa-file" aria-hidden="true"></i> HUJJAT</a></li>
+                <li><a href="{% url 'rooms' %}"><i class="fa fa-upload"></i> XARAJATLAR</a></li>
+                <li><a href="{% url 'income' %}"><i class="fa fa-shopping-cart"></i> SAVDO</a></li>
+                <li><a href="{% url 'income' %}"><i class="fa fa-archive" aria-hidden="true"></i> ARXIV</a></li>
 
                 <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> CHIQISH</a></li>
 

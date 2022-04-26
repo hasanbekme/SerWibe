@@ -5,7 +5,7 @@
         {% for table in tables %}
             {% if table.is_available %}
                 <!-- CARD of unusing -->
-                <div class="tablecard ml-1 mt-1 card shadow text-center bg-info ">
+                <div class="tablecard tablecardn ml-3 mt-2 card shadow text-center bg-info ">
                     <span class="tablenum h1 text-white">{{ table.number }}</span>
                     <div class="icons">
                         <a class="fa fa-trash text-danger" type="button"
@@ -14,7 +14,7 @@
                 </div>
             {% else %}
                 <!-- CARD of using -->
-                <div class="tablecard ml-1 mt-1 card shadow text-center bg-primary ">
+                <div class="tablecard tablecard-u ml-3 mt-2 card shadow text-center bg-primary ">
                     <span class="tablenum h1 text-white">{{ table.number }}</span>
                     <span class="tableprice h6 text-white">{{ table.current_order.needed_payment }} so`m</span>
                     <div class="icons">
@@ -22,7 +22,6 @@
                 </div>
             {% endif %}
         {% endfor %}
-        <!-- End card -->
 
     </main>
     <div class="mt-4">
