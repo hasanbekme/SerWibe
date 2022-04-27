@@ -3,8 +3,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 
-from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm, TableForm
-from .models import Worker, Category, Food, Room, Table, Order
+from utils.payment_receipt import print_receipt
+from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm, TableForm, ExpenseReasonForm, ExpenseForm, \
+    OrderCompletionForm
+from .models import Worker, Category, Food, Room, Table, Order, Expense, ExpenseReason
 
 
 def logoutUser(request):
@@ -51,12 +53,17 @@ def income(request):
     return render(request, 'income.html')
 
 
+# @login_required(login_url='/')
+def document(request):
+    return render(request, 'document.html')
+
+
 @login_required(login_url='/')
 def worker(request):
     if request.user.is_superuser:
         workers = Worker.objects.all()
         context = {'workers': workers}
-        return render(request, 'worker.html', context)
+        return render(request, 'workers/worker.html', context)
     else:
         return redirect('room')
 
@@ -72,7 +79,7 @@ def user_new(request):
             print(form.errors)
     else:
         form = CreateUserForm()
-    return render(request, 'user_edit.html', {'form': form})
+    return render(request, 'workers/user_edit.html', {'form': form})
 
 
 @login_required(login_url='/')
@@ -85,7 +92,7 @@ def user_edit(request, pk):
             return redirect('worker')
     else:
         form = CreateUserForm(instance=post)
-    return render(request, 'user_edit.html', {'form': form})
+    return render(request, 'workers/user_edit.html', {'form': form})
 
 
 @login_required(login_url='/')
@@ -97,7 +104,7 @@ def user_delete(request, pk):
         obj.delete()
         return redirect('worker')
 
-    return render(request, "user_delete.html", {'user': obj})
+    return render(request, "workers/user_delete.html", {'user': obj})
 
 
 @login_required(login_url='/')
@@ -110,7 +117,7 @@ def product(request):
         else:
             foods = Food.objects.all()
         context = {'categories': categories, 'foods': foods}
-        return render(request, 'product.html', context)
+        return render(request, 'foods/product.html', context)
     else:
         return redirect('room')
 
@@ -126,7 +133,7 @@ def category_edit(request, pk):
             return redirect(reverse('product') + '#C')
     else:
         form = CategoryForm(instance=post)
-    return render(request, 'category_edit.html', {'form': form})
+    return render(request, 'foods/category_edit.html', {'form': form})
 
 
 @login_required(login_url='/')
@@ -141,7 +148,7 @@ def category_new(request):
             print(form.errors)
     else:
         form = CategoryForm()
-    return render(request, 'category_edit.html', {'form': form})
+    return render(request, 'foods/category_edit.html', {'form': form})
 
 
 @login_required(login_url='/')
@@ -152,7 +159,7 @@ def category_delete(request, pk):
         obj.delete()
         return redirect(reverse('product') + '#C')
 
-    return render(request, "category_delete.html", {'category': obj})
+    return render(request, "foods/category_delete.html", {'category': obj})
 
 
 @login_required(login_url='/')
@@ -166,7 +173,7 @@ def food_edit(request, pk):
             return redirect('product')
     else:
         form = FoodForm(instance=food)
-    return render(request, 'food_edit.html', {'form': form})
+    return render(request, 'foods/food_edit.html', {'form': form})
 
 
 @login_required(login_url='/')
@@ -181,7 +188,7 @@ def food_new(request):
             print(form.errors)
     else:
         form = FoodForm()
-    return render(request, 'food_edit.html', {'form': form})
+    return render(request, 'foods/food_edit.html', {'form': form})
 
 
 @login_required(login_url='/')
@@ -192,7 +199,7 @@ def food_delete(request, pk):
         obj.delete()
         return redirect('product')
 
-    return render(request, "food_delete.html", {'food': obj})
+    return render(request, "foods/food_delete.html", {'food': obj})
 
 
 @login_required(login_url='/')
@@ -282,9 +289,110 @@ def table_delete(request, pk_room, pk_table):
 @login_required(login_url='/')
 def orders(request):
     order_models = Order.objects.filter(is_completed=False)
-    return render(request, 'orders/order_view.html', context={'orders': order_models})
+    return render(request, 'orders/orders.html', context={'orders': order_models})
 
 
-# @login_required(login_url='/')
-def document(request):
-    return render(request, 'document.html')
+@login_required(login_url='/')
+def order_view(request, pk):
+    order_model = get_object_or_404(Order, pk=pk)
+    order_items = order_model.orderitem_set.all()
+    return render(request, 'orders/order_view.html', context={'order': order_model, 'orderitems': order_items})
+
+
+@login_required(login_url='/')
+def print_order(request, order_id):
+    order_model = get_object_or_404(Order, id=order_id)
+    print_receipt(order=order_model)
+    return redirect('orders')
+
+
+@login_required(login_url='/')
+def expenses(request):
+    expense_models = Expense.objects.all()
+    expense_reason_models = ExpenseReason.objects.all()
+    return render(request, 'expenses/expenses.html',
+                  context={'expenses': expense_models, 'expense_reasons': expense_reason_models})
+
+
+@login_required(login_url='/')
+def expense_reason_new(request):
+    if request.method == "POST":
+        form = ExpenseReasonForm(request.POST)
+        if form.is_valid():
+            model = form.save(commit=False)
+            model.save()
+            return redirect(reverse('expenses') + '#C')
+        else:
+            print(form.errors)
+    else:
+        form = ExpenseReasonForm()
+    return render(request, 'expenses/expense_reason_edit.html', {'form': form})
+
+
+@login_required(login_url='/')
+def expense_reason_edit(request, pk):
+    expense_reason = get_object_or_404(ExpenseReason, pk=pk)
+    if request.method == "POST":
+        form = ExpenseReasonForm(request.POST, instance=expense_reason)
+        if form.is_valid():
+            model = form.save(commit=False)
+            model.save()
+            return redirect(reverse('expenses') + '#C')
+    else:
+        form = ExpenseReasonForm(instance=expense_reason)
+    return render(request, 'expenses/expense_reason_edit.html', {'form': form})
+
+
+@login_required(login_url='/')
+def expense_new(request):
+    worker_model = Worker.objects.get(user=request.user)
+    if request.method == "POST":
+        tempt_dict = request.POST.copy()
+        tempt_dict['performer'] = str(worker_model.id)
+        form = ExpenseForm(tempt_dict)
+        if form.is_valid():
+            model = form.save(commit=False)
+            model.save()
+            return redirect(reverse('expenses'))
+        else:
+            print(form.errors)
+    else:
+        default_choice = request.GET.get('reason')
+        if default_choice is not None:
+            form = ExpenseForm(initial={'reason': ExpenseReason.objects.get(id=int(default_choice))})
+        else:
+            form = ExpenseForm()
+    return render(request, 'expenses/expense_new.html', {'form': form})
+
+
+@login_required(login_url='/')
+def expense_delete(request, pk):
+    expense_model = get_object_or_404(Expense, pk=pk)
+    if request.method == "POST":
+        expense_model.delete()
+        return redirect('expenses')
+
+    return render(request, "expenses/expense_delete.html")
+
+
+@login_required(login_url='/')
+def expense_reason_delete(request, pk):
+    expense_reason_model = get_object_or_404(ExpenseReason, pk=pk)
+    if request.method == "POST":
+        expense_reason_model.delete()
+        return redirect('expenses')
+
+    return render(request, "expenses/expense_reason_delete.html", {'reason': expense_reason_model})
+
+
+@login_required(login_url='/')
+def complete_order(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    if request.method == "POST":
+        form = OrderCompletionForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('orders')
+    else:
+        form = OrderCompletionForm()
+    return render(request, "orders/complete_order.html", context={'form': form, 'order': order})

@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.forms import Form, CharField, ChoiceField, PasswordInput, ModelForm, IntegerField
 
 from utils.printer import get_printers
-from .models import Worker, Category, Food, Room, Table
+from .models import Worker, Category, Food, Room, Table, ExpenseReason, Expense, Order
 
 
 class CreateUserForm(Form):
@@ -29,13 +29,8 @@ class CreateUserForm(Form):
         last_name = self.cleaned_data.get("last_name")
         position = self.cleaned_data.get("position")
         password = self.cleaned_data.get("password")
-        if position == 'admin':
-            admin = True
-        else:
-            admin = False
         if self.instance is None:
-            user = User.objects.create(username=f"{first_name.lower()}_{last_name.lower()}", password=password,
-                                       is_staff=admin, is_superuser=admin)
+            user = User.objects.create(username=f"{first_name.lower()}_{last_name.lower()}", password=password)
             user.save()
             worker = Worker.objects.create(user=user, first_name=first_name, last_name=last_name, position=position)
             worker.save()
@@ -43,10 +38,7 @@ class CreateUserForm(Form):
             self.instance: Worker
             self.instance.user.username = f"{first_name.lower()}_{last_name.lower()}"
             if password != "":
-                print("updated")
                 self.instance.user.set_password(password)
-            self.instance.user.is_superuser = admin
-            self.instance.user.is_staff = admin
             self.instance.first_name = first_name
             self.instance.last_name = last_name
             self.instance.position = position
@@ -85,3 +77,31 @@ class TableForm(Form):
         number = self.cleaned_data.get("number")
         table = Table.objects.create(number=number, room=self.room)
         table.save()
+
+
+class ExpenseReasonForm(ModelForm):
+    class Meta:
+        model = ExpenseReason
+        fields = '__all__'
+
+
+class ExpenseForm(ModelForm):
+    class Meta:
+        model = Expense
+        fields = '__all__'
+
+
+class OrderCompletionForm(Form):
+    payment_type = ChoiceField(choices=(('cash', 'Naqd'), ('credit_card', 'Kartadan')))
+
+    def __init__(self, *args, instance=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.instance = instance
+
+    def save(self):
+        payment_type = self.cleaned_data.get('payment_type')
+        self.instance: Order
+        self.instance.payment_type = payment_type
+        self.instance.is_completed = True
+        self.instance.paid_money = self.instance.needed_payment
+        self.instance.save()

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block content %}
+    <ul id="tabs" class="nav nav-tabs nav-tabs-style" role="tablist" style=" border: none;">
+        <li class="nav-item ">
+            <a id="tab-A" href="#pane-A" class="nav-link nav-link-style active border-0" data-toggle="tab" role="tab">XARAJATLAR</a>
+        </li>
+        <li class="nav-item">
+            <a id="tab-B" href="#pane-B" class="nav-link nav-link-style border-0" data-toggle="tab" role="tab">XARAJAT
+                SABABLARI</a>
+        </li>
+    </ul>
+
+    <div id="content" class="tab-content" role="tablist">
+
+        <div id="pane-A" class=" border-top-0 tab-pane fade show active" role="tabpanel" aria-labelledby="tab-A">
+            <div role="tab" id="heading-A">
+                <table class="table table-hover m">
+
+                    <tr>
+                        <td class="bg-primary text-white">№</td>
+                        <td class="bg-primary text-white">Sababi</td>
+                        <td class="bg-primary text-white">Sanasi</td>
+                        <td class="bg-primary text-white text-center">Amalga oshirdi</td>
+                        <td class="bg-primary text-white">Summa</td>
+                        <td class="bg-primary text-white">O`chirish</td>
+                    </tr>
+                    {% for expense in expenses %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ expense.reason.title }}</td>
+                            <td>{{ expense.created_time }}</td>
+                            <td>{{ expense.performer.full_name }}</td>
+                            <td>{{ expense.amount }} so'm</td>
+                            <td><a href="{% url 'expense_delete' pk=expense.pk %}">
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> O`chirish
+                                </button>
+                                <a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+
+
+                <!-- Button trigger modal -->
+                <a href="{% url 'expense_new' %}" type="button" class="btn btn-primary m-1">Qo'shish</a>
+            </div>
+        </div>
+
+
+        <div id="pane-B" class=" border-top-0 tab-pane fade" role="tabpanel" aria-labelledby="tab-B">
+            <div role="tab" id="heading-B">
+
+                <table class="table table-hover m">
+
+                    <tr>
+                        <td class="bg-primary text-white text-center">№</td>
+                        <td class="bg-primary text-white ">Nomi</td>
+                        <td class="bg-primary text-white text-center">Sarflash</td>
+                        <td class="bg-primary text-white text-center">Tahrir</td>
+                        <td class="bg-primary text-white text-center">O`chirish</td>
+                    </tr>
+
+                    {% for i in expense_reasons %}
+                        <tr>
+                            <td class="text-center">{{ forloop.counter }}</td>
+                            <td>{{ i.title }}</td>
+                            <td class="text-center"><a href="{% url 'expense_new' %}?reason={{ i.id }}">
+                                <button type="button" class="btn btn-info"><i class="fa fa-money"></i> Saflash</button>
+                            </a></td>
+                            <td class="text-center"><a href="{% url 'expense_reason_edit' pk=i.pk %}">
+                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Tahrir</button>
+                            </a></td>
+                            <td class="text-center"><a href="{% url 'expense_reason_delete' pk=i.pk %}">
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> O`chirish
+                                </button>
+                            </a></td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+
+
+                <!-- Button trigger modal -->
+                <a href="{% url 'expense_reason_new' %}" type="button" class="btn btn-primary m-1">Qo'shish</a>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        if (window.location.href.slice(-2) === "#C") {
+            document.getElementById("pane-A").setAttribute("class", " border-top-0 tab-pane fade");
+            document.getElementById("pane-B").setAttribute("class", " border-top-0 tab-pane fade show active");
+            document.getElementById("tab-B").setAttribute("class", " nav-link nav-link-style active border-0");
+            document.getElementById("tab-A").setAttribute("class", " nav-link nav-link-style border-0");
+        }
+    </script>
+{% endblock %}

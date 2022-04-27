@@ -54,10 +54,10 @@
                             <td>{{ food.price }} so'm</td>
                             <td>{{ food.category.title }}</td>
                             <td><a href="{% url 'food_edit' pk=food.pk %}">
-                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i>Tahrir</button>
+                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Tahrir</button>
                             </a></td>
                             <td><a href="{% url 'food_delete' pk=food.pk %}">
-                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>O`chirish
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> O`chirish
                                 </button>
                             </a></td>
                         </tr>
@@ -109,10 +109,10 @@
                             {% endif %}
                             <td class="text-center">{{ i.printer }}</td>
                             <td class="text-center"><a href="{% url 'category' pk=i.pk %}">
-                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i>Tahrir</button>
+                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Tahrir</button>
                             </a></td>
                             <td class="text-center"><a href="{% url 'category_delete' pk=i.pk %}">
-                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i>O`chirish
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> O`chirish
                                 </button>
                             </a></td>
                         </tr>

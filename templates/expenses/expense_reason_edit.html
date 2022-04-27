@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        <div class="row mt-5">
+            <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow tableab">
+                <div class="h2">Xarajat turi:</div>
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td style="text-align: right;">Nomi:</td>
+                        <td>{{ form.title }}</td>
+                    </tr>
+                </table>
+                <div class="mr-auto">
+                    <a href="{% url 'expenses' %}#C" type="button" class="btn btn-danger m-1 mt-3"><i
+                            class="fa fa-times"
+                            aria-hidden="true"></i>
+                        Yopish</a>
+                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> Saqlash</button>
+
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

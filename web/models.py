@@ -18,7 +18,10 @@ class Worker(models.Model):
         if self.position == "admin":
             self.user.is_superuser = True
             self.user.is_staff = True
-            self.user.save()
+        else:
+            self.user.is_superuser = False
+            self.user.is_staff = False
+        self.user.save()
 
     @property
     def full_name(self):
@@ -98,6 +101,9 @@ class Order(models.Model):
     table = models.ForeignKey(to=Table, verbose_name="Stol", on_delete=models.PROTECT)
     is_completed = models.BooleanField(default=False)
     paid_money = models.IntegerField(verbose_name="To'langan summa", null=True, blank=True)
+    payment_type = models.CharField(max_length=25, verbose_name="To'lov turi",
+                                    choices=(('cash', 'Naqd'), ('credit_card', 'Kartadan')),
+                                    default='cash')
 
     def __str__(self):
         return str(self.id)
@@ -134,3 +140,21 @@ class OrderItem(models.Model):
     def save(self, *args, **kwargs):
         super(OrderItem, self).save()
         self.paid_amount = self.total_price
+
+
+class ExpenseReason(models.Model):
+    title = models.CharField(max_length=50, verbose_name='Nomi')
+
+    def __str__(self):
+        return self.title
+
+
+class Expense(models.Model):
+    reason = models.ForeignKey(to=ExpenseReason, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(verbose_name="Sanasi", auto_now_add=True)
+    performer = models.ForeignKey(to=Worker, on_delete=models.CASCADE)
+    amount = models.IntegerField(verbose_name="Sarflangan summa")
+
+    @property
+    def created_time(self):
+        return self.created_at.strftime("%d/%m/%Y, %H:%M")
