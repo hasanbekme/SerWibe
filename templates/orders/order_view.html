@@ -3,7 +3,7 @@
     <div class="row mt-5">
         <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
             <div class="h4">Buyurtma: #{{ order.id }} <span
-                    class="float-right text-danger font-weight-bold ">{{ order.table.room.title }}: №{{ order.table.number }}</span>
+                    class="float-left float-sm-right float-md-right text-danger font-weight-bold">{{ order.table.room.title }}: №{{ order.table.number }}</span>
             </div>
             {% csrf_token %}
             <table class="table">
