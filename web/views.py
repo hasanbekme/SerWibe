@@ -282,7 +282,7 @@ def table_delete(request, pk_room, pk_table):
 @login_required(login_url='/')
 def orders(request):
     order_models = Order.objects.filter(is_completed=False)
-    return render(request, 'orders/orders.html', context={'orders': order_models})
+    return render(request, 'orders/order_view.html', context={'orders': order_models})
 
 
 # @login_required(login_url='/')

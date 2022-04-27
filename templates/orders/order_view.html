@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+        <div class="row mt-5">
+            <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
+                <div class="h2">Buyurtma:#156 <span class="float-right text-danger font-weight-bold ">Umimiy:№2</span></div>
+                {% csrf_token %}
+                <table class="table">
+                    <tr class="bg-primary text-white">
+                        <td>Nomi</td>
+                        <td>Miqdori</td>
+                        <td>Narxi</td>
+                    </tr>
+                    <tr>
+                        <td>Gamburger</td>
+                        <td>2 ta</td>
+                        <td>2000</td>
+                    </tr>
+                    <tr>
+                        <td>Gamburger</td>
+                        <td>2 ta</td>
+                        <td>2000</td>
+                    </tr>
+                    <tr>
+                        <td>Gamburger</td>
+                        <td>2 ta</td>
+                        <td>2000</td>
+                    </tr>
+                    <tr class="text-danger font-weight-bold">
+                        <td>Umumiy</td>
+                        <td>15 ta</td>
+                        <td>30000</td>
+                    </tr>
+                </table>
+                <div class="mr-auto">
+                    <a href="{% url 'rooms' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times" aria-hidden="true"></i> Yopish</a>
+                    <a href="{% url 'rooms' %}" type="button" class="btn btn-primary m-1 mt-3"><i class="fa fa-print" aria-hidden="true"></i> Chop etish</a>
 
-</body>
-</html>
+                </div>
+            </div>
+        </div>
+{% endblock %}
