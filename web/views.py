@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 
 from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm, TableForm
-from .models import Worker, Category, Food, Room, Table
+from .models import Worker, Category, Food, Room, Table, Order
 
 
 def logoutUser(request):
@@ -36,7 +36,7 @@ def signin(request):
         return render(request, 'login.html', context)
 
 
-# @login_required(login_url='/')
+@login_required(login_url='/')
 def dashboard(request):
     return render(request, 'dashboard.html')
 
@@ -279,9 +279,10 @@ def table_delete(request, pk_room, pk_table):
     return render(request, "tables/table_delete.html", {'room': room_obj, 'table': table_obj})
 
 
-# @login_required(login_url='/')
-def order(request):
-    return render(request, 'order.html')
+@login_required(login_url='/')
+def orders(request):
+    order_models = Order.objects.filter(is_completed=False)
+    return render(request, 'orders/orders.html', context={'orders': order_models})
 
 
 # @login_required(login_url='/')

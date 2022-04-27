@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table class="table table-hover mt-4">
+
+        <tr>
+            <td class="bg-primary text-white" style=" border-radius: 10px 0 0 0">№</td>
+            <td class="bg-primary text-white">ID</td>
+            <td class="bg-primary text-white">Offitsant</td>
+            <td class="bg-primary text-white">Olingan vaqt</td>
+            <td class="bg-primary text-white">Xona</td>
+            <td class="bg-primary text-white">Stol</td>
+            <td class="bg-primary text-white">Umumiy summa</td>
+            <td class="bg-primary text-white">Tahlil</td>
+            <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">O`chirish</td>
+        </tr>
+
+        <tr>
+            {% for order in orders %}
+                <td>{{ forloop.counter }}</td>
+                <td>#{{ order.id }}</td>
+                <td>{{ order.waiter.full_name }}</td>
+                <td>{{ order.created_time }}</td>
+                <td>{{ order.table.room.title }}</td>
+                <td>{{ order.table.number }}</td>
+                <td>{{ order.needed_payment }}</td>
+                <td><a href="#">
+                    <button type="button" class="btn btn-info"><i class="fa fa-eye"></i> Tahlil</button>
+                </a></td>
+                <td><a href="#">
+                    <button type="button" class="btn btn-warning"><i class="fa fa-credit-card"></i> Tugatish
+                    </button>
+                </a></td>
+            {% endfor %}
+        </tr>
+
+    </table>
+
+{% endblock %}

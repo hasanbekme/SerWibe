@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="POST">
+        <div class="row mt-5">
+            <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
+                {% csrf_token %}
+                <div class="h4">Xona:
+                    <span class="text-info h4 font-weight-bold">
+                        {{ room.title }}
+                    </span>
+                </div>
+                <div class="h5">Stol nomeri:
+                    <span class="text-danger h4 font-weight-bold">
+                        {{ table.number }}
+                    </span>
+                </div>
+                <div class="mt-2 mb-4">{{ table.number }}-raqamli stolni o'chirib yuborishga rozimisiz?
+                </div>
+                <div class="m-auto">
+                    <a href="{% url 'room_tables' pk=room.pk %}" type="button" class="btn btn-danger mr-4 mb-0 "><i
+                            class="fa fa-times" aria-hidden="true"></i>Bekor qilish</a>
+                    <button type="sumbit" class="btn btn-primary ml-4 mb-0 "><i class="fa fa-trash"></i> O`chirish
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

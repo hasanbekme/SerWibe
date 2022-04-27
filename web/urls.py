@@ -25,6 +25,6 @@ urlpatterns = [
     path('rooms/<int:pk>/delete', views.room_delete, name='room_delete'),
     path('rooms/<int:pk>/table_new', views.table_new, name='table_add'),
     path('rooms/<int:pk_room>/tables/<int:pk_table>/delete', views.table_delete, name='table_delete'),
-    path('order', views.order, name='order'),
+    path('orders', views.orders, name='orders'),
     path('document', views.document, name='document'),
 ]

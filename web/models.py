@@ -109,6 +109,10 @@ class Order(models.Model):
             total += item.total_price
         return total
 
+    @property
+    def created_time(self):
+        return self.created_at.strftime("%d/%m/%Y, %H:%M")
+
     class Meta:
         verbose_name = "Buyurtma"
         verbose_name_plural = "Buyurtmalar"
