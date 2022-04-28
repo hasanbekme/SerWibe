@@ -4,31 +4,31 @@
         <div class="row mt-5">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
                 <div class="h4">Buyurtma: #{{ order.id }} <span
-                    class="float-left float-sm-right float-md-right text-danger font-weight-bold">{{ order.table.room.title }}: №{{ order.table.number }}</span>
+                        class="float-left float-sm-right float-md-right text-danger font-weight-bold">{{ order.table.room.title }}: №{{ order.table.number }}</span>
                 </div>
                 {% csrf_token %}
                 <table class="table">
-                <tr class="bg-primary text-white">
-                    <td>Nomi</td>
-                    <td>Soni</td>
-                    <td>Umumiy narxi</td>
-                </tr>
-                {% for orderitem in orderitems %}
-                    <tr>
-                        <td>{{ orderitem.meal.title }}</td>
-                        <td>{{ orderitem.quantity }} ta</td>
-                        <td>{{ orderitem.total_price }} so'm</td>
+                    <tr class="bg-primary text-white">
+                        <td>Nomi</td>
+                        <td>Soni</td>
+                        <td>Umumiy narxi</td>
                     </tr>
-                {% endfor %}
-                <tr class="text-danger font-weight-bold">
-                    <td>Umumiy</td>
-                    <td>{{ order.orderitem_set.count }} ta</td>
-                    <td>{{ order.needed_payment }} so'm</td>
-                </tr>
-            </table>
-            <textarea class="mb-3 mt-3 p-2" placeholder="Izoh" value="" rows="3"></textarea>
-            <div class="row pl-3 payment_type">
-                
+                    {% for orderitem in orderitems %}
+                        <tr>
+                            <td>{{ orderitem.meal.title }}</td>
+                            <td>{{ orderitem.quantity }} ta</td>
+                            <td>{{ orderitem.total_price }} so'm</td>
+                        </tr>
+                    {% endfor %}
+                    <tr class="text-danger font-weight-bold">
+                        <td>Umumiy</td>
+                        <td>{{ order.orderitem_set.count }} ta</td>
+                        <td>{{ order.needed_payment }} so'm</td>
+                    </tr>
+                </table>
+                {{ form.comment }}
+                <div class="row pl-3 payment_type">
+
                     <button onclick="changed(2)" id="money" type="button" class="btn m-2 btn-success col-2">
                         <i class="fa fa-money" aria-hidden="true"></i>
                     </button>
@@ -42,29 +42,31 @@
                     </button>
                 </div>
                 <div class="mr-auto">
-                    <a href="{% url 'orders' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times" aria-hidden="true"></i>
+                    <a href="{% url 'orders' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
+                                                                                                  aria-hidden="true"></i>
                         Bekor qilish</a>
-                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-check-circle"></i> Tasdiqlash</button>
+                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-check-circle"></i> Tasdiqlash
+                    </button>
                 </div>
             </div>
         </div>
     </form>
-<script type="text/javascript">
-    document.getElementById("id_payment_type").style.display = "none";
-    function changed(pressed=0){
-        if ((pressed!=2 && document.getElementById("checkbox").checked ) || pressed==1){
-        document.getElementById("checkbox").checked=true;
-        document.getElementById("id_payment_type").value = "credit_card";
-        document.getElementById("ccard").className = "btn m-2 btn-success col-2";
-        document.getElementById("money").className = "btn m-2 btn-secondary col-2";
+    <script type="text/javascript">
+        document.getElementById("id_payment_type").style.display = "none";
+
+        function changed(pressed = 0) {
+            if ((pressed != 2 && document.getElementById("checkbox").checked) || pressed == 1) {
+                document.getElementById("checkbox").checked = true;
+                document.getElementById("id_payment_type").value = "credit_card";
+                document.getElementById("ccard").className = "btn m-2 btn-success col-2";
+                document.getElementById("money").className = "btn m-2 btn-secondary col-2";
+            } else {
+                document.getElementById("checkbox").checked = false;
+                document.getElementById("id_payment_type").value = "cash";
+                document.getElementById("money").className = "btn m-2 btn-success col-2";
+                document.getElementById("ccard").className = "btn m-2 btn-secondary col-2";
+            }
+
         }
-        else {
-        document.getElementById("checkbox").checked=false;
-        document.getElementById("id_payment_type").value = "cash";
-        document.getElementById("money").className = "btn m-2 btn-success col-2";
-        document.getElementById("ccard").className = "btn m-2 btn-secondary col-2";
-        }
-        
-    }
-</script>
+    </script>
 {% endblock %}

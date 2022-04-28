@@ -104,6 +104,7 @@ class Order(models.Model):
     payment_type = models.CharField(max_length=25, verbose_name="To'lov turi",
                                     choices=(('cash', 'Naqd'), ('credit_card', 'Kartadan')),
                                     default='cash')
+    comment = models.TextField(blank=True)
 
     def __str__(self):
         return str(self.id)

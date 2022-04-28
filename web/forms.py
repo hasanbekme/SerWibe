@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.forms import Form, CharField, ChoiceField, PasswordInput, ModelForm, IntegerField
+from django.forms import Form, CharField, ChoiceField, PasswordInput, ModelForm, IntegerField, Textarea
 
 from utils.printer import get_printers
 from .models import Worker, Category, Food, Room, Table, ExpenseReason, Expense, Order
@@ -93,6 +93,7 @@ class ExpenseForm(ModelForm):
 
 class OrderCompletionForm(Form):
     payment_type = ChoiceField(choices=(('cash', 'Naqd'), ('credit_card', 'Kartadan')))
+    comment = CharField(widget=Textarea, required=False)
 
     def __init__(self, *args, instance=None, **kwargs):
         super().__init__(*args, **kwargs)
@@ -100,7 +101,10 @@ class OrderCompletionForm(Form):
 
     def save(self):
         payment_type = self.cleaned_data.get('payment_type')
+        comment = self.cleaned_data.get('comment')
         self.instance: Order
+        if comment is not None:
+            self.instance.comment = comment
         self.instance.payment_type = payment_type
         self.instance.is_completed = True
         self.instance.paid_money = self.instance.needed_payment

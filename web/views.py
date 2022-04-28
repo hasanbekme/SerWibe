@@ -388,6 +388,7 @@ def expense_reason_delete(request, pk):
 @login_required(login_url='/')
 def complete_order(request, pk):
     order = get_object_or_404(Order, pk=pk)
+    order_items = order.orderitem_set.all()
     if request.method == "POST":
         form = OrderCompletionForm(request.POST, instance=order)
         if form.is_valid():
@@ -395,4 +396,4 @@ def complete_order(request, pk):
             return redirect('orders')
     else:
         form = OrderCompletionForm()
-    return render(request, "orders/complete_order.html", context={'form': form, 'order': order})
+    return render(request, "orders/complete_order.html", context={'form': form, 'order': order, 'orderitems': order_items})
