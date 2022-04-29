@@ -1,5 +1,6 @@
+from django.urls import path
+
 from web import views
-from django.urls import path, re_path
 
 urlpatterns = [
     path('', views.signin, name='signin'),
@@ -10,9 +11,10 @@ urlpatterns = [
     path('room', views.room, name='room'),
     path('income', views.income, name='income'),
     path('worker', views.worker, name='worker'),
-    path('expenses/', views.expenses, name='expenses'),
+    path('expenses', views.expenses, name='expenses'),
+    path('archive', views.archive, name='archive'),
     path('document', views.document, name='document'),
-    path('product/', views.product, name='product'),
+    path('product', views.product, name='product'),
     path('worker/add', views.user_new, name='user_new'),
     path('worker/<int:pk>/', views.user_edit, name='user_edit'),
     path('worker/<int:pk>/delete', views.user_delete, name='user_delete'),
@@ -37,5 +39,5 @@ urlpatterns = [
     path('expenses/<int:pk>/delete', views.expense_delete, name='expense_delete'),
     path('expenses/reason/<int:pk>/delete', views.expense_reason_delete
          , name='expense_reason_delete'),
-
+    path('archive/<int:pk>/view', views.archive_order_view, name='archive_order_view'),
 ]

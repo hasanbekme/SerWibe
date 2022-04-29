@@ -17,13 +17,13 @@
                     <td>{{ forloop.counter }}</td>
                     <td>{{ room.title }}</td>
                     <td><a href="{% url 'room_tables' pk=room.pk %}">
-                        <button type="button" class="btn btn-info"><i class="fa fa-table"> {{ room.tables_count }}</i></button>
+                        <button type="button" class="btn btn-info"><i class="fa fa-table"> {{ room.tables_count }}</i> ta</button>
                     </a></td>
                     <td><a href="{% url 'room_edit' pk=room.pk %}">
-                        <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Tahrir</button>
                     </a></td>
                     <td><a href="{% url 'room_delete' pk=room.pk %}">
-                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> O'chirish</button>
                     </a></td>
                 </tr>
             {% endfor %}
