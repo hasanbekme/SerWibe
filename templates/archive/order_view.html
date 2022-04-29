@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row mt-5">
+        <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
+            <div class="h4">Buyurtma: #{{ order.id }} <span
+                    class="float-left float-sm-right float-md-right text-danger font-weight-bold">{{ order.table.room.title }}: №{{ order.table.number }}</span>
+            </div>
+            {% csrf_token %}
+            <table class="table">
+                <tr class="bg-primary text-white">
+                    <td>Nomi</td>
+                    <td>Soni</td>
+                    <td>Umumiy narxi</td>
+                </tr>
+                {% for orderitem in orderitems %}
+                    <tr>
+                        <td>{{ orderitem.meal.title }}</td>
+                        <td>{{ orderitem.quantity }} ta</td>
+                        <td>{{ orderitem.paid_amount }} so'm</td>
+                    </tr>
+                {% endfor %}
+                <tr class="text-danger font-weight-bold">
+                    <td>Umumiy</td>
+                    <td>{{ order.orderitem_set.count }} ta</td>
+                    <td>{{ order.paid_money }} so'm</td>
+                </tr>
+            </table>
+            <div class="mr-auto">
+                <a href="{% url 'archive' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
+                                                                                             aria-hidden="true"></i>
+                    Yopish</a>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
