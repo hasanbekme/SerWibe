@@ -1,0 +1,100 @@
+{% extends 'base2.html' %}
+{% block content %}
+
+<div  class="topmenu">
+	<a class="btn btn-light text-danger p-1 ">
+		<i class="fa fa-home" style="font-size:3em"></i>
+	</a> 
+	<a class="btn btn-light ml-3 topmenu-room">
+		<div class="h2 text-primary topmenu-room-span" id="roomname" style="line-height:25px">UMUYMIY</div>
+	</a> 
+	<a class="btn btn-success  p-1 ml-3">
+		<span class="h2 text-light " style="height: 34px; display: inline-block; font-size: 1.7em;  margin-top: 6px; width: 50px;"> 2 </span>
+	</a> 
+</div>
+<main style="overflow-y: auto; height:80%">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-5 col-md-5 cardtable card m-auto shadow text-white h1 bg-info" style="margin-bottom: 15px!important;">
+				<div class="tableindex2">300 000 so`m</div>
+				<span class="tableprice">1</span>
+			</div>
+			<div class="col-5 col-md-5 cardtable card m-auto shadow text-primary h1" style="margin-bottom: 15px!important;">
+				<span class="tableprice">2</span>
+			</div>
+			<div class="col-5 col-md-5 cardtable card m-auto shadow text-primary h1" style="margin-bottom: 15px!important;">
+				
+				<span class="tableprice">1</span>
+			</div>
+			<div class="col-5 col-md-5 cardtable card m-auto shadow text-primary h1" style="margin-bottom: 15px!important;">
+				
+				<span class="tableprice">10</span>
+			</div>
+			<div class="col-5 col-md-5 cardtable card m-auto shadow text-primary h1" style="margin-bottom: 15px!important;">
+				
+				<span class="tableprice">1</span>
+			</div>
+			<div class="col-5 col-md-5 cardtable card m-auto shadow text-primary h1" style="margin-bottom: 15px!important;">
+				
+				<span class="tableprice">1</span>
+			</div>
+			<div class="col-5 col-md-5 cardtable card m-auto shadow text-primary h1" style="margin-bottom: 15px!important;">
+				
+				<span class="tableprice">1</span>
+			</div>
+			
+			<div class="col-5 col-md-5 cardtable card m-auto shadow text-primary h1" style="margin-bottom: 15px!important;">
+				
+				<span class="tableprice">1</span>
+			</div>
+			
+			<div class="col-5 col-md-5 cardtable card m-auto shadow text-primary h1" style="margin-bottom: 15px!important;">
+				
+				<span class="tableprice">1</span>
+			</div>
+			
+			<div class="col-5 col-md-5 cardtable card m-auto shadow text-primary h1" style="margin-bottom: 15px!important;">
+				
+				<span class="tableprice">1</span>
+			</div>
+			
+			<div class="col-5 col-md-5 cardtable card m-auto shadow text-primary h1" style="margin-bottom: 15px!important;">
+				
+				<span class="tableprice">1</span>
+			</div>
+			
+			<div class="col-5 col-md-5 cardtable card m-auto shadow text-primary h1" style="margin-bottom: 15px!important;">
+				
+				<span class="tableprice">1</span>
+			</div>
+			
+			<div class="col-5 col-md-5 cardtable card m-auto shadow text-primary h1" style="margin-bottom: 15px!important;">
+				
+				<span class="tableprice">1</span>
+			</div>
+			
+		</div>
+	</div>
+
+</main>
+
+<div class="menu">
+	<a href="/room"><i class="fa fa-bars"></i></a>
+	<a href="/sean"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+	<a href="#"><i class="fa fa-user" onclick="if (confirm('Chiqishga rozimisiz')){ document.location.href = '/logout'; }" ></i></a>
+
+</div>
+<script type="text/javascript">
+	var vr = document.getElementById("roomname");
+	console.log(vr.innerHTML.length);
+	if (vr.innerHTML.length<=7){
+		vr.style.lineHeight = "45px"
+		vr.style.fontSize = "25px";
+	}
+	else{
+	vr.style.fontSize = "25px";
+		}
+</script>
+
+{% endblock %}

@@ -1,58 +1,50 @@
 {% extends 'base2.html' %}
 {% block content %}
 
-<div class="pt-2" style="height: 70px; width:100%">
+<div  class="topmenu">
 	<a class="btn btn-light text-danger p-1 ">
 		<i class="fa fa-home" style="font-size:3em"></i>
 	</a> 
-	<a class="btn btn-light p-1 pl-3 pr-3 ml-3">
-		<span class="h2 text-warning font-weight-bold" style="font-size: 3vw; width:80%!important">UMUMIY</span>
+	<a class="btn btn-light ml-3 topmenu-room">
+		<div class="h2 text-primary topmenu-room-span" id="roomname" style="line-height:25px">UMUYMIY</div>
 	</a> 
 	<a class="btn btn-light  p-1 ml-3">
-		<span class="h2 text-primary font-weight-bold">№3</span>
+		<span class="h2 text-primary" style="height: 34px; display: inline-block; font-size: 1.7em;  margin-top: 6px;">№13</span>
 	</a> 
 </div>
 <main style="overflow-y: auto; height:80%">
 
 	<div class="container">
 		<div class="row">
-			<!-- for -->
-			<div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row" style="margin-top: 15px!important;">
-				<div class="col-3 p-0">
-					<img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px">
-				</div>
-				<div class="text-primary mt-4 col-7 h4 font-weight-bold text-left" style="line-height: 25px;">
-					HotDog katassi
-				</div>
-				<div class="text-primary col-3 h4 font-weight-bold text-left" style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-					<div class="addandsubt btn btn-success" onclick="adding('{{ i.id }}')"><span>+</span></div> 
-					<input class="limit  border " type="number" name="{{ i.id }}"  min="0" id="{{ i.id }}">
 
-					<div class="addandsubt btn btn-danger" onclick="subt('{{ i.id }}')"><span> -</span></div>
+			<div class="col-11 col-md-5 cardcat card m-auto shadow text-white h1 bg-white row" style="margin-bottom: 15px!important;">
+				<div class="col-3 p-0">
+					<img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:20px">
+				</div>
+				<div class="text-primary mt-4 col-10 h2 font-weight-bold text-left" style="line-height: 30px;">
+					Ovqatlar
 				</div>
 			</div>
-			<!-- EndFor -->
 		</div>
 	</div>
 
 </main>
 
-<div class="menu">
-	<a href="/table"><i class="fa fa-bars"></i></a>
-	<a href="/sean"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
-	<a href="#"><i class="fa fa-user" onclick="if (confirm('Chiqishga rozimisiz')){ document.location.href = '/logout'; }" ></i></a>
+<div class="menu-food">
+	<a href="/table" class="left"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+	
+	<a href="#" style="float: right;"><span class="h4 font-weight-bold text-danger">120000so`m</span><i class="fa fa-check" aria-hidden="true"></i>	</a>
 
 </div>
 <script type="text/javascript">
-	function adding(aer) {
-		document.getElementById(aer).value-=-1;
+	var vr = document.getElementById("roomname");
+	console.log(vr.innerHTML.length);
+	if (vr.innerHTML.length<=7){
+		vr.style.lineHeight = "45px"
+		vr.style.fontSize = "25px";
 	}
-	function subt(aer) {
-		if (document.getElementById(aer).value-1>0) {
-				document.getElementById(aer).value-=1;}
-				else{
-					document.getElementById(aer).value="";
-				}
-	}
+	else{
+	vr.style.fontSize = "25px";
+		}
 </script>
 {% endblock %}

@@ -56,6 +56,30 @@
 
     </table>
 
+
+
+    <!-- Paginator shu yerga if ishlatib paginator kerak bo`lmasa o`chirib qo`yadigan qiling -->
+
+    <div class="text-center">
+        
+    {% if p_paginator.has_previous %}
+     <a class="btn btn-primary" href="?page=1">&laquo</a>
+     <a class="btn btn-primary" href="?page={{ p_paginator.previous_page_number }}"><</a>
+    {% endif %}
+    <span class="btn btn-primary">
+        
+    Sahifa {{ p_paginator.number }} - {{ p_paginator.paginator.num_pages }} 
+    </span>
+    
+    
+    {% if p_paginator.has_next %}
+     <a class="btn btn-primary" href="?page={{ p_paginator.next_page_number }}">></a>
+     <a class="btn btn-primary" href="?page={{ p_paginator.paginator.num_pages }}">&raquo</a>
+    {% endif %}
+    </div>
+
+    <!-- End Paginator -->
+    <div class="h5 font-weight-bold text-danger">Jami: 320 000</div>
     <script type="text/javascript">
         var year = new URL(location.href).searchParams.get('fir');
         document.getElementById("fir").value = year;

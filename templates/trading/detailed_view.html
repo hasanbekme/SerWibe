@@ -13,18 +13,16 @@
         <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Hafta</a>
         <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Oy</a>
     </form>
-    <br>
+    <div class="h2 m-0 p-0 text-primary font-weight-bold">LavashBurger</div>
     <div class="row">
-        <table class="table table-hover col-12 col-lg-7">
+        <table class="table table-hover col-12 col-lg-5">
             <tr>
-                <td class="bg-primary text-white" style=" border-radius: 10px 0 0 0">№</td>
-                <td class="bg-primary text-white">Sana</td>
+                <td class="bg-primary text-white" style=" border-radius: 10px 0 0 0">Sana</td>
                 <td class="bg-primary text-white">Nechta</td>
                 <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">Savdo</td>
             </tr>
             {% for date in dates %}
                 <tr>
-                    <td>{{ forloop.counter }}</td>
                     <td>{{ date.date }}</td>
                     <td>{{ date.total_sold }}</td>
                     <td>{{ date.sale_amount }} so`m</td>
@@ -32,7 +30,11 @@
             {% endfor %}
 
         </table>
-        <canvas class="col-12 col-lg-5" id="myChart"></canvas>
+        <div class="col-12 col-lg-7">
+        <canvas id="myChart" style="width:100%"></canvas>
+
+    <div class="h5 font-weight-bold text-danger ml-5 mt-3 mb-4">Jami: 320 000</div>
+        </div>
     </div>
 
     <script type="text/javascript">
