@@ -48,7 +48,7 @@
             <td><img src="{{ food.image.url }}" style="height: 50px;" alt="image"></td>
             <td>{{ food.total_sold }}</td>
             <td>{{ food.total_sale }} so'm</td>
-            <td><a href="#">
+            <td><a href="{% url 'trading_detailed_view' pk=food.pk %}">
                 <button type="button" class="btn btn-info"><i class="fa fa-eye"></i>Tahlil</button>
             </a></td>
         </tr>

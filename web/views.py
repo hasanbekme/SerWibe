@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 
 from django.contrib import messages
@@ -5,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 
-from utils.data_processing import get_trading_table
+from utils.data_processing import get_trading_table, food_trading_data
 from utils.date_config import get_start_of_week
 from utils.payment_receipt import print_receipt
 from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm, TableForm, ExpenseReasonForm, ExpenseForm, \
@@ -59,13 +60,18 @@ def trading(request):
     start_date = request.GET.get('fir')
     end_date = request.GET.get('sec')
     food_data = get_trading_table(category_parameter, start_date, end_date)
-    print(food_data)
     return render(request, 'trading/income.html', {'foods': food_data, 'categories': category_models})
 
 
-# @login_required(login_url='/')
-def document(request):
-    return render(request, 'document.html')
+@login_required(login_url='/')
+def trading_detailed_view(request, pk):
+    start_date = request.GET.get('fir')
+    end_date = request.GET.get('sec')
+    dates, xvalues, yvalues = food_trading_data(pk, start_date, end_date)
+    mn = min(yvalues) // 2
+    mx = int(max(yvalues) * 1.1)
+    return render(request, 'trading/detailed_view.html',
+                  {'dates': dates, 'labels': json.dumps(xvalues), 'data': json.dumps(yvalues), 'mn': mn, 'mx': mx})
 
 
 @login_required(login_url='/')

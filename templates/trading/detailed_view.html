@@ -10,7 +10,6 @@
         <input type="date" name="fir" id="fir" class="form-item m-2">dan-
         <input type="date" name="sec" id="sec" class="form-item m-2">gacha
         <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Filter</button>
-        <a href="?fir=day&sec=day" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Bugun</a>
         <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Hafta</a>
         <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Oy</a>
     </form>
@@ -23,123 +22,17 @@
                 <td class="bg-primary text-white">Nechta</td>
                 <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">Savdo</td>
             </tr>
-    
-            <tr>
-                <td>1</td>
-                <td>25/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>24/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>23/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-    
-            <tr>
-                <td>1</td>
-                <td>25/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>24/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>23/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-    
-            <tr>
-                <td>1</td>
-                <td>25/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>24/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>23/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-    
-            <tr>
-                <td>1</td>
-                <td>25/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>24/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>23/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-    
-            <tr>
-                <td>1</td>
-                <td>25/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>24/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>23/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-    
-            <tr>
-                <td>1</td>
-                <td>25/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>24/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>23/02/2005</td>
-                <td>213</td>
-                <td>213000so`m</td>
-            </tr>
-    
+            {% for date in dates %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ date.date }}</td>
+                    <td>{{ date.total_sold }}</td>
+                    <td>{{ date.sale_amount }} so`m</td>
+                </tr>
+            {% endfor %}
+
         </table>
-        <canvas class="col-12 col-lg-5" id="myChart" ></canvas>
+        <canvas class="col-12 col-lg-5" id="myChart"></canvas>
     </div>
 
     <script type="text/javascript">
@@ -147,38 +40,34 @@
         document.getElementById("fir").value = year;
         var year = new URL(location.href).searchParams.get('sec');
         document.getElementById("sec").value = year;
-        function addurlparameter(name, value){
-            var sp = new URLSearchParams(window.location.search)
-            sp.set(name, value)
-            window.location.search = sp.toString()
-        }
     </script>
-<script
-src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-</script>
-<script>
-var xValues = [50,60,70,80,90,100,110,120,130,140,50,60,70,80,90,100,110,120,130,140,150];
-var yValues = [7,8,8,9,9,9,10,11,14,14,11,8,8,9,9,9,10,11,14,14,15];
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+    <script>
+        var xValues = {{ labels | safe }};
+        var yValues = {{ data | safe}};
 
-new Chart("myChart", {
-  type: "line",
-  data: {
-    labels: xValues,
-    datasets: [{
-      fill: false,
-      lineTension: 0,
-      backgroundColor: "rgba(7,82,149,1.0)",
-      borderColor: "rgba(7,82,149,1.0)",
-      data: yValues
-    }]
-  },
-  options: {
-    legend: {display: false},
-    scales: {
-      yAxes: [{ticks: {min: 6, max:16}}],
-    }
-  }
-});
-</script>
+        new Chart("myChart", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(7,82,149,1.0)",
+                    borderColor: "rgba(7,82,149,1.0)",
+                    pointRadius: 3,
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                scales: {
+                    yAxes: [{ticks: {min: {{ mn }}, max: {{ mx }}}}],
+                }
+            }
+        });
+    </script>
 
 {% endblock %}
