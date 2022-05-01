@@ -1,10 +1,184 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
 
-</body>
-</html>
+
+
+    <br>
+
+    <form class="container"
+          style="width:100%; background:white; padding:25px; border-radius: 15px; box-shadow: 1px 2px 3px gray;">
+        <input type="date" name="fir" id="fir" class="form-item m-2">dan-
+        <input type="date" name="sec" id="sec" class="form-item m-2">gacha
+        <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Filter</button>
+        <a href="?fir=day&sec=day" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Bugun</a>
+        <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Hafta</a>
+        <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Oy</a>
+    </form>
+    <br>
+    <div class="row">
+        <table class="table table-hover col-12 col-lg-7">
+            <tr>
+                <td class="bg-primary text-white" style=" border-radius: 10px 0 0 0">№</td>
+                <td class="bg-primary text-white">Sana</td>
+                <td class="bg-primary text-white">Nechta</td>
+                <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">Savdo</td>
+            </tr>
+    
+            <tr>
+                <td>1</td>
+                <td>25/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>24/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>23/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+    
+            <tr>
+                <td>1</td>
+                <td>25/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>24/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>23/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+    
+            <tr>
+                <td>1</td>
+                <td>25/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>24/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>23/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+    
+            <tr>
+                <td>1</td>
+                <td>25/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>24/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>23/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+    
+            <tr>
+                <td>1</td>
+                <td>25/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>24/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>23/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+    
+            <tr>
+                <td>1</td>
+                <td>25/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>24/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>23/02/2005</td>
+                <td>213</td>
+                <td>213000so`m</td>
+            </tr>
+    
+        </table>
+        <canvas class="col-12 col-lg-5" id="myChart" ></canvas>
+    </div>
+
+    <script type="text/javascript">
+        var year = new URL(location.href).searchParams.get('fir');
+        document.getElementById("fir").value = year;
+        var year = new URL(location.href).searchParams.get('sec');
+        document.getElementById("sec").value = year;
+        function addurlparameter(name, value){
+            var sp = new URLSearchParams(window.location.search)
+            sp.set(name, value)
+            window.location.search = sp.toString()
+        }
+    </script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+<script>
+var xValues = [50,60,70,80,90,100,110,120,130,140,50,60,70,80,90,100,110,120,130,140,150];
+var yValues = [7,8,8,9,9,9,10,11,14,14,11,8,8,9,9,9,10,11,14,14,15];
+
+new Chart("myChart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "rgba(7,82,149,1.0)",
+      borderColor: "rgba(7,82,149,1.0)",
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    scales: {
+      yAxes: [{ticks: {min: 6, max:16}}],
+    }
+  }
+});
+</script>
+
+{% endblock %}
