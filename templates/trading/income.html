@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+    <br>
+
+    <form class="container"
+          style="width:100%; background:white; padding:25px; border-radius: 15px; box-shadow: 1px 2px 3px gray;">
+        <input type="date" name="fir" id="fir" class="form-item m-2">dan-
+        <input type="date" name="sec" id="sec" class="form-item m-2">gacha
+        <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Filter</button>
+        <a href="?fir=day&sec=day" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Bugun</a>
+        <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Hafta</a>
+        <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Oy</a>
+    </form>
+    <br>
+    <table class="table table-hover">
+
+        <tr>
+            <td class="bg-primary text-white" style=" border-radius: 10px 0 0 0">№</td>
+            <td class="bg-primary text-white">
+                <div class="dropdown">
+                    <button class="btn btn-primary p-0 dropdown-toggle"
+                            type="button" id="dropdownMenu1" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        Kategoriya
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        {% for category in categories %}
+                            <a class="dropdown-item" onclick="addurlparameter('category', {{ category.id }})">{{ category.title }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </td>
+            <td class="bg-primary text-white">Nomi</td>
+            <td class="bg-primary text-white">Rasmi</td>
+            <td class="bg-primary text-white">Nechta</td>
+            <td class="bg-primary text-white">Savdo</td>
+            <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">Tahlil</td>
+        </tr>
+
+        {% for food in foods %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ food.category.title }}</td>
+            <td>{{ food.title }}</td>
+            <td><img src="{{ food.image.url }}" style="height: 50px;" alt="image"></td>
+            <td>{{ food.total_sold }}</td>
+            <td>{{ food.total_sale }} so'm</td>
+            <td><a href="#">
+                <button type="button" class="btn btn-info"><i class="fa fa-eye"></i>Tahlil</button>
+            </a></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <script type="text/javascript">
+        var year = new URL(location.href).searchParams.get('fir');
+        document.getElementById("fir").value = year;
+        var year = new URL(location.href).searchParams.get('sec');
+        document.getElementById("sec").value = year;
+        function addurlparameter(name, value){
+            var sp = new URLSearchParams(window.location.search)
+            sp.set(name, value)
+            window.location.search = sp.toString()
+        }
+    </script>
+
+
+{% endblock %}

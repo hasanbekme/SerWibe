@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 
+from utils.data_processing import get_trading_table
 from utils.date_config import get_start_of_week
 from utils.payment_receipt import print_receipt
 from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm, TableForm, ExpenseReasonForm, ExpenseForm, \
@@ -51,9 +52,15 @@ def room(request):
     return render(request, 'room.html')
 
 
-# @login_required(login_url='/')
-def income(request):
-    return render(request, 'income.html')
+@login_required(login_url='/')
+def trading(request):
+    category_models = Category.objects.all()
+    category_parameter = request.GET.get('category')
+    start_date = request.GET.get('fir')
+    end_date = request.GET.get('sec')
+    food_data = get_trading_table(category_parameter, start_date, end_date)
+    print(food_data)
+    return render(request, 'trading/income.html', {'foods': food_data, 'categories': category_models})
 
 
 # @login_required(login_url='/')
