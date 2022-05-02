@@ -17,7 +17,9 @@
                     <td>{{ forloop.counter }}</td>
                     <td>{{ room.title }}</td>
                     <td><a href="{% url 'room_tables' pk=room.pk %}">
-                        <button type="button" class="btn btn-info"><i class="fa fa-table"> {{ room.tables_count }}</i> ta</button>
+                        <button type="button" class="btn btn-info"><i class="fa fa-table"> {{ room.tables_count }}</i>
+                            ta
+                        </button>
                     </a></td>
                     <td><a href="{% url 'room_edit' pk=room.pk %}">
                         <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Tahrir</button>
@@ -30,8 +32,23 @@
 
         </table>
 
-
         <a href="{% url 'room_new' %}" type="button" class="btn btn-primary m-1">Qo'shish</a>
+        <div class="text-center">
 
+            {% if p_paginator.has_previous %}
+                <a class="btn btn-primary" href="?page={{ p_paginator.previous_page_number }}"><</a>
+            {% endif %}
+            <span class="btn btn-primary">
+
+                    Sahifa {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
+                    </span>
+
+
+            {% if p_paginator.has_next %}
+                <a class="btn btn-primary" href="?page={{ p_paginator.next_page_number }}">></a>
+            {% endif %}
+        </div>
+
+        <!-- End Paginator -->
     </div>
 {% endblock %}

@@ -3,75 +3,83 @@
     <div class="row">
 
         <div class="col-lg-3  col-10 dcard btn btn-primary m-4">
-            <div class="dcard-decimal">12</div>
+            <div class="dcard-decimal">{{ dashboard_info.food_types }}</div>
             <i class="fa fa-cutlery"></i>
             <div class="dcard-about">Taom turlari</div>
         </div>
         <div class="col-lg-3  col-10 dcard btn btn-secondary m-4">
-            <div class="dcard-decimal" style="font-size: 2em; line-height: 70px; vertical-align: bottom;">935 000</div>
+            <div class="dcard-decimal"
+                 style="font-size: 2em; line-height: 70px; vertical-align: bottom;">{{ dashboard_info.trading }}</div>
             <i class="fa fa-shopping-cart"></i>
             <div class="dcard-about" style="">Savdo</div>
         </div>
         <div class="col-lg-3  col-10 dcard btn btn-success m-4">
-            <div class="dcard-decimal">6</div>
+            <div class="dcard-decimal">{{ dashboard_info.workers }}</div>
             <i class="fa fa-users"></i>
             <div class="dcard-about">Xodimlar</div>
         </div>
         <div class="col-lg-3  col-10 dcard btn btn-danger m-4">
-            <div class="dcard-decimal">6</div>
+            <div class="dcard-decimal">{{ dashboard_info.categories }}</div>
             <i class="fa fa-list-alt"></i>
             <div class="dcard-about">Kategoriyalar</div>
         </div>
         <div class="col-lg-3  col-10 dcard btn btn-warning m-4">
-            <div class="dcard-decimal">31</div>
+            <div class="dcard-decimal">{{ dashboard_info.orders }}</div>
             <i class="fa fa-money"></i>
             <div class="dcard-about">Buyurtmalar</div>
         </div>
         <div class="col-lg-3  col-10 dcard btn btn-info m-4">
-            <div class="dcard-decimal">3/12</div>
+            <div class="dcard-decimal">{{ dashboard_info.tables }}</div>
             <i class="fa fa-ban"></i>
             <div class="dcard-about">Stollar</div>
         </div>
 
     </div>
-<div class="row">
-    <div class="col-lg-3 col-10 card shadow-sm ml-4 mr-4 ">
-                <input type="date" name="fir" id="fir" class="form-item m-2">
-        <input type="date" name="sec" id="sec" class="form-item m-2">
-        <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i>Filter</button>
-        <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i>Bugun</button>
-        <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i>Hafta</button>
-        <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i>Oy</button>
-    </div>
-        
-    <canvas class="col-lg-7 col-11" id="myChart" ></canvas>
-    <script
-src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-</script>
-<script>
-var xValues = [50,60,70,80,90,100,110,120,130,140,50,60,70,80,90,100,110,120,130,140,150];
-var yValues = [7,8,8,9,9,9,10,11,14,14,11,8,8,9,9,9,10,11,14,14,15];
+    <div class="row">
+        <div class="col-lg-3 col-10 card shadow-sm ml-4 mr-4 ">
+            <input type="date" name="fir" id="fir" class="form-item m-2">
+            <input type="date" name="sec" id="sec" class="form-item m-2">
+            <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Filter</button>
+            <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i>
+                Hafta</a>
+            <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Oy</a>
+        </div>
 
-new Chart("myChart", {
-  type: "line",
-  data: {
-    labels: xValues,
-    datasets: [{
-      fill: false,
-      lineTension: 0,
-      backgroundColor: "rgba(7,82,149,1.0)",
-      borderColor: "rgba(7,82,149,1.0)",
-      data: yValues
-    }]
-  },
-  options: {
-    legend: {display: false},
-    scales: {
-      yAxes: [{ticks: {min: 6, max:16}}],
-    }
-  }
-});
-</script>
-</div>
- 
+        <canvas class="col-lg-7 col-11" id="myChart"></canvas>
+        <script
+                src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+        </script>
+        <script type="text/javascript">
+            var year = new URL(location.href).searchParams.get('fir');
+            document.getElementById("fir").value = year;
+            var year = new URL(location.href).searchParams.get('sec');
+            document.getElementById("sec").value = year;
+        </script>
+        <script>
+            var xValues = {{ labels | safe }};
+            var yValues = {{ data | safe}};
+
+            new Chart("myChart", {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        fill: false,
+                        lineTension: 0.3,
+                        backgroundColor: "rgba(7,82,149,1.0)",
+                        borderColor: "rgba(7,82,149,1.0)",
+                        pointRadius: 3,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    legend: {display: false},
+                    scales: {
+                        yAxes: [{ticks: {min: {{ mn }}, max: {{ mx }}}}],
+                    }
+                }
+            });
+        </script>
+    </div>
+
 {% endblock %}

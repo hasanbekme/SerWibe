@@ -4,9 +4,10 @@ from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 
-from utils.data_processing import get_trading_table, food_trading_data
+from utils.data_processing import get_trading_table, food_trading_data, get_dashboard_info, get_sales_graph_data
 from utils.date_config import get_start_of_week
 from utils.payment_receipt import print_receipt
 from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm, TableForm, ExpenseReasonForm, ExpenseForm, \
@@ -45,7 +46,15 @@ def signin(request):
 
 @login_required(login_url='/')
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    start_date = request.GET.get('fir')
+    end_date = request.GET.get('sec')
+    dashboard_info = get_dashboard_info()
+    xvalues, yvalues = get_sales_graph_data(start_date, end_date)
+    mx = int(max(yvalues) * 1.1)
+    mn = min(yvalues) // 2
+    return render(request, 'dashboard.html',
+                  {'dashboard_info': dashboard_info, 'labels': json.dumps(xvalues), 'data': json.dumps(yvalues),
+                   'mx': mx, 'mn': mn})
 
 
 # @login_required(login_url='/')
@@ -59,19 +68,24 @@ def trading(request):
     category_parameter = request.GET.get('category')
     start_date = request.GET.get('fir')
     end_date = request.GET.get('sec')
-    food_data = get_trading_table(category_parameter, start_date, end_date)
-    return render(request, 'trading/income.html', {'foods': food_data, 'categories': category_models})
+    food_data, total_sum = get_trading_table(category_parameter, start_date, end_date)
+    p = Paginator(food_data, 10)
+    page = p.get_page(request.GET.get('page'))
+    return render(request, 'trading/income.html',
+                  {'foods': page, 'categories': category_models, 'total': total_sum, 'p_paginator': page})
 
 
 @login_required(login_url='/')
 def trading_detailed_view(request, pk):
     start_date = request.GET.get('fir')
     end_date = request.GET.get('sec')
-    dates, xvalues, yvalues = food_trading_data(pk, start_date, end_date)
+    dates, xvalues, yvalues, food_model = food_trading_data(pk, start_date, end_date)
     mn = min(yvalues) // 2
     mx = int(max(yvalues) * 1.1)
     return render(request, 'trading/detailed_view.html',
-                  {'dates': dates, 'labels': json.dumps(xvalues), 'data': json.dumps(yvalues), 'mn': mn, 'mx': mx})
+                  {'dates': dates, 'labels': json.dumps(xvalues), 'data': json.dumps(yvalues), 'mn': mn, 'mx': mx,
+                   'food': food_model,
+                   'total': sum(yvalues)})
 
 
 @login_required(login_url='/')
@@ -132,7 +146,9 @@ def product(request):
             foods = Food.objects.filter(category_id=int(category_id))
         else:
             foods = Food.objects.all()
-        context = {'categories': categories, 'foods': foods}
+        p = Paginator(foods, 10)
+        page = p.get_page(request.GET.get('page'))
+        context = {'categories': categories, 'foods': page, 'p_paginator': page}
         return render(request, 'foods/product.html', context)
     else:
         return redirect('room')
@@ -221,8 +237,10 @@ def food_delete(request, pk):
 @login_required(login_url='/')
 def rooms(request):
     if request.user.is_superuser:
-        models = Room.objects.all()
-        context = {'rooms': models}
+        room_models = Room.objects.all()
+        p = Paginator(room_models, 10)
+        page = p.get_page(request.GET.get('page'))
+        context = {'rooms': page, 'p_paginator': page}
         return render(request, 'tables/rooms.html', context)
     else:
         return redirect('room')
@@ -334,9 +352,11 @@ def expenses(request):
         expense_models = Expense.objects.filter(created_at__month=today.month)
     else:
         expense_models = Expense.objects.all()
+    p = Paginator(expense_models, 10)
+    page = p.get_page(request.GET.get('page'))
     expense_reason_models = ExpenseReason.objects.all()
     return render(request, 'expenses/expenses.html',
-                  context={'expenses': expense_models, 'expense_reasons': expense_reason_models})
+                  context={'expenses': page, 'expense_reasons': expense_reason_models, 'p_paginator': page})
 
 
 @login_required(login_url='/')
@@ -448,7 +468,10 @@ def archive(request):
             order_models = order_models.filter(created_at__lt=datetime.strptime(sec, "%Y-%m-%d"))
     if waiter not in [None, '']:
         order_models = order_models.filter(waiter_id=int(waiter))
-    return render(request, "archive/archive.html", context={'waiters': waiter_models, 'orders': order_models})
+    p = Paginator(order_models, 10)
+    page = p.get_page(request.GET.get('page'))
+    return render(request, "archive/archive.html",
+                  context={'waiters': waiter_models, 'orders': page, 'p_paginator': page})
 
 
 @login_required(login_url='/')

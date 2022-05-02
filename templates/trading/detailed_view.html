@@ -13,7 +13,7 @@
         <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Hafta</a>
         <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Oy</a>
     </form>
-    <div class="h2 m-0 p-0 text-primary font-weight-bold">LavashBurger</div>
+    <div class="h2 m-0 p-0 text-primary font-weight-bold">{{ food.title }}</div>
     <div class="row">
         <table class="table table-hover col-12 col-lg-5">
             <tr>
@@ -33,7 +33,7 @@
         <div class="col-12 col-lg-7">
         <canvas id="myChart" style="width:100%"></canvas>
 
-    <div class="h5 font-weight-bold text-danger ml-5 mt-3 mb-4">Jami: 320 000</div>
+    <div class="h5 font-weight-bold text-danger ml-5 mt-3 mb-4">Jami: {{ total }} so'm</div>
         </div>
     </div>
 

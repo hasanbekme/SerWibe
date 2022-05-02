@@ -3,7 +3,10 @@ from datetime import datetime, timedelta, date
 from django.db.models import Sum
 
 from utils.date_config import get_start_of_week
-from web.models import OrderItem, Food
+from web.models import OrderItem, Food, Order, Worker, Category, Table
+
+today = date.today()
+delta = timedelta(days=1)
 
 
 class FoodTrade(Food):
@@ -32,7 +35,6 @@ class FoodTrade(Food):
 
 
 def get_trading_table(category=None, start_date=None, end_date=None):
-    today = date.today()
     final_models = OrderItem.objects.all()
     food_models = Food.objects.all()
     if start_date in ['day', 'week', 'month']:
@@ -52,7 +54,7 @@ def get_trading_table(category=None, start_date=None, end_date=None):
         final_models = final_models.filter(meal__category_id=category)
 
     res = list(map(lambda x: FoodTrade(final_models, x), food_models))
-    return res
+    return res, sum([x.total_sale for x in res])
 
 
 class DateInfo:
@@ -86,8 +88,6 @@ class ChartInfo:
 
 
 def food_trading_data(food, start_date=None, end_date=None):
-    today = date.today()
-    delta = timedelta(days=1)
     start_loop = today - timedelta(days=9)
     end_loop = today + delta
 
@@ -97,7 +97,7 @@ def food_trading_data(food, start_date=None, end_date=None):
     if start_date in ['week', 'month']:
         end_loop = today + timedelta(days=1)
         if start_date == 'week':
-            start_loop = get_start_of_week()
+            start_loop = today - timedelta(days=6)
         elif start_date == 'month':
             start_loop = today - timedelta(days=29)
     else:
@@ -116,4 +116,62 @@ def food_trading_data(food, start_date=None, end_date=None):
         query_result.append(date_info)
         start_loop += delta
 
-    return reversed(query_result), xvalues, yvalues
+    return reversed(query_result), xvalues, yvalues, food
+
+
+class DashboardInfo:
+    def __init__(self, food_types, trading, workers, categories, orders, tables):
+        self.food_types = food_types
+        self.trading = trading
+        self.workers = workers
+        self.categories = categories
+        self.orders = orders
+        self.tables = tables
+
+
+def get_dashboard_info():
+    food_types = Food.objects.count()
+    trading_data = Order.objects.filter(created_at__year=today.year, created_at__month=today.month,
+                                        created_at__day=today.day)
+    trading = trading_data.aggregate(Sum('paid_money'))['paid_money__sum']
+    if trading is None:
+        trading = 0
+    workers = Worker.objects.filter(position='waiter').count()
+    categories = Category.objects.count()
+    orders = f"{trading_data.filter(is_completed=False).count()}/{trading_data.count()}"
+    table_data = Table.objects.all()
+    tables = f"{table_data.filter(is_available=False).count()}/{table_data.count()}"
+    dashboard_info = DashboardInfo(food_types, trading, workers, categories, orders, tables)
+    return dashboard_info
+
+
+def get_sales_graph_data(start_date=None, end_date=None):
+    start_loop = today - timedelta(days=9)
+    end_loop = today + delta
+
+    order_models = Order.objects.all()
+
+    if start_date in ['week', 'month']:
+        end_loop = today + timedelta(days=1)
+        if start_date == 'week':
+            start_loop = today - timedelta(days=6)
+        elif start_date == 'month':
+            start_loop = today - timedelta(days=29)
+    else:
+        if start_date != '' and start_date is not None and end_date != '' and end_date is not None:
+            start_loop = datetime.strptime(start_date, "%Y-%m-%d")
+            end_loop = datetime.strptime(end_date, "%Y-%m-%d") + timedelta(days=1)
+
+    xvalues = []
+    yvalues = []
+
+    while start_loop < end_loop:
+        xvalues.append(start_loop.strftime("%d/%m"))
+        sale_amount = order_models.filter(created_at__year=start_loop.year, created_at__month=start_loop.month,
+                                          created_at__day=start_loop.day).aggregate(Sum('paid_money'))['paid_money__sum']
+        if sale_amount is None:
+            sale_amount = 0
+        yvalues.append(sale_amount)
+        start_loop += delta
+
+    return xvalues, yvalues

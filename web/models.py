@@ -28,6 +28,7 @@ class Worker(models.Model):
         return f"{self.last_name} {self.first_name}"
 
     class Meta:
+        ordering = ['position']
         verbose_name = "Xodim"
         verbose_name_plural = "Xodimlar"
 
@@ -43,6 +44,7 @@ class Room(models.Model):
         return self.table_set.count()
 
     class Meta:
+        ordering = ['title']
         verbose_name = "Xona"
         verbose_name_plural = "Xonalar"
 
@@ -60,6 +62,7 @@ class Table(models.Model):
         return self.order_set.filter(is_completed=False).last()
 
     class Meta:
+        ordering = ['number']
         verbose_name = "Stol"
         verbose_name_plural = "Stollar"
 
@@ -76,6 +79,7 @@ class Category(models.Model):
         return self.title
 
     class Meta:
+        ordering = ['title']
         verbose_name = 'Kategoriya'
         verbose_name_plural = 'Kategoriyalar'
 
@@ -91,6 +95,7 @@ class Food(models.Model):
         return self.title
 
     class Meta:
+        ordering = ['title']
         verbose_name = 'Taom'
         verbose_name_plural = 'Taomlar'
 
@@ -121,6 +126,7 @@ class Order(models.Model):
         return self.created_at.strftime("%d/%m/%Y, %H:%M")
 
     class Meta:
+        ordering = ['-id']
         verbose_name = "Buyurtma"
         verbose_name_plural = "Buyurtmalar"
 
@@ -142,12 +148,18 @@ class OrderItem(models.Model):
         super(OrderItem, self).save()
         self.paid_amount = self.total_price
 
+    class Meta:
+        ordering = ['-id']
+
 
 class ExpenseReason(models.Model):
     title = models.CharField(max_length=50, verbose_name='Nomi')
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ['title']
 
 
 class Expense(models.Model):
@@ -159,3 +171,6 @@ class Expense(models.Model):
     @property
     def created_time(self):
         return self.created_at.strftime("%d/%m/%Y, %H:%M")
+
+    class Meta:
+        ordering = ['-id']

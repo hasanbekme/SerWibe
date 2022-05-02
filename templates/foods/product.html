@@ -68,6 +68,23 @@
 
                 <!-- Button trigger modal -->
                 <a href="{% url 'food_new' %}" type="button" class="btn btn-primary m-1">Qo'shish</a>
+                <div class="text-center">
+
+                    {% if p_paginator.has_previous %}
+                        <a class="btn btn-primary" href="?page={{ p_paginator.previous_page_number }}"><</a>
+                    {% endif %}
+                    <span class="btn btn-primary">
+
+                    Sahifa {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
+                    </span>
+
+
+                    {% if p_paginator.has_next %}
+                        <a class="btn btn-primary" href="?page={{ p_paginator.next_page_number }}">></a>
+                    {% endif %}
+                </div>
+
+                <!-- End Paginator -->
             </div>
         </div>
 

@@ -28,7 +28,8 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         {% for category in categories %}
-                            <a class="dropdown-item" onclick="addurlparameter('category', {{ category.id }})">{{ category.title }}</a>
+                            <a class="dropdown-item"
+                               onclick="addurlparameter('category', {{ category.id }})">{{ category.title }}</a>
                         {% endfor %}
                     </div>
                 </div>
@@ -41,17 +42,17 @@
         </tr>
 
         {% for food in foods %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ food.category.title }}</td>
-            <td>{{ food.title }}</td>
-            <td><img src="{{ food.image.url }}" style="height: 50px;" alt="image"></td>
-            <td>{{ food.total_sold }}</td>
-            <td>{{ food.total_sale }} so'm</td>
-            <td><a href="{% url 'trading_detailed_view' pk=food.pk %}">
-                <button type="button" class="btn btn-info"><i class="fa fa-eye"></i>Tahlil</button>
-            </a></td>
-        </tr>
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ food.category.title }}</td>
+                <td>{{ food.title }}</td>
+                <td><img src="{{ food.image.url }}" style="height: 50px;" alt="image"></td>
+                <td>{{ food.total_sold }}</td>
+                <td>{{ food.total_sale }} so'm</td>
+                <td><a href="{% url 'trading_detailed_view' pk=food.pk %}">
+                    <button type="button" class="btn btn-info"><i class="fa fa-eye"></i>Tahlil</button>
+                </a></td>
+            </tr>
         {% endfor %}
 
     </table>
@@ -61,31 +62,30 @@
     <!-- Paginator shu yerga if ishlatib paginator kerak bo`lmasa o`chirib qo`yadigan qiling -->
 
     <div class="text-center">
-        
-    {% if p_paginator.has_previous %}
-     <a class="btn btn-primary" href="?page=1">&laquo</a>
-     <a class="btn btn-primary" href="?page={{ p_paginator.previous_page_number }}"><</a>
-    {% endif %}
-    <span class="btn btn-primary">
-        
-    Sahifa {{ p_paginator.number }} - {{ p_paginator.paginator.num_pages }} 
+
+        {% if p_paginator.has_previous %}
+            <a class="btn btn-primary" href="?page={{ p_paginator.previous_page_number }}"><</a>
+        {% endif %}
+        <span class="btn btn-primary">
+
+    Sahifa {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
     </span>
-    
-    
-    {% if p_paginator.has_next %}
-     <a class="btn btn-primary" href="?page={{ p_paginator.next_page_number }}">></a>
-     <a class="btn btn-primary" href="?page={{ p_paginator.paginator.num_pages }}">&raquo</a>
-    {% endif %}
+
+
+        {% if p_paginator.has_next %}
+            <a class="btn btn-primary" href="?page={{ p_paginator.next_page_number }}">></a>
+        {% endif %}
     </div>
 
     <!-- End Paginator -->
-    <div class="h5 font-weight-bold text-danger">Jami: 320 000</div>
+    <div class="h5 font-weight-bold text-danger">Jami: {{ total }} so'm</div>
     <script type="text/javascript">
         var year = new URL(location.href).searchParams.get('fir');
         document.getElementById("fir").value = year;
         var year = new URL(location.href).searchParams.get('sec');
         document.getElementById("sec").value = year;
-        function addurlparameter(name, value){
+
+        function addurlparameter(name, value) {
             var sp = new URLSearchParams(window.location.search)
             sp.set(name, value)
             window.location.search = sp.toString()
