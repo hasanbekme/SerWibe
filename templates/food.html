@@ -2,13 +2,13 @@
 {% block content %}
 
 <div  class="topmenu">
-	<a class="btn btn-light text-danger p-1 ">
+	<a class="btn btn-light text-danger p-1 " href="/room">
 		<i class="fa fa-home" style="font-size:3em"></i>
 	</a> 
-	<a class="btn btn-light ml-3 topmenu-room">
-		<div class="h2 text-primary topmenu-room-span" id="roomname" style="line-height:25px">UMUYMIY</div>
+	<a class="btn btn-light ml-3 topmenu-room" href="/table">
+		<div class="h2 text-primary topmenu-room-span" id="roomname" style="line-height:25px">UMUMIY</div>
 	</a> 
-	<a class="btn btn-light  p-1 ml-3">
+	<a class="btn btn-light  p-1 ml-3"  href="/category">
 		<span class="h2 text-primary" style="height: 34px; display: inline-block; font-size: 1.7em;  margin-top: 6px;">№13</span>
 	</a> 
 </div>
@@ -21,7 +21,7 @@
 				<div class="col-3 p-0">
 					<img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px">
 				</div>
-				<div class="text-primary mt-3 col-7 h4 font-weight-bold text-left" style="line-height: 27px;">
+				<div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2" style="line-height: 27px; padding: 0">
 					HotDog katassi
 				</div>
 				<div class="text-primary col-3 h4 font-weight-bold text-left" style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
@@ -30,6 +30,7 @@
 
 					<div class="addandsubt btn btn-danger" onclick="subt('{{ i.id }}')"><span> -</span></div>
 				</div>
+				<span style="position:absolute; right: 15%; bottom: 5px; font-weight:700" class="text-danger">24000so`m</span>
 			</div>
 			<!-- EndFor -->
 		</div>
@@ -38,8 +39,8 @@
 </main>
 
 <div class="menu-food">
-	<a href="/table" class="left"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
-	
+	<a href="/category" class="left"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+	<span  class="centered" id="centered"></span>
 	<a href="#" style="float: right;"><span class="h4 font-weight-bold text-danger">120000so`m</span><i class="fa fa-paper-plane" ></i></a>
 
 </div>
@@ -66,5 +67,21 @@
 	else{
 	vr.style.fontSize = "25px";
 		}
+</script>
+
+<script type="text/javascript">
+	function delay(time) {
+  		return new Promise(resolve => setTimeout(resolve, time));
+	}
+
+
+function changer(){
+	document.getElementById("centered").style.width = "0px";
+	document.getElementById("centered").style.boxShadow = "0";
+	document.getElementById("centered").style.marginLeft = "5px";
+}
+
+
+delay(100).then(() => changer());
 </script>
 {% endblock %}

@@ -1,68 +1,42 @@
 {% extends 'base2.html' %}
 {% block content %}
 
-<div  class="topmenu">
-	<a class="btn btn-light text-danger p-1 ">
-		<i class="fa fa-home" style="font-size:3em"></i>
-	</a> 
-	<a class="btn btn-light ml-3 topmenu-room">
-		<div class="h2 text-primary topmenu-room-span" id="roomname" style="line-height:25px">UMUYMIY</div>
-	</a> 
-	<a class="btn btn-light  p-1 ml-3">
-		<span class="h2 text-primary" style="height: 34px; display: inline-block; font-size: 1.7em;  margin-top: 6px;">№13</span>
-	</a> 
-</div>
-<main style="overflow-y: auto; height:80%">
-
-	<div class="container">
+<div class="h1">XONALAR</div>
+<main style="overflow-y: scroll; overflow-x: hidden; height:80%">
 		<div class="row">
-
-			<div class="col-11 col-md-5 cardcat card m-auto shadow text-white h1 bg-white row" style="margin-bottom: 15px!important;">
-				<div class="col-3 p-0">
-					<img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:20px">
-				</div>
-				<div class="text-primary mt-4 col-10 h2 font-weight-bold text-left" style="line-height: 30px;">
-					Ovqatlar
-				</div>
-			</div>
+			<a href="table" class="col-10 col-md-5 card m-auto shadow h1 text-primary p-5" style="margin-top:5px!important">
+				<div class="tableindex">3/12</div>
+				Umumiy
+			</a>
+			<a href="#" class="col-10 col-md-5 card m-auto shadow h1 text-primary p-5" style="margin-top:5px!important">
+				<div class="tableindex">3/12</div>
+				Umumiy
+			</a>
+			<a href="#" class="col-10 col-md-5 card m-auto shadow h1 text-primary p-5" style="margin-top:5px!important">
+				<div class="tableindex">3/12</div>
+				Umumiy
+			</a>
+			<a href="#" class="col-10 col-md-5 card m-auto shadow h1 text-primary p-5" style="margin-top:5px!important">
+				<div class="tableindex">3/12</div>
+				Umumiy
+			</a>
+			<a href="#" class="col-10 col-md-5 card m-auto shadow h1 text-primary p-5" style="margin-top:5px!important">
+				<div class="tableindex">3/12</div>
+				Umumiy
+			</a>
+			<a href="#" class="col-10 col-md-5 card m-auto shadow h1 text-primary p-5" style="margin-top:5px!important">
+				<div class="tableindex">3/12</div>
+				Umumiy
+			</a>
+			
 		</div>
-	</div>
-
 </main>
-<div style="position:absolute; right: 5%; bottom: 80px; border-radius: 50%; background:white; color: #075295; width:50px; height:50px; padding:10px; box-shadow: 0px 0px 8px 2px #000000aa">
-	<i class='fa fa-commenting' style="font-size:2em"></i>
-</div>
-<div class="menu-food">
-	<a href="/table" class="left"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
-	<span  class="centered" id="centered"></span>
-	
-	<a href="#" style="float: right;"><span class="h4 font-weight-bold text-danger">120000so`m</span><i class="fa fa-check" aria-hidden="true"></i>	</a>
+
+<div class="menu">
+	<a href="/table"><i class="fa fa-bars"></i></a>
+	<a href="/sean"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+	<a href="#"><i class="fa fa-user" onclick="if (confirm('Chiqishga rozimisiz')){ document.location.href = '/logout'; }" ></i></a>
 
 </div>
-<script type="text/javascript">
-	var vr = document.getElementById("roomname");
-	console.log(vr.innerHTML.length);
-	if (vr.innerHTML.length<=7){
-		vr.style.lineHeight = "45px"
-		vr.style.fontSize = "25px";
-	}
-	else{
-	vr.style.fontSize = "25px";
-		}
-</script>
-<script type="text/javascript">
-	function delay(time) {
-  		return new Promise(resolve => setTimeout(resolve, time));
-	}
 
-
-function changer(){
-	document.getElementById("centered").style.width = "0px";
-	document.getElementById("centered").style.boxShadow = "0";
-	document.getElementById("centered").style.marginLeft = "5px";
-}
-
-
-delay(100).then(() => changer());
-</script>
 {% endblock %}
