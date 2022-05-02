@@ -68,7 +68,7 @@ def trading(request):
     category_parameter = request.GET.get('category')
     start_date = request.GET.get('fir')
     end_date = request.GET.get('sec')
-    food_data, total_sum = get_trading_table(category_parameter, start_date, end_date)
+    food_data, total_sum, date_string = get_trading_table(category_parameter, start_date, end_date)
     p = Paginator(food_data, 10)
     page = p.get_page(request.GET.get('page'))
     return render(request, 'trading/income.html',
