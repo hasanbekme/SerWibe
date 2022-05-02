@@ -8,7 +8,6 @@ urlpatterns = [
     path('dashboard', views.dashboard, name='dashboard'),
     path('orders', views.orders, name='orders'),
     path('rooms', views.rooms, name='rooms'),
-    path('room', views.room, name='room'),
     path('trading', views.trading, name='trading'),
     path('worker', views.worker, name='worker'),
     path('expenses', views.expenses, name='expenses'),
@@ -40,4 +39,9 @@ urlpatterns = [
          , name='expense_reason_delete'),
     path('trading/<int:pk>/view', views.trading_detailed_view, name='trading_detailed_view'),
     path('archive/<int:pk>/view', views.archive_order_view, name='archive_order_view'),
+
+    path('room', views.room, name='room'),
+    path('table', views.table, name='table'),
+    path('category', views.category, name='category'),
+    path('food', views.food, name='food'),
 ]

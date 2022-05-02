@@ -62,6 +62,21 @@ def room(request):
     return render(request, 'room.html')
 
 
+# @login_required(login_url='/')
+def table(request):
+    return render(request, 'table.html')
+
+
+# @login_required(login_url='/')
+def category(request):
+    return render(request, 'category.html')
+
+
+# @login_required(login_url='/')
+def food(request):
+    return render(request, 'food.html')
+
+
 @login_required(login_url='/')
 def trading(request):
     category_models = Category.objects.all()
