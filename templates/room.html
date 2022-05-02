@@ -29,9 +29,12 @@
 	</div>
 
 </main>
-
+<div style="position:absolute; right: 5%; bottom: 80px; border-radius: 50%; background:white; color: #075295; width:50px; height:50px; padding:10px; box-shadow: 0px 0px 8px 2px #000000aa">
+	<i class='fa fa-commenting' style="font-size:2em"></i>
+</div>
 <div class="menu-food">
 	<a href="/table" class="left"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+	<span  class="centered" id="centered"></span>
 	
 	<a href="#" style="float: right;"><span class="h4 font-weight-bold text-danger">120000so`m</span><i class="fa fa-check" aria-hidden="true"></i>	</a>
 
@@ -46,5 +49,20 @@
 	else{
 	vr.style.fontSize = "25px";
 		}
+</script>
+<script type="text/javascript">
+	function delay(time) {
+  		return new Promise(resolve => setTimeout(resolve, time));
+	}
+
+
+function changer(){
+	document.getElementById("centered").style.width = "0px";
+	document.getElementById("centered").style.boxShadow = "0";
+	document.getElementById("centered").style.marginLeft = "5px";
+}
+
+
+delay(100).then(() => changer());
 </script>
 {% endblock %}

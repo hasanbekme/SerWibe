@@ -116,7 +116,8 @@
 			position: fixed;
 			bottom: 10px;
 			background: white;
-			border-radius: 25px;
+			border-radius: 25px 0 0 25px;
+			outline: 5px dashed white;
 			width: 90%;
 			left: 5%;
 			box-shadow: 2px 3px 5px -1px #000000aa;
@@ -132,7 +133,7 @@
 			border-radius: 15px;
 		}
 		.menu-food > .left{
-			background-color:var(--primary);
+			background-color:#075295;
 			height:100%;
 			transform: scale(1.15);
 			box-shadow: -1px 0px 5px 1px #000000aa;
@@ -140,6 +141,22 @@
 			border-radius: 25px 0 0 25px;
 			color: white;
 
+		}
+		.menu-food > .centered{
+			background-color:#075295;
+			position: absolute;
+			height:60px;
+			width: 82%;
+			transform: scale(1.15);
+			box-shadow: 5px 0px 5px 1px #000000aa;
+			display: inline-block;
+			color: white;
+			margin-left: 6%;
+			transition: 1.5s;
+
+		}
+		.text-primary{
+			color: #075295!important;
 		}
 	</style>
 </head>

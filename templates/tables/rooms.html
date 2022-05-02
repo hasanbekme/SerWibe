@@ -33,7 +33,8 @@
         </table>
 
         <a href="{% url 'room_new' %}" type="button" class="btn btn-primary m-1">Qo'shish</a>
-        <div class="text-center">
+    </div>
+        <div class="text-center ">
 
             {% if p_paginator.has_previous %}
                 <a class="btn btn-primary" href="?page={{ p_paginator.previous_page_number }}"><</a>
@@ -50,5 +51,4 @@
         </div>
 
         <!-- End Paginator -->
-    </div>
 {% endblock %}

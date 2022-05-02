@@ -42,8 +42,8 @@
             <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0">Tahlil</td>
         </tr>
 
-        <tr>
             {% for order in orders %}
+        <tr>
                 <td>{{ forloop.counter }}</td>
                 <td>#{{ order.id }}</td>
                 <td>{{ order.waiter.full_name }}</td>
@@ -54,8 +54,8 @@
                 <td><a href="{% url 'archive_order_view' pk=order.id %}">
                     <button type="button" class="btn btn-info"><i class="fa fa-eye"></i> Tahlil</button>
                 </a></td>
-            {% endfor %}
         </tr>
+            {% endfor %}
 
     </table>
     <!-- Paginator shu yerga if ishlatib paginator kerak bo`lmasa o`chirib qo`yadigan qiling -->
@@ -75,7 +75,7 @@
             <a class="btn btn-primary" href="?page={{ p_paginator.next_page_number }}">></a>
         {% endif %}
     </div>
-
+<div class="h5 font-weight-bold text-danger">Jami: {{ total }} so'm</div>
     <!-- End Paginator -->
     <script type="text/javascript">
         var year = new URL(location.href).searchParams.get('fir');

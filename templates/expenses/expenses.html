@@ -60,6 +60,7 @@
 
                 <!-- Button trigger modal -->
                 <a href="{% url 'expense_new' %}" type="button" class="btn btn-primary m-1">Qo'shish</a>
+                <span class="h5 font-weight-bold text-danger ml-3">Jami: {{ total }} so'm</span>
             </div>
             <!-- Paginator shu yerga if ishlatib paginator kerak bo`lmasa o`chirib qo`yadigan qiling -->
 
@@ -101,7 +102,7 @@
                             <td class="text-center">{{ forloop.counter }}</td>
                             <td>{{ i.title }}</td>
                             <td class="text-center"><a href="{% url 'expense_new' %}?reason={{ i.id }}">
-                                <button type="button" class="btn btn-info"><i class="fa fa-money"></i> Saflash</button>
+                                <button type="button" class="btn btn-info"><i class="fa fa-money"></i> Sarflash</button>
                             </a></td>
                             <td class="text-center"><a href="{% url 'expense_reason_edit' pk=i.pk %}">
                                 <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Tahrir</button>
