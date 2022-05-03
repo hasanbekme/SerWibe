@@ -41,7 +41,7 @@ urlpatterns = [
     path('archive/<int:pk>/view', views.archive_order_view, name='archive_order_view'),
 
     path('room', views.room, name='room'),
-    path('table', views.table, name='table'),
+    path('room/<int:pk>/tables', views.table, name='table'),
     path('category', views.category, name='category'),
     path('food', views.food, name='food'),
 ]

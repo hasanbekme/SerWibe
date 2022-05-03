@@ -43,6 +43,10 @@ class Room(models.Model):
     def tables_count(self):
         return self.table_set.count()
 
+    @property
+    def busy_tables(self):
+        return self.table_set.filter(is_available=False).count()
+
     class Meta:
         ordering = ['title']
         verbose_name = "Xona"

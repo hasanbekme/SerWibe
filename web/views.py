@@ -59,14 +59,17 @@ def dashboard(request):
                    'mx': mx, 'mn': mn, 'date_string': json.dumps(date_string)})
 
 
-# @login_required(login_url='/')
+@login_required(login_url='/')
 def room(request):
-    return render(request, 'room.html')
+    room_models = Room.objects.all()
+    return render(request, 'waiter/room.html', {'rooms': room_models})
 
 
-# @login_required(login_url='/')
-def table(request):
-    return render(request, 'table.html')
+@login_required(login_url='/')
+def table(request, pk):
+    room_model = get_object_or_404(Room, pk=pk)
+    tables = room_model.table_set.all()
+    return render(request, 'waiter/tables.html', {'tables': tables})
 
 
 # @login_required(login_url='/')
