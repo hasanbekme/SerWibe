@@ -13,7 +13,6 @@
                   style="height: 34px; display: inline-block; font-size: 1.7em;  margin-top: 6px; width: 50px;"> 2 </span>
         </a>
     </div>
-    <br>
     <main style="overflow-y: auto; height:80%">
 
         <div class="container">
@@ -24,12 +23,18 @@
                         <a href="#" class="col-5 col-md-5 cardtable card m-auto shadow text-primary h1"
                            style="margin-bottom: 15px!important;">
                             <span class="tableprice">{{ table.number }}</span>
+                            <span class="startadd">+</span>
                         </a>
                     {% else %}
                         <a href="#" class="col-5 col-md-5 cardtable card m-auto shadow text-white h1 bg-info"
                            style="margin-bottom: 15px!important;">
+                            <i class="fa fa-eye" aria-hidden="true" style="position:absolute; font-size: 25px; right: 10px; top:2px"></i>
                             <div class="tableindex2">{{ table.current_order.needed_payment }} so`m</div>
                             <span class="tableprice">{{ table.number }}</span>
+                            <span class="startadd">
+                                <span style="position:absolute; font-size:12px; padding: 1px 2px 0px 2px; right: 2px; bottom:0px; color: yellow; font-weight:normal; ">221000so`m</span>
+                                +
+                            </span>
                         </a>
                     {% endif %}
                 {% endfor %}
