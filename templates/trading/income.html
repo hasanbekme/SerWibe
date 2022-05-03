@@ -14,7 +14,7 @@
         <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Hafta</a>
         <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Oy</a>
     </form>
-    <div class="h6 text-center">Sat, 21/01/2022 - 23/02/2023</div>
+    <div class="h6 text-center">{{ date_string }}</div>
     <table class="table table-hover">
 
         <tr>
@@ -78,7 +78,7 @@
     </div>
 
     <!-- End Paginator -->
-    <div class="h5 font-weight-bold text-danger">Jami: {{ total }} so'm</div>
+    <div class="h5 font-weight-bold text-danger text-right">Jami: {{ total }} so'm</div>
     <script type="text/javascript">
         var year = new URL(location.href).searchParams.get('fir');
         document.getElementById("fir").value = year;

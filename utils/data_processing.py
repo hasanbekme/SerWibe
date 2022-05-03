@@ -40,21 +40,27 @@ def get_trading_table(category=None, start_date=None, end_date=None):
     if start_date in ['day', 'week', 'month']:
         if start_date == 'day':
             final_models = final_models.filter(order__created_at__day=today.day)
+            date_string = today.strftime("%a, %d/%m/%Y")
         elif start_date == 'week':
             final_models = final_models.filter(order__created_at__gt=get_start_of_week())
+            date_string = f"{get_start_of_week().strftime('%d/%m/%Y')} - {today.strftime('%d/%m/%Y')}"
         elif start_date == 'month':
             final_models = final_models.filter(order__created_at__month=today.month)
+            date_string = f"{get_start_of_week().strftime('01/%m/%Y')} - {today.strftime('%d/%m/%Y')}"
     else:
-        if start_date != '' and start_date is not None:
-            final_models = final_models.filter(order__created_at__gt=datetime.strptime(start_date, "%Y-%m-%d"))
-        if end_date != '' and end_date is not None:
-            final_models = final_models.filter(order__created_at__lt=datetime.strptime(end_date, "%Y-%m-%d"))
+        if start_date != '' and start_date is not None and end_date != '' and end_date is not None:
+            sd = datetime.strptime(start_date, "%Y-%m-%d")
+            ed = datetime.strptime(end_date, "%Y-%m-%d")
+            final_models = final_models.filter(order__created_at__gt=sd, order__created_at__lt=ed)
+            date_string = f"{sd.strftime('01/%m/%Y')} - {ed.strftime('%d/%m/%Y')}"
+        else:
+            date_string = ""
     if category is not None and category != '':
         food_models = food_models.filter(category_id=category)
         final_models = final_models.filter(meal__category_id=category)
 
     res = list(map(lambda x: FoodTrade(final_models, x), food_models))
-    return res, sum([x.total_sale for x in res])
+    return res, sum([x.total_sale for x in res]), date_string
 
 
 class DateInfo:
@@ -109,6 +115,8 @@ def food_trading_data(food, start_date=None, end_date=None):
     xvalues = []
     yvalues = []
 
+    date_string = f"{start_loop.strftime('%d/%m/%Y')} - {end_loop.strftime('%d/%m/%Y')}"
+
     while start_loop < end_loop:
         date_info = DateInfo(food, start_loop, final_models)
         xvalues.append(start_loop.strftime("%d/%m"))
@@ -116,7 +124,7 @@ def food_trading_data(food, start_date=None, end_date=None):
         query_result.append(date_info)
         start_loop += delta
 
-    return reversed(query_result), xvalues, yvalues, food
+    return reversed(query_result), xvalues, yvalues, food, date_string
 
 
 class DashboardInfo:
@@ -165,13 +173,16 @@ def get_sales_graph_data(start_date=None, end_date=None):
     xvalues = []
     yvalues = []
 
+    date_string = f"{start_loop.strftime('%d/%m/%Y')} - {end_loop.strftime('%d/%m/%Y')}"
+
     while start_loop < end_loop:
         xvalues.append(start_loop.strftime("%d/%m"))
         sale_amount = order_models.filter(created_at__year=start_loop.year, created_at__month=start_loop.month,
-                                          created_at__day=start_loop.day).aggregate(Sum('paid_money'))['paid_money__sum']
+                                          created_at__day=start_loop.day).aggregate(Sum('paid_money'))[
+            'paid_money__sum']
         if sale_amount is None:
             sale_amount = 0
         yvalues.append(sale_amount)
         start_loop += delta
 
-    return xvalues, yvalues
+    return xvalues, yvalues, date_string

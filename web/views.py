@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Sum
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 
 from utils.data_processing import get_trading_table, food_trading_data, get_dashboard_info, get_sales_graph_data
@@ -49,12 +50,13 @@ def dashboard(request):
     start_date = request.GET.get('fir')
     end_date = request.GET.get('sec')
     dashboard_info = get_dashboard_info()
-    xvalues, yvalues = get_sales_graph_data(start_date, end_date)
+    xvalues, yvalues, date_string = get_sales_graph_data(start_date, end_date)
     mx = int(max(yvalues) * 1.1)
     mn = min(yvalues) // 2
+    print(date_string)
     return render(request, 'dashboard.html',
                   {'dashboard_info': dashboard_info, 'labels': json.dumps(xvalues), 'data': json.dumps(yvalues),
-                   'mx': mx, 'mn': mn})
+                   'mx': mx, 'mn': mn, 'date_string': json.dumps(date_string)})
 
 
 # @login_required(login_url='/')
@@ -87,20 +89,21 @@ def trading(request):
     p = Paginator(food_data, 10)
     page = p.get_page(request.GET.get('page'))
     return render(request, 'trading/income.html',
-                  {'foods': page, 'categories': category_models, 'total': total_sum, 'p_paginator': page})
+                  {'foods': page, 'categories': category_models, 'total': total_sum, 'date_string': date_string,
+                   'p_paginator': page})
 
 
 @login_required(login_url='/')
 def trading_detailed_view(request, pk):
     start_date = request.GET.get('fir')
     end_date = request.GET.get('sec')
-    dates, xvalues, yvalues, food_model = food_trading_data(pk, start_date, end_date)
+    dates, xvalues, yvalues, food_model, date_string = food_trading_data(pk, start_date, end_date)
     mn = min(yvalues) // 2
     mx = int(max(yvalues) * 1.1)
     return render(request, 'trading/detailed_view.html',
                   {'dates': dates, 'labels': json.dumps(xvalues), 'data': json.dumps(yvalues), 'mn': mn, 'mx': mx,
                    'food': food_model,
-                   'total': sum(yvalues)})
+                   'total': sum(yvalues), 'date_string': json.dumps(date_string)})
 
 
 @login_required(login_url='/')
@@ -468,25 +471,33 @@ def archive(request):
     fir = request.GET.get('fir')
     sec = request.GET.get('sec')
     waiter = request.GET.get('waiter')
+    date_string = ""
     if fir in ['day', 'week', 'month']:
         if fir == 'day':
-            print('day')
             order_models = order_models.filter(created_at__day=now.day)
+            date_string = now.strftime("%a, %d/%m/%Y")
         elif fir == 'week':
             order_models = order_models.filter(created_at__gt=get_start_of_week())
+            date_string = f"{get_start_of_week().strftime('%d/%m/%Y')} - {now.strftime('%d/%m/%Y')}"
         elif fir == 'month':
             order_models = order_models.filter(created_at__month=now.month)
+            date_string = f"{get_start_of_week().strftime('01/%m/%Y')} - {now.strftime('%d/%m/%Y')}"
     else:
-        if fir != '' and fir is not None:
-            order_models = order_models.filter(created_at__gt=datetime.strptime(fir, "%Y-%m-%d"))
-        if sec != '' and sec is not None:
-            order_models = order_models.filter(created_at__lt=datetime.strptime(sec, "%Y-%m-%d"))
+        if fir != '' and fir is not None and sec != '' and sec is not None:
+            sd = datetime.strptime(fir, "%Y-%m-%d")
+            ed = datetime.strptime(sec, "%Y-%m-%d")
+            order_models = order_models.filter(order__created_at__gt=sd, order__created_at__lt=ed)
+            date_string = f"{sd.strftime('01/%m/%Y')} - {ed.strftime('%d/%m/%Y')}"
     if waiter not in [None, '']:
         order_models = order_models.filter(waiter_id=int(waiter))
+    total_sum = order_models.aggregate(Sum('paid_money'))['paid_money__sum']
+    if total_sum is None:
+        total_sum = 0
     p = Paginator(order_models, 10)
     page = p.get_page(request.GET.get('page'))
     return render(request, "archive/archive.html",
-                  context={'waiters': waiter_models, 'orders': page, 'p_paginator': page})
+                  context={'waiters': waiter_models, 'orders': page, 'date_string': date_string, 'total_sum': total_sum,
+                           'p_paginator': page})
 
 
 @login_required(login_url='/')

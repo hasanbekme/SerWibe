@@ -31,9 +31,9 @@
 
         </table>
         <div class="col-12 col-lg-7">
-        <canvas id="myChart" style="width:100%"></canvas>
+            <canvas id="myChart" style="width:100%"></canvas>
 
-    <div class="h5 font-weight-bold text-danger ml-5 mt-3 mb-4">Jami: {{ total }} so'm</div>
+            <div class="h5 font-weight-bold text-danger ml-5 mt-3 mb-4">Jami: {{ total }} so'm</div>
         </div>
     </div>
 
@@ -67,7 +67,13 @@
                 legend: {display: false},
                 scales: {
                     yAxes: [{ticks: {min: {{ mn }}, max: {{ mx }}}}],
-                }
+                },
+                title:
+                    {
+                        display: true,
+                        fontSize: 16,
+                        text: {{ date_string | safe}},
+                    }
             }
         });
     </script>
