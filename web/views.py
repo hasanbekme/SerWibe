@@ -77,8 +77,9 @@ def table(request, pk):
 def add_item(request, pk_room, pk_table):
     room_model = Room.objects.get(pk=pk_room)
     table_model = Table.objects.get(pk=pk_table)
+    waiter = Worker.objects.get(user=request.user)
     if request.method == 'POST':
-        order_items_add(request.POST)
+        order_items_add(request.POST, table_model, waiter)
     else:
         food_models = Food.objects.filter(is_available=True, category__is_available=True)
         category_models = Category.objects.filter(is_available=True)

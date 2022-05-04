@@ -14,8 +14,8 @@
             <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">Tasdiqlash</td>
         </tr>
 
-        <tr>
-            {% for order in orders %}
+        {% for order in orders %}
+            <tr>
                 <td>{{ forloop.counter }}</td>
                 <td>#{{ order.id }}</td>
                 <td>{{ order.waiter.full_name }}</td>
@@ -30,8 +30,8 @@
                     <button type="button" class="btn btn-warning"><i class="fa fa-credit-card"></i> Tugatish
                     </button>
                 </a></td>
-            {% endfor %}
         </tr>
+        {% endfor %}
 
     </table>
 

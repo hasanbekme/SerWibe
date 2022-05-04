@@ -85,7 +85,7 @@ def print_receipt(order: Order):
 
 
 def printer_order_item(order_item: OrderItem):
-    doc = Document(width=int(Settings().get("printer_width", int) * 51))
+    doc = Document(printer=order_item.meal.category.printer, width=int(Settings().get("printer_width", int) * 51))
     doc.begin_document()
     y = 0
     doc.set_font(family="Arial", size=12, bold=True)
