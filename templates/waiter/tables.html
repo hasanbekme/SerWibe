@@ -26,15 +26,17 @@
                             <span class="startadd">+</span>
                         </a>
                     {% else %}
-                        <a href="{% url 'add_item' pk_room=room.pk pk_table=table.pk %}" class="col-5 col-md-5 cardtable card m-auto shadow text-white h1 bg-info"
+                        <div class="col-5 col-md-5 cardtable card m-auto shadow  h1 bg-info" style="margin-top:0!important" >
+                        <a href="{% url 'add_item' pk_room=room.pk pk_table=table.pk %}" class="cardtable text-white mt-4" 
                            style="margin-bottom: 15px!important;">
                             <i class="fa fa-eye" aria-hidden="true" style="position:absolute; font-size: 25px; right: 10px; top:2px"></i>
-                            <span class="tableprice">{{ table.number }}</span>
-                            <span class="startadd">
+                            <span class="tableprice">{{ table.number }}</span>  
+                        </a>
+                        <a class="startadd" style="bottom:-15px; margin-top:-15px" href="mashettga">
                                 <span style="position:absolute; font-size:12px; padding: 1px 2px 0 2px; right: 2px; bottom:0; color: yellow; font-weight:normal; ">{{ table.current_order.needed_payment }} so`m</span>
                                 +
-                            </span>
-                        </a>
+                            </a>
+                        </div>
                     {% endif %}
                 {% endfor %}
             </div>
