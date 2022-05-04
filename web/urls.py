@@ -42,6 +42,6 @@ urlpatterns = [
 
     path('room', views.room, name='room'),
     path('room/<int:pk>/tables', views.table, name='table'),
-    path('category', views.category, name='category'),
+    path('room/<int:pk_room>/<int:pk_table>/add_item', views.add_item, name='add_item'),
     path('food', views.food, name='food'),
 ]

@@ -11,6 +11,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from utils.data_processing import get_trading_table, food_trading_data, get_dashboard_info, get_sales_graph_data
 from utils.date_config import get_start_of_week
 from utils.payment_receipt import print_receipt
+from utils.request_processing import order_items_add
 from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm, TableForm, ExpenseReasonForm, ExpenseForm, \
     OrderCompletionForm
 from .models import Worker, Category, Food, Room, Table, Order, Expense, ExpenseReason
@@ -69,12 +70,21 @@ def room(request):
 def table(request, pk):
     room_model = get_object_or_404(Room, pk=pk)
     tables = room_model.table_set.all()
-    return render(request, 'waiter/tables.html', {'tables': tables})
+    return render(request, 'waiter/tables.html', {'tables': tables, 'room': room_model})
 
 
-# @login_required(login_url='/')
-def category(request):
-    return render(request, 'category.html')
+@login_required(login_url='/')
+def add_item(request, pk_room, pk_table):
+    room_model = Room.objects.get(pk=pk_room)
+    table_model = Table.objects.get(pk=pk_table)
+    if request.method == 'POST':
+        order_items_add(request.POST)
+    else:
+        food_models = Food.objects.filter(is_available=True, category__is_available=True)
+        category_models = Category.objects.filter(is_available=True)
+        return render(request, 'waiter/add_item.html',
+                      {"foods": food_models, 'categories': category_models, 'table': table_model, 'room': room_model})
+    return redirect('table', pk=pk_room)
 
 
 # @login_required(login_url='/')
