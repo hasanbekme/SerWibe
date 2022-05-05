@@ -21,6 +21,10 @@ def logoutUser(request):
     logout(request)
     return redirect('signin')
 
+def my_orders(request):
+    room_model = get_object_or_404(Room, pk=5)
+    tables = room_model.table_set.all()
+    return render(request, 'my_orders.html', {'tables': tables, 'room': room_model})
 
 def signin(request):
     if request.user.is_authenticated:

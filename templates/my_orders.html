@@ -19,20 +19,9 @@
             <div class="row">
 
                 {% for table in tables %}
-                    {% if table.is_available %}
-                        <div class="col-5 col-md-5 cardtable card m-auto shadow text-primary h1"
-                             style="margin-bottom: 15px!important;">
-                            <a class="cardtable text-white mt-4"
-                               style="margin-bottom: 15px!important;">
-                                <span class="tableprice" style="color: #2692d0">{{ table.number }}</span></a>
-                            <a class="startadd" style="bottom:-15px; margin-top:-15px"
-                               href="{% url 'add_item' pk_room=room.pk pk_table=table.pk %}">
-                                +
-                            </a>
-                        </div>
-                    {% else %}
                         <div class="col-5 col-md-5 cardtable card m-auto shadow  h1 bg-info"
                              style="margin-bottom: 15px!important">
+                             <span style="position:absolute; font-size:0.4em; padding-left:2px;">{{ room.title }}</span>
                             <a href="{% url 'waiter_order' pk=table.pk %}" class="cardtable text-white mt-4"
                                style="margin-bottom: 15px!important;">
                                 <i class="fa fa-eye" aria-hidden="true"
@@ -45,7 +34,6 @@
                                 +
                             </a>
                         </div>
-                    {% endif %}
                 {% endfor %}
             </div>
         </div>

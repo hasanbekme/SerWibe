@@ -6,7 +6,7 @@
             <i class="fa fa-home" style="font-size:3em"></i>
         </a>
         <a class="btn btn-light ml-3 topmenu-room"  href="{% url 'table' pk=room.pk %}">
-            <div class="h2 text-primary topmenu-room-span" id="roomname" style="line-height:25px">{{ room.title }}</div>
+            <div class="h2 text-primary topmenu-room-span" id="roomname" style="line-height:45px">{{ room.title }}</div>
         </a>
         <a class="btn btn-light  p-1 ml-3" href="#">
             <span class="h2 text-primary"
@@ -27,6 +27,7 @@
                                  style="line-height: 27px; padding: 0">
                                 {{ item.meal.title }}
                             </div>
+                            <i class="fa fa-trash btn btn-danger" style="position: absolute; right:2px; top:2px; opacity:0.5"></i>
                             <span id="{{ item.meal.id }}p" style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
                                   class="text-danger"><span class="">{{ item.quantity }} ta</span> <span class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
                         </div>
@@ -36,15 +37,21 @@
 
         </main>
         <a href="{% url 'add_item' pk_room=room.pk pk_table=table.pk %}" style="position:absolute; right: 5%; bottom: 80px; border-radius: 50%; background:white; color: #075295; width:50px; height:50px; padding:10px; box-shadow: 0px 0px 8px 2px #000000aa; opacity: 0.9;">
+             <i class='fa fa-print' style="font-size:2.4em"></i>
+        </a>
+        <a href="{% url 'add_item' pk_room=room.pk pk_table=table.pk %}" style="position:absolute; right: 22%; bottom: 80px; border-radius: 50%; background:white; color: #075295; width:50px; height:50px; padding:10px; box-shadow: 0px 0px 8px 2px #000000aa; opacity: 0.9;">
              <i class='fa fa-plus' style="font-size:2.4em"></i>
+        </a>
+        <a href="{% url 'add_item' pk_room=room.pk pk_table=table.pk %}" style="position:absolute; right: 39%; bottom: 80px; border-radius: 50%; background:white; color: #075295; width:50px; height:50px; padding:10px; box-shadow: 0px 0px 8px 2px #000000aa; opacity: 0.9;">
+             <i class='fa fa-comment' style="font-size:2.0em"></i>
         </a>
         <div class="menu-food">
             <a href="{% url 'table' pk=room.pk %}" class="left"><i class="fa fa-arrow-left"
                                                                          aria-hidden="true"></i></a>
             <a href="{% url 'table' pk=room.pk %}" style="padding:0" class="centered" id="centered"></a>
 
-            <button type="submit" style="float: right; width: 66%; height: 55px; background-color: white; border:none;" class="h4 font-weight-bold text-danger">
-                <span id="allsumm">{{ order.needed_payment }}</span> so`m <i class="fa fa-check" aria-hidden="true"></i>
+            <button type="submit" style="float: right; width: 70%; height: 55px; background-color: white; border:none;" class="h4 font-weight-bold text-danger">
+                <span id="allsumm">{{ order.needed_payment }}</span> so`m <i class="fa fa-check-circle" aria-hidden="true"></i>
             </button>
 
         </div>
