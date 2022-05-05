@@ -89,7 +89,7 @@ def printer_order_item(order_item: OrderItem):
     doc.begin_document()
     y = 0
     doc.set_font(family="Arial", size=12, bold=True)
-    doc.aligned_text('#' + str(order_item.id), y=y, align="left")
+    doc.aligned_text('#' + str(order_item.order.id), y=y, align="left")
     y += 300
     doc.set_font(family="Arial", size=12, bold=False)
     doc.aligned_text(f"Offitsant:   {str(order_item.order.waiter.full_name)}", y=y, align="left")

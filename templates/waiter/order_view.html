@@ -16,26 +16,26 @@
         <main style="overflow-y: auto; height:80%; position: fixed; top: 80px; width: 100%;">
             <div class="container">
                 <div class="row" id="filtercontent">
-                    {% for food in foods %}
+                    {% for item in orderitems %}
                         <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
+                             style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
                             <div class="col-3 p-0">
-                                <img src="{{ food.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
+                                <img src="{{ item.meal.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
                                      alt="image">
                             </div>
                             <div class="text-primary mt-3 col-9 h4 font-weight-bold text-left ml-2 filtercontentclass"
                                  style="line-height: 27px; padding: 0">
-                                {{ food.title }}
+                                {{ item.meal.title }}
                             </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
-                                  class="text-danger"><span class="">2 ta</span> <span class="text-primary">x</span>  {{ food.price }} so`m</span>
+                            <span id="{{ item.meal.id }}p" style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
+                                  class="text-danger"><span class="">{{ item.quantity }} ta</span> <span class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
                         </div>
                     {% endfor %}
                 </div>
             </div>
 
         </main>
-        <a href="ashetka" style="position:absolute; right: 5%; bottom: 80px; border-radius: 50%; background:white; color: #075295; width:50px; height:50px; padding:10px; box-shadow: 0px 0px 8px 2px #000000aa; opacity: 0.9;">
+        <a href="{% url 'add_item' pk_room=room.pk pk_table=table.pk %}" style="position:absolute; right: 5%; bottom: 80px; border-radius: 50%; background:white; color: #075295; width:50px; height:50px; padding:10px; box-shadow: 0px 0px 8px 2px #000000aa; opacity: 0.9;">
              <i class='fa fa-plus' style="font-size:2.4em"></i>
         </a>
         <div class="menu-food">
@@ -44,7 +44,7 @@
             <a href="{% url 'table' pk=room.pk %}" style="padding:0" class="centered" id="centered"></a>
 
             <button type="submit" style="float: right; width: 66%; height: 55px; background-color: white; border:none;" class="h4 font-weight-bold text-danger">
-                <span id="allsumm">0</span> so`m <i class="fa fa-check" aria-hidden="true"></i>
+                <span id="allsumm">{{ order.needed_payment }}</span> so`m <i class="fa fa-check" aria-hidden="true"></i>
             </button>
 
         </div>

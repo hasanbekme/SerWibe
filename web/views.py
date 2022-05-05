@@ -88,9 +88,14 @@ def add_item(request, pk_room, pk_table):
     return redirect('table', pk=pk_room)
 
 
-# @login_required(login_url='/')
-def food(request):
-    return render(request, 'food.html')
+@login_required(login_url='/')
+def waiter_order(request, pk):
+    table_model = get_object_or_404(Table, pk=pk)
+    order_model = table_model.current_order
+    print(order_model)
+    return render(request, 'waiter/order_view.html',
+                  {'room': table_model.room, 'table': table_model, 'orderitems': order_model.orderitem_set.all(),
+                   'order': order_model})
 
 
 @login_required(login_url='/')

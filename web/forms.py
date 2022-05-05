@@ -109,3 +109,5 @@ class OrderCompletionForm(Form):
         self.instance.is_completed = True
         self.instance.paid_money = self.instance.needed_payment
         self.instance.save()
+        self.instance.table.is_available = True
+        self.instance.table.save()

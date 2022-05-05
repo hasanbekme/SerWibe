@@ -43,5 +43,5 @@ urlpatterns = [
     path('room', views.room, name='room'),
     path('room/<int:pk>/tables', views.table, name='table'),
     path('room/<int:pk_room>/<int:pk_table>/add_item', views.add_item, name='add_item'),
-    path('food', views.food, name='food'),
+    path('order/<int:pk>/view', views.waiter_order, name='waiter_order'),
 ]
