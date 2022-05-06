@@ -60,23 +60,23 @@
 
                 <!-- Button trigger modal -->
                 <a href="{% url 'expense_new' %}" type="button" class="btn btn-primary m-1">Qo'shish</a>
-                <span class="h5 font-weight-bold text-danger ml-3 text-right">Jami: {{ total_sum }} so'm</span>
+                <span class="h5 font-weight-bold text-danger mr-5 text-right float-right">Jami: {{ total_sum }} so'm</span>
             </div>
             <!-- Paginator shu yerga if ishlatib paginator kerak bo`lmasa o`chirib qo`yadigan qiling -->
 
             <div class="text-center">
 
                 {% if p_paginator.has_previous %}
-                    <a class="btn btn-primary" href="?page={{ p_paginator.previous_page_number }}"><</a>
+                    <a class="btn btn-primary mb-5d" href="?page={{ p_paginator.previous_page_number }}"><</a>
                 {% endif %}
-                <span class="btn btn-primary">
+                <span class="btn btn-primary mb-5">
 
     Sahifa {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
     </span>
 
 
                 {% if p_paginator.has_next %}
-                    <a class="btn btn-primary" href="?page={{ p_paginator.next_page_number }}">></a>
+                    <a class="btn btn-primary mb-5" href="?page={{ p_paginator.next_page_number }}">></a>
                 {% endif %}
             </div>
 

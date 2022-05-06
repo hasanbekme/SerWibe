@@ -26,6 +26,9 @@ def my_orders(request):
     tables = room_model.table_set.all()
     return render(request, 'my_orders.html', {'tables': tables, 'room': room_model})
 
+def my_profile(request):
+    return render(request, 'my_profile.html')
+
 def signin(request):
     if request.user.is_authenticated:
         return redirect('dashboard')

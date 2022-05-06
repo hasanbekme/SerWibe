@@ -194,11 +194,10 @@
             </button>
         </div>
         <div style="position: fixed; margin:10px;">
-            <h1 style="text-align: center; width: 100%"><a href="{% url 'dashboard' %}" class="logo ml-4"
-                                                           style="text-align: center;"><img src="/static/img/logo.png"
-                                                      ~                                      style="width:160px;"></a>
-                <div style="color:#fff; font-weight: 800;" class="mb-3 ml-3">SERWIBE</div>
+            <h1 style="text-align: center; width: 100%"><a href="{% url 'dashboard' %}" class="logo ml-4" style="text-align: center;"><img src="/static/img/logo.png" style="width:160px;"></a>
+                <div style="color:#fff; font-weight: 800;" class="ml-3">SERWIBE</div>
             </h1>
+                <div  class="ml-3" style="color:#fff; font-size: 1.2em; margin-top: -25px;">Bunyodbek Abdurazzaqov</div>
 
 
             <ul class="list-unstyled components ml-2">
@@ -278,5 +277,20 @@
         document.getElementById('siljish').style.top = y - 30 + 'px';
     }
 </script>
+<script type="text/javascript">
+    var comps = document.getElementsByClassName("components")[0];
+    var lis = comps.getElementsByTagName("a");
+    for(var i=0; i<lis.length; i++){
+        if (lis[i].href==location.href){
+            console.log();
+            lis[i].className = "text-white";
+        }
+        else{
+
+            lis.className = "";
+        }
+    }
+</script>
+
 </body>
 </html>
