@@ -43,7 +43,9 @@ urlpatterns = [
     path('room', views.room, name='room'),
     path('room/<int:pk>/tables', views.table, name='table'),
     path('room/<int:pk_room>/<int:pk_table>/add_item', views.add_item, name='add_item'),
+    path('order_item/<int:pk>/delete', views.order_item_delete, name='delete_order_item'),
     path('order/<int:pk>/view', views.waiter_order, name='waiter_order'),
     path('my_orders', views.my_orders, name='my_orders'),
     path('my_profile', views.my_profile, name='my_profile'),
+    path('print_receipt/<int:order_id>/', views.print_order_receipt, name='print_order_receipt')
 ]

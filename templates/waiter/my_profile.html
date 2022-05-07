@@ -3,18 +3,18 @@
 
     <div class="card m-2 text-left p-3 font-weight-bold text-dark row h5">
         <div class="text-center h1 text-primary font-weight-bold">
-            PROFILE
+            PROFIL
         </div>
         <div >
             <i class="fa fa-user"></i>
-            Bunyodbek Abdurazzaoqov
+            {{ user.full_name }}
         </div>
-        <div class="btn btn-danger block mt-2">
+        <a href="/logout" class="btn btn-danger block mt-2">
             <div>
                 Acoountdan chiqish
                 <i class="fa fa-sign-out"></i>
             </div>
-        </div>
+        </a>
     </div>
     
     <div class="card m-2 text-left p-3 font-weight-bold text-dark row h5">
@@ -23,17 +23,17 @@
         </div>
         <div class="h6">
             <i class="fa fa-money"></i>
-            Buyurtmalar soni: 24 ta
+            Buyurtmalar soni: {{ orders_count }} ta
         </div>
         <div  class="h6">
             <i class="fa fa-dollar"></i>
-            Buyurtmalar narxi: 2500000so`m
+            Buyurtmalar narxi: {{ orders_amount }} so`m
         </div>
     </div>
 
     <div class="menu">
         <a href="/room"><i class="fa fa-bars"></i></a>
-        <a href="/sean"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+        <a href="/my_orders"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
         <a href="/my_profile"><i class="fa fa-user" ></i></a>
 
     </div>

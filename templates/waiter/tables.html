@@ -10,7 +10,7 @@
         </a>
         <a class="btn btn-success  p-1 ml-3">
             <span class="h2 text-light "
-                  style="height: 34px; display: inline-block; font-size: 1.7em;  margin-top: 6px; width: 50px;"> 2 </span>
+                  style="height: 34px; display: inline-block; font-size: 1.7em;  margin-top: 6px; width: 50px;"> {{ busy_tables }} </span>
         </a>
     </div>
     <main style="overflow-y: auto; height:80%; margin-top:10px">
@@ -31,6 +31,7 @@
                             </a>
                         </div>
                     {% else %}
+                        {% if table.current_order.waiter == waiter %}
                         <div class="col-5 col-md-5 cardtable card m-auto shadow  h1 bg-info"
                              style="margin-bottom: 15px!important">
                             <a href="{% url 'waiter_order' pk=table.pk %}" class="cardtable text-white mt-4"
@@ -45,6 +46,19 @@
                                 +
                             </a>
                         </div>
+                        {% else %}
+                            <div class="col-5 col-md-5 cardtable card m-auto shadow  h1 bg-info"
+                             style="margin-bottom: 15px!important">
+                            <a class="cardtable text-white mt-4"
+                               style="margin-bottom: 15px!important;">
+                                <span class="tableprice">{{ table.number }}</span>
+                            </a>
+                            <a class="startadd" style="bottom:-15px; margin-top:-15px">
+                                <span style="position:absolute; font-size:12px; padding: 1px 2px 0 2px; right: 2px; bottom:0; color: yellow; font-weight:normal; ">{{ table.current_order.needed_payment }} so`m</span>
+                                +
+                            </a>
+                        </div>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </div>
@@ -54,9 +68,8 @@
 
     <div class="menu">
         <a href="/room"><i class="fa fa-bars"></i></a>
-        <a href="/sean"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
-        <a href="#"><i class="fa fa-user"
-                       onclick="if (confirm('Chiqishga rozimisiz')){ document.location.href = '/logout'; }"></i></a>
+        <a href="/my_orders"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+        <a href="/my_profile"><i class="fa fa-user"></i></a>
 
     </div>
     <script type="text/javascript">

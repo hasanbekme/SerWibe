@@ -2,6 +2,11 @@ from utils.payment_receipt import printer_order_item
 from web.models import Food, Table, Worker, Order, OrderItem
 
 
+def get_user(request):
+    result = Worker.objects.get(user=request.user)
+    return result
+
+
 def order_items_add(post_data: dict, table_model: Table, waiter: Worker):
     if table_model.is_available:
         current_order = Order.objects.create(waiter=waiter, table=table_model)

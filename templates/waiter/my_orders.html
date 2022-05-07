@@ -6,11 +6,11 @@
             <i class="fa fa-home" style="font-size:3em"></i>
         </a>
         <a class="btn btn-light ml-3 topmenu-room" href="/room">
-            <div class="h2 text-primary topmenu-room-span" id="roomname" style="line-height:45px">{{ room.title }}</div>
+            <div class="h2 text-primary topmenu-room-span" id="roomname" style="line-height:45px">Buyurtmalar</div>
         </a>
         <a class="btn btn-success  p-1 ml-3">
             <span class="h2 text-light "
-                  style="height: 34px; display: inline-block; font-size: 1.7em;  margin-top: 6px; width: 50px;"> 2 </span>
+                  style="height: 34px; display: inline-block; font-size: 1.7em;  margin-top: 6px; width: 50px;"> {{ orders.count }} </span>
         </a>
     </div>
     <main style="overflow-y: auto; height:80%; margin-top:10px">
@@ -18,19 +18,19 @@
         <div class="container">
             <div class="row">
 
-                {% for table in tables %}
+                {% for order in orders %}
                         <div class="col-5 col-md-5 cardtable card m-auto shadow  h1 bg-info"
                              style="margin-bottom: 15px!important">
-                             <span style="position:absolute; font-size:0.4em; padding-left:2px;">{{ room.title }}</span>
-                            <a href="{% url 'waiter_order' pk=table.pk %}" class="cardtable text-white mt-4"
+                             <span style="position:absolute; font-size:0.4em; padding-left:2px;">{{ order.table.room.title }}</span>
+                            <a href="{% url 'waiter_order' pk=order.table.pk %}" class="cardtable text-white mt-4"
                                style="margin-bottom: 15px!important;">
                                 <i class="fa fa-eye" aria-hidden="true"
                                    style="position:absolute; font-size: 25px; right: 10px; top:2px"></i>
-                                <span class="tableprice">{{ table.number }}</span>
+                                <span class="tableprice">{{ order.table.number }}</span>
                             </a>
                             <a class="startadd" style="bottom:-15px; margin-top:-15px"
-                               href="{% url 'add_item' pk_room=room.pk pk_table=table.pk %}">
-                                <span style="position:absolute; font-size:12px; padding: 1px 2px 0 2px; right: 2px; bottom:0; color: yellow; font-weight:normal; ">{{ table.current_order.needed_payment }} so`m</span>
+                               href="{% url 'add_item' pk_room=order.table.room.pk pk_table=order.table.pk %}">
+                                <span style="position:absolute; font-size:12px; padding: 1px 2px 0 2px; right: 2px; bottom:0; color: yellow; font-weight:normal; ">{{ order.needed_payment }} so`m</span>
                                 +
                             </a>
                         </div>
@@ -42,9 +42,8 @@
 
     <div class="menu">
         <a href="/room"><i class="fa fa-bars"></i></a>
-        <a href="/sean"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
-        <a href="#"><i class="fa fa-user"
-                       onclick="if (confirm('Chiqishga rozimisiz')){ document.location.href = '/logout'; }"></i></a>
+        <a href="/my_orders"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a>
+        <a href="/my_profile"><i class="fa fa-user"></i></a>
 
     </div>
     <script type="text/javascript">

@@ -1,33 +1,27 @@
 import json
-from datetime import datetime
+from datetime import datetime, date
 
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Sum
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 
+from utils.request_processing import get_user
 from utils.data_processing import get_trading_table, food_trading_data, get_dashboard_info, get_sales_graph_data
 from utils.date_config import get_start_of_week
 from utils.payment_receipt import print_receipt
 from utils.request_processing import order_items_add
 from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm, TableForm, ExpenseReasonForm, ExpenseForm, \
     OrderCompletionForm
-from .models import Worker, Category, Food, Room, Table, Order, Expense, ExpenseReason
+from .models import Worker, Category, Food, Room, Table, Order, Expense, ExpenseReason, OrderItem
 
 
 def logoutUser(request):
     logout(request)
     return redirect('signin')
 
-def my_orders(request):
-    room_model = get_object_or_404(Room, pk=5)
-    tables = room_model.table_set.all()
-    return render(request, 'my_orders.html', {'tables': tables, 'room': room_model})
-
-def my_profile(request):
-    return render(request, 'my_profile.html')
 
 def signin(request):
     if request.user.is_authenticated:
@@ -55,16 +49,19 @@ def signin(request):
 
 @login_required(login_url='/')
 def dashboard(request):
-    start_date = request.GET.get('fir')
-    end_date = request.GET.get('sec')
-    dashboard_info = get_dashboard_info()
-    xvalues, yvalues, date_string = get_sales_graph_data(start_date, end_date)
-    mx = int(max(yvalues) * 1.1)
-    mn = min(yvalues) // 2
-    print(date_string)
-    return render(request, 'dashboard.html',
-                  {'dashboard_info': dashboard_info, 'labels': json.dumps(xvalues), 'data': json.dumps(yvalues),
-                   'mx': mx, 'mn': mn, 'date_string': json.dumps(date_string)})
+    user = get_user(request)
+    if user.position == 'admin':
+        start_date = request.GET.get('fir')
+        end_date = request.GET.get('sec')
+        dashboard_info = get_dashboard_info()
+        xvalues, yvalues, date_string = get_sales_graph_data(start_date, end_date)
+        mx = int(max(yvalues) * 1.1)
+        mn = min(yvalues) // 2
+        return render(request, 'dashboard.html',
+                      {'dashboard_info': dashboard_info, 'labels': json.dumps(xvalues), 'data': json.dumps(yvalues),
+                       'mx': mx, 'mn': mn, 'date_string': json.dumps(date_string), 'user': user})
+    else:
+        return redirect('room')
 
 
 @login_required(login_url='/')
@@ -75,9 +72,12 @@ def room(request):
 
 @login_required(login_url='/')
 def table(request, pk):
+    user = get_user(request)
     room_model = get_object_or_404(Room, pk=pk)
     tables = room_model.table_set.all()
-    return render(request, 'waiter/tables.html', {'tables': tables, 'room': room_model})
+    busy_tables = tables.filter(is_available=False).count()
+    return render(request, 'waiter/tables.html',
+                  {'tables': tables, 'room': room_model, 'busy_tables': busy_tables, 'waiter': user})
 
 
 @login_required(login_url='/')
@@ -92,17 +92,44 @@ def add_item(request, pk_room, pk_table):
         category_models = Category.objects.filter(is_available=True)
         return render(request, 'waiter/add_item.html',
                       {"foods": food_models, 'categories': category_models, 'table': table_model, 'room': room_model})
-    return redirect('table', pk=pk_room)
+    return redirect('my_orders')
 
 
 @login_required(login_url='/')
 def waiter_order(request, pk):
     table_model = get_object_or_404(Table, pk=pk)
     order_model = table_model.current_order
-    print(order_model)
     return render(request, 'waiter/order_view.html',
                   {'room': table_model.room, 'table': table_model, 'orderitems': order_model.orderitem_set.all(),
                    'order': order_model})
+
+
+@login_required(login_url='/')
+def order_item_delete(request, pk):
+    order_item = get_object_or_404(OrderItem, pk=pk)
+    order_model = order_item.order
+    order_item.delete()
+    return redirect('waiter_order', pk=order_model.table.pk)
+
+
+@login_required(login_url='/')
+def my_orders(request):
+    user = get_user(request)
+    current_orders = Order.objects.filter(waiter=user, is_completed=False)
+    print(current_orders)
+    return render(request, 'waiter/my_orders.html', {'orders': current_orders})
+
+
+@login_required(login_url='/')
+def my_profile(request):
+    user = get_user(request)
+    today = date.today()
+    order_models = Order.objects.filter(waiter=user, created_at__gt=today)
+    orders_amount = order_models.aggregate(Sum('paid_money'))['paid_money__sum']
+    if orders_amount is None:
+        orders_amount = 0
+    return render(request, 'waiter/my_profile.html',
+                  {'user': user, 'orders_count': order_models.count(), 'orders_amount': orders_amount})
 
 
 @login_required(login_url='/')
@@ -385,22 +412,33 @@ def print_order(request, order_id):
 
 
 @login_required(login_url='/')
+def print_order_receipt(request, order_id):
+    order_model = get_object_or_404(Order, id=order_id)
+    print_receipt(order=order_model)
+    return redirect('waiter_order', pk=order_model.table.pk)
+
+
+@login_required(login_url='/')
 def expenses(request):
-    date = request.GET.get('date')
-    today = datetime.today()
-    if date == 'today':
-        expense_models = Expense.objects.filter(created_at__day=today.day)
-    elif date == "week":
-        expense_models = Expense.objects.filter(created_at__gt=get_start_of_week())
-    elif date == "month":
-        expense_models = Expense.objects.filter(created_at__month=today.month)
+    user = get_user(request)
+    if user.position == 'admin':
+        date = request.GET.get('date')
+        today = datetime.today()
+        if date == 'today':
+            expense_models = Expense.objects.filter(created_at__day=today.day)
+        elif date == "week":
+            expense_models = Expense.objects.filter(created_at__gt=get_start_of_week())
+        elif date == "month":
+            expense_models = Expense.objects.filter(created_at__month=today.month)
+        else:
+            expense_models = Expense.objects.all()
+        p = Paginator(expense_models, 8)
+        page = p.get_page(request.GET.get('page'))
+        expense_reason_models = ExpenseReason.objects.all()
+        return render(request, 'expenses/expenses.html',
+                      context={'expenses': page, 'expense_reasons': expense_reason_models, 'p_paginator': page})
     else:
-        expense_models = Expense.objects.all()
-    p = Paginator(expense_models, 10)
-    page = p.get_page(request.GET.get('page'))
-    expense_reason_models = ExpenseReason.objects.all()
-    return render(request, 'expenses/expenses.html',
-                  context={'expenses': page, 'expense_reasons': expense_reason_models, 'p_paginator': page})
+        redirect('room')
 
 
 @login_required(login_url='/')
