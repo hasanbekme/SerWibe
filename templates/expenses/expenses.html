@@ -20,19 +20,26 @@
                         <td class="bg-primary text-white">№</td>
                         <td class="bg-primary text-white">Sababi</td>
                         <td class="bg-primary text-white">
-                            <div class="dropdown">
-                                <button class="btn btn-primary p-0 dropdown-toggle"
+                            <div class="dropdown" >
+                                <button class="btn btn-primary p-0 dropdown-toggle text-left"
                                         type="button" id="dropdownMenu1" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
+                                        aria-haspopup="true" aria-expanded="false" style="width: 100%;">
                                     Sana
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <a class="dropdown-item"
-                                       href="?date=today">Kun</a>
-                                    <a class="dropdown-item"
-                                       href="?date=week">Hafta</a>
-                                    <a class="dropdown-item"
-                                       href="?date=month">Oy</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu1" style="min-width: 300px;">
+                                    <form class="h6">
+                                        <div class="p-1"><input type="date" name="fir" id="fir" class="form-item m-1" style="border: 1px solid black">dan</div>
+                                        <div class="p-1"><input type="date" name="sec" id="sec" class="form-item m-1" style="border: 1px solid black">gacha</div>
+                                        <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Filter</button>
+                                        <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2">
+                                            <i class="fa fa-filter"></i>
+                                            Hafta
+                                        </a>
+                                        <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2">
+                                            <i class="fa fa-filter"></i> 
+                                            Oy
+                                        </a>
+                                    </form>
                                 </div>
                             </div>
                         </td>
@@ -67,7 +74,7 @@
             <div class="text-center">
 
                 {% if p_paginator.has_previous %}
-                    <a class="btn btn-primary mb-5d" href="?page={{ p_paginator.previous_page_number }}"><</a>
+                    <a class="btn btn-primary mb-5" href="?page={{ p_paginator.previous_page_number }}"><</a>
                 {% endif %}
                 <span class="btn btn-primary mb-5">
 
