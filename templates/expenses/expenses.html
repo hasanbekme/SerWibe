@@ -28,16 +28,32 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1" style="min-width: 300px;">
                                     <form class="h6">
-                                        <div class="p-1"><input type="date" name="fir" id="fir" class="form-item m-1" style="border: 1px solid black">dan</div>
-                                        <div class="p-1"><input type="date" name="sec" id="sec" class="form-item m-1" style="border: 1px solid black">gacha</div>
-                                        <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Filter</button>
-                                        <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2">
+                                        <table class="tableab">
+                                            <tr>
+                                                <td>
+                                                    <div class="p-1" style="font-size: 13px;"><input type="date" name="fir" id="fir" class="form-item m-1" style="border: 1px solid black">dan</div>            
+                                                </td>
+                                                <td rowspan="2">
+                                                    <button type="sumbit" class="btn btn-primary m-2 mt-3"><i class="fa fa-filter"></i> Filter</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="p-1" style="font-size: 13px;"><input type="date" name="sec" id="sec" class="form-item m-1" style="border: 1px solid black">gacha</div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <a href="?fir=week&sec=week" type="button" class="btn btn-primary ml-2">
                                             <i class="fa fa-filter"></i>
                                             Hafta
                                         </a>
-                                        <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2">
+                                        <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-0">
                                             <i class="fa fa-filter"></i> 
                                             Oy
+                                        </a>
+                                        <a href="/expenses" type="button" class="btn btn-danger m-0">
+                                            <i class="fa fa-times"></i> 
+                                            Qaytalash
                                         </a>
                                     </form>
                                 </div>
