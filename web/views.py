@@ -587,7 +587,7 @@ def archive(request):
             if fir != '' and fir is not None and sec != '' and sec is not None:
                 sd = datetime.strptime(fir, "%Y-%m-%d")
                 ed = datetime.strptime(sec, "%Y-%m-%d")
-                order_models = order_models.filter(order__created_at__gt=sd, order__created_at__lt=ed)
+                order_models = order_models.filter(created_at__gt=sd, created_at__lt=ed)
                 date_string = f"{sd.strftime('01/%m/%Y')} - {ed.strftime('%d/%m/%Y')}"
         if waiter not in [None, '']:
             order_models = order_models.filter(waiter_id=int(waiter))
@@ -624,7 +624,7 @@ def room(request):
         room_models = Room.objects.all()
         return render(request, 'waiter/room.html', {'rooms': room_models})
     else:
-        return redirect('room')
+        return redirect('dashboard')
 
 
 @login_required(login_url='/')
@@ -637,7 +637,7 @@ def table(request, pk):
         return render(request, 'waiter/tables.html',
                       {'tables': tables, 'room': room_model, 'busy_tables': busy_tables, 'waiter': user})
     else:
-        return redirect('room')
+        return redirect('dashboard')
 
 
 @login_required(login_url='/')
@@ -656,7 +656,7 @@ def add_item(request, pk_room, pk_table):
                            'room': room_model})
         return redirect('my_orders')
     else:
-        return redirect('room')
+        return redirect('dashboard')
 
 
 @login_required(login_url='/')
@@ -668,7 +668,7 @@ def waiter_order(request, pk):
                       {'room': table_model.room, 'table': table_model, 'orderitems': order_model.orderitem_set.all(),
                        'order': order_model})
     else:
-        return redirect('room')
+        return redirect('dashboard')
 
 
 @login_required(login_url='/')
@@ -679,7 +679,7 @@ def order_item_delete(request, pk):
         order_item.delete()
         return redirect('waiter_order', pk=order_model.table.pk)
     else:
-        return redirect('room')
+        return redirect('dashboard')
 
 
 @login_required(login_url='/')
@@ -689,7 +689,7 @@ def print_order_receipt(request, order_id):
         print_receipt(order=order_model)
         return redirect('waiter_order', pk=order_model.table.pk)
     else:
-        return redirect('room')
+        return redirect('dashboard')
 
 
 @login_required(login_url='/')
@@ -700,7 +700,7 @@ def my_orders(request):
         print(current_orders)
         return render(request, 'waiter/my_orders.html', {'orders': current_orders})
     else:
-        return redirect('room')
+        return redirect('dashboard')
 
 
 @login_required(login_url='/')
@@ -715,5 +715,5 @@ def my_profile(request):
         return render(request, 'waiter/my_profile.html',
                       {'user': user, 'orders_count': order_models.count(), 'orders_amount': orders_amount})
     else:
-        return redirect('room')
+        return redirect('dashboard')
 # ----------------------------------------------------------------------------------------------------------------------

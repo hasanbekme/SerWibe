@@ -19,6 +19,7 @@ strartup_settings = QSettings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\
 
 
 def set_autostart(state):
+    print(state)
     if state:
         strartup_settings.setValue("SerWibe", sys.argv[0])
     else:
@@ -40,7 +41,7 @@ if __name__ == '__main__':
             tray_icon.stop_action.triggered.connect(app.quit)
             tray_icon.stop_action.triggered.connect(server.stop)
             tray_icon.open_action.triggered.connect(open_website)
-            tray_icon.autostart.triggered.connect(set_autostart)
+            tray_icon.s_w.autostart.stateChanged.connect(set_autostart)
 
             open_website()
             sys.exit(app.exec())

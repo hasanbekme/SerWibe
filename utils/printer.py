@@ -30,8 +30,10 @@ class Document:
         self.dc.SetMapMode(win32con.MM_TWIPS)
 
     def end_document(self):
+        win32print.WritePrinter(win32print.OpenPrinter(self.printer), b'\x1dV\x00')
         self.dc.EndPage()
         self.dc.EndDoc()
+        self.dc.DeleteDC()
 
     def set_font(self, family, size, bold=None):
         weight = 400

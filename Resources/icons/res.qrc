@@ -1,5 +1,13 @@
 <RCC>
   <qresource prefix="main">
+    <file>submit_document.png</file>
+    <file>license.png</file>
+    <file>locked.png</file>
+    <file>main_settings.png</file>
+    <file>receipt.png</file>
+    <file>send.png</file>
+    <file>unlocked.png</file>
+    <file>update.png</file>
     <file>settings.png</file>
     <file>open_icon.png</file>
     <file>stop_icon.png</file>

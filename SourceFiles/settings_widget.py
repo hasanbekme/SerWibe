@@ -1,3 +1,4 @@
+from PyQt5.QtCore import QSettings
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import QWidget
 from utils.system_settings import Settings
@@ -9,10 +10,16 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         super().__init__()
         self.setupUi(self)
         self.settings = Settings()
+        self.startup_settings = QSettings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+                                          QSettings.NativeFormat)
         self.cancel_button.clicked.connect(self.hide)
         self.accept_button.clicked.connect(self.save)
 
     def update_data(self):
+        if self.startup_settings.value("SerWibe", type=str) != "":
+            self.autostart.setChecked(True)
+        else:
+            self.autostart.setChecked(False)
         self.company_name_edit.setText(self.settings.get(key="company_name", tp=str))
         self.address_edit.setText(self.settings.get(key="address", tp=str))
         self.number_edit.setText(self.settings.get(key="phone_number", tp=str))
@@ -28,7 +35,7 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.settings.set(key="tax", value=self.tax_edit.value())
         self.settings.set(key="printer_width", value=self.printer_width_edit.value())
         self.hide()
-        
+
     def show(self) -> None:
         self.update_data()
         super(SettingsWidget, self).show()

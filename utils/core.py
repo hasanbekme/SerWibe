@@ -1,13 +1,20 @@
 import logging
+import os
 import socket
 import threading
 import webbrowser
-import os
+from datetime import datetime
 
 import requests
 
+
+def get_env():
+    res = os.getenv("APPDATA") + "\\SerWibe"
+    return res
+
+
 logging.basicConfig(format=u'%(filename)s [LINE:%(lineno)d] #%(levelname)-8s [%(asctime)s]  %(message)s',
-                    filename="logs.log",
+                    filename=get_env() + "\\" + datetime.today().strftime("logs_%d-%m-%Y.log"),
                     level=logging.INFO,
                     )
 
@@ -48,8 +55,3 @@ def run_server():
     except Exception as exc:
         logging.error(exc)
         return
-
-
-def get_env():
-    res = os.getenv("APPDATA") + "\SerWibe"
-    return res

@@ -67,7 +67,7 @@ def print_receipt(order: Order):
         y += 300
     doc.set_font(family="Arial", size=14, bold=True)
     doc.aligned_text("Jami:", y, align="left")
-    doc.aligned_text(f"{order.needed_payment * (1 + tax / 100)} so'm", y, align="right")
+    doc.aligned_text(f"{int(order.needed_payment * (1 + tax / 100))} so'm", y, align="right")
     doc.set_font(family="Arial", size=12, bold=False)
     if Settings().get("last_message", tp=str):
         y += 500
