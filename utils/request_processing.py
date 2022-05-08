@@ -7,6 +7,22 @@ def get_user(request):
     return result
 
 
+def is_admin(request):
+    user = get_user(request)
+    if user.position == 'admin':
+        return True
+    else:
+        return False
+
+
+def is_waiter(request):
+    user = get_user(request)
+    if user.position == 'waiter':
+        return True
+    else:
+        return False
+
+
 def order_items_add(post_data: dict, table_model: Table, waiter: Worker):
     if table_model.is_available:
         current_order = Order.objects.create(waiter=waiter, table=table_model)
