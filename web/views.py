@@ -717,3 +717,7 @@ def my_profile(request):
     else:
         return redirect('dashboard')
 # ----------------------------------------------------------------------------------------------------------------------
+
+
+def takeaway(request):
+    return render(request, 'takeaway.html')

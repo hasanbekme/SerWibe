@@ -7,7 +7,7 @@
             <i class="fa fa-cutlery"></i>
             <div class="dcard-about">Taom turlari</div>
         </div>
-        <div class="col-lg-3  col-10 dcard btn btn-secondary m-4">
+        <div class="col-lg-3  col-10 dcard btn btn-secondary m-4" style="background-color:cornflowerblue;">
             <div class="dcard-decimal"
                  style="font-size: 2em; line-height: 70px; vertical-align: bottom;">{{ dashboard_info.trading }}</div>
             <canvas id="barChart" style="position:absolute; top:10px; right: -50px"></canvas>
@@ -105,12 +105,13 @@ var data = {
         {
             fill: true,
             backgroundColor: [
-                'red',
-                'white'],
-            data: [5, 95],
+                'tomato',
+                'mediumseagreen', 
+                'yellow'],
+            data: [5, 70, 25],
 // Notice the borderColor 
-            borderColor:    ['black', 'black'],
-            borderWidth: [2,2]
+            borderColor:    ['black', 'black', 'black'],
+            borderWidth: [0.9,0.9,0.9]
         }
     ]
 };
