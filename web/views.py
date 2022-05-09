@@ -656,7 +656,7 @@ def add_item(request, pk_room, pk_table):
             category_models = Category.objects.filter(is_available=True)
             return render(request, 'waiter/add_item.html',
                           {"foods": food_models, 'categories': category_models, 'table': table_model,
-                           'room': room_model})
+                           'room': room_model, 'tax': get_tax()})
         return redirect('my_orders')
     else:
         return redirect('dashboard')
