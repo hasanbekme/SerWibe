@@ -49,5 +49,6 @@ urlpatterns = [
     path('my_profile', views.my_profile, name='my_profile'),
     path('print_receipt/<int:order_id>/', views.print_order_receipt, name='print_order_receipt'),
     path('pickup', views.pickup, name='pickup'),
+    path('pickup/add/', views.pickup_add, name='pickup_add'),
 
 ]

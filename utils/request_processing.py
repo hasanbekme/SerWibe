@@ -39,3 +39,16 @@ def order_items_add(post_data: dict, table_model: Table, waiter: Worker):
             if food.category.printing_required:
                 printer_order_item(new_order_item)
     current_order.save()
+
+
+def pickup_items_add(post_data: dict, staff: Worker):
+    new_order = Order.objects.create(waiter=staff)
+    food_objects = Food.objects.filter(is_available=True, category__is_available=True)
+    for food in food_objects:
+        quantity = post_data[str(food.id)]
+        if quantity != '':
+            new_order_item = OrderItem.objects.create(order=new_order, meal=food, quantity=int(quantity))
+            new_order_item.save()
+            if food.category.printing_required:
+                printer_order_item(new_order_item)
+    new_order.save()

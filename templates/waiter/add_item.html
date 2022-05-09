@@ -4,7 +4,7 @@
         <a class="btn btn-light text-danger p-1 " href="/room">
             <i class="fa fa-home" style="font-size:3em"></i>
         </a>
-        <a class="btn btn-light ml-3 topmenu-room"  href="{% url 'table' pk=room.pk %}">
+        <a class="btn btn-light ml-3 topmenu-room" href="{% url 'table' pk=room.pk %}">
             <div class="h2 text-primary topmenu-room-span" id="roomname" style="line-height:45px">{{ room.title }}</div>
         </a>
         <a class="btn btn-light  p-1 ml-3" href="#">
@@ -12,7 +12,7 @@
                   style="height: 34px; display: inline-block; font-size: 1.7em;  margin-top: 6px;">№{{ table.number }}</span>
         </a>
     </div>
-    <div class="container row p-0 pl-2 mb-2 text-center asdff"  style="position: fixed; top:68px; z-index: 1; left: 5%">
+    <div class="container row p-0 pl-2 mb-2 text-center asdff" style="position: fixed; top:68px; z-index: 1; left: 5%">
         <label class="col-2 btn btn-danger ml-2" style="padding:6.8px; border-radius: 5px 0 0 5px; z-index: 2;"
                for="searfilter" onclick="searchactive()">
             <i class="fa fa-search" id="searchorfilter"></i>
@@ -68,7 +68,8 @@
                                 <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
                                 </div>
                             </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
+                            <span id="{{ food.id }}p"
+                                  style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
                                   class="text-danger">{{ food.price }} so`m</span>
                         </div>
                     {% endfor %}
@@ -78,10 +79,11 @@
         </main>
         <div class="menu-food">
             <a href="{% url 'table' pk=room.pk %}" class="left"><i class="fa fa-arrow-left"
-                                                                         aria-hidden="true"></i></a>
+                                                                   aria-hidden="true"></i></a>
             <a href="{% url 'table' pk=room.pk %}" style="padding:0" class="centered" id="centered"></a>
 
-            <button type="submit" style="float: right; width: 66%; height: 55px; background-color: white; border:none;" class="h4 font-weight-bold text-danger">
+            <button type="submit" style="float: right; width: 66%; height: 55px; background-color: white; border:none;"
+                    class="h4 font-weight-bold text-danger">
                 <span id="allsumm">0</span> so`m
                 <i class="fa fa-check" aria-hidden="true"></i>
             </button>
@@ -207,21 +209,20 @@
 
     <script type="text/javascript">
 
-        function calculateAll(){
+        function calculateAll() {
             var allsumm = 0;
             var klt = 0;
             var limites = document.getElementsByClassName("limit");
-            for (i = 0; i < limites.length; i++){
-                klt = document.getElementById(limites[i].id+"p").innerHTML.slice(0, -4);
-                allsumm+=parseInt(klt)*limites[i].value;
+            for (var i = 0; i < limites.length; i++) {
+                klt = document.getElementById(limites[i].id + "p").innerHTML.slice(0, -4);
+                allsumm += parseInt(parseInt(klt) * limites[i].value * (1 + {{ tax }} / 100));
             }
-            document.getElementById("allsumm").innerHTML=allsumm;
-            if (allsumm==0){
+            document.getElementById("allsumm").innerHTML = allsumm;
+            if (allsumm === 0) {
                 document.getElementById("centered").style.width = "";
                 document.getElementById("centered").style.boxShadow = "";
                 document.getElementById("centered").style.marginLeft = "";
-            }
-            else{
+            } else {
                 changer();
             }
         }

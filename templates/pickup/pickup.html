@@ -22,15 +22,11 @@
                 <td><a href="{% url 'order_view' pk=order.id %}">
                     <button type="button" class="btn btn-info"><i class="fa fa-eye"></i> Tahlil</button>
                 </a></td>
-                <td><a href="{% url 'order_complete' pk=order.pk %}">
-                    <button type="button" class="btn btn-warning"><i class="fa fa-credit-card"></i> Tugatish
-                    </button>
-                </a></td>
-        </tr>
+            </tr>
         {% endfor %}
 
     </table>
-    <a href="#" class="pickup-add" style="">
+    <a href="{% url 'pickup_add' %}" class="pickup-add" style="">
         <i class="fa fa-plus" style="color: white; font-size:2em; "></i>
     </a>
 {% endblock %}

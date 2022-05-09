@@ -75,7 +75,7 @@ class Table(models.Model):
 
 class Category(models.Model):
     title = models.CharField(max_length=25, verbose_name="Nomi")
-    image = models.ImageField(verbose_name="Rasmi", upload_to="categories/", null=True)
+    image = models.ImageField(verbose_name="Rasmi", upload_to="categories/", null=True, blank=True)
     is_available = models.BooleanField(default=True)
     printing_required = models.BooleanField(default=False)
     printer = models.CharField(max_length=250, verbose_name="Printer", default=win32print.GetDefaultPrinter(),
@@ -93,7 +93,7 @@ class Category(models.Model):
 class Food(models.Model):
     title = models.CharField(max_length=25, verbose_name="Nomi")
     category = models.ForeignKey(to=Category, on_delete=models.CASCADE)
-    image = models.ImageField(verbose_name="Rasmi", upload_to="Foods/", null=True)
+    image = models.ImageField(verbose_name="Rasmi", upload_to="Foods/", null=True, blank=True)
     price = models.IntegerField(verbose_name="Narxi (so'm)")
     is_available = models.BooleanField(default=True)
 

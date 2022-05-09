@@ -723,6 +723,26 @@ def my_profile(request):
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-
+@login_required(login_url='/')
 def pickup(request):
-    return render(request, 'pickup/pickup.html')
+    if is_admin(request):
+        order_models = Order.objects.filter(is_completed=False, type="pickup")
+        return render(request, 'pickup/pickup.html', {"orders": order_models})
+    else:
+        return redirect("room")
+
+
+@login_required(login_url='/')
+def pickup_add(request):
+    if is_admin(request):
+        staff = Worker.objects.get(user=request.user)
+        if request.method == 'POST':
+            order_items_add(request.POST, staff)
+        else:
+            food_models = Food.objects.filter(is_available=True, category__is_available=True)
+            category_models = Category.objects.filter(is_available=True)
+            return render(request, 'pickup/pickup_add.html',
+                          {"foods": food_models, 'categories': category_models})
+        return redirect('pickup')
+    else:
+        return redirect('room')
