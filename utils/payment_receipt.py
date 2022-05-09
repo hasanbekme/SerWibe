@@ -33,12 +33,13 @@ def print_receipt(order: Order):
     doc.aligned_text("Buyurtma raqami:", y, align="left")
     doc.aligned_text('#' + str(order.id), y, align="right")
     y += 300
-    doc.aligned_text("Xona:", y, align="left")
-    doc.aligned_text(str(order.table.room.title), y, align="right")
-    y += 300
-    doc.aligned_text("Stol raqami:", y, align="left")
-    doc.aligned_text(str(order.table.number), y, align="right")
-    y += 300
+    if order.order_type == 'table':
+        doc.aligned_text("Xona:", y, align="left")
+        doc.aligned_text(str(order.table.room.title), y, align="right")
+        y += 300
+        doc.aligned_text("Stol raqami:", y, align="left")
+        doc.aligned_text(str(order.table.number), y, align="right")
+        y += 300
     doc.aligned_text("Offitsant:", y, align="left")
     doc.aligned_text(str(order.waiter.full_name), y, align="right")
     y += 200
@@ -94,8 +95,9 @@ def printer_order_item(order_item: OrderItem):
     y += 300
     doc.aligned_text(f"Buyurtma:   #{order_item.order.id}", y=y, align="center")
     y += 300
-    doc.aligned_text(f"Stol:   {order_item.order.table.room.title}, {order_item.order.table.number}", y=y, align="center")
-    y += 300
+    if order_item.order.order_type == 'table':
+        doc.aligned_text(f"Stol:   {order_item.order.table.room.title}, {order_item.order.table.number}", y=y, align="center")
+        y += 300
     doc.aligned_text(f"Offitsant:   {str(order_item.order.waiter.full_name)}", y=y, align="center")
     y += 300
     doc.aligned_text("  " + order_item.meal.title, y=y, align="left")

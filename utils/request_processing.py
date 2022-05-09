@@ -42,7 +42,7 @@ def order_items_add(post_data: dict, table_model: Table, waiter: Worker):
 
 
 def pickup_items_add(post_data: dict, staff: Worker):
-    new_order = Order.objects.create(waiter=staff)
+    new_order = Order.objects.create(waiter=staff, order_type='pickup')
     food_objects = Food.objects.filter(is_available=True, category__is_available=True)
     for food in food_objects:
         quantity = post_data[str(food.id)]

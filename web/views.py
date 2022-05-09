@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from utils.data_processing import get_trading_table, food_trading_data, get_dashboard_info, get_sales_graph_data
 from utils.date_config import get_start_of_week
 from utils.payment_receipt import print_receipt
-from utils.request_processing import get_user, is_waiter, is_admin
+from utils.request_processing import get_user, is_waiter, is_admin, pickup_items_add
 from utils.request_processing import order_items_add
 from utils.system_settings import get_tax
 from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm, TableForm, ExpenseReasonForm, ExpenseForm, \
@@ -78,7 +78,7 @@ def dashboard(request):
 @login_required(login_url='/')
 def orders(request):
     if is_admin(request):
-        order_models = Order.objects.filter(is_completed=False)
+        order_models = Order.objects.filter(is_completed=False, order_type='table')
         return render(request, 'orders/orders.html', context={'orders': order_models})
     else:
         return redirect('room')
@@ -737,7 +737,7 @@ def pickup_add(request):
     if is_admin(request):
         staff = Worker.objects.get(user=request.user)
         if request.method == 'POST':
-            order_items_add(request.POST, staff)
+            pickup_items_add(request.POST, staff)
         else:
             food_models = Food.objects.filter(is_available=True, category__is_available=True)
             category_models = Category.objects.filter(is_available=True)

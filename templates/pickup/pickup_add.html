@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container row p-0 mt-2 mb-2 text-center"  style="position: relative; z-index: 1; ">
+    <div class="container row p-0 mt-2 mb-2 text-center" style="position: relative; z-index: 1; ">
         <label class="col-2 btn btn-primary" style="padding:6.8px; border-radius: 5px 0 0 5px; z-index: 2;"
                for="searfilter" onclick="searchactive()">
             <i class="fa fa-search" id="searchorfilter"></i>
@@ -32,21 +32,27 @@
     </div>
 
 
-<form method="POST">
+    <form method="POST">
         {% csrf_token %}
         <main style="overflow-y: auto; height: 75%; position: fixed; top:80px; width: 100%; ">
             <div class="container" style="margin:0; ">
                 <div class="row" id="filtercontent">
-                    
+                    {% for food in foods %}
                         <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-5"
                              style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
                             <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
+                                {% if food.image %}
+                                    <img src="{{ food.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
+                                         alt="image">
+                                {% else %}
+                                    <img src="/static/img/default_image.png"
+                                         style="width: 70px; height: 70px; margin-top:15px"
+                                         alt="image">
+                                {% endif %}
                             </div>
                             <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
                                  style="line-height: 27px; padding: 0">
-                                HotDog
+                                {{ food.title }}
                             </div>
                             <div class="text-primary col-3 h4 font-weight-bold text-left"
                                  style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
@@ -58,305 +64,27 @@
                                 <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
                                 </div>
                             </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
+                            <span id="{{ food.id }}p"
+                                  style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
                                   class="text-danger">{{ food.price }} so`m</span>
                         </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-5"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
-                        </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-5"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
-                        </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-5"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
-                        </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-5"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
-                        </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-5"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
-                        </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-5"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
-                        </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-5"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
-                        </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-5"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
-                        </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-5"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
-                        </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-5"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
-                        </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-5"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
-                        </div>
-                    
+                    {% endfor %}
                 </div>
             </div>
         </main>
-</form>
+    <div class="menu-food">
+        <a href="#" class="left"><i class="fa fa-arrow-left"
+                                    aria-hidden="true"></i></a>
+        <a href="#" style="padding:0" class="centered" id="centered"></a>
 
+        <button type="submit" style="float: right; width: 66%; height: 55px; background-color: white; border:none;"
+                class="h4 font-weight-bold text-danger">
+            <span id="allsumm">0</span> so`m
+            <i class="fa fa-check" aria-hidden="true"></i>
+        </button>
 
-
-
-
-        <div class="menu-food">
-            <a href="#" class="left"><i class="fa fa-arrow-left"
-                                                                         aria-hidden="true"></i></a>
-            <a href="#" style="padding:0" class="centered" id="centered"></a>
-
-            <button type="submit" style="float: right; width: 66%; height: 55px; background-color: white; border:none;" class="h4 font-weight-bold text-danger">
-                <span id="allsumm">0</span> so`m
-                <i class="fa fa-check" aria-hidden="true"></i>
-            </button>
-
-        </div>
+    </div>
+    </form>
 
 
 
@@ -478,21 +206,20 @@
 
     <script type="text/javascript">
 
-        function calculateAll(){
+        function calculateAll() {
             var allsumm = 0;
             var klt = 0;
             var limites = document.getElementsByClassName("limit");
-            for (i = 0; i < limites.length; i++){
-                klt = document.getElementById(limites[i].id+"p").innerHTML.slice(0, -4);
-                allsumm+=parseInt(klt)*limites[i].value;
+            for (i = 0; i < limites.length; i++) {
+                klt = document.getElementById(limites[i].id + "p").innerHTML.slice(0, -4);
+                allsumm += parseInt(klt) * limites[i].value;
             }
-            document.getElementById("allsumm").innerHTML=allsumm;
-            if (allsumm==0){
+            document.getElementById("allsumm").innerHTML = allsumm;
+            if (allsumm == 0) {
                 document.getElementById("centered").style.width = "";
                 document.getElementById("centered").style.boxShadow = "";
                 document.getElementById("centered").style.marginLeft = "";
-            }
-            else{
+            } else {
                 changer();
             }
         }
