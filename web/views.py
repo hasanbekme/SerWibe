@@ -726,7 +726,7 @@ def my_profile(request):
 @login_required(login_url='/')
 def pickup(request):
     if is_admin(request):
-        order_models = Order.objects.filter(is_completed=False, type="pickup")
+        order_models = Order.objects.filter(is_completed=False, order_type="pickup")
         return render(request, 'pickup/pickup.html', {"orders": order_models})
     else:
         return redirect("room")
