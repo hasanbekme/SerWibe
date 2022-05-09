@@ -128,9 +128,9 @@ class Order(models.Model):
     table = models.ForeignKey(to=Table, verbose_name="Stol", on_delete=models.PROTECT, null=True)
     is_completed = models.BooleanField(default=False)
     paid_money = models.IntegerField(verbose_name="To'langan summa", null=True, blank=True)
-    payment_type = models.CharField(max_length=25, verbose_name="To'lov turi",
-                                    choices=(('cash', 'Naqd'), ('credit_card', 'Kartadan')),
-                                    default='cash')
+    cash_money = models.IntegerField(default=0)
+    credit_card = models.IntegerField(default=0)
+    debt_money = models.IntegerField(default=0)
     comment = models.TextField(blank=True)
 
     def __str__(self):

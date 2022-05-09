@@ -51,7 +51,8 @@ urlpatterns = [
     path('pickup', views.pickup, name='pickup'),
     path('pickup/add/', views.pickup_add, name='pickup_add'),
     path('pickup/<int:pk>/view', views.pickup_view, name='pickup_view'),
-    path('pickup/<int:pk>/print', views.print_pickup, name='print_pickup')
+    path('pickup/<int:pk>/print', views.print_pickup, name='print_pickup'),
+    path('pickup/<int:pk>/complete', views.complete_pickup, name='complete_pickup')
     # path('pickup/<int:pk>/complete', views.pickup_complete, name='pickup_view'),
 
 ]

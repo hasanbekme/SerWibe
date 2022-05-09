@@ -46,7 +46,7 @@
                 <td>{{ forloop.counter }}</td>
                 <td>{{ food.category.title }}</td>
                 <td>{{ food.title }}</td>
-                <td><img src="{{ food.image.url }}" style="height: 50px;" alt="image"></td>
+                <td><img src="{{ food.photo }}" style="height: 50px;" alt="image"></td>
                 <td>{{ food.total_sold }}</td>
                 <td>{{ food.total_sale }} so'm</td>
                 <td><a href="{% url 'trading_detailed_view' pk=food.pk %}">

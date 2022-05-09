@@ -92,7 +92,9 @@ class ExpenseForm(ModelForm):
 
 
 class OrderCompletionForm(Form):
-    payment_type = ChoiceField(choices=(('cash', 'Naqd'), ('credit_card', 'Kartadan')))
+    cash_money = IntegerField()
+    credit_card = IntegerField()
+    debt_money = IntegerField()
     comment = CharField(widget=Textarea, required=False)
 
     def __init__(self, *args, instance=None, **kwargs):
@@ -100,14 +102,19 @@ class OrderCompletionForm(Form):
         self.instance = instance
 
     def save(self):
-        payment_type = self.cleaned_data.get('payment_type')
+        cash_money = self.cleaned_data.get('cash_money')
+        credit_card = self.cleaned_data.get('credit_card')
+        debt_money = self.cleaned_data.get('debt_money')
         comment = self.cleaned_data.get('comment')
         self.instance: Order
         if comment is not None:
             self.instance.comment = comment
-        self.instance.payment_type = payment_type
+        self.instance.cash_money = cash_money
+        self.instance.credit_card = credit_card
+        self.instance.debt_money = debt_money
         self.instance.is_completed = True
-        self.instance.paid_money = self.instance.needed_payment
+        self.instance.paid_money = cash_money + credit_card
         self.instance.save()
-        self.instance.table.is_available = True
-        self.instance.table.save()
+        if self.instance.order_type == 'table':
+            self.instance.table.is_available = True
+            self.instance.table.save()

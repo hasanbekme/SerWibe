@@ -768,3 +768,21 @@ def print_pickup(request, pk):
         return redirect('pickup_view', pk=pk)
     else:
         return redirect('room')
+
+
+@login_required(login_url='/')
+def complete_pickup(request, pk):
+    if is_admin(request):
+        order = get_object_or_404(Order, pk=pk)
+        order_items = order.orderitem_set.all()
+        if request.method == "POST":
+            form = OrderCompletionForm(request.POST, instance=order)
+            if form.is_valid():
+                form.save()
+                return redirect('pickup')
+        else:
+            form = OrderCompletionForm()
+        return render(request, "pickup/pickup_complate.html",
+                      context={'form': form, 'order': order, 'orderitems': order_items})
+    else:
+        return redirect('room')

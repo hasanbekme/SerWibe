@@ -19,7 +19,6 @@ strartup_settings = QSettings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\
 
 
 def set_autostart(state):
-    print(state)
     if state:
         strartup_settings.setValue("SerWibe", sys.argv[0])
     else:
