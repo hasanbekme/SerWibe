@@ -1,7 +1,8 @@
 {% extends 'base2.html' %}
 {% block content %}
 
-    <div class="card m-2 text-left p-3 font-weight-bold text-dark row h5">
+<br>
+    <div class="card m-2 text-left p-3 font-weight-bold text-dark row h5  col-md-5 m-auto" >
         <div class="text-center h1 text-primary font-weight-bold">
             PROFIL
         </div>
@@ -16,17 +17,17 @@
             </div>
         </a>
     </div>
-    
-    <div class="card m-2 text-left p-3 font-weight-bold text-dark row h5">
+    <br>    
+    <div class="card m-2 text-left p-3 font-weight-bold text-dark row h5 col-md-5 m-auto mt-2">
         <div class="text-center h1 font-weight-bold btn btn-primary">
             BUGUN
         </div>
         <div class="h6">
-            <i class="fa fa-money"></i>
+            <i class="fa fa-money mr-2" ></i>
             Buyurtmalar soni: {{ orders_count }} ta
         </div>
         <div  class="h6">
-            <i class="fa fa-dollar"></i>
+            <i class="fa fa-dollar ml-0 mr-3"></i>
             Buyurtmalar narxi: {{ orders_amount }} so`m
         </div>
     </div>
