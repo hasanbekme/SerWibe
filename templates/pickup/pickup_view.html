@@ -3,7 +3,7 @@
 
     <form method="POST">
         {% csrf_token %}
-        <main style="overflow-y: auto; height: 85%; position: fixed; top:20px; width: 100%; ">
+        <main style="overflow-y: auto; height: 85%; position: fixed; top:50px; width: 100%; ">
             <div class="container" style="margin:0; ">
                 <div class="row" id="filtercontent">
                     {% for item in orderitems %}
@@ -40,6 +40,10 @@
     <a class="plussed" href="{% url 'pickup_add' %}"
        style="position:absolute; right: 22%; bottom: 90px; border-radius: 50%; background:white; color: #075295; width:50px; height:50px; padding:10px; box-shadow: 0px 0px 8px 2px #000000aa; opacity: 0.9;">
         <i class='fa fa-plus' style="font-size:2.4em"></i>
+    </a>
+    <a class="plussed2 " href=""
+       style="position:absolute; right: 39%; bottom: 90px; border-radius: 50%; background:white; color: #075295; width:50px; height:50px; padding:10px; box-shadow: 0px 0px 8px 2px #000000aa; opacity: 0.9;">
+        <i class='fa fa-trash' style="font-size:2.4em"></i>
     </a>
     <div class="menu-food">
         <a href="{% url 'pickup' %}" class="left"><i class="fa fa-arrow-left"
