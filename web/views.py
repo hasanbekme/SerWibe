@@ -13,6 +13,7 @@ from utils.date_config import get_start_of_week
 from utils.payment_receipt import print_receipt
 from utils.request_processing import get_user, is_waiter, is_admin
 from utils.request_processing import order_items_add
+from utils.system_settings import get_tax
 from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm, TableForm, ExpenseReasonForm, ExpenseForm, \
     OrderCompletionForm
 from .models import Worker, Category, Food, Room, Table, Order, Expense, ExpenseReason, OrderItem
@@ -65,7 +66,7 @@ def dashboard(request):
         mn = min(yvalues) // 2
         return render(request, 'dashboard.html',
                       {'dashboard_info': dashboard_info, 'labels': json.dumps(xvalues), 'data': json.dumps(yvalues),
-                       'mx': mx, 'mn': mn, 'date_string': json.dumps(date_string), 'user': user})
+                       'mx': mx, 'mn': mn, 'date_string': json.dumps(date_string)})
     else:
         return redirect('room')
 
@@ -88,7 +89,8 @@ def order_view(request, pk):
     if is_admin(request):
         order_model = get_object_or_404(Order, pk=pk)
         order_items = order_model.orderitem_set.all()
-        return render(request, 'orders/order_view.html', context={'order': order_model, 'orderitems': order_items})
+        return render(request, 'orders/order_view.html',
+                      context={'order': order_model, 'orderitems': order_items, 'tax': get_tax()})
     else:
         return redirect('room')
 
@@ -599,7 +601,8 @@ def archive(request):
         return render(request, "archive/archive.html",
                       context={'waiters': waiter_models, 'orders': page, 'date_string': date_string,
                                'total_sum': total_sum,
-                               'p_paginator': page})
+                               'p_paginator': page,
+                               'tax': get_tax()})
     else:
         return redirect('room')
 
@@ -716,6 +719,8 @@ def my_profile(request):
                       {'user': user, 'orders_count': order_models.count(), 'orders_amount': orders_amount})
     else:
         return redirect('dashboard')
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 
 

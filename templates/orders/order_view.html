@@ -19,6 +19,9 @@
                         <td>{{ orderitem.total_price }} so'm</td>
                     </tr>
                 {% endfor %}
+                <tr>
+                    <h4>Tax:  {{ tax }}%</h4>
+                </tr>
                 <tr class="text-danger font-weight-bold">
                     <td>Umumiy</td>
                     <td>{{ order.orderitem_set.count }} ta</td>

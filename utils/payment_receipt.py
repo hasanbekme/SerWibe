@@ -58,7 +58,7 @@ def print_receipt(order: Order):
     doc.aligned_text(border_string, y, align="center")
     y += 200
     doc.aligned_text("Umumiy summa:", y, align="left")
-    doc.aligned_text(f"{order.needed_payment} so'm", y, align="right")
+    doc.aligned_text(f"{order.without_tax} so'm", y, align="right")
     y += 300
     tax = Settings().get("tax", tp=int)
     if tax != 0:
@@ -67,7 +67,7 @@ def print_receipt(order: Order):
         y += 300
     doc.set_font(family="Arial", size=14, bold=True)
     doc.aligned_text("Jami:", y, align="left")
-    doc.aligned_text(f"{int(order.needed_payment * (1 + tax / 100))} so'm", y, align="right")
+    doc.aligned_text(f"{order.needed_payment} so'm", y, align="right")
     doc.set_font(family="Arial", size=12, bold=False)
     if Settings().get("last_message", tp=str):
         y += 500
@@ -81,24 +81,23 @@ def print_receipt(order: Order):
     y += 200
     doc.set_font(family="Arial", size=8, bold=False)
     doc.aligned_text("Created by serwibe.uz", y, align="right")
-    doc.end_document()
+    doc.end_document(y)
 
 
 def printer_order_item(order_item: OrderItem):
+    now = datetime.now()
     doc = Document(printer=order_item.meal.category.printer, width=int(Settings().get("printer_width", int) * 51))
     doc.begin_document()
     y = 0
-    doc.set_font(family="Arial", size=12, bold=True)
-    doc.aligned_text('#' + str(order_item.order.id), y=y, align="left")
+    doc.set_font(family="Segoe UI Historic", size=16, weight=900)
+    doc.aligned_text(now.strftime("%d.%m.%Y %H:%M"), y=y, align="center")
     y += 300
-    doc.set_font(family="Arial", size=12, bold=False)
-    doc.aligned_text(f"Offitsant:   {str(order_item.order.waiter.full_name)}", y=y, align="left")
+    doc.aligned_text(f"Buyurtma:   #{order_item.order.id}", y=y, align="center")
     y += 300
-    doc.aligned_text(f"Xona:   {str(order_item.order.table.room.title)}", y=y, align="left")
+    doc.aligned_text(f"Stol:   {order_item.order.table.room.title}, {order_item.order.table.number}", y=y, align="center")
     y += 300
-    doc.aligned_text(f"Stol:   {str(order_item.order.table.number)}", y=y, align="left")
+    doc.aligned_text(f"Offitsant:   {str(order_item.order.waiter.full_name)}", y=y, align="center")
     y += 300
-    doc.aligned_text(f"Buyurtma:    {str(order_item.meal.title)}", y=y, align="left")
-    y += 300
-    doc.aligned_text(f"Soni:    {str(order_item.quantity)}", y=y, align="left")
-    doc.end_document()
+    doc.aligned_text("  " + order_item.meal.title, y=y, align="left")
+    doc.aligned_text(str(order_item.quantity), y=y, align="right")
+    doc.end_document(y)

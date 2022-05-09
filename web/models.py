@@ -2,6 +2,8 @@ import win32print
 from django.contrib.auth.models import User
 from django.db import models
 
+from utils.system_settings import get_tax
+
 
 class Worker(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
@@ -107,7 +109,9 @@ class Food(models.Model):
 class Order(models.Model):
     waiter = models.ForeignKey(to=Worker, verbose_name="Offitsant", on_delete=models.PROTECT)
     created_at = models.DateTimeField(verbose_name="Sanasi", auto_now_add=True)
-    table = models.ForeignKey(to=Table, verbose_name="Stol", on_delete=models.PROTECT)
+    order_type = models.CharField(max_length=25, choices=(('table', 'Stol'), ('pickup', 'Olib ketish')),
+                                  default='table')
+    table = models.ForeignKey(to=Table, verbose_name="Stol", on_delete=models.PROTECT, null=True)
     is_completed = models.BooleanField(default=False)
     paid_money = models.IntegerField(verbose_name="To'langan summa", null=True, blank=True)
     payment_type = models.CharField(max_length=25, verbose_name="To'lov turi",
@@ -122,8 +126,19 @@ class Order(models.Model):
     def needed_payment(self):
         total = 0
         for item in self.orderitem_set.all():
-            total += item.total_price
+            total += item.paid_amount
         return total
+
+    @property
+    def without_tax(self):
+        total = 0
+        for item in self.orderitem_set.all():
+            total += item.abstract_amount
+        return total
+
+    @property
+    def tax_price(self):
+        return self.paid_money - self.without_tax
 
     @property
     def created_time(self):
@@ -140,10 +155,14 @@ class OrderItem(models.Model):
     meal = models.ForeignKey(to=Food, on_delete=models.CASCADE)
     quantity = models.IntegerField(verbose_name="Soni", default=1)
     paid_amount = models.IntegerField(null=True)
+    abstract_amount = models.IntegerField(null=True)
 
     @property
     def total_price(self):
-        return float(self.meal.price * self.quantity)
+        if self.order.order_type == 'table':
+            return int(self.meal.price * self.quantity * (1 + get_tax() / 100))
+        else:
+            return int(self.meal.price * self.quantity)
 
     def __str__(self):
         return f"{self.order.id}:{self.id}"
@@ -151,6 +170,7 @@ class OrderItem(models.Model):
     def save(self, *args, **kwargs):
         super(OrderItem, self).save()
         self.paid_amount = self.total_price
+        self.abstract_amount = int(self.meal.price * self.quantity)
 
     class Meta:
         ordering = ['-id']

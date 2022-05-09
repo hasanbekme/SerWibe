@@ -29,16 +29,23 @@ class Document:
         self.dc.StartPage()
         self.dc.SetMapMode(win32con.MM_TWIPS)
 
-    def end_document(self):
-        win32print.WritePrinter(win32print.OpenPrinter(self.printer), b'\x1dV\x00')
+    def end_document(self, y):
+        y += 400
+        self.aligned_text(".", y, 'center')
         self.dc.EndPage()
         self.dc.EndDoc()
-        self.dc.DeleteDC()
+        printer = win32print.OpenPrinter(self.printer)
+        win32print.StartDocPrinter(
+            printer, 1, ("Paper cut print", None, "raw"))
+        win32print.WritePrinter(printer, b'\x1dV\x01')
+        win32print.EndDocPrinter(printer)
+        win32print.ClosePrinter(printer)
 
-    def set_font(self, family, size, bold=None):
-        weight = 400
-        if bold:
-            weight = 700
+    def set_font(self, family, size, bold=None, weight=None):
+        if weight is None:
+            weight = 400
+            if bold:
+                weight = 700
         self.font = win32ui.CreateFont({
             "name": family,
             "height": size * scale_factor,

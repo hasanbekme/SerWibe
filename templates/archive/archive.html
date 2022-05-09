@@ -34,9 +34,12 @@
                     </div>
                 </div>
             </td>
+            <td class="bg-primary text-white">Turi</td>
             <td class="bg-primary text-white">Olingan vaqt</td>
             <td class="bg-primary text-white">Xona</td>
             <td class="bg-primary text-white">Stol</td>
+            <td class="bg-primary text-white">Summa</td>
+            <td class="bg-primary text-white">Tax ({{ tax }}%)</td>
             <td class="bg-primary text-white">Umumiy summa</td>
             <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0">Tahlil</td>
         </tr>
@@ -46,10 +49,17 @@
                 <td>{{ forloop.counter }}</td>
                 <td>#{{ order.id }}</td>
                 <td>{{ order.waiter.full_name }}</td>
+                {% if order.order_type == 'table' %}
+                    <td>Shu yerda</td>
+                {% else %}
+                    <td>Olib ketish</td>
+                {% endif %}
                 <td>{{ order.created_time }}</td>
                 <td>{{ order.table.room.title }}</td>
                 <td>{{ order.table.number }}</td>
-                <td>{{ order.needed_payment }}</td>
+                <td>{{ order.without_tax }}</td>
+                <td>{{ order.tax_price }}</td>
+                <td>{{ order.paid_money }} so'm</td>
                 <td><a href="{% url 'archive_order_view' pk=order.id %}">
                     <button type="button" class="btn btn-info"><i class="fa fa-eye"></i> Tahlil</button>
                 </a></td>
