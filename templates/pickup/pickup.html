@@ -19,7 +19,7 @@
                 <td>{{ order.waiter.full_name }}</td>
                 <td>{{ order.created_time }}</td>
                 <td>{{ order.needed_payment }} so'm</td>
-                <td><a href="{% url 'order_view' pk=order.id %}">
+                <td><a href="{% url 'pickup_view' pk=order.id %}">
                     <button type="button" class="btn btn-info"><i class="fa fa-eye"></i> Tahlil</button>
                 </a></td>
                 <td><a href="{% url 'order_view' pk=order.id %}">

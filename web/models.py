@@ -84,6 +84,13 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def photo(self):
+        if self.image:
+            return self.image.url
+        else:
+            return "/static/img/default_image.png"
+
     class Meta:
         ordering = ['title']
         verbose_name = 'Kategoriya'
@@ -99,6 +106,13 @@ class Food(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def photo(self):
+        if self.image:
+            return self.image.url
+        else:
+            return "/static/img/default_image.png"
 
     class Meta:
         ordering = ['title']

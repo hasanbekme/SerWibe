@@ -24,7 +24,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 {% for category in categories %}
                     <a class="dropdown-item" onclick="filterFunction('{{ category.title }}')"><img
-                            src="{{ category.image.url }}" style="width:25px; height:25px"
+                            src="{{ category.photo }}" style="width:25px; height:25px"
                             alt="category_image"> {{ category.title }}</a>
                 {% endfor %}
             </div>
@@ -41,14 +41,9 @@
                         <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-5"
                              style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
                             <div class="col-3 p-0">
-                                {% if food.image %}
-                                    <img src="{{ food.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
-                                         alt="image">
-                                {% else %}
-                                    <img src="/static/img/default_image.png"
-                                         style="width: 70px; height: 70px; margin-top:15px"
-                                         alt="image">
-                                {% endif %}
+                                <img src="{{ food.photo }}"
+                                     style="width: 70px; height: 70px; margin-top:15px"
+                                     alt="image">
                             </div>
                             <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
                                  style="line-height: 27px; padding: 0">

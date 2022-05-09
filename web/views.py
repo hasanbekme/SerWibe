@@ -746,3 +746,25 @@ def pickup_add(request):
         return redirect('pickup')
     else:
         return redirect('room')
+
+
+@login_required(login_url='/')
+def pickup_view(request, pk):
+    if is_admin(request):
+        order_model = get_object_or_404(Order, pk=pk)
+        return render(request, 'pickup/pickup_view.html',
+                      {'orderitems': order_model.orderitem_set.all(),
+                       'order': order_model})
+    else:
+        return redirect('room')
+
+
+@login_required(login_url='/')
+def print_pickup(request, pk):
+    if is_admin(request):
+        order_model = get_object_or_404(Order, pk=pk)
+        print(order_model)
+        print_receipt(order_model)
+        return redirect('pickup_view', pk=pk)
+    else:
+        return redirect('room')
