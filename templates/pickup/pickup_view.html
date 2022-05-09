@@ -1,341 +1,257 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container row p-0 mt-2 mb-2 text-center"  style="position: relative; z-index: 1; ">
-        <label class="col-2 btn btn-primary" style="padding:6.8px; border-radius: 5px 0 0 5px; z-index: 2;"
-               for="searfilter" onclick="searchactive()">
-            <i class="fa fa-search" id="searchorfilter"></i>
-        </label>
-        <input id="searfilter" placeholder="Qidirish" type="search" class="btn border"
-               style="display: none; background-color: white; position:absolute; left: 16.6%; z-index: 1; text-align: left; width:  83.4%;"
-               onkeyup="searchFunction()" onmousemove="searchFunction()">
-        <button id="searchreset" type="button" class="btn btn-primary"
-                style="position:absolute; right:0px; transform:scale(1.05); z-index: 1"
-                onclick="filterFunction(''); document.getElementById('searfilter').value='';"><i
-                class="fa fa-close"></i></button>
-        <div class="dropdown col-10 p-0 ">
-            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false"
-                    style="width: 100%; border-radius: 0 5px 5px 0; font-weight: 800; color:var(--primary); text-align:left; border:2px solid gray;">
-                <i class="fa fa-filter"></i><span id="catname"> Kategoriya</span>
-                <button id="filterreset" type="button" class="btn btn-primary"
-                        style="position:absolute; right:0px; transform:scale(1.05);" onclick="filterFunction('');"><i
-                        class="fa fa-close"></i></button>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {% for category in categories %}
-                    <a class="dropdown-item" onclick="filterFunction('{{ category.title }}')"><img
-                            src="{{ category.image.url }}" style="width:25px; height:25px"
-                            alt="category_image"> {{ category.title }}</a>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-
 
 <form method="POST">
         {% csrf_token %}
-        <main style="overflow-y: auto; height: 75%; position: fixed; top:80px; width: 100%; ">
+        <main style="overflow-y: auto; height: 85%; position: fixed; top:20px; width: 100%; ">
             <div class="container" style="margin:0; ">
                 <div class="row" id="filtercontent">
                     
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-2 m-auto"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
+                    <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
+                         style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
+                        <div class="col-3 p-0">
+                            <img src="{{ item.meal.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
+                                 alt="image">
                         </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-2 m-auto"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
+                        <div class="text-primary mt-3 col-9 h4 font-weight-bold text-left ml-2 filtercontentclass"
+                             style="line-height: 27px; padding: 0">
+                            {{ item.meal.title }}
                         </div>
+                        <a href="#" type="button" class="fa fa-trash btn btn-danger"
+                           style="position: absolute; right:2px; top:2px;"></a>
+                        <span id="{{ item.meal.id }}p"
+                              style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
+                              class="text-danger"><span class="">{{ item.quantity }} ta</span> <span
+                                class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
+                    </div>
                     
                     
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-2 m-auto"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
+                    <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
+                         style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
+                        <div class="col-3 p-0">
+                            <img src="{{ item.meal.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
+                                 alt="image">
                         </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-2 m-auto"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
+                        <div class="text-primary mt-3 col-9 h4 font-weight-bold text-left ml-2 filtercontentclass"
+                             style="line-height: 27px; padding: 0">
+                            {{ item.meal.title }}
                         </div>
+                        <a href="#" type="button" class="fa fa-trash btn btn-danger"
+                           style="position: absolute; right:2px; top:2px;"></a>
+                        <span id="{{ item.meal.id }}p"
+                              style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
+                              class="text-danger"><span class="">{{ item.quantity }} ta</span> <span
+                                class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
+                    </div>
                     
                     
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-2 m-auto"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
+                    <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
+                         style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
+                        <div class="col-3 p-0">
+                            <img src="{{ item.meal.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
+                                 alt="image">
                         </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-2 m-auto"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
+                        <div class="text-primary mt-3 col-9 h4 font-weight-bold text-left ml-2 filtercontentclass"
+                             style="line-height: 27px; padding: 0">
+                            {{ item.meal.title }}
                         </div>
+                        <a href="#" type="button" class="fa fa-trash btn btn-danger"
+                           style="position: absolute; right:2px; top:2px;"></a>
+                        <span id="{{ item.meal.id }}p"
+                              style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
+                              class="text-danger"><span class="">{{ item.quantity }} ta</span> <span
+                                class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
+                    </div>
                     
                     
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-2 m-auto"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
+                    <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
+                         style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
+                        <div class="col-3 p-0">
+                            <img src="{{ item.meal.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
+                                 alt="image">
                         </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-2 m-auto"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
+                        <div class="text-primary mt-3 col-9 h4 font-weight-bold text-left ml-2 filtercontentclass"
+                             style="line-height: 27px; padding: 0">
+                            {{ item.meal.title }}
                         </div>
+                        <a href="#" type="button" class="fa fa-trash btn btn-danger"
+                           style="position: absolute; right:2px; top:2px;"></a>
+                        <span id="{{ item.meal.id }}p"
+                              style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
+                              class="text-danger"><span class="">{{ item.quantity }} ta</span> <span
+                                class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
+                    </div>
                     
                     
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-2 m-auto"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
+                    <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
+                         style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
+                        <div class="col-3 p-0">
+                            <img src="{{ item.meal.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
+                                 alt="image">
                         </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-2 m-auto"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
+                        <div class="text-primary mt-3 col-9 h4 font-weight-bold text-left ml-2 filtercontentclass"
+                             style="line-height: 27px; padding: 0">
+                            {{ item.meal.title }}
                         </div>
+                        <a href="#" type="button" class="fa fa-trash btn btn-danger"
+                           style="position: absolute; right:2px; top:2px;"></a>
+                        <span id="{{ item.meal.id }}p"
+                              style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
+                              class="text-danger"><span class="">{{ item.quantity }} ta</span> <span
+                                class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
+                    </div>
                     
                     
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-2 m-auto"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
+                    <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
+                         style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
+                        <div class="col-3 p-0">
+                            <img src="{{ item.meal.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
+                                 alt="image">
                         </div>
-                    
-                    
-                        <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row mr-2 m-auto"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="/static/img/hotdog.png" style="width: 70px; height: 70px; margin-top:15px"
-                                     alt="image">
-                            </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
-                                HotDog
-                            </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
-                                       id="{{ food.id }}">
-
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
-                                </div>
-                            </div>
-                            <span id="{{ food.id }}p" style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
+                        <div class="text-primary mt-3 col-9 h4 font-weight-bold text-left ml-2 filtercontentclass"
+                             style="line-height: 27px; padding: 0">
+                            {{ item.meal.title }}
                         </div>
+                        <a href="#" type="button" class="fa fa-trash btn btn-danger"
+                           style="position: absolute; right:2px; top:2px;"></a>
+                        <span id="{{ item.meal.id }}p"
+                              style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
+                              class="text-danger"><span class="">{{ item.quantity }} ta</span> <span
+                                class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
+                    </div>
+                    
+                    
+                    <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
+                         style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
+                        <div class="col-3 p-0">
+                            <img src="{{ item.meal.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
+                                 alt="image">
+                        </div>
+                        <div class="text-primary mt-3 col-9 h4 font-weight-bold text-left ml-2 filtercontentclass"
+                             style="line-height: 27px; padding: 0">
+                            {{ item.meal.title }}
+                        </div>
+                        <a href="#" type="button" class="fa fa-trash btn btn-danger"
+                           style="position: absolute; right:2px; top:2px;"></a>
+                        <span id="{{ item.meal.id }}p"
+                              style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
+                              class="text-danger"><span class="">{{ item.quantity }} ta</span> <span
+                                class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
+                    </div>
+                    
+                    
+                    <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
+                         style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
+                        <div class="col-3 p-0">
+                            <img src="{{ item.meal.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
+                                 alt="image">
+                        </div>
+                        <div class="text-primary mt-3 col-9 h4 font-weight-bold text-left ml-2 filtercontentclass"
+                             style="line-height: 27px; padding: 0">
+                            {{ item.meal.title }}
+                        </div>
+                        <a href="#" type="button" class="fa fa-trash btn btn-danger"
+                           style="position: absolute; right:2px; top:2px;"></a>
+                        <span id="{{ item.meal.id }}p"
+                              style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
+                              class="text-danger"><span class="">{{ item.quantity }} ta</span> <span
+                                class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
+                    </div>
+                    
+                    
+                    <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
+                         style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
+                        <div class="col-3 p-0">
+                            <img src="{{ item.meal.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
+                                 alt="image">
+                        </div>
+                        <div class="text-primary mt-3 col-9 h4 font-weight-bold text-left ml-2 filtercontentclass"
+                             style="line-height: 27px; padding: 0">
+                            {{ item.meal.title }}
+                        </div>
+                        <a href="#" type="button" class="fa fa-trash btn btn-danger"
+                           style="position: absolute; right:2px; top:2px;"></a>
+                        <span id="{{ item.meal.id }}p"
+                              style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
+                              class="text-danger"><span class="">{{ item.quantity }} ta</span> <span
+                                class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
+                    </div>
+                    
+                    
+                    <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
+                         style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
+                        <div class="col-3 p-0">
+                            <img src="{{ item.meal.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
+                                 alt="image">
+                        </div>
+                        <div class="text-primary mt-3 col-9 h4 font-weight-bold text-left ml-2 filtercontentclass"
+                             style="line-height: 27px; padding: 0">
+                            {{ item.meal.title }}
+                        </div>
+                        <a href="#" type="button" class="fa fa-trash btn btn-danger"
+                           style="position: absolute; right:2px; top:2px;"></a>
+                        <span id="{{ item.meal.id }}p"
+                              style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
+                              class="text-danger"><span class="">{{ item.quantity }} ta</span> <span
+                                class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
+                    </div>
+                    
+                    
+                    <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
+                         style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
+                        <div class="col-3 p-0">
+                            <img src="{{ item.meal.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
+                                 alt="image">
+                        </div>
+                        <div class="text-primary mt-3 col-9 h4 font-weight-bold text-left ml-2 filtercontentclass"
+                             style="line-height: 27px; padding: 0">
+                            {{ item.meal.title }}
+                        </div>
+                        <a href="#" type="button" class="fa fa-trash btn btn-danger"
+                           style="position: absolute; right:2px; top:2px;"></a>
+                        <span id="{{ item.meal.id }}p"
+                              style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
+                              class="text-danger"><span class="">{{ item.quantity }} ta</span> <span
+                                class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
+                    </div>
+                    
+                    
+                    <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
+                         style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
+                        <div class="col-3 p-0">
+                            <img src="{{ item.meal.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
+                                 alt="image">
+                        </div>
+                        <div class="text-primary mt-3 col-9 h4 font-weight-bold text-left ml-2 filtercontentclass"
+                             style="line-height: 27px; padding: 0">
+                            {{ item.meal.title }}
+                        </div>
+                        <a href="#" type="button" class="fa fa-trash btn btn-danger"
+                           style="position: absolute; right:2px; top:2px;"></a>
+                        <span id="{{ item.meal.id }}p"
+                              style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
+                              class="text-danger"><span class="">{{ item.quantity }} ta</span> <span
+                                class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
+                    </div>
+                    
+                    
+                    <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
+                         style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
+                        <div class="col-3 p-0">
+                            <img src="{{ item.meal.image.url }}" style="width: 70px; height: 70px; margin-top:15px"
+                                 alt="image">
+                        </div>
+                        <div class="text-primary mt-3 col-9 h4 font-weight-bold text-left ml-2 filtercontentclass"
+                             style="line-height: 27px; padding: 0">
+                            {{ item.meal.title }}
+                        </div>
+                        <a href="#" type="button" class="fa fa-trash btn btn-danger"
+                           style="position: absolute; right:2px; top:2px;"></a>
+                        <span id="{{ item.meal.id }}p"
+                              style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
+                              class="text-danger"><span class="">{{ item.quantity }} ta</span> <span
+                                class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
+                    </div>
                     
                 </div>
             </div>
@@ -475,42 +391,18 @@
             document.getElementById("searchreset").style.display = "block"
         }
     </script>
-
     <script type="text/javascript">
-
-        function calculateAll(){
-            var allsumm = 0;
-            var klt = 0;
-            var limites = document.getElementsByClassName("limit");
-            for (i = 0; i < limites.length; i++){
-                klt = document.getElementById(limites[i].id+"p").innerHTML.slice(0, -4);
-                allsumm+=parseInt(klt)*limites[i].value;
-            }
-            document.getElementById("allsumm").innerHTML=allsumm;
-            if (allsumm==0){
-                document.getElementById("centered").style.width = "";
-                document.getElementById("centered").style.boxShadow = "";
-                document.getElementById("centered").style.marginLeft = "";
-            }
-            else{
-                changer();
-            }
+        function delay(time) {
+            return new Promise(resolve => setTimeout(resolve, time));
         }
 
-        function adding(aer) {
-            changer();
-            document.getElementById(aer).value -= -1;
-            calculateAll()
+
+        function changer() {
+            document.getElementById("centered").style.width = "0px";
+            document.getElementById("centered").style.boxShadow = "4px 0 4px 1px #000000aa";
+            document.getElementById("centered").style.marginLeft = "5px";
         }
 
-        function subt(aer) {
-            if (document.getElementById(aer).value - 1 > 0) {
-                document.getElementById(aer).value -= 1;
-            } else {
-                document.getElementById(aer).value = "";
-            }
-            calculateAll()
-        }
+        delay(100).then(() => changer());
     </script>
-
 {% endblock %}
