@@ -724,5 +724,5 @@ def my_profile(request):
 # ----------------------------------------------------------------------------------------------------------------------
 
 
-def takeaway(request):
-    return render(request, 'takeaway.html')
+def pickup(request):
+    return render(request, 'pickup/pickup.html')

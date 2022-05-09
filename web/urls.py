@@ -48,6 +48,6 @@ urlpatterns = [
     path('my_orders', views.my_orders, name='my_orders'),
     path('my_profile', views.my_profile, name='my_profile'),
     path('print_receipt/<int:order_id>/', views.print_order_receipt, name='print_order_receipt'),
-    path('takeaway', views.takeaway, name='takeaway'),
+    path('pickup', views.pickup, name='pickup'),
 
 ]
