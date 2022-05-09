@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+<div style="position:absolute; right:0px; top: 0px">{{ user.full_name }}</div>
     <div class="row">
 
         <div class="col-lg-3  col-10 dcard btn btn-primary m-4">
@@ -110,7 +111,7 @@ var data = {
                 'yellow'],
             data: [5, 70, 25],
 // Notice the borderColor 
-            borderColor:    ['black', 'black', 'black'],
+            borderColor:    ['white', 'white', 'white'],
             borderWidth: [0.9,0.9,0.9]
         }
     ]

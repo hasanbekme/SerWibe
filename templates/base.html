@@ -189,25 +189,21 @@
         #id_comment {
             height: 75px;
         }
-
         .tableab td {
             padding: 0;
             vertical-align: none;
-            border-top: none;
-        }
+            border-top: none;}
 
-        .cardproduct {
+        .cardproduct{
             height: 100px;
         }
-
-        .addandsubt {
+        .addandsubt{
             width: 38px;
             height: 38px;
             position: relative;
             margin: 2px;
 
         }
-
         .addandsubt > span {
             font-size: 2em;
             position: absolute;
@@ -215,13 +211,11 @@
             left: 8px;
             font-weight: 600;
         }
-
-        .limit {
+        .limit{
             margin: 2px;
             width: 38px;
         }
-
-        .menu-food {
+        .menu-food{
             position: absolute;
             bottom: 20px;
             background: white;
@@ -234,21 +228,18 @@
             text-align: left;
             height: 55px;
         }
-
         .menu-food > a {
             padding: 1px 15px;
             border: none;
         }
-
-        .menu-food > a > i {
+        .menu-food > a >i{
             padding: 15px;
             font-size: 2em;
             border-radius: 15px;
         }
-
-        .menu-food > .left {
-            background-color: #075295;
-            height: 100%;
+        .menu-food > .left{
+            background-color:#075295;
+            height:100%;
             transform: scale(1.15);
             box-shadow: -1px 0px 5px 1px #000000aa;
             display: inline-block;
@@ -256,11 +247,10 @@
             color: white;
 
         }
-
-        .menu-food > .centered {
-            background-color: #075295;
+        .menu-food > .centered{
+            background-color:#075295;
             position: absolute;
-            height: 56px;
+            height:56px;
             width: 61%;
             transform: scale(1.15);
             box-shadow: 6px 0px 4px 1px #000000aa;
@@ -271,18 +261,14 @@
 
 
         }
-
-        @media only screen and (min-width: 600px) {
-            .asdff {
-                left: 10% !important;
-            }
-
-            #centered {
+                @media only screen and (min-width: 600px) {
+            .asdff{
+                left:10%!important;     }
+            #centered{
                 width: 80%;
             }
-
-            .plussed {
-                right: 10% !important;
+            .plussed{
+                right: 10%!important;
             }
         }
     </style>
@@ -307,9 +293,8 @@
 
 
             <ul class="list-unstyled components ml-2">
-                <li><a href="{% url 'dashboard' %}"><i class="fa fa-tachometer" aria-hidden="true"></i> DASHBOARD</a>
-                </li>
-                <li><a href="{% url 'takeaway' %}"><i class="fa fa-taxi" aria-hidden="true"></i> OLIB KETISH</a></li>
+                <li><a href="{% url 'dashboard' %}"><i class="fa fa-tachometer" aria-hidden="true"></i> DASHBOARD</a></li>
+                <li><a href="{% url 'takeaway' %}"><i class="fa fa-truck" aria-hidden="true"></i> OLIB KETISH</a></li>
                 <li><a href="{% url 'orders' %}"><i class="fa fa-money" aria-hidden="true"></i> BUYURTMALAR</a></li>
                 <li><a href="{% url 'worker' %}"><i class="fa fa-user"></i> XODIMLAR</a></li>
                 <li><a href="{% url 'product' %}"><i class="fa fa-cutlery" aria-hidden="true"></i> TAOMLAR</a></li>
