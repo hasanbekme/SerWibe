@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
     <form method="POST" enctype="multipart/form-data">
-        <div class="row mt-5">
+        <div class="row mt-4">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
                 <div class="h4">Buyurtma: #{{ order.id }}
                 </div>
                 {% csrf_token %}
-                <table class="table">
+                <table class="table tableorder">
                     <tr class="bg-primary text-white">
                         <td>Nomi</td>
                         <td>Soni</td>
@@ -74,13 +74,14 @@
                     <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-check-circle"></i> Tasdiqlash
                     </button>
                 </div>
+                <span class="bottomed">25/02/2022</span>
             </div>
         </div>
     </form>
 
     <script type="text/javascript">
         var totalsumm = {{ order.needed_payment }};
-        document.getElementById('id_comment').placeholder = "Izoh";
+        document.getElementById('id_comment').placeholder = "Izoh...";
         var payment_inputs = document.getElementsByTagName("input");
         var payment_buttons = document.getElementsByTagName("buttons");
         payment_inputs[1].placeholder = "Naqt pul";
@@ -148,5 +149,6 @@
             }
             back_function()
         }
+        money_cash();
     </script>
 {% endblock %}
