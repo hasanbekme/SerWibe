@@ -786,3 +786,19 @@ def complete_pickup(request, pk):
                       context={'form': form, 'order': order, 'orderitems': order_items})
     else:
         return redirect('room')
+
+
+# @login_required(login_url='/')
+# def delete_pickup_item(request, pk_order, pk_item):
+#     if is_admin(request):
+#         pass
+#     else:
+#         return redirect('room')
+#
+#
+# @login_required(login_url='/')
+# def delete_pickup(request, pk_order):
+#     if is_admin(request):
+#         pass
+#     else:
+#         return redirect('room')

@@ -1,4 +1,5 @@
 import win32print
+from PIL import Image
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -91,6 +92,13 @@ class Category(models.Model):
         else:
             return "/static/img/default_image.png"
 
+    def save(self, *args, **kwargs):
+        super(Category, self).save(*args, **kwargs)
+        imag = Image.open(self.image.path)
+        output_size = (70, 70)
+        imag.thumbnail(output_size)
+        imag.save(self.image.path)
+
     class Meta:
         ordering = ['title']
         verbose_name = 'Kategoriya'
@@ -114,6 +122,13 @@ class Food(models.Model):
         else:
             return "/static/img/default_image.png"
 
+    def save(self, *args, **kwargs):
+        super(Food, self).save(*args, **kwargs)
+        imag = Image.open(self.image.path)
+        output_size = (70, 70)
+        imag.thumbnail(output_size)
+        imag.save(self.image.path)
+
     class Meta:
         ordering = ['title']
         verbose_name = 'Taom'
@@ -128,9 +143,9 @@ class Order(models.Model):
     table = models.ForeignKey(to=Table, verbose_name="Stol", on_delete=models.PROTECT, null=True)
     is_completed = models.BooleanField(default=False)
     paid_money = models.IntegerField(verbose_name="To'langan summa", null=True, blank=True)
-    payment_type = models.CharField(max_length=25, verbose_name="To'lov turi",
-                                    choices=(('cash', 'Naqd'), ('credit_card', 'Kartadan')),
-                                    default='cash')
+    cash_money = models.IntegerField(default=0)
+    credit_card = models.IntegerField(default=0)
+    debt_money = models.IntegerField(default=0)
     comment = models.TextField(blank=True)
 
     def __str__(self):

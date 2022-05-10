@@ -9,7 +9,7 @@ today = date.today()
 delta = timedelta(days=1)
 
 
-class FoodTrade(Food):
+class FoodTrade:
     def __init__(self, trade_data, instance, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.pk = instance.pk

@@ -26,20 +26,9 @@
                     </tr>
                 </table>
                 {{ form.comment }}
-                <div class="row pl-3 payment_type">
-
-                    <button onclick="changed(2)" id="money" type="button" class="btn m-2 btn-success col-2">
-                        <i class="fa fa-money" aria-hidden="true"></i>
-                    </button>
-                    {{ form.payment_type }}
-                    <label class="switch" style="margin-top:17px">
-                        <input type="checkbox" id="checkbox" onchange="changed()">
-                        <span class="slider"></span>
-                    </label>
-                    <button onclick="changed(1)" id="ccard" type="button" class="btn m-2 btn-secondary col-2">
-                        <i class="fa fa-credit-card" aria-hidden="true"></i>
-                    </button>
-                </div>
+                {{ form.cash_money }}
+                {{ form.credit_card }}
+                {{ form.debt_money }}
                 <div class="mr-auto">
                     <a href="{% url 'orders' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
                                                                                                   aria-hidden="true"></i>
