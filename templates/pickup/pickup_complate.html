@@ -3,7 +3,8 @@
     <form method="POST" enctype="multipart/form-data">
         <div class="row mt-4">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
-                <div class="h4">Buyurtma: #{{ order.id }}
+                <div class="h4">Buyurtma: #{{ order.id }} <span
+                        class="float-left float-sm-right float-md-right text-danger font-weight-bold">Olib Ketish</span>
                 </div>
                 {% csrf_token %}
                 <table class="table tableorder">
@@ -149,6 +150,5 @@
             }
             back_function()
         }
-        money_cash();
     </script>
 {% endblock %}

@@ -4,7 +4,7 @@
         <div class="row mt-4">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
                 <div class="h4">Buyurtma: #{{ order.id }} <span
-                        class="float-left float-sm-right float-md-right text-danger font-weight-bold">{{ order.table.room.title }}: №{{ order.table.number }}</span>
+                        class="float-left float-sm-right float-md-right text-danger">{{ order.table.room.title }}: №{{ order.table.number }}</span>
                 </div>
                 {% csrf_token %}
                 <table class="table tableorder">
@@ -20,6 +20,11 @@
                             <td>{{ orderitem.total_price }} so'm</td>
                         </tr>
                     {% endfor %}
+                    <tr class="font-weight-bold">
+                        <td>Xizmat</td>
+                        <td>10%</td>
+                        <td>{{ order.needed_payment }} so'm</td>
+                    </tr>
                     <tr class="text-danger font-weight-bold">
                         <td>Umumiy</td>
                         <td>{{ order.orderitem_set.count }} ta</td>
@@ -68,13 +73,14 @@
                 </div>
                 
                 
-                <div class="mr-auto">
+                <div class="mr-auto mb-3">
                     <a href="{% url 'orders' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
                                                                                                   aria-hidden="true"></i>
                         Bekor qilish</a>
                     <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-check-circle"></i> Tasdiqlash
                     </button>
                 </div>
+                <span class="bottomed-name">Bunyodbek Abdurazzaqov</span>
                 <span class="bottomed">25/02/2022</span>
             </div>
         </div>
@@ -150,6 +156,5 @@
             }
             back_function()
         }
-        money_cash();
     </script>
 {% endblock %}
