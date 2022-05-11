@@ -149,7 +149,7 @@ class Order(models.Model):
     cash_money = models.IntegerField(default=0)
     credit_card = models.IntegerField(default=0)
     debt_money = models.IntegerField(default=0)
-    comment = models.TextField(blank=True)
+    comment = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return str(self.id)
@@ -167,7 +167,7 @@ class Order(models.Model):
         total = 0
         for item in self.orderitem_set.all():
             total += item.paid_amount
-        if not self.table.tax_required:
+        if self.order_type == 'table' and not self.table.tax_required:
             total += self.room_service_cost
         return total
 
@@ -180,7 +180,7 @@ class Order(models.Model):
 
     @property
     def tax_price(self):
-        return self.paid_money - self.without_tax
+        return self.needed_payment - self.without_tax
 
     @property
     def created_time(self):
@@ -201,7 +201,7 @@ class OrderItem(models.Model):
 
     @property
     def total_price(self):
-        if self.order.order_type == 'table' and not self.order.table.tax_required:
+        if self.order.order_type == 'table' and self.order.table.tax_required:
             return int(self.meal.price * self.quantity * (1 + get_tax() / 100))
         else:
             return int(self.meal.price * self.quantity)

@@ -17,13 +17,13 @@
                         <tr>
                             <td>{{ orderitem.meal.title }}</td>
                             <td>{{ orderitem.quantity }} ta</td>
-                            <td>{{ orderitem.total_price }} so'm</td>
+                            <td>{{ orderitem.abstract_amount }} so'm</td>
                         </tr>
                     {% endfor %}
                     <tr class="font-weight-bold">
                         <td>Xizmat</td>
-                        <td>10%</td>
-                        <td>{{ order.needed_payment }} so'm</td>
+                        <td>{{ tax }}%</td>
+                        <td>{{ order.tax_price }} so'm</td>
                     </tr>
                     <tr class="text-danger font-weight-bold">
                         <td>Umumiy</td>
@@ -80,8 +80,8 @@
                     <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-check-circle"></i> Tasdiqlash
                     </button>
                 </div>
-                <span class="bottomed-name">Bunyodbek Abdurazzaqov</span>
-                <span class="bottomed">25/02/2022</span>
+                <span class="bottomed-name">{{ order.waiter.full_name }}</span>
+                <span class="bottomed">{{ order.created_time }}</span>
             </div>
         </div>
     </form>

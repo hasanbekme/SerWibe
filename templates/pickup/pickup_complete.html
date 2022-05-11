@@ -75,7 +75,7 @@
                     <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-check-circle"></i> Tasdiqlash
                     </button>
                 </div>
-                <span class="bottomed">25/02/2022</span>
+                <span class="bottomed">{{ order.created_time }}</span>
             </div>
         </div>
     </form>
@@ -109,7 +109,7 @@
             }
         }
         function money_cash(){
-            if (payment_inputs[2].value*1+payment_inputs[3].value*1==totalsumm){
+            if (payment_inputs[2].value*1+payment_inputs[3].value*1===totalsumm){
                 payment_inputs[1].value=totalsumm;
                 payment_inputs[2].value="";
                 payment_inputs[3].value="";
@@ -123,7 +123,7 @@
             back_function()
         }
         function credit_card(){
-            if (payment_inputs[1].value*1+payment_inputs[3].value*1==totalsumm){
+            if (payment_inputs[1].value*1+payment_inputs[3].value*1===totalsumm){
                 payment_inputs[2].value=totalsumm;
                 payment_inputs[1].value="";
                 payment_inputs[3].value="";
@@ -137,7 +137,7 @@
             back_function()
         }
         function debt(){
-            if (payment_inputs[1].value*1+payment_inputs[2].value*1==totalsumm){
+            if (payment_inputs[1].value*1+payment_inputs[2].value*1===totalsumm){
                 payment_inputs[3].value=totalsumm;
                 payment_inputs[1].value="";
                 payment_inputs[2].value="";

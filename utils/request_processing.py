@@ -25,7 +25,7 @@ def is_waiter(request):
 
 def order_items_add(post_data: dict, table_model: Table, waiter: Worker):
     if table_model.is_available:
-        current_order = Order.objects.create(waiter=waiter, table=table_model)
+        current_order = Order.objects.create(waiter=waiter,  order_type='table', table=table_model)
         table_model.is_available = False
         table_model.save()
     else:

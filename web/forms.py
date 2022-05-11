@@ -100,9 +100,9 @@ class ExpenseForm(ModelForm):
 
 
 class OrderCompletionForm(Form):
-    cash_money = IntegerField()
-    credit_card = IntegerField()
-    debt_money = IntegerField()
+    cash_money = IntegerField(required=False)
+    credit_card = IntegerField(required=False)
+    debt_money = IntegerField(required=False)
     comment = CharField(widget=Textarea, required=False)
 
     def __init__(self, *args, instance=None, **kwargs):
@@ -113,6 +113,12 @@ class OrderCompletionForm(Form):
         cash_money = self.cleaned_data.get('cash_money')
         credit_card = self.cleaned_data.get('credit_card')
         debt_money = self.cleaned_data.get('debt_money')
+        if cash_money is None:
+            cash_money = 0
+        if credit_card is None:
+            credit_card = 0
+        if debt_money is None:
+            debt_money = 0
         comment = self.cleaned_data.get('comment')
         self.instance: Order
         if comment is not None:

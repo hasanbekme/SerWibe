@@ -118,7 +118,7 @@ def complete_order(request, pk):
         else:
             form = OrderCompletionForm()
         return render(request, "orders/complete_order.html",
-                      context={'form': form, 'order': order, 'orderitems': order_items})
+                      context={'form': form, 'order': order, 'orderitems': order_items, 'tax': get_tax()})
     else:
         return redirect('room')
 
@@ -806,7 +806,7 @@ def complete_pickup(request, pk):
                 return redirect('pickup')
         else:
             form = OrderCompletionForm()
-        return render(request, "pickup/pickup_complate.html",
+        return render(request, "pickup/pickup_complete.html",
                       context={'form': form, 'order': order, 'orderitems': order_items})
     else:
         return redirect('room')
