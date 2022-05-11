@@ -7,14 +7,30 @@
                 {% csrf_token %}
                 <table>
                     <tr>
-                        <td style="text-align: right;">Xona:</td>
-                        <td class="text-info h5 font-weight-bold">{{ room.title }}</td>
+                        <td style="text-align: center ">Xona: </td>
+                        <td class="text-info h5 font-weight-bold"> {{ room.title }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;">Stol raqami:</td>
-                        <td>{{ form.number }}</td>
+                        <td style="text-align: center ">Stol raqami: </td>
+                        <td> {{ form.number }}</td>
                     </tr>
                 </table>
+
+                <div class="row pl-3 payment_type mt-3 ml-3">
+                    <button onclick="changed(2)" id="money" type="button" class="btn m-2 btn-success col-2">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </button>
+                    {{ form.payment_type }}
+                    <label class="switch" style="margin-top:17px">
+                        <input type="checkbox" id="checkbox" onchange="changed()">
+                        <span class="slider"></span>
+                    </label>
+                    <button onclick="changed(1)" id="ccard" type="button" class="btn m-2 btn-secondary col-2">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    </button>
+                    <input type="number" name="" class="mt-2" style="height: 44px;" placeholder="Soatiga(so`mda)" id="tabletype">
+                </div>
+
                 <div class="mr-auto">
                     <a href="{% url 'room_tables' room.id %}" type="button" class="btn btn-danger m-1 mt-3"><i
                             class="fa fa-times"
@@ -23,7 +39,30 @@
                     <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> Saqlash</button>
 
                 </div>
+
             </div>
         </div>
     </form>
+        <script type="text/javascript">
+        //document.getElementById("id_payment_type").style.display = "none";
+
+        function changed(pressed = 0) {
+            if ((pressed != 2 && document.getElementById("checkbox").checked) || pressed == 1) {
+                document.getElementById("checkbox").checked = true;
+                //document.getElementById("id_payment_type").value = "credit_card";
+                document.getElementById("ccard").className = "btn m-2 btn-success col-2";
+                document.getElementById("money").className = "btn m-2 btn-secondary col-2";
+                document.getElementById("tabletype").style.display = "block";
+
+            } else {
+                document.getElementById("checkbox").checked = false;
+                //document.getElementById("id_payment_type").value = "cash";
+                document.getElementById("money").className = "btn m-2 btn-success col-2";
+                document.getElementById("ccard").className = "btn m-2 btn-secondary col-2";
+                document.getElementById("tabletype").style.display = "none";
+            }
+
+        }
+        document.getElementById("tabletype").style.display = "none";
+    </script>
 {% endblock %}
