@@ -29,7 +29,6 @@
                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                     </button>
                     {{ form.service_cost }}
-                    <input type="number" name="" class="mt-2" style="height: 44px;" placeholder="Soatiga(so`mda)" id="tabletype">
                 </div>
 
                 <div class="mr-auto">
@@ -53,17 +52,18 @@
                 document.getElementById("id_tax_required").checked = true;
                 document.getElementById("ccard").className = "btn m-2 btn-success col-2";
                 document.getElementById("money").className = "btn m-2 btn-secondary col-2";
-                document.getElementById("tabletype").style.display = "block";
+                document.getElementById("id_service_cost").style.display = "block";
 
             } else {
                 document.getElementById("checkbox").checked = false;
                 document.getElementById("id_tax_required").checked = false;
                 document.getElementById("money").className = "btn m-2 btn-success col-2";
                 document.getElementById("ccard").className = "btn m-2 btn-secondary col-2";
-                document.getElementById("tabletype").style.display = "none";
+                document.getElementById("id_service_cost").style.display = "none";
             }
 
         }
-        document.getElementById("tabletype").style.display = "none";
+        document.getElementById("id_service_cost").style.display = "none";
+        document.getElementById("id_service_cost").placeholder = "Soatiga(so`mda)";
     </script>
 {% endblock %}
