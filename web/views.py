@@ -744,13 +744,30 @@ def pickup_add(request):
     if is_admin(request):
         staff = Worker.objects.get(user=request.user)
         if request.method == 'POST':
-            pickup_items_add(request.POST, staff)
+            pickup_items_add(post_data=request.POST, staff=staff)
         else:
             food_models = Food.objects.filter(is_available=True, category__is_available=True)
             category_models = Category.objects.filter(is_available=True)
             return render(request, 'pickup/pickup_add.html',
                           {"foods": food_models, 'categories': category_models})
         return redirect('pickup')
+    else:
+        return redirect('room')
+
+
+@login_required(login_url='/')
+def existed_pickup_add(request, pk):
+    if is_admin(request):
+        staff = Worker.objects.get(user=request.user)
+        pickup_model = get_object_or_404(Order, pk=pk)
+        if request.method == 'POST':
+            pickup_items_add(post_data=request.POST, staff=staff, instance=pickup_model)
+        else:
+            food_models = Food.objects.filter(is_available=True, category__is_available=True)
+            category_models = Category.objects.filter(is_available=True)
+            return render(request, 'pickup/pickup_add.html',
+                          {"foods": food_models, 'categories': category_models})
+        return redirect('pickup_view', pk=pk)
     else:
         return redirect('room')
 

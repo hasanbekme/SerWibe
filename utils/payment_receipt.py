@@ -85,7 +85,7 @@ def print_receipt(order: Order):
     doc.end_document(y)
 
 
-def printer_order_item(order_item: OrderItem):
+def printer_order_item(order_item: OrderItem, quantity: int):
     now = datetime.now()
     doc = Document(printer=order_item.meal.category.printer, width=int(Settings().get("printer_width", int) * 51))
     doc.begin_document()
@@ -101,5 +101,5 @@ def printer_order_item(order_item: OrderItem):
     doc.aligned_text(f"Offitsant:   {str(order_item.order.waiter.full_name)}", y=y, align="center")
     y += 300
     doc.aligned_text("  " + order_item.meal.title, y=y, align="left")
-    doc.aligned_text(str(order_item.quantity), y=y, align="right")
+    doc.aligned_text(str(quantity), y=y, align="right")
     doc.end_document(y)

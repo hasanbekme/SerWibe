@@ -30,25 +30,43 @@ def order_items_add(post_data: dict, table_model: Table, waiter: Worker):
         table_model.save()
     else:
         current_order = table_model.current_order
+    existing_items = current_order.orderitem_set.all()
     food_objects = Food.objects.filter(is_available=True, category__is_available=True)
     for food in food_objects:
         quantity = post_data[str(food.id)]
         if quantity != '':
-            new_order_item = OrderItem.objects.create(order=current_order, meal=food, quantity=int(quantity))
-            new_order_item.save()
+            existing_item = existing_items.filter(meal=food)
+            if existing_item.count():
+                item = existing_item.first()
+                item.quantity += int(quantity)
+                item.save()
+            else:
+                item = OrderItem.objects.create(order=current_order, meal=food, quantity=int(quantity))
+                item.save()
             if food.category.printing_required:
-                printer_order_item(new_order_item)
+                printer_order_item(item, quantity)
     current_order.save()
 
 
-def pickup_items_add(post_data: dict, staff: Worker):
-    new_order = Order.objects.create(waiter=staff, order_type='pickup')
+def pickup_items_add(post_data: dict, staff: Worker, instance=None):
+    print(instance)
+    if instance is None:
+        current_pickup = Order.objects.create(waiter=staff, order_type='pickup')
+    else:
+        current_pickup = instance
+    existing_items = current_pickup.orderitem_set.all()
     food_objects = Food.objects.filter(is_available=True, category__is_available=True)
     for food in food_objects:
         quantity = post_data[str(food.id)]
         if quantity != '':
-            new_order_item = OrderItem.objects.create(order=new_order, meal=food, quantity=int(quantity))
-            new_order_item.save()
+            existing_item = existing_items.filter(meal=food)
+            if existing_item.count():
+                item = existing_item.first()
+                item.quantity += int(quantity)
+                item.save()
+            else:
+                item = OrderItem.objects.create(order=current_pickup, meal=food, quantity=int(quantity))
+                item.save()
             if food.category.printing_required:
-                printer_order_item(new_order_item)
-    new_order.save()
+                printer_order_item(item, quantity)
+    current_pickup.save()

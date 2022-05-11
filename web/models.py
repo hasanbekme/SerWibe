@@ -1,4 +1,5 @@
-import win32print
+import datetime
+
 from PIL import Image
 from django.contrib.auth.models import User
 from django.db import models
@@ -59,6 +60,8 @@ class Room(models.Model):
 class Table(models.Model):
     number = models.IntegerField(verbose_name="Raqami")
     room = models.ForeignKey(to=Room, on_delete=models.CASCADE)
+    tax_required = models.BooleanField(default=True)
+    service_cost = models.IntegerField(null=True, blank=True)
     is_available = models.BooleanField(default=True)
 
     def __str__(self):
@@ -152,6 +155,14 @@ class Order(models.Model):
         return str(self.id)
 
     @property
+    def passed_time(self):
+        return self.created_at - datetime.datetime.now()
+
+    @property
+    def service_cost(self):
+        return (self.table.service_cost * self.passed_time.total_seconds() // 360000) * 100
+
+    @property
     def needed_payment(self):
         total = 0
         for item in self.orderitem_set.all():
@@ -189,7 +200,10 @@ class OrderItem(models.Model):
     @property
     def total_price(self):
         if self.order.order_type == 'table':
-            return int(self.meal.price * self.quantity * (1 + get_tax() / 100))
+            if self.order.table.tax_required:
+                return int(self.meal.price * self.quantity * (1 + get_tax() / 100))
+            else:
+                return int(self.meal.price * self.quantity) + self.order.service_cost
         else:
             return int(self.meal.price * self.quantity)
 
