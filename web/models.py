@@ -79,7 +79,7 @@ class Category(models.Model):
     image = models.ImageField(verbose_name="Rasmi", upload_to="categories/", null=True, blank=True)
     is_available = models.BooleanField(default=True)
     printing_required = models.BooleanField(default=False)
-    printer = models.CharField(max_length=250, verbose_name="Printer", default=win32print.GetDefaultPrinter(),
+    printer = models.CharField(max_length=250, verbose_name="Printer",
                                blank=True, null=True)
 
     def __str__(self):

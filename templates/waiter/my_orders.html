@@ -2,15 +2,8 @@
 {% block content %}
 
     <div class="topmenu">
-        <a class="btn btn-light text-danger p-1 " href="/room">
-            <i class="fa fa-home" style="font-size:3em"></i>
-        </a>
-        <a class="btn btn-light ml-3 topmenu-room" href="/room">
-            <div class="h2 text-primary topmenu-room-span" id="roomname" style="line-height:45px">Buyurtmalar</div>
-        </a>
-        <a class="btn btn-success  p-1 ml-3">
-            <span class="h2 text-light "
-                  style="height: 34px; display: inline-block; font-size: 1.7em;  margin-top: 6px; width: 50px;"> {{ orders.count }} </span>
+        <a class="btn btn-light w-75 topmenu-room">
+            <div class="h5 text-primary topmenu-room-span" id="roomname" style="line-height:45px">Mening buyurtmalar</div>
         </a>
     </div>
     <main style="overflow-y: auto; height:80%; margin-top:10px">

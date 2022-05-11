@@ -1,7 +1,8 @@
 import datetime
 
+today = datetime.date.today()
 
-def get_start_of_week():
-    td = datetime.date.today()
-    start_date = td - datetime.timedelta(days=td.weekday())
+
+def get_days_before(days):
+    start_date = today - datetime.timedelta(days=days)
     return start_date

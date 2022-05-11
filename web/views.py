@@ -8,8 +8,8 @@ from django.core.paginator import Paginator
 from django.db.models import Sum
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 
-from utils.data_processing import get_trading_table, food_trading_data, get_dashboard_info, get_sales_graph_data
-from utils.date_config import get_start_of_week
+from utils.data_processing import get_trading_table, food_trading_data, get_dashboard_info, get_sales_graph_data, \
+    get_expenses_data
 from utils.payment_receipt import print_receipt
 from utils.request_processing import get_user, is_waiter, is_admin, pickup_items_add
 from utils.request_processing import order_items_add
@@ -419,21 +419,16 @@ def table_delete(request, pk_room, pk_table):
 @login_required(login_url='/')
 def expenses(request):
     if is_admin(request):
-        dt = request.GET.get('date')
-        today = datetime.today()
-        if dt == 'today':
-            expense_models = Expense.objects.filter(created_at__day=today.day)
-        elif dt == "week":
-            expense_models = Expense.objects.filter(created_at__gt=get_start_of_week())
-        elif dt == "month":
-            expense_models = Expense.objects.filter(created_at__month=today.month)
-        else:
-            expense_models = Expense.objects.all()
-        p = Paginator(expense_models, 8)
+        fir = request.GET.get('fir')
+        sec = request.GET.get('sec')
+        expense_models = get_expenses_data(fir, sec)
+        total_amount = expense_models.aggregate(Sum('amount'))['amount__sum']
+        p = Paginator(expense_models, 10)
         page = p.get_page(request.GET.get('page'))
         expense_reason_models = ExpenseReason.objects.all()
         return render(request, 'expenses/expenses.html',
-                      context={'expenses': page, 'expense_reasons': expense_reason_models, 'p_paginator': page})
+                      context={'expenses': page, 'expense_reasons': expense_reason_models, 'p_paginator': page,
+                               'total_amount': total_amount})
     else:
         redirect('room')
 
@@ -686,6 +681,18 @@ def order_item_delete(request, pk):
 
 
 @login_required(login_url='/')
+def order_delete(request, pk):
+    if is_waiter(request):
+        order_model = get_object_or_404(Order, pk=pk)
+        order_model.table.is_available = True
+        order_model.table.save()
+        order_model.delete()
+        return redirect('my_orders')
+    else:
+        return redirect('dashboard')
+
+
+@login_required(login_url='/')
 def print_order_receipt(request, order_id):
     if is_waiter(request):
         order_model = get_object_or_404(Order, id=order_id)
@@ -788,17 +795,22 @@ def complete_pickup(request, pk):
         return redirect('room')
 
 
-# @login_required(login_url='/')
-# def delete_pickup_item(request, pk_order, pk_item):
-#     if is_admin(request):
-#         pass
-#     else:
-#         return redirect('room')
-#
-#
-# @login_required(login_url='/')
-# def delete_pickup(request, pk_order):
-#     if is_admin(request):
-#         pass
-#     else:
-#         return redirect('room')
+@login_required(login_url='/')
+def delete_pickup(request, pk_order):
+    if is_admin(request):
+        order_model = Order.objects.get(pk=pk_order)
+        order_model.delete()
+        return redirect('pickup')
+    else:
+        return redirect('room')
+
+
+@login_required(login_url='/')
+def delete_pickup_item(request, pk_item):
+    if is_admin(request):
+        item = get_object_or_404(OrderItem, pk=pk_item)
+        pickup_id = item.order.pk
+        item.delete()
+        return redirect('pickup_view', pickup_id)
+    else:
+        return redirect('room')

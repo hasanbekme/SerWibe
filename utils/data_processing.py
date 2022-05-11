@@ -2,8 +2,8 @@ from datetime import datetime, timedelta, date
 
 from django.db.models import Sum
 
-from utils.date_config import get_start_of_week
-from web.models import OrderItem, Food, Order, Worker, Category, Table
+from utils.date_config import get_days_before
+from web.models import OrderItem, Food, Order, Worker, Category, Table, Expense
 
 today = date.today()
 delta = timedelta(days=1)
@@ -15,6 +15,7 @@ class FoodTrade:
         self.pk = instance.pk
         self.title = instance.title
         self.category = instance.category
+        self.photo = instance.photo
         self.image = instance.image
         self.price = instance.price
         self.trade_data = trade_data.filter(meal=instance)
@@ -37,16 +38,16 @@ class FoodTrade:
 def get_trading_table(category=None, start_date=None, end_date=None):
     final_models = OrderItem.objects.all()
     food_models = Food.objects.all()
-    if start_date in ['day', 'week', 'month']:
-        if start_date == 'day':
-            final_models = final_models.filter(order__created_at__day=today.day)
-            date_string = today.strftime("%a, %d/%m/%Y")
-        elif start_date == 'week':
-            final_models = final_models.filter(order__created_at__gt=get_start_of_week())
-            date_string = f"{get_start_of_week().strftime('%d/%m/%Y')} - {today.strftime('%d/%m/%Y')}"
-        elif start_date == 'month':
-            final_models = final_models.filter(order__created_at__month=today.month)
-            date_string = f"{get_start_of_week().strftime('01/%m/%Y')} - {today.strftime('%d/%m/%Y')}"
+    if start_date == 'day':
+        final_models = final_models.filter(order__created_at__day=today.day, order__created_at__month=today.month,
+                                           order__created_at__year=today.year)
+        date_string = today.strftime("%a, %d/%m/%Y")
+    elif start_date == 'week':
+        final_models = final_models.filter(order__created_at__gt=get_days_before(7))
+        date_string = f"{get_days_before(7).strftime('%d/%m/%Y')} - {today.strftime('%d/%m/%Y')}"
+    elif start_date == 'month':
+        final_models = final_models.filter(order__created_at__month=get_days_before(30))
+        date_string = f"{get_days_before(30).strftime('01/%m/%Y')} - {today.strftime('%d/%m/%Y')}"
     else:
         if start_date != '' and start_date is not None and end_date != '' and end_date is not None:
             sd = datetime.strptime(start_date, "%Y-%m-%d")
@@ -103,9 +104,9 @@ def food_trading_data(food, start_date=None, end_date=None):
     if start_date in ['week', 'month']:
         end_loop = today + timedelta(days=1)
         if start_date == 'week':
-            start_loop = today - timedelta(days=6)
+            start_loop = get_days_before(6)
         elif start_date == 'month':
-            start_loop = today - timedelta(days=29)
+            start_loop = get_days_before(29)
     else:
         if start_date != '' and start_date is not None and end_date != '' and end_date is not None:
             start_loop = datetime.strptime(start_date, "%Y-%m-%d")
@@ -162,9 +163,9 @@ def get_sales_graph_data(start_date=None, end_date=None):
     if start_date in ['week', 'month']:
         end_loop = today + timedelta(days=1)
         if start_date == 'week':
-            start_loop = today - timedelta(days=6)
+            start_loop = get_days_before(6)
         elif start_date == 'month':
-            start_loop = today - timedelta(days=29)
+            start_loop = get_days_before(29)
     else:
         if start_date != '' and start_date is not None and end_date != '' and end_date is not None:
             start_loop = datetime.strptime(start_date, "%Y-%m-%d")
@@ -186,3 +187,20 @@ def get_sales_graph_data(start_date=None, end_date=None):
         start_loop += delta
 
     return xvalues, yvalues, date_string
+
+
+def get_expenses_data(start_date=None, end_date=None):
+    expense_models = Expense.objects.all()
+    if start_date == 'today':
+        expense_models = expense_models.filter(created_at__day=today.day)
+    elif start_date == "week":
+        expense_models = expense_models.filter(created_at__gt=get_days_before(6))
+    elif start_date == "month":
+        expense_models = expense_models.filter(created_at__gt=get_days_before(29))
+    else:
+        if start_date != '' and start_date is not None and end_date != '' and end_date is not None:
+            start_loop = datetime.strptime(start_date, "%Y-%m-%d")
+            end_loop = datetime.strptime(end_date, "%Y-%m-%d") + timedelta(days=1)
+            expense_models = expense_models.filter(created_at__gt=start_loop, created_at__lt=end_loop)
+
+    return expense_models

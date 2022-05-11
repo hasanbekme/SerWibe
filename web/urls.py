@@ -45,6 +45,7 @@ urlpatterns = [
     path('room/<int:pk_room>/<int:pk_table>/add_item', views.add_item, name='add_item'),
     path('order_item/<int:pk>/delete', views.order_item_delete, name='delete_order_item'),
     path('order/<int:pk>/view', views.waiter_order, name='waiter_order'),
+    path('order/<int:pk>/delete', views.order_delete, name='order_delete'),
     path('my_orders', views.my_orders, name='my_orders'),
     path('my_profile', views.my_profile, name='my_profile'),
     path('print_receipt/<int:order_id>/', views.print_order_receipt, name='print_order_receipt'),
@@ -53,8 +54,7 @@ urlpatterns = [
     path('pickup/<int:pk>/view', views.pickup_view, name='pickup_view'),
     path('pickup/<int:pk>/print', views.print_pickup, name='print_pickup'),
     path('pickup/<int:pk>/complete', views.complete_pickup, name='complete_pickup'),
-    # path('pickup/<int:pk_order>/<int:pk_item>/delete', views.delete_pickup_item, 'delete_pickup_item'),
-    # path('pickup/<int:pk_order>/delete', views.delete_pickup, 'delete_pickup')
-    # path('pickup/<int:pk>/complete', views.pickup_complete, name='pickup_view'),
+    path('pickup/<int:pk_order>/delete', views.delete_pickup, name='delete_pickup'),
+    path('pickup/item/<int:pk_item>/delete', views.delete_pickup_item, name='delete_pickup_item'),
 
 ]

@@ -63,7 +63,7 @@ def print_receipt(order: Order):
     y += 300
     tax = Settings().get("tax", tp=int)
     if tax != 0:
-        doc.aligned_text("Tax:", y, align="left")
+        doc.aligned_text("Xizmat:", y, align="left")
         doc.aligned_text(f"{tax} %", y, align="right")
         y += 300
     doc.set_font(family="Arial", size=14, bold=True)

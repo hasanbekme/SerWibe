@@ -43,17 +43,17 @@
                                                 </td>
                                             </tr>
                                         </table>
+                                        <a href="?fir=today&sec=today" type="button" class="btn btn-primary ml-2">
+                                            <i class="fa fa-filter"></i>
+                                            Bugun
+                                        </a>
                                         <a href="?fir=week&sec=week" type="button" class="btn btn-primary ml-2">
                                             <i class="fa fa-filter"></i>
                                             Hafta
                                         </a>
-                                        <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-0">
+                                        <a href="?fir=month&sec=month" type="button" class="btn btn-primary ml-2">
                                             <i class="fa fa-filter"></i> 
                                             Oy
-                                        </a>
-                                        <a href="/expenses" type="button" class="btn btn-danger m-0">
-                                            <i class="fa fa-times"></i> 
-                                            Qaytalash
                                         </a>
                                     </form>
                                 </div>
@@ -83,7 +83,7 @@
 
                 <!-- Button trigger modal -->
                 <a href="{% url 'expense_new' %}" type="button" class="btn btn-primary m-1">Qo'shish</a>
-                <span class="h5 font-weight-bold text-danger mr-5 text-right float-right">Jami: {{ total_sum }} so'm</span>
+                <span class="h5 font-weight-bold text-danger mr-5 text-right float-right">Jami: {{ total_amount }} so'm</span>
             </div>
             <!-- Paginator shu yerga if ishlatib paginator kerak bo`lmasa o`chirib qo`yadigan qiling -->
 

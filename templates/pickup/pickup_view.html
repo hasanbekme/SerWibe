@@ -17,7 +17,7 @@
                                  style="line-height: 27px; padding: 0">
                                 {{ item.meal.title }}
                             </div>
-                            <a href="#" type="button" class="fa fa-trash btn btn-danger"
+                            <a href="{% url 'delete_pickup_item' pk_item=item.pk %}" type="button" class="fa fa-trash btn btn-danger"
                                style="position: absolute; right:2px; top:2px;"></a>
                             <span id="{{ item.meal.id }}p"
                                   style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
@@ -41,13 +41,13 @@
        style="position:absolute; right: 22%; bottom: 90px; border-radius: 50%; background:white; color: #075295; width:50px; height:50px; padding:10px; box-shadow: 0px 0px 8px 2px #000000aa; opacity: 0.9; text-align: center;">
         <i class='fa fa-plus' style="font-size:2.4em"></i>
     </a>
-    <a class="plussed2 " href=""
+    <a class="plussed2 " onclick="if (confirm('O`chirishga rozimisiz')){ document.location.href = '{% url 'delete_pickup' pk_order=order.pk%}'; }"
        style="position:absolute; right: 39%; bottom: 90px; border-radius: 50%; background:white; color: var(--danger); width:50px; height:50px; padding:10px; box-shadow: 0px 0px 8px 2px #000000aa; opacity: 0.9; text-align: center;">
         <i class='fa fa-trash' style="font-size:2.4em"></i>
     </a>
     <div class="menu-food">
         <a href="{% url 'pickup' %}" class="left"><i class="fa fa-arrow-left"
-                                    aria-hidden="true"></i></a>
+                                                     aria-hidden="true"></i></a>
         <a href="#" style="padding:0" class="centered" id="centered"></a>
 
         <button type="submit" style="float: right; width: 66%; height: 55px; background-color: white; border:none;"
