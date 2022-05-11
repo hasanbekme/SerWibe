@@ -157,15 +157,16 @@ class Order(models.Model):
 
     @property
     def passed_time(self):
-        return self.created_at - datetime.datetime.now()
+        return int((datetime.datetime.now() - self.created_at).total_seconds())
 
     @property
     def passed_time_formatted(self):
-        return str(self.passed_time // 3600).zfill(2) + " : " + str(self.passed_time % timedelta(seconds=3600) // 60).zfill(2)
+        return str(self.passed_time // 3600).zfill(2) + " : " + str(
+            self.passed_time % 3600 // 60).zfill(2)
 
     @property
     def room_service_cost(self):
-        return (self.table.service_cost * self.passed_time.total_seconds() // 360000) * 100
+        return (self.table.service_cost * self.passed_time // 360000) * 100
 
     @property
     def needed_payment(self):
