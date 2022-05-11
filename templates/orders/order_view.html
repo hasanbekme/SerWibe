@@ -20,11 +20,16 @@
                     </tr>
                 {% endfor %}
 
-                <tr class="font-weight-bold">
-                    <td>Xizmat</td>
-                    <td>10%</td>
-                    <td>{{ order.needed_payment }} so'm</td>
-                </tr>
+                 <tr class="font-weight-bold">
+                        <td>Xizmat</td>
+                        {% if order.table.tax_required %}
+                        <td>{{ tax }}%</td>
+                        <td>{{ order.tax_price }} so'm</td>
+                        {% else %}
+                        <td>{{ order.passed_time_formatted }}</td>
+                        <td>{{ order.room_service_cost }} so'm</td>
+                        {% endif %}
+                    </tr>
                 <tr class="text-danger font-weight-bold">
                     <td>Umumiy</td>
                     <td>{{ order.orderitem_set.count }} ta</td>
