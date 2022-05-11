@@ -23,23 +23,38 @@
                 <div class="dropdown">
                     <button class="btn btn-primary p-0 dropdown-toggle"
                             type="button" id="dropdownMenu1" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
+                            aria-haspopup="true" aria-expanded="false" style="width:100%">
                         Offitsant
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <a class="dropdown-item"
+                               onclick="addurlparameter('type', '' ">{{ waiter.full_name }}</a>
+                            <a class="dropdown-item"
+                               onclick="addurlparameter('type', '' ">{{ waiter.full_name }}</a>
+                    </div>
+                </div>
+            </td>
+
+            <td class="bg-primary text-white">
+                <div class="dropdown">
+                    <button class="btn btn-primary p-0 dropdown-toggle"
+                            type="button" id="dropdownMenu1" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false" style="width:100%">
+                        Turi
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         {% for waiter in waiters %}
                             <a class="dropdown-item"
-                               onclick="addurlparameter('waiter', {{ waiter.id }})">{{ waiter.full_name }}</a>
+                               onclick="addurlparameter('type', {{ waiter.id }})">{{ waiter.full_name }}</a>
                         {% endfor %}
                     </div>
                 </div>
             </td>
-            <td class="bg-primary text-white">Turi</td>
             <td class="bg-primary text-white">Olingan vaqt</td>
             <td class="bg-primary text-white">Xona</td>
             <td class="bg-primary text-white">Stol</td>
             <td class="bg-primary text-white">Summa</td>
-            <td class="bg-primary text-white">Tax ({{ tax }}%)</td>
+            <td class="bg-primary text-white">Xizmat</td>
             <td class="bg-primary text-white">Umumiy summa</td>
             <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0">Tahlil</td>
         </tr>

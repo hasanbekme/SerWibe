@@ -6,7 +6,7 @@
                     class="float-left float-sm-right float-md-right text-danger font-weight-bold">{{ order.table.room.title }}: №{{ order.table.number }}</span>
             </div>
             {% csrf_token %}
-            <table class="table">
+            <table class="table tableorder">
                 <tr class="bg-primary text-white">
                     <td>Nomi</td>
                     <td>Soni</td>
@@ -19,8 +19,11 @@
                         <td>{{ orderitem.total_price }} so'm</td>
                     </tr>
                 {% endfor %}
-                <tr>
-                    <h4>Tax:  {{ tax }}%</h4>
+
+                <tr class="font-weight-bold">
+                    <td>Xizmat</td>
+                    <td>10%</td>
+                    <td>{{ order.needed_payment }} so'm</td>
                 </tr>
                 <tr class="text-danger font-weight-bold">
                     <td>Umumiy</td>
