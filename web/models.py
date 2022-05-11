@@ -159,7 +159,7 @@ class Order(models.Model):
         return self.created_at - datetime.datetime.now()
 
     @property
-    def service_cost(self):
+    def room_service_cost(self):
         return (self.table.service_cost * self.passed_time.total_seconds() // 360000) * 100
 
     @property
@@ -167,6 +167,8 @@ class Order(models.Model):
         total = 0
         for item in self.orderitem_set.all():
             total += item.paid_amount
+        if not self.table.tax_required:
+            total += self.room_service_cost
         return total
 
     @property
@@ -199,11 +201,8 @@ class OrderItem(models.Model):
 
     @property
     def total_price(self):
-        if self.order.order_type == 'table':
-            if not self.order.table.tax_required:
-                return int(self.meal.price * self.quantity * (1 + get_tax() / 100))
-            else:
-                return int(self.meal.price * self.quantity) + self.order.service_cost
+        if self.order.order_type == 'table' and not self.order.table.tax_required:
+            return int(self.meal.price * self.quantity * (1 + get_tax() / 100))
         else:
             return int(self.meal.price * self.quantity)
 
