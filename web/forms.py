@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.forms import Form, CharField, ChoiceField, PasswordInput, ModelForm, IntegerField, Textarea
+from django.forms import Form, CharField, ChoiceField, PasswordInput, ModelForm, IntegerField, Textarea, BooleanField
 
 from utils.printer import get_printers
 from .models import Worker, Category, Food, Room, Table, ExpenseReason, Expense, Order
@@ -68,6 +68,8 @@ class RoomForm(ModelForm):
 
 class TableForm(Form):
     number = IntegerField()
+    tax_required = BooleanField()
+    service_cost = IntegerField(required=False)
 
     def __init__(self, *args, room=None, **kwargs):
         super().__init__(*args, **kwargs)
@@ -75,7 +77,13 @@ class TableForm(Form):
 
     def save(self):
         number = self.cleaned_data.get("number")
+        tax_required = self.cleaned_data.get("tax_required")
+        service_cost = self.cleaned_data.get("service_cost")
+
         table = Table.objects.create(number=number, room=self.room)
+        if tax_required:
+            table.tax_required = False
+            table.service_cost = service_cost
         table.save()
 
 

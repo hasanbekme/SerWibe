@@ -20,7 +20,7 @@
                     <button onclick="changed(2)" id="money" type="button" class="btn m-2 btn-success col-2">
                         <i class="fa fa-user" aria-hidden="true"></i>
                     </button>
-                    {{ form.payment_type }}
+                    {{ form.tax_required }}
                     <label class="switch" style="margin-top:17px">
                         <input type="checkbox" id="checkbox" onchange="changed()">
                         <span class="slider"></span>
@@ -28,6 +28,7 @@
                     <button onclick="changed(1)" id="ccard" type="button" class="btn m-2 btn-secondary col-2">
                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                     </button>
+                    {{ form.service_cost }}
                     <input type="number" name="" class="mt-2" style="height: 44px;" placeholder="Soatiga(so`mda)" id="tabletype">
                 </div>
 
@@ -49,14 +50,14 @@
         function changed(pressed = 0) {
             if ((pressed != 2 && document.getElementById("checkbox").checked) || pressed == 1) {
                 document.getElementById("checkbox").checked = true;
-                //document.getElementById("id_payment_type").value = "credit_card";
+                document.getElementById("id_tax_required").checked = true;
                 document.getElementById("ccard").className = "btn m-2 btn-success col-2";
                 document.getElementById("money").className = "btn m-2 btn-secondary col-2";
                 document.getElementById("tabletype").style.display = "block";
 
             } else {
                 document.getElementById("checkbox").checked = false;
-                //document.getElementById("id_payment_type").value = "cash";
+                document.getElementById("id_tax_required").checked = false;
                 document.getElementById("money").className = "btn m-2 btn-success col-2";
                 document.getElementById("ccard").className = "btn m-2 btn-secondary col-2";
                 document.getElementById("tabletype").style.display = "none";

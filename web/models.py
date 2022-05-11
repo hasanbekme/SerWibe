@@ -200,7 +200,7 @@ class OrderItem(models.Model):
     @property
     def total_price(self):
         if self.order.order_type == 'table':
-            if self.order.table.tax_required:
+            if not self.order.table.tax_required:
                 return int(self.meal.price * self.quantity * (1 + get_tax() / 100))
             else:
                 return int(self.meal.price * self.quantity) + self.order.service_cost
