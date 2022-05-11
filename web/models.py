@@ -1,4 +1,5 @@
 import datetime
+from datetime import timedelta
 
 from PIL import Image
 from django.contrib.auth.models import User
@@ -157,6 +158,10 @@ class Order(models.Model):
     @property
     def passed_time(self):
         return self.created_at - datetime.datetime.now()
+
+    @property
+    def passed_time_formatted(self):
+        return str(self.passed_time // 3600).zfill(2) + " : " + str(self.passed_time % timedelta(seconds=3600) // 60).zfill(2)
 
     @property
     def room_service_cost(self):

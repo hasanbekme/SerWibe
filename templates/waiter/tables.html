@@ -32,34 +32,36 @@
                         </div>
                     {% else %}
                         {% if table.current_order.waiter == waiter %}
-                        <div class="col-5 col-md-5 cardtable card m-auto shadow  h1 bg-info"
-                             style="margin-bottom: 15px!important">
-                            <a href="{% url 'waiter_order' pk=table.pk %}" class="cardtable text-white mt-4"
-                               style="margin-bottom: 15px!important;">
-                            <span style="position:absolute; font-size: 15px; left: 5px; top:2px">
-                                <i class="fa fa-clock-o"></i> 02:22
-                            </span>
-                                <i class="fa fa-eye" aria-hidden="true"
-                                   style="position:absolute; font-size: 25px; right: 10px; top:2px"></i>
-                                <span class="tableprice">{{ table.number }}</span>
-                            </a>
-                            <a class="startadd" style="bottom:-15px; margin-top:-15px"
-                               href="{% url 'add_item' pk_room=room.pk pk_table=table.pk %}">
-                                <span style="position:absolute; font-size:12px; padding: 1px 2px 0 2px; right: 2px; bottom:0; color: yellow; font-weight:normal; ">{{ table.current_order.needed_payment }} so`m</span>
-                                +
-                            </a>
-                        </div>
-                        {% else %}
                             <div class="col-5 col-md-5 cardtable card m-auto shadow  h1 bg-info"
-                             style="margin-bottom: 15px!important">
-                            <a class="cardtable text-white mt-4"
-                               style="margin-bottom: 15px!important;">
-                                <span class="tableprice">{{ table.number }}</span>
-                            </a>
-                            <a class="startadd" style="bottom:-15px; margin-top:-15px">
-                                +
-                            </a>
-                        </div>
+                                 style="margin-bottom: 15px!important">
+                                <a href="{% url 'waiter_order' pk=table.pk %}" class="cardtable text-white mt-4"
+                                   style="margin-bottom: 15px!important;">
+                                    {% if not table.tax_required %}
+                                        <span style="position:absolute; font-size: 15px; left: 5px; top:2px">
+                                <i class="fa fa-clock-o"></i> {{ table.current_order.passed_time_formatted }}
+                            </span>
+                                    {% endif %}
+                                    <i class="fa fa-eye" aria-hidden="true"
+                                       style="position:absolute; font-size: 25px; right: 10px; top:2px"></i>
+                                    <span class="tableprice">{{ table.number }}</span>
+                                </a>
+                                <a class="startadd" style="bottom:-15px; margin-top:-15px"
+                                   href="{% url 'add_item' pk_room=room.pk pk_table=table.pk %}">
+                                    <span style="position:absolute; font-size:12px; padding: 1px 2px 0 2px; right: 2px; bottom:0; color: yellow; font-weight:normal; ">{{ table.current_order.needed_payment }} so`m</span>
+                                    +
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="col-5 col-md-5 cardtable card m-auto shadow  h1 bg-secondary"
+                                 style="margin-bottom: 15px!important">
+                                <a class="cardtable bg-secondary mt-4"
+                                   style="margin-bottom: 15px!important;">
+                                    <span class="tableprice">{{ table.number }}</span>
+                                </a>
+                                <a class="startadd bg-secondary" style="bottom:-15px; margin-top:-15px">
+                                    +
+                                </a>
+                            </div>
                         {% endif %}
                     {% endif %}
                 {% endfor %}
