@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
     <form method="POST" enctype="multipart/form-data">
-        <div class="row mt-5">
+        <div class="row mt-4">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
                 <div class="h4">Buyurtma: #{{ order.id }}
                 </div>
                 {% csrf_token %}
-                <table class="table">
+                <table class="table tableorder">
                     <tr class="bg-primary text-white">
                         <td>Nomi</td>
                         <td>Soni</td>
@@ -26,9 +26,47 @@
                     </tr>
                 </table>
                 {{ form.comment }}
-                {{ form.cash_money }}
-                {{ form.credit_card }}
-                {{ form.debt_money }}
+                <div class="input-group mt-3 button-payyed">
+                  <div class="input-group-prepend" onclick="money_cash()">
+                    <span class="input-group-text p-1 text-center">
+                        <button type="button" class="btn btn-secondary cash_money" id="cash_money"  style="margin: auto; width:30px; height:30px; border-radius: 50%;"></button>
+                    </span>
+                </div>
+                    {{ form.cash_money }}
+                    <div class="input-group-append" onclick="money_cash()">
+                    <span class="input-group-text">
+                        <i class="fa fa-money"></i>
+                    </span>
+                    </div>
+                </div>
+                <div class="input-group mt-1 button-payyed">
+                  <div class="input-group-prepend" onclick="credit_card()">
+                    <span class="input-group-text p-1 text-center" >
+                        <button type="button" class="btn btn-secondary credit_card" id="credit_card"  style="margin: auto; width:30px; height:30px; border-radius: 50%;"></button>
+                    </span>
+                  </div>
+                    {{ form.credit_card }}
+                    <div class="input-group-append" onclick="credit_card()">
+                      <span class="input-group-text">
+                          <i class="fa fa-credit-card"></i>
+                      </span>
+                    </div>
+                </div>
+                <div class="input-group mt-1 button-payyed">
+                  <div class="input-group-prepend" onclick="debt()">
+                    <span class="input-group-text p-1 text-center" >
+                        <button type="button" class="btn btn-secondary debt_money" id="debt_money"  style="margin: auto; width:30px; height:30px; border-radius: 50%;"></button>
+                    </span>
+                  </div>
+                    {{ form.debt_money }}
+                    <div class="input-group-append"  onclick="debt()">
+                      <span class="input-group-text">
+                          <i class="fa fa-ban"></i>
+                      </span>
+                    </div>
+                </div>
+                
+                
                 <div class="mr-auto">
                     <a href="{% url 'orders' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
                                                                                                   aria-hidden="true"></i>
@@ -36,25 +74,81 @@
                     <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-check-circle"></i> Tasdiqlash
                     </button>
                 </div>
+                <span class="bottomed">25/02/2022</span>
             </div>
         </div>
     </form>
+
     <script type="text/javascript">
-        document.getElementById("id_payment_type").style.display = "none";
-
-        function changed(pressed = 0) {
-            if ((pressed != 2 && document.getElementById("checkbox").checked) || pressed == 1) {
-                document.getElementById("checkbox").checked = true;
-                document.getElementById("id_payment_type").value = "credit_card";
-                document.getElementById("ccard").className = "btn m-2 btn-success col-2";
-                document.getElementById("money").className = "btn m-2 btn-secondary col-2";
-            } else {
-                document.getElementById("checkbox").checked = false;
-                document.getElementById("id_payment_type").value = "cash";
-                document.getElementById("money").className = "btn m-2 btn-success col-2";
-                document.getElementById("ccard").className = "btn m-2 btn-secondary col-2";
+        var totalsumm = {{ order.needed_payment }};
+        document.getElementById('id_comment').placeholder = "Izoh...";
+        var payment_inputs = document.getElementsByTagName("input");
+        var payment_buttons = document.getElementsByTagName("buttons");
+        payment_inputs[1].placeholder = "Naqt pul";
+        payment_inputs[2].placeholder = "Plastik karta";
+        payment_inputs[3].placeholder = "To`lanmagan";
+        function back_function(){
+            if (payment_inputs[1].value>0){
+                document.getElementById('cash_money').className = "btn btn-primary";
             }
-
+            else{
+                document.getElementById('cash_money').className = "btn btn-secondary";
+            }
+            if (payment_inputs[2].value>0){
+                document.getElementById('credit_card').className = "btn btn-primary";
+            }
+            else{
+                document.getElementById('credit_card').className = "btn btn-secondary";
+            }
+            if (payment_inputs[3].value>0){
+                document.getElementById('debt_money').className = "btn btn-primary";
+            }
+            else{
+                document.getElementById('debt_money').className = "btn btn-secondary";
+            }
         }
+        function money_cash(){
+            if (payment_inputs[2].value*1+payment_inputs[3].value*1==totalsumm){
+                payment_inputs[1].value=totalsumm;
+                payment_inputs[2].value="";
+                payment_inputs[3].value="";
+            }
+            else if(payment_inputs[2].value*1+payment_inputs[3].value*1>0){
+                payment_inputs[1].value=totalsumm - (payment_inputs[2].value*1+payment_inputs[3].value*1);
+            }
+            else{
+                payment_inputs[1].value=totalsumm;
+            }
+            back_function()
+        }
+        function credit_card(){
+            if (payment_inputs[1].value*1+payment_inputs[3].value*1==totalsumm){
+                payment_inputs[2].value=totalsumm;
+                payment_inputs[1].value="";
+                payment_inputs[3].value="";
+            }
+            else if(payment_inputs[1].value*1+payment_inputs[3].value*1>0){
+                payment_inputs[2].value=totalsumm - (payment_inputs[1].value*1+payment_inputs[3].value*1);
+            }
+            else{
+                payment_inputs[2].value=totalsumm;
+            }
+            back_function()
+        }
+        function debt(){
+            if (payment_inputs[1].value*1+payment_inputs[2].value*1==totalsumm){
+                payment_inputs[3].value=totalsumm;
+                payment_inputs[1].value="";
+                payment_inputs[2].value="";
+            }
+            else if(payment_inputs[1].value*1+payment_inputs[2].value*1>0){
+                payment_inputs[3].value=totalsumm - (payment_inputs[1].value*1+payment_inputs[2].value*1);
+            }
+            else{
+                payment_inputs[3].value=totalsumm;
+            }
+            back_function()
+        }
+        money_cash();
     </script>
 {% endblock %}

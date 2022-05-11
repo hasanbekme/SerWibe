@@ -43,7 +43,7 @@
                         <tr>
                             <td>{{ forloop.counter }}</td>
                             <td>{{ food.title }}</td>
-                            <td><img src="{{ food.photo }}" style="height: 50px;" alt="image"></td>
+                            <td><img src="{{ food.photo }}" style="height: 50px; width: 50px" alt="image"></td>
                             {% if food.is_available %}
                                 <td class="text-center"><i class="fa fa-check-circle" aria-hidden="true"
                                                            style="font-size: 2em; color:green"></i></td>
@@ -109,7 +109,7 @@
                         <tr>
                             <td class="text-center">{{ forloop.counter }}</td>
                             <td>{{ i.title }}</td>
-                            <td class="text-center"><img src="{{ i.photo }}" style="height: 50px;" alt="image"></td>
+                            <td class="text-center"><img src="{{ i.photo }}" style="height: 50px; width: 50px" alt="image"></td>
                             {% if i.is_available %}
                                 <td class="text-center"><i class="fa fa-check-circle" aria-hidden="true"
                                                            style="font-size: 2em; color:green"></i></td>
