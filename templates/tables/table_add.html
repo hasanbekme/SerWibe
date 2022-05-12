@@ -53,6 +53,7 @@
                 document.getElementById("ccard").className = "btn m-2 btn-success col-2";
                 document.getElementById("money").className = "btn m-2 btn-secondary col-2";
                 document.getElementById("id_service_cost").style.display = "block";
+                document.getElementById("id_tax_required").required = true;
 
             } else {
                 document.getElementById("checkbox").checked = false;
@@ -60,6 +61,7 @@
                 document.getElementById("money").className = "btn m-2 btn-success col-2";
                 document.getElementById("ccard").className = "btn m-2 btn-secondary col-2";
                 document.getElementById("id_service_cost").style.display = "none";
+                document.getElementById("id_tax_required").required = false;
             }
 
         }
