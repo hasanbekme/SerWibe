@@ -1,5 +1,4 @@
 import datetime
-from datetime import timedelta
 
 from PIL import Image
 from django.contrib.auth.models import User
@@ -98,10 +97,11 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         super(Category, self).save(*args, **kwargs)
-        imag = Image.open(self.image.path)
-        output_size = (70, 70)
-        imag.thumbnail(output_size)
-        imag.save(self.image.path)
+        if self.image:
+            imag = Image.open(self.image.path)
+            output_size = (70, 70)
+            imag.thumbnail(output_size)
+            imag.save(self.image.path)
 
     class Meta:
         ordering = ['title']
@@ -128,10 +128,11 @@ class Food(models.Model):
 
     def save(self, *args, **kwargs):
         super(Food, self).save(*args, **kwargs)
-        imag = Image.open(self.image.path)
-        output_size = (70, 70)
-        imag.thumbnail(output_size)
-        imag.save(self.image.path)
+        if self.image:
+            imag = Image.open(self.image.path)
+            output_size = (70, 70)
+            imag.thumbnail(output_size)
+            imag.save(self.image.path)
 
     class Meta:
         ordering = ['title']

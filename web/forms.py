@@ -31,6 +31,7 @@ class CreateUserForm(Form):
         password = self.cleaned_data.get("password")
         if self.instance is None:
             user = User.objects.create(username=f"{first_name.lower()}_{last_name.lower()}", password=password)
+            user.set_password(password)
             user.save()
             worker = Worker.objects.create(user=user, first_name=first_name, last_name=last_name, position=position)
             worker.save()
@@ -49,12 +50,20 @@ class CreateUserForm(Form):
 class CategoryForm(ModelForm):
     printer = ChoiceField(choices=[(printer, printer) for printer in get_printers()])
 
+    def __init__(self, *args, **kwargs):
+        super(CategoryForm, self).__init__(*args, **kwargs)
+        self.fields['image'].required = False
+
     class Meta:
         model = Category
         fields = '__all__'
 
 
 class FoodForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(FoodForm, self).__init__(*args, **kwargs)
+        self.fields['image'].required = False
+
     class Meta:
         model = Food
         fields = '__all__'
@@ -68,7 +77,7 @@ class RoomForm(ModelForm):
 
 class TableForm(Form):
     number = IntegerField()
-    tax_required = BooleanField()
+    tax_required = BooleanField(required=False)
     service_cost = IntegerField(required=False)
 
     def __init__(self, *args, room=None, **kwargs):
