@@ -36,7 +36,7 @@
                             class="fa fa-times"
                             aria-hidden="true"></i>
                         Yopish</a>
-                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> Saqlash</button>
+                    <button type="sumbit" id="FormSubmit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> Saqlash</button>
 
                 </div>
 
@@ -45,7 +45,9 @@
     </form>
         <script type="text/javascript">
         //document.getElementById("id_payment_type").style.display = "none";
-
+        document.getElementById("FormSubmit").disabled = true;
+        document.getElementById("id_service_cost").onkeyup =  function() {changed();}
+        document.getElementById("id_number").onkeyup =  function() {changed();}
         function changed(pressed = 0) {
             if ((pressed != 2 && document.getElementById("checkbox").checked) || pressed == 1) {
                 document.getElementById("checkbox").checked = true;
@@ -53,7 +55,14 @@
                 document.getElementById("ccard").className = "btn m-2 btn-success col-2";
                 document.getElementById("money").className = "btn m-2 btn-secondary col-2";
                 document.getElementById("id_service_cost").style.display = "block";
-                document.getElementById("id_tax_required").required = true;
+                console.log(document.getElementById("id_service_cost").value!="");
+                if (document.getElementById("id_service_cost").value!="" && document.getElementById("id_number").value!=""){
+                    document.getElementById("FormSubmit").disabled = false;
+                }
+                else{
+                    document.getElementById("FormSubmit").disabled = true;
+
+                }
 
             } else {
                 document.getElementById("checkbox").checked = false;
@@ -61,7 +70,13 @@
                 document.getElementById("money").className = "btn m-2 btn-success col-2";
                 document.getElementById("ccard").className = "btn m-2 btn-secondary col-2";
                 document.getElementById("id_service_cost").style.display = "none";
-                document.getElementById("id_tax_required").required = false;
+                if (document.getElementById("id_number").value!=""){
+                    document.getElementById("FormSubmit").disabled = false;
+                }
+                else{
+                    document.getElementById("FormSubmit").disabled = true;
+
+                }
             }
 
         }
