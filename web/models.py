@@ -62,6 +62,7 @@ class Table(models.Model):
     room = models.ForeignKey(to=Room, on_delete=models.CASCADE)
     tax_required = models.BooleanField(default=True)
     service_cost = models.IntegerField(null=True, blank=True)
+    initial_payment = models.IntegerField(default=0)
     is_available = models.BooleanField(default=True)
 
     def __str__(self):
