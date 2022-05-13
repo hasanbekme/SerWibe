@@ -21,9 +21,8 @@
                     <button onclick="changed(2)" id="money" type="button" class="btn m-2 btn-success col-2">
                         <i class="fa fa-user" aria-hidden="true"></i>
                     </button>
-                    {{ form.tax_required }}
                     <label class="switch" style="margin-top:17px">
-                        <input type="checkbox" id="checkbox" onchange="changed()">
+                    {{ form.tax_required }}
                         <span class="slider"></span>
                     </label>
                     <button onclick="changed(1)" id="ccard" type="button" class="btn m-2 btn-secondary col-2">
@@ -45,13 +44,28 @@
         </div>
     </form>
         <script type="text/javascript">
+        document.getElementById("id_service_cost").style.display = "none";
         //document.getElementById("id_payment_type").style.display = "none";
         document.getElementById("FormSubmit").disabled = true;
         document.getElementById("id_service_cost").onkeyup =  function() {changed();}
         document.getElementById("id_number").onkeyup =  function() {changed();}
+        document.getElementById("id_tax_required").onclick =  function() {changed();}
+        if (document.getElementById("id_tax_required").checked){
+            document.getElementById("id_tax_required").checked = true;
+            document.getElementById("ccard").className = "btn m-2 btn-success col-2";
+            document.getElementById("money").className = "btn m-2 btn-secondary col-2";
+            document.getElementById("id_service_cost").style.display = "block";
+            console.log(document.getElementById("id_service_cost").value!="");
+            if (document.getElementById("id_service_cost").value!="" && document.getElementById("id_number").value!=""){
+                document.getElementById("FormSubmit").disabled = false;
+            }
+            else{
+                document.getElementById("FormSubmit").disabled = true;
+            }
+
+        }
         function changed(pressed = 0) {
-            if ((pressed != 2 && document.getElementById("checkbox").checked) || pressed == 1) {
-                document.getElementById("checkbox").checked = true;
+            if ((pressed != 2 && document.getElementById("id_tax_required").checked) || pressed == 1) {
                 document.getElementById("id_tax_required").checked = true;
                 document.getElementById("ccard").className = "btn m-2 btn-success col-2";
                 document.getElementById("money").className = "btn m-2 btn-secondary col-2";
@@ -66,7 +80,6 @@
                 }
 
             } else {
-                document.getElementById("checkbox").checked = false;
                 document.getElementById("id_tax_required").checked = false;
                 document.getElementById("money").className = "btn m-2 btn-success col-2";
                 document.getElementById("ccard").className = "btn m-2 btn-secondary col-2";
@@ -81,7 +94,6 @@
             }
 
         }
-        document.getElementById("id_service_cost").style.display = "none";
         document.getElementById("id_service_cost").placeholder = "Soatiga(so`mda)";
     </script>
 {% endblock %}
