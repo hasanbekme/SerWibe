@@ -79,7 +79,7 @@ class TableForm(Form):
     number = IntegerField()
     tax_required = BooleanField(required=False)
     service_cost = IntegerField(required=False)
-    initial_payment = IntegerField()
+    initial_payment = IntegerField(initial=0)
 
     def __init__(self, *args, room=None, instance=None, **kwargs):
         instance: Table
@@ -101,6 +101,7 @@ class TableForm(Form):
         tax_required = self.cleaned_data.get("tax_required")
         service_cost = self.cleaned_data.get("service_cost")
         initial_payment = self.cleaned_data.get("initial_payment")
+
         if self.instance is None:
             self.instance = Table.objects.create(number=number, room=self.room)
         self.instance.number = number
@@ -109,6 +110,9 @@ class TableForm(Form):
         if tax_required:
             self.instance.tax_required = False
             self.instance.service_cost = service_cost
+        else:
+            self.instance = True
+            self.instance.service_cost = 0
         self.instance.save()
 
 
