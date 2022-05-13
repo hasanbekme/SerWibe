@@ -27,10 +27,10 @@
                         Offitsant
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        {% for waiter in waiters %}
                             <a class="dropdown-item"
-                               onclick="addurlparameter('type', '' ">{{ waiter.full_name }}</a>
-                            <a class="dropdown-item"
-                               onclick="addurlparameter('type', '' ">{{ waiter.full_name }}</a>
+                               onclick="addurlparameter('wtype', {{ waiter.id }})">{{ waiter.full_name }}</a>
+                        {% endfor %}
                     </div>
                 </div>
             </td>
@@ -43,10 +43,10 @@
                         Turi
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        {% for waiter in waiters %}
-                            <a class="dropdown-item"
-                               onclick="addurlparameter('type', {{ waiter.id }})">{{ waiter.full_name }}</a>
-                        {% endfor %}
+                        <a class="dropdown-item"
+                           onclick="addurlparameter('otype', 'in')">Shu yerda</a>
+                        <a class="dropdown-item"
+                           onclick="addurlparameter('otype', 'out')">Olib ketish</a>
                     </div>
                 </div>
             </td>
