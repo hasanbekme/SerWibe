@@ -80,20 +80,32 @@ class TableForm(Form):
     tax_required = BooleanField(required=False)
     service_cost = IntegerField(required=False)
 
-    def __init__(self, *args, room=None, **kwargs):
+    def __init__(self, *args, room=None, instance=None, **kwargs):
+        instance: Table
         super().__init__(*args, **kwargs)
         self.room = room
+        if instance is not None:
+            self.instance: Table = instance
+            self.initial = {
+                'number': instance.number,
+                'tax_required': not instance.tax_required,
+                'service_cost': instance.service_cost
+            }
+        else:
+            self.instance = None
 
     def save(self):
         number = self.cleaned_data.get("number")
         tax_required = self.cleaned_data.get("tax_required")
         service_cost = self.cleaned_data.get("service_cost")
-
-        table = Table.objects.create(number=number, room=self.room)
+        if self.instance is None:
+            self.instance = Table.objects.create(number=number, room=self.room)
+        self.instance.number = number
+        self.instance.room = self.room
         if tax_required:
-            table.tax_required = False
-            table.service_cost = service_cost
-        table.save()
+            self.instance.tax_required = False
+            self.instance.service_cost = service_cost
+        self.instance.save()
 
 
 class ExpenseReasonForm(ModelForm):

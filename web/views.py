@@ -211,7 +211,7 @@ def category_edit(request, pk):
     if is_admin(request):
         post = get_object_or_404(Category, pk=pk)
         if request.method == "POST":
-            form = CategoryForm(request.POST, instance=post)
+            form = CategoryForm(request.POST, request.FILES, instance=post)
             if form.is_valid():
                 model = form.save(commit=False)
                 model.save()
@@ -260,7 +260,7 @@ def food_edit(request, pk):
     if is_admin(request):
         food = get_object_or_404(Food, pk=pk)
         if request.method == "POST":
-            form = FoodForm(request.POST, instance=food)
+            form = FoodForm(request.POST, request.FILES, instance=food)
             if form.is_valid():
                 model = form.save(commit=False)
                 model.save()
@@ -392,7 +392,24 @@ def table_new(request, pk):
                 print(form.errors)
         else:
             form = TableForm()
-        return render(request, 'tables/table_add.html', {'form': form, 'room': room_m})
+        return render(request, 'tables/table_edit.html', {'form': form, 'room': room_m})
+    else:
+        return redirect('room')
+
+
+@login_required(login_url='/')
+def table_edit(request, pk_room, pk_table):
+    if is_admin(request):
+        room_model = get_object_or_404(Room, pk=pk_room)
+        table_model = get_object_or_404(Table, pk=pk_table)
+        if request.method == "POST":
+            form = TableForm(request.POST, room=room_model, instance=table_model)
+            if form.is_valid():
+                form.save()
+                return redirect('room_tables', pk=pk_room)
+        else:
+            form = TableForm(instance=table_model)
+        return render(request, 'tables/table_edit.html', {'form': form, 'room': room_model})
     else:
         return redirect('room')
 
