@@ -46,14 +46,12 @@
                         <a class="dropdown-item"
                            onclick="addurlparameter('otype', 'in')">Shu yerda</a>
                         <a class="dropdown-item"
-                           onclick="addurlparameter('otype', 'out')">Olib ketish</a>
+                           onclick="addurlparameter('otype', 'out')">Olib ketilgan</a>
                     </div>
                 </div>
             </td>
             <td class="bg-primary text-white">Olingan vaqt</td>
-            <td class="bg-primary text-white">Xona</td>
             <td class="bg-primary text-white">Stol</td>
-            <td class="bg-primary text-white">Summa</td>
             <td class="bg-primary text-white">Xizmat</td>
             <td class="bg-primary text-white">Umumiy summa</td>
             <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0">Tahlil</td>
@@ -67,14 +65,43 @@
                 {% if order.order_type == 'table' %}
                     <td>Shu yerda</td>
                 {% else %}
-                    <td>Olib ketish</td>
+                    <td>Olib ketilgan</td>
                 {% endif %}
                 <td>{{ order.created_time }}</td>
-                <td>{{ order.table.room.title }}</td>
-                <td>{{ order.table.number }}</td>
-                <td>{{ order.without_tax }}</td>
+                {% if order.order_type == 'table' %}
+                <td>{{ order.table.room.title }} №{{ order.table.number }}</td>
+                {% else %}
+                <td>-------</td>
+                {% endif %}
                 <td>{{ order.tax_price }}</td>
-                <td>{{ order.paid_money }} so'm</td>
+                <td class="p-0">
+                    <table class="table table-sm mb-0">
+                        <tr style="padding:0; margin:0; font-size:11px">
+                            <td style="padding:0; margin:0; font-size:11px">
+                                <i class="fa fa-money"></i>
+                            </td>
+                            <td style="padding:0; margin:0; font-size:11px">
+                                {{ order.paid_money }} so'm
+                            </td>
+                        </tr>
+                        <tr style="padding:0; margin:0; font-size:11px">
+                            <td style="padding:0; margin:0; font-size:11px">
+                                <i class="fa fa-money"></i>
+                            </td>
+                            <td style="padding:0; margin:0; font-size:11px">
+                                {{ order.paid_money }} so'm
+                            </td>
+                        </tr>
+                        <tr style="padding:0; margin:0; font-size:11px">
+                            <td style="padding:0; margin:0; font-size:11px">
+                                <i class="fa fa-money"></i>
+                            </td>
+                            <td style="padding:0; margin:0; font-size:11px">
+                                {{ order.paid_money }} so'm
+                            </td>
+                        </tr>
+                    </table>
+                </td>
                 <td><a href="{% url 'archive_order_view' pk=order.id %}">
                     <button type="button" class="btn btn-info"><i class="fa fa-eye"></i> Tahlil</button>
                 </a></td>
