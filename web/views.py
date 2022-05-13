@@ -8,8 +8,7 @@ from django.core.paginator import Paginator
 from django.db.models import Sum
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 
-from utils.data_processing import get_trading_table, food_trading_data, get_dashboard_info, get_sales_graph_data, \
-    get_expenses_data
+from utils.data_processing import get_trading_table, food_trading_data, get_dashboard_info, get_expenses_data
 from utils.payment_receipt import print_receipt
 from utils.request_processing import get_user, is_waiter, is_admin, pickup_items_add
 from utils.request_processing import order_items_add
@@ -56,17 +55,16 @@ def signin(request):
 # dashboard ------------------------------------------------------------------------------------------------------------
 @login_required(login_url='/')
 def dashboard(request):
-    user = get_user(request)
     if is_admin(request):
         start_date = request.GET.get('fir')
         end_date = request.GET.get('sec')
-        dashboard_info = get_dashboard_info()
-        xvalues, yvalues, date_string = get_sales_graph_data(start_date, end_date)
-        mx = int(max(yvalues) * 1.1)
-        mn = min(yvalues) // 2
+        dashboard_info = get_dashboard_info(start_date, end_date)
+        mx = int(max(dashboard_info.yvalues) * 1.1)
+        mn = min(dashboard_info.yvalues) // 2
         return render(request, 'dashboard.html',
-                      {'dashboard_info': dashboard_info, 'labels': json.dumps(xvalues), 'data': json.dumps(yvalues),
-                       'mx': mx, 'mn': mn, 'date_string': json.dumps(date_string)})
+                      {'dashboard_info': dashboard_info, 'labels': json.dumps(dashboard_info.xvalues),
+                       'data': json.dumps(dashboard_info.yvalues),
+                       'mx': mx, 'mn': mn, 'date_string': json.dumps(dashboard_info.date_string)})
     else:
         return redirect('room')
 

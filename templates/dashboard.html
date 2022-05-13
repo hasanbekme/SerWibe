@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<div style="position:absolute; right:0px; top: 0px">{{ user.full_name }}</div>
+    <div style="position:absolute; right:0px; top: 0px">{{ user.full_name }}</div>
     <div class="row">
 
         <div class="col-lg-3  col-10 dcard btn btn-primary m-4">
@@ -41,16 +41,20 @@
             <div><input type="date" name="fir" id="fir" class="form-item m-2">dan</div>
             <div><input type="date" name="sec" id="sec" class="form-item m-2">gacha</div>
             <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Filter</button>
+            <a href="?fir=today&sec=today" type="button" class="btn btn-primary m-2">
+                <i class="fa fa-filter"></i>
+                Bugun
+            </a>
             <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2">
                 <i class="fa fa-filter"></i>
                 Hafta
             </a>
             <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2">
-                <i class="fa fa-filter"></i> 
+                <i class="fa fa-filter"></i>
                 Oy
             </a>
         </form>
-        <canvas class="col-lg-7 col-11"  id="myChart"></canvas>
+        <canvas class="col-lg-7 col-11" id="myChart"></canvas>
         <script
                 src="/static/js/Chart.js">
         </script>
@@ -93,45 +97,47 @@
         </script>
     </div>
 
-<script type="text/javascript">
-    var canvas = document.getElementById("barChart");
-var ctx = canvas.getContext('2d');
+    <script type="text/javascript">
+        var canvas = document.getElementById("barChart");
+        var ctx = canvas.getContext('2d');
 
-// Global Options:
- Chart.defaults.global.defaultFontColor = 'black';
- Chart.defaults.global.defaultFontSize = 16;
+        // Global Options:
+        Chart.defaults.global.defaultFontColor = 'black';
+        Chart.defaults.global.defaultFontSize = 16;
 
-var data = {
-      datasets: [
-        {
-            fill: true,
-            backgroundColor: [
-                'tomato',
-                'mediumseagreen', 
-                'yellow'],
-            data: [5, 70, 25],
+        var data = {
+            labels: ["To'lanmagan", "Naqd pul", "Plastik karta"],
+            datasets: [
+                {
+                    fill: true,
+                    backgroundColor: [
+                        'tomato',
+                        'mediumseagreen',
+                        'yellow'],
+                    data: [{{ dashboard_info.unpaid_p}}, {{ dashboard_info.cash_p}}, {{ dashboard_info.credit_card_p}}],
 // Notice the borderColor 
-            borderColor:    ['white', 'white', 'white'],
-            borderWidth: [0.9,0.9,0.9]
-        }
-    ]
-};
+                    borderColor: ['white', 'white', 'white'],
+                    borderWidth: [0.9, 0.9, 0.9]
+                }
+            ]
+        };
 
-// Notice the rotation from the documentation.
+        // Notice the rotation from the documentation.
 
-var options = {
-        rotation: -0.7 * Math.PI
-};
+        var options = {
+            legend: {display: false},
+            rotation: -0.7 * Math.PI
+        };
 
 
-// Chart declaration:
-var myBarChart = new Chart(ctx, {
-    type: 'pie',
-    data: data,
-    options: options
-});
+        // Chart declaration:
+        var myBarChart = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: options
+        });
 
-// Fun Fact: I've lost exactly 3 of my favorite T-shirts and 2 hoodies this way :|
+        // Fun Fact: I've lost exactly 3 of my favorite T-shirts and 2 hoodies this way :|
 
-</script>
+    </script>
 {% endblock %}

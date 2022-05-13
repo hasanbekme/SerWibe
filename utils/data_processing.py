@@ -2,11 +2,12 @@ from datetime import datetime, timedelta, date
 
 from django.db.models import Sum
 
-from utils.date_config import get_days_before
+from utils.date_config import get_days_before, get_start_of_the_week, get_start_of_the_month
 from web.models import OrderItem, Food, Order, Worker, Category, Table, Expense
 
 today = date.today()
 delta = timedelta(days=1)
+delta_hour = timedelta(hours=1)
 
 
 class FoodTrade:
@@ -129,43 +130,41 @@ def food_trading_data(food, start_date=None, end_date=None):
 
 
 class DashboardInfo:
-    def __init__(self, food_types, trading, workers, categories, orders, tables):
+    def __init__(self, food_types, trading, workers, categories, orders, tables, xvalues, yvalues, cash_p,
+                 credit_card_p, unpaid_p, date_string):
         self.food_types = food_types
         self.trading = trading
         self.workers = workers
         self.categories = categories
         self.orders = orders
         self.tables = tables
+        self.xvalues = xvalues
+        self.yvalues = yvalues
+        self.cash_p = cash_p
+        self.credit_card_p = credit_card_p
+        self.unpaid_p = unpaid_p
+        self.date_string = date_string
 
 
-def get_dashboard_info():
+def get_dashboard_info(start_date=None, end_date=None):
+    # static data
     food_types = Food.objects.count()
-    trading_data = Order.objects.filter(created_at__year=today.year, created_at__month=today.month,
-                                        created_at__day=today.day)
-    trading = trading_data.aggregate(Sum('paid_money'))['paid_money__sum']
-    if trading is None:
-        trading = 0
     workers = Worker.objects.filter(position='waiter').count()
     categories = Category.objects.count()
-    orders = f"{trading_data.filter(is_completed=False).count()}/{trading_data.count()}"
     table_data = Table.objects.all()
     tables = f"{table_data.filter(is_available=False).count()}/{table_data.count()}"
-    dashboard_info = DashboardInfo(food_types, trading, workers, categories, orders, tables)
-    return dashboard_info
+    if start_date in ["", None] or end_date in ["", None]:
+        start_date = "today"
 
-
-def get_sales_graph_data(start_date=None, end_date=None):
-    start_loop = today - timedelta(days=9)
-    end_loop = today + delta
-
-    order_models = Order.objects.all()
-
-    if start_date in ['week', 'month']:
+    if start_date in ['today', 'week', 'month']:
         end_loop = today + timedelta(days=1)
         if start_date == 'week':
-            start_loop = get_days_before(6)
+            start_loop = get_start_of_the_week()
         elif start_date == 'month':
-            start_loop = get_days_before(29)
+            start_loop = get_start_of_the_month()
+        else:
+            start_loop = datetime(year=today.year, month=today.month, day=today.day, hour=00, minute=00)
+            end_loop = datetime.now() + timedelta(seconds=1)
     else:
         if start_date != '' and start_date is not None and end_date != '' and end_date is not None:
             start_loop = datetime.strptime(start_date, "%Y-%m-%d")
@@ -174,19 +173,65 @@ def get_sales_graph_data(start_date=None, end_date=None):
     xvalues = []
     yvalues = []
 
-    date_string = f"{start_loop.strftime('%d/%m/%Y')} - {end_loop.strftime('%d/%m/%Y')}"
+    if start_date == "today":
+        time_interval = f"Bugun, {start_loop.strftime('%H:%M')} - {end_loop.strftime('%H:%M')}"
+    else:
+        time_interval = f"{start_loop.strftime('%d/%m/%Y')} - {end_loop.strftime('%d/%m/%Y')}"
 
-    while start_loop < end_loop:
-        xvalues.append(start_loop.strftime("%d/%m"))
-        sale_amount = order_models.filter(created_at__year=start_loop.year, created_at__month=start_loop.month,
-                                          created_at__day=start_loop.day).aggregate(Sum('paid_money'))[
-            'paid_money__sum']
+    # income statistics
+    total_orders = Order.objects.filter(created_at__gt=start_loop, created_at__lt=end_loop)
+    orders_count = total_orders.count()
+    orders_income = total_orders.aggregate(Sum('paid_money'))['paid_money__sum']
+    cash_p = total_orders.aggregate(Sum('cash_money'))['cash_money__sum']
+    credit_card_p = total_orders.aggregate(Sum('credit_card'))['credit_card__sum']
+    debt_money_p = total_orders.aggregate(Sum('debt_money'))['debt_money__sum']
+    if orders_income is None:
+        orders_income = 0
+    if cash_p is None:
+        cash_p = 0
+    if credit_card_p is None:
+        credit_card_p = 0
+    if debt_money_p is None:
+        debt_money_p = 0
+
+    if start_date != "today":
+        while start_loop < end_loop:
+            xvalues.append(start_loop.strftime("%d/%m"))
+            sale_amount = total_orders.filter(created_at__year=start_loop.year, created_at__month=start_loop.month,
+                                              created_at__day=start_loop.day).aggregate(Sum('paid_money'))[
+                'paid_money__sum']
+            if sale_amount is None:
+                sale_amount = 0
+            yvalues.append(sale_amount)
+            start_loop += delta
+    else:
+        xvalues.append("00")
+        yvalues.append(0)
+        start_loop += delta_hour
+        while start_loop < end_loop:
+            xvalues.append(start_loop.strftime("%H:%M"))
+            sale_amount = \
+                total_orders.filter(created_at__gt=(start_loop - timedelta(hours=1)),
+                                    created_at__lt=start_loop).aggregate(
+                    Sum('paid_money'))['paid_money__sum']
+            if sale_amount is None:
+                sale_amount = 0
+            yvalues.append(sale_amount)
+            start_loop += delta_hour
+        start_loop = end_loop.replace(minute=0)
+        xvalues.append(end_loop.strftime("%H:%M"))
+        sale_amount = \
+            total_orders.filter(created_at__gt=start_loop,
+                                created_at__lt=end_loop).aggregate(
+                Sum('paid_money'))['paid_money__sum']
         if sale_amount is None:
             sale_amount = 0
         yvalues.append(sale_amount)
-        start_loop += delta
 
-    return xvalues, yvalues, date_string
+    dashboard = DashboardInfo(food_types, orders_income, workers, categories, orders_count, tables, xvalues, yvalues,
+                              cash_p, credit_card_p, debt_money_p, time_interval)
+
+    return dashboard
 
 
 def get_expenses_data(start_date=None, end_date=None):
