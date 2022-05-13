@@ -111,8 +111,8 @@ class TableForm(Form):
             self.instance.tax_required = False
             self.instance.service_cost = service_cost
         else:
-            self.instance = True
-            self.instance.service_cost = 0
+            self.instance.tax_required = True
+            self.instance.service_cost = None
         self.instance.save()
 
 
