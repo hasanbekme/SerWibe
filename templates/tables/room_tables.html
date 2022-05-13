@@ -15,6 +15,8 @@
                     </span>
                     <span class="tablenum h1 text-white">{{ table.number }}</span>
                     <div class="icons">
+                        <a class="fa fa-edit text-warning" type="button"
+                           href="{% url 'table_delete' pk_room=room.pk pk_table=table.pk %}"></a>
                         <a class="fa fa-trash text-danger" type="button"
                            href="{% url 'table_delete' pk_room=room.pk pk_table=table.pk %}"></a>
                     </div>

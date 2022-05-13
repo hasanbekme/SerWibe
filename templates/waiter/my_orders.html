@@ -19,13 +19,13 @@
                                 <i class="fa fa-clock-o"></i> {{ order.passed_time_formatted }}
                             </span>
                         {% endif %}
-                        <span style="position:absolute; font-size:0.4em; padding-left:2px; right: 5px">{{ order.table.room.title }}</span>
                         <a href="{% url 'waiter_order' pk=order.table.pk %}" class="cardtable text-white mt-4"
                            style="margin-bottom: 15px!important;">
                             <span class="tableprice">{{ order.table.number }}</span>
                         </a>
                         <a class="startadd" style="bottom:-15px; margin-top:-15px"
                            href="{% url 'add_item' pk_room=order.table.room.pk pk_table=order.table.pk %}">
+                        <span style="position:absolute; font-size:0.3em; padding-left:2px; right: 5px; top:0">{{ order.table.room.title }}</span>
                             <span style="position:absolute; font-size:12px; padding: 1px 2px 0 2px; right: 2px; bottom:0; color: yellow; font-weight:normal; ">{{ order.needed_payment }} so`m</span>
                             +
                         </a>
