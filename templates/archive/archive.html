@@ -53,7 +53,24 @@
             <td class="bg-primary text-white">Olingan vaqt</td>
             <td class="bg-primary text-white">Stol</td>
             <td class="bg-primary text-white">Xizmat</td>
-            <td class="bg-primary text-white">Umumiy summa</td>
+            <td class="bg-primary text-white" style="padding:0 0 0 0;">
+                <table>
+                    <tr>
+                        <td class="btn btn-primary p-2 m-1 shadow" onclick="filterPaid(1)">
+                            <i class="fa fa-list-alt" aria-hidden="true" style="font-size:1.2em;"></i>
+                        </td>
+                        <td class="btn btn-primary p-2 m-1 shadow" onclick="filterPaid(2)">
+                            <i class="fa fa-money" aria-hidden="true" style="font-size:1.2em;"></i>
+                        </td>
+                        <td class="btn btn-primary p-2 m-1 shadow" onclick="filterPaid(3)">
+                            <i class="fa fa-credit-card" aria-hidden="true" style="font-size:1.2em;"></i>
+                        </td>
+                        <td class="btn btn-primary p-2 m-1 shadow" onclick="filterPaid(4)">
+                            <i class="fa fa-ban" aria-hidden="true" style="font-size:1.2em;"></i>
+                        </td>
+                    </tr>
+                </table>
+            </td>
             <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0">Tahlil</td>
         </tr>
 
@@ -74,33 +91,11 @@
                 <td>-------</td>
                 {% endif %}
                 <td>{{ order.tax_price }}</td>
-                <td class="p-0">
-                    <table class="table table-sm mb-0">
-                        <tr style="padding:0; margin:0; font-size:11px">
-                            <td style="padding:0; margin:0; font-size:11px; color: var(--primary);">
-                                <i class="fa fa-money"></i>
-                            </td>
-                            <td style="padding:0; margin:0; font-size:11px;">
-                                {{ order.paid_money }} so'm
-                            </td>
-                        </tr>
-                        <tr style="padding:0; margin:0; font-size:11px">
-                            <td style="padding:0; margin:0; font-size:11px; color: var(--success);">
-                                <i class="fa fa-credit-card"></i>
-                            </td>
-                            <td style="padding:0; margin:0; font-size:11px;">
-                                {{ order.paid_money }} so'm
-                            </td>
-                        </tr>
-                        <tr style="padding:0; margin:0; font-size:11px">
-                            <td style="padding:0; margin:0; font-size:11px; color: var(--danger);">
-                                <i class="fa fa-ban"></i>
-                            </td>
-                            <td style="padding:0; margin:0; font-size:11px">
-                                {{ order.paid_money }} so'm
-                            </td>
-                        </tr>
-                    </table>
+                <td class="text-center">
+                    <span class="paid_money1">{{ order.paid_money }} so'm</span>
+                    <span class="paid_money2">{{ order.paid_money }} so'm</span>
+                    <span class="paid_money3">{{ order.paid_money }} so'm</span>
+                    <span class="paid_money4">{{ order.paid_money }} so'm</span>
                 </td>
                 <td><a href="{% url 'archive_order_view' pk=order.id %}">
                     <button type="button" class="btn btn-info"><i class="fa fa-eye"></i> Tahlil</button>
@@ -140,6 +135,24 @@
             window.location.search = sp.toString()
         }
     </script>
-
+    <script type="text/javascript">
+        function filterPaid(n){
+            var prises1 = document.getElementsByClassName('paid_money1');
+            var prises2 = document.getElementsByClassName('paid_money2');
+            var prises3 = document.getElementsByClassName('paid_money3');
+            var prises4 = document.getElementsByClassName('paid_money4');
+            for (var i=0; i<prises1.length; i++){
+                prises1[i].style.display = "none";
+                prises2[i].style.display = "none";
+                prises3[i].style.display = "none";
+                prises4[i].style.display = "none";
+                if (n==1){ prises1[i].style.display = "inline"; }
+                if (n==2){ prises2[i].style.display = "inline"; }
+                if (n==3){ prises3[i].style.display = "inline"; }
+                if (n==4){ prises4[i].style.display = "inline"; }
+            }
+        }
+        filterPaid(1);
+    </script>
 
 {% endblock %}
