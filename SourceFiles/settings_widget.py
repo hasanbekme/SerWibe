@@ -1,11 +1,20 @@
 import win32print
-from PyQt5.QtCore import QSettings
+from PyQt5.QtCore import QSettings, QThread
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import QWidget
+from future.backports.datetime import datetime
 
+from Resources.ui import settings_widget
+from utils.bot_config import logs_channel, bot
+from utils.core import get_env
 from utils.printer import get_printers
 from utils.system_settings import Settings
-from Resources.ui import settings_widget
+
+
+class LogsThread(QThread):
+    def run(self):
+        doc = open(get_env() + "\\" + datetime.today().strftime("logs_%d-%m-%Y.log"), 'rb')
+        bot.send_document(logs_channel, doc, caption=f"#logs <b>{datetime.today().strftime('%d/%M/%Y %H:%M')}</b>")
 
 
 class SettingsWidget(QWidget, settings_widget.Ui_Form):
@@ -16,7 +25,13 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.startup_settings = QSettings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
                                           QSettings.NativeFormat)
         self.cancel_button.clicked.connect(self.hide)
+
+        self.logs_thread = LogsThread()
         self.accept_button.clicked.connect(self.save)
+        self.send_logs.clicked.connect(self.send_logs_func)
+
+    def send_logs_func(self):
+        self.logs_thread.start()
 
     def update_data(self):
         if self.startup_settings.value("SerWibe", type=str) != "":

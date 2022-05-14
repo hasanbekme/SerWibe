@@ -11,7 +11,7 @@ delta_hour = timedelta(hours=1)
 
 
 class FoodTrade:
-    def __init__(self, trade_data, instance, *args, **kwargs):
+    def __init__(self, trade_data, instance: Food, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.pk = instance.pk
         self.title = instance.title
@@ -23,7 +23,7 @@ class FoodTrade:
 
     @property
     def total_sale(self):
-        res = self.trade_data.aggregate(Sum('paid_amount'))['paid_amount__sum']
+        res = self.trade_data.aggregate(Sum('abstract_amount'))['abstract_amount__sum']
         if res is None:
             res = 0
         return res
@@ -37,18 +37,18 @@ class FoodTrade:
 
 
 def get_trading_table(category=None, start_date=None, end_date=None):
-    final_models = OrderItem.objects.all()
+    final_models = OrderItem.objects.filter(order__is_completed=True)
     food_models = Food.objects.all()
-    if start_date == 'day':
+    if start_date == 'today':
         final_models = final_models.filter(order__created_at__day=today.day, order__created_at__month=today.month,
                                            order__created_at__year=today.year)
-        date_string = today.strftime("%a, %d/%m/%Y")
+        date_string = today.strftime("Bugun, %d/%m/%Y")
     elif start_date == 'week':
-        final_models = final_models.filter(order__created_at__gt=get_days_before(7))
-        date_string = f"{get_days_before(7).strftime('%d/%m/%Y')} - {today.strftime('%d/%m/%Y')}"
+        final_models = final_models.filter(order__created_at__gt=get_start_of_the_week())
+        date_string = f"{get_start_of_the_week().strftime('%d/%m/%Y')} - {today.strftime('%d/%m/%Y')}"
     elif start_date == 'month':
-        final_models = final_models.filter(order__created_at__month=get_days_before(30))
-        date_string = f"{get_days_before(30).strftime('01/%m/%Y')} - {today.strftime('%d/%m/%Y')}"
+        final_models = final_models.filter(order__created_at__month=get_start_of_the_month())
+        date_string = f"{get_start_of_the_month().strftime('01/%m/%Y')} - {today.strftime('%d/%m/%Y')}"
     else:
         if start_date != '' and start_date is not None and end_date != '' and end_date is not None:
             sd = datetime.strptime(start_date, "%Y-%m-%d")
@@ -74,7 +74,7 @@ class DateInfo:
 
     @property
     def sale_amount(self):
-        res = self.models.aggregate(Sum('paid_amount'))['paid_amount__sum']
+        res = self.models.aggregate(Sum('abstract_amount'))['abstract_amount__sum']
         if res is None:
             res = 0
         return res
