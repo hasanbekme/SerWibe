@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.forms import Form, CharField, ChoiceField, PasswordInput, ModelForm, IntegerField, Textarea, BooleanField
 
 from utils.printer import get_printers
+from utils.system_settings import get_tax
 from .models import Worker, Category, Food, Room, Table, ExpenseReason, Expense, Order
 
 
@@ -156,6 +157,7 @@ class OrderCompletionForm(Form):
         self.instance.credit_card = credit_card
         self.instance.debt_money = debt_money
         self.instance.is_completed = True
+        self.instance.waiter_fee = int((1 + get_tax() / 100) * self.instance.without_tax)
         self.instance.paid_money = cash_money + credit_card
         self.instance.save()
         if self.instance.order_type == 'table':

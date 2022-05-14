@@ -153,6 +153,7 @@ class Order(models.Model):
     cash_money = models.IntegerField(default=0)
     credit_card = models.IntegerField(default=0)
     debt_money = models.IntegerField(default=0)
+    waiter_fee = models.IntegerField(default=0)
     comment = models.TextField(blank=True, null=True)
 
     def __str__(self):

@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, date
+from datetime import date
 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user
@@ -8,7 +8,8 @@ from django.core.paginator import Paginator
 from django.db.models import Sum
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 
-from utils.data_processing import get_trading_table, food_trading_data, get_dashboard_info, get_expenses_data
+from utils.data_processing import get_trading_table, food_trading_data, get_dashboard_info, get_expenses_data, \
+    get_archive_data
 from utils.payment_receipt import print_receipt
 from utils.request_processing import get_user, is_waiter, is_admin, pickup_items_add
 from utils.request_processing import order_items_add
@@ -578,39 +579,17 @@ def trading_detailed_view(request, pk):
 @login_required(login_url='/')
 def archive(request):
     if is_admin(request):
-        now = datetime.now()
-        waiter_models = Worker.objects.filter(position='waiter')
-        order_models = Order.objects.filter(is_completed=True)
-        fir = request.GET.get('fir')
-        sec = request.GET.get('sec')
+        start_date = request.GET.get('fir')
+        end_date = request.GET.get('sec')
         waiter = request.GET.get('waiter')
-        date_string = ""
-        if fir in ['day', 'week', 'month']:
-            if fir == 'day':
-                order_models = order_models.filter(created_at__day=now.day)
-                date_string = now.strftime("%a, %d/%m/%Y")
-            elif fir == 'week':
-                order_models = order_models.filter(created_at__gt=get_start_of_week())
-                date_string = f"{get_start_of_week().strftime('%d/%m/%Y')} - {now.strftime('%d/%m/%Y')}"
-            elif fir == 'month':
-                order_models = order_models.filter(created_at__month=now.month)
-                date_string = f"{get_start_of_week().strftime('01/%m/%Y')} - {now.strftime('%d/%m/%Y')}"
-        else:
-            if fir != '' and fir is not None and sec != '' and sec is not None:
-                sd = datetime.strptime(fir, "%Y-%m-%d")
-                ed = datetime.strptime(sec, "%Y-%m-%d")
-                order_models = order_models.filter(created_at__gt=sd, created_at__lt=ed)
-                date_string = f"{sd.strftime('01/%m/%Y')} - {ed.strftime('%d/%m/%Y')}"
-        if waiter not in [None, '']:
-            order_models = order_models.filter(waiter_id=int(waiter))
-        total_sum = order_models.aggregate(Sum('paid_money'))['paid_money__sum']
-        if total_sum is None:
-            total_sum = 0
-        p = Paginator(order_models, 10)
+        order_type = request.GET.get('order_type')
+        archive_info = get_archive_data(start_date, end_date, waiter, order_type)
+        order_models = archive_info.orders
+        p = Paginator(order_models, 3)
+        print(p)
         page = p.get_page(request.GET.get('page'))
         return render(request, "archive/archive.html",
-                      context={'waiters': waiter_models, 'orders': page, 'date_string': date_string,
-                               'total_sum': total_sum,
+                      context={'archive_info': archive_info,
                                'p_paginator': page,
                                'tax': get_tax()})
     else:

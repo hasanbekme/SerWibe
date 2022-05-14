@@ -249,3 +249,62 @@ def get_expenses_data(start_date=None, end_date=None):
             expense_models = expense_models.filter(created_at__gt=start_loop, created_at__lt=end_loop)
 
     return expense_models
+
+
+class ArchiveInfo:
+    def __init__(self, orders, stuffs, waiter_fee, orders_income, cash_money_p, credit_card_p, debt_money_p,
+                date_string):
+        self.orders = orders
+        self.stuffs = stuffs
+        self.waiter_fee = waiter_fee
+        self.orders_income = orders_income
+        self.cash_money_p = cash_money_p
+        self.credit_card_p = credit_card_p
+        self.debt_money_p = debt_money_p
+        self.date_string = date_string
+
+
+def get_archive_data(start_date=None, end_date=None, waiter=None, order_type=None):
+    stuffs = Worker.objects.all()
+    order_models = Order.objects.filter(is_completed=True)
+    date_string = ""
+    if start_date in ['today', 'week', 'month']:
+        if start_date == 'today':
+            order_models = order_models.filter(created_at__day=today.day, created_at__month=today.month,
+                                               created_at__year=today.year)
+            date_string = today.strftime("Bugun, %d/%m/%Y")
+        elif start_date == 'week':
+            order_models = order_models.filter(created_at__gt=get_start_of_the_week())
+            date_string = f"{get_start_of_the_week().strftime('%d/%m/%Y')} - {today.strftime('%d/%m/%Y')}"
+        elif start_date == 'month':
+            order_models = order_models.filter(created_at__month=today.month)
+            date_string = f"{get_start_of_the_month().strftime('01/%m/%Y')} - {today.strftime('%d/%m/%Y')}"
+    else:
+        if start_date != '' and start_date is not None and end_date != '' and end_date is not None:
+            sd = datetime.strptime(start_date, "%Y-%m-%d")
+            ed = datetime.strptime(end_date, "%Y-%m-%d") + delta
+            order_models = order_models.filter(created_at__gt=sd, created_at__lt=ed)
+            date_string = f"{sd.strftime('01/%m/%Y')} - {ed.strftime('%d/%m/%Y')}"
+    if waiter not in [None, '']:
+        total_orders = order_models.filter(waiter_id=int(waiter))
+    else:
+        total_orders = order_models
+    if order_type not in [None, '']:
+        total_orders = total_orders.filter(order_type=order_type)
+    orders_income = total_orders.aggregate(Sum('paid_money'))['paid_money__sum']
+    cash_p = total_orders.aggregate(Sum('cash_money'))['cash_money__sum']
+    credit_card_p = total_orders.aggregate(Sum('credit_card'))['credit_card__sum']
+    debt_money_p = total_orders.aggregate(Sum('debt_money'))['debt_money__sum']
+    waiter_fee = total_orders.aggregate(Sum('waiter_fee'))['waiter_fee__sum']
+    if orders_income is None:
+        orders_income = 0
+    if cash_p is None:
+        cash_p = 0
+    if credit_card_p is None:
+        credit_card_p = 0
+    if debt_money_p is None:
+        debt_money_p = 0
+    if waiter_fee is None:
+        waiter_fee = 0
+    return ArchiveInfo(total_orders, stuffs, waiter_fee, orders_income, cash_p, credit_card_p, debt_money_p,
+                       date_string)

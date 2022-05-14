@@ -7,11 +7,11 @@
         <input type="date" name="fir" id="fir" class="form-item m-2">dan-
         <input type="date" name="sec" id="sec" class="form-item m-2">gacha
         <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Filter</button>
-        <a href="?fir=day&sec=day" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Bugun</a>
+        <a href="?fir=today&sec=today" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Bugun</a>
         <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Hafta</a>
         <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Oy</a>
     </form>
-    <div class="h6 text-center">{{ date_string }}</div>
+    <div class="h6 text-center">{{ archive_info.date_string }}</div>
     <table class="table table-hover">
         <tr>
             <td class="bg-primary text-white" style=" border-radius: 10px 0 0 0">№</td>
@@ -21,12 +21,12 @@
                     <button class="btn btn-primary p-0 dropdown-toggle"
                             type="button" id="dropdownMenu1" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false" style="width:100%">
-                        Offitsant
+                        Xodim
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        {% for waiter in waiters %}
+                        {% for stuff in archive_info.stuffs %}
                             <a class="dropdown-item"
-                               onclick="addurlparameter('wtype', {{ waiter.id }})">{{ waiter.full_name }}</a>
+                               onclick="addurlparameter('waiter', {{ stuff.id }})">{{ stuff.full_name }}</a>
                         {% endfor %}
                     </div>
                 </div>
@@ -41,9 +41,9 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <a class="dropdown-item"
-                           onclick="addurlparameter('otype', 'in')">Shu yerda</a>
+                           onclick="addurlparameter('order_type', 'table')">Shu yerda</a>
                         <a class="dropdown-item"
-                           onclick="addurlparameter('otype', 'out')">Olib ketilgan</a>
+                           onclick="addurlparameter('order_type', 'pickup')">Olib ketilgan</a>
                     </div>
                 </div>
             </td>
@@ -53,16 +53,20 @@
             <td class="bg-primary text-white" style="padding:0 0 0 0;">
                 <table>
                     <tr>
-                        <td class="btn btn-info p-2 m-1 mt-2 shadow" style="height: 30px; padding-top: 5px!important;" onclick="filterPaid(1)">
+                        <td class="btn btn-info p-2 m-1 mt-2 shadow" style="height: 30px; padding-top: 5px!important;"
+                            onclick="filterPaid(1)">
                             <i class="fa fa-list-alt" aria-hidden="true" style="font-size:1.2em; "></i>
                         </td>
-                        <td class="btn btn-success p-2 m-1 mt-2 shadow" style="height: 30px; padding-top: 5px!important;" onclick="filterPaid(2)">
+                        <td class="btn btn-success p-2 m-1 mt-2 shadow"
+                            style="height: 30px; padding-top: 5px!important;" onclick="filterPaid(2)">
                             <i class="fa fa-money" aria-hidden="true" style="font-size:1.2em; "></i>
                         </td>
-                        <td class="btn btn-warning p-2 m-1 mt-2 shadow" style="height: 30px; padding-top: 5px!important;" onclick="filterPaid(3)">
+                        <td class="btn btn-warning p-2 m-1 mt-2 shadow"
+                            style="height: 30px; padding-top: 5px!important;" onclick="filterPaid(3)">
                             <i class="fa fa-credit-card" aria-hidden="true" style="font-size:1.2em; "></i>
                         </td>
-                        <td class="btn btn-danger p-2 m-1 mt-2 shadow" style="height: 30px; padding-top: 5px!important;" style="width:39px" onclick="filterPaid(4)">
+                        <td class="btn btn-danger p-2 m-1 mt-2 shadow" style="height: 30px; padding-top: 5px!important;"
+                            style="width:39px" onclick="filterPaid(4)">
                             <i class="fa fa-ban" aria-hidden="true" style="font-size:1.2em; "></i>
                         </td>
                     </tr>
@@ -71,7 +75,7 @@
             <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0">Tahlil</td>
         </tr>
 
-        {% for order in orders %}
+        {% for order in p_paginator %}
             <tr>
                 <td>{{ forloop.counter }}</td>
                 <td>#{{ order.id }}</td>
@@ -83,16 +87,20 @@
                 {% endif %}
                 <td>{{ order.created_time }}</td>
                 {% if order.order_type == 'table' %}
-                <td>{{ order.table.room.title }} №{{ order.table.number }}</td>
+                    <td>{{ order.table.room.title }} №{{ order.table.number }}</td>
                 {% else %}
-                <td>-------</td>
+                    <td>-------</td>
                 {% endif %}
                 <td>{{ order.tax_price }}</td>
                 <td class="">
-                    <span class="paid_money1"><i class="fa fa-list-alt"></i> <span class="moneyed">{{ order.paid_money }}</span> so'm</span>
-                    <span class="paid_money2"><i class="fa fa-money"></i> <span class="moneyed">{{ order.paid_money }}</span> so'm</span>
-                    <span class="paid_money3"><i class="fa fa-credit-card"></i> <span class="moneyed">{{ order.paid_money }}</span> so'm</span>
-                    <span class="paid_money4"><i class="fa fa-ban"></i> <span class="moneyed">{{ order.paid_money }}</span> so'm</span>
+                    <span class="paid_money1"><i class="fa fa-list-alt"></i> <span
+                            class="moneyed">{{ order.paid_money }}</span> so'm</span>
+                    <span class="paid_money2"><i class="fa fa-money"></i> <span
+                            class="moneyed">{{ order.cash_money }}</span> so'm</span>
+                    <span class="paid_money3"><i class="fa fa-credit-card"></i> <span
+                            class="moneyed">{{ order.credit_card }}</span> so'm</span>
+                    <span class="paid_money4"><i class="fa fa-ban"></i> <span
+                            class="moneyed">{{ order.debt_money }}</span> so'm</span>
                 </td>
                 <td><a href="{% url 'archive_order_view' pk=order.id %}">
                     <button type="button" class="btn btn-info"><i class="fa fa-eye"></i> Tahlil</button>
@@ -119,10 +127,18 @@
                 --
             </td>
             <td>
-                <span class="h6 font-weight-bold text-dark text-center"><span class="moneyed">13000</span> so`m</span>
+                <span class="h6 font-weight-bold text-dark text-center"><span
+                        class="moneyed">{{ archive_info.waiter_fee }}</span> so`m</span>
             </td>
             <td>
-                <span class="h6 font-weight-bold text-dark text-center"><span class="moneyed">13000</span> so`m</span>
+                <span class="paid_money1 h6 font-weight-bold text-dark text-center"><i class="fa fa-list-alt"></i> <span
+                        class="moneyed">{{ archive_info.orders_income }}</span> so'm</span>
+                <span class="paid_money2 h6 font-weight-bold text-dark text-center"><i class="fa fa-money"></i> <span
+                        class="moneyed">{{ archive_info.cash_money_p }}</span> so'm</span>
+                <span class="paid_money3 h6 font-weight-bold text-dark text-center"><i
+                        class="fa fa-credit-card"></i> <span class="moneyed">{{ archive_info.credit_card_p }}</span> so'm</span>
+                <span class="paid_money4 h6 font-weight-bold text-dark text-center"><i class="fa fa-ban"></i> <span
+                        class="moneyed">{{ archive_info.debt_money_p }}</span> so'm</span>
             </td>
             <td>
                 --
@@ -161,30 +177,40 @@
         }
     </script>
     <script type="text/javascript">
-        function filterPaid(n){
+        function filterPaid(n) {
             var prises1 = document.getElementsByClassName('paid_money1');
             var prises2 = document.getElementsByClassName('paid_money2');
             var prises3 = document.getElementsByClassName('paid_money3');
             var prises4 = document.getElementsByClassName('paid_money4');
-            for (var i=0; i<prises1.length; i++){
+            for (var i = 0; i < prises1.length; i++) {
                 prises1[i].style.display = "none";
                 prises2[i].style.display = "none";
                 prises3[i].style.display = "none";
                 prises4[i].style.display = "none";
-                if (n==1){ prises1[i].style.display = "inline"; }
-                if (n==2){ prises2[i].style.display = "inline"; }
-                if (n==3){ prises3[i].style.display = "inline"; }
-                if (n==4){ prises4[i].style.display = "inline"; }
+                if (n == 1) {
+                    prises1[i].style.display = "inline";
+                }
+                if (n == 2) {
+                    prises2[i].style.display = "inline";
+                }
+                if (n == 3) {
+                    prises3[i].style.display = "inline";
+                }
+                if (n == 4) {
+                    prises4[i].style.display = "inline";
+                }
             }
         }
+
         filterPaid(1);
     </script>
-        <script type="text/javascript">
+    <script type="text/javascript">
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         }
+
         var moneyeds = document.getElementsByClassName("moneyed");
-        for (var i=0; i<moneyeds.length; i++){
+        for (var i = 0; i < moneyeds.length; i++) {
             moneyeds[i].innerHTML = numberWithCommas(moneyeds[i].innerHTML);
         }
 
