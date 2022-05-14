@@ -17,23 +17,23 @@
                         <tr>
                             <td>{{ orderitem.meal.title }}</td>
                             <td>{{ orderitem.quantity }} ta</td>
-                            <td>{{ orderitem.abstract_amount }} so'm</td>
+                            <td><span class="moneyed">{{ orderitem.abstract_amount }}</span> so'm</td>
                         </tr>
                     {% endfor %}
                     <tr class="font-weight-bold">
                         <td>Xizmat</td>
                         {% if order.table.tax_required %}
                         <td>{{ tax }}%</td>
-                        <td>{{ order.tax_price }} so'm</td>
+                        <td><span class="moneyed">{{ order.tax_price }}</span> so'm</td>
                         {% else %}
                         <td>{{ order.passed_time_formatted }}</td>
-                        <td>{{ order.room_service_cost }} so'm</td>
+                        <td><span class="moneyed">{{ order.room_service_cost }}</span> so'm</td>
                         {% endif %}
                     </tr>
                     <tr class="text-danger font-weight-bold">
                         <td>Umumiy</td>
                         <td>{{ order.orderitem_set.count }} ta</td>
-                        <td>{{ order.needed_payment }} so'm</td>
+                        <td><span class="moneyed">{{ order.needed_payment }}</span> so'm</td>
                     </tr>
                 </table>
                 {{ form.comment }}
@@ -91,5 +91,125 @@
         </div>
     </form>
 
+    <script type="text/javascript">
+        var totalsumm = {{ order.needed_payment }};
+        document.getElementById('id_comment').placeholder = "Izoh...";
+        var payment_inputs = document.getElementsByTagName("input");
+        var payment_buttons = document.getElementsByTagName("buttons");
+        payment_inputs[1].placeholder = "Naqt pul";
+        payment_inputs[2].placeholder = "Plastik karta";
+        payment_inputs[3].placeholder = "To`lanmagan";
 
+        payment_inputs[1].onkeyup = function() {back_function()};
+        payment_inputs[2].onkeyup = function() {back_function()};
+        payment_inputs[3].onkeyup = function() {back_function()};
+        function back_function(){
+            
+            if (payment_inputs[1].value>0){
+                document.getElementById('cash_money').className = "btn btn-primary";
+            }
+            else{
+                document.getElementById('cash_money').className = "btn btn-secondary";
+            }
+            if (payment_inputs[2].value>0){
+                document.getElementById('credit_card').className = "btn btn-primary";
+            }
+            else{
+                document.getElementById('credit_card').className = "btn btn-secondary";
+            }
+            if (payment_inputs[3].value>0){
+                document.getElementById('debt_money').className = "btn btn-primary";
+            }
+            else{
+                document.getElementById('debt_money').className = "btn btn-secondary";
+            }
+            if (payment_inputs[1].value*1+payment_inputs[2].value*1+payment_inputs[3].value*1>=totalsumm){
+                document.getElementById("submitForm").disabled = false;
+            }
+            else{
+                document.getElementById("submitForm").disabled = true;
+            }
+            
+        }
+
+        function money_cash(){
+            if (payment_inputs[2].value*1+payment_inputs[3].value*1>=totalsumm){
+                if (payment_inputs[2].value*1==totalsumm || payment_inputs[3].value*1==totalsumm){
+                }
+                else{
+                return;
+                }
+            }
+            if (payment_inputs[2].value*1+payment_inputs[3].value*1==totalsumm){
+                payment_inputs[1].value=totalsumm;
+                payment_inputs[2].value="";
+                payment_inputs[3].value="";
+            }
+            else if(payment_inputs[2].value*1+payment_inputs[3].value*1>0){
+                if (totalsumm - (payment_inputs[2].value*1+payment_inputs[3].value*1)<=0){
+                    
+                }
+                else{
+                payment_inputs[1].value=totalsumm - (payment_inputs[2].value*1+payment_inputs[3].value*1);
+                }
+            }
+            else{
+                payment_inputs[1].value=totalsumm;
+            }
+            back_function()
+        }
+        function credit_card(){
+            if (payment_inputs[1].value*1+payment_inputs[3].value*1>=totalsumm){
+                if (payment_inputs[1].value*1==totalsumm || payment_inputs[3].value*1==totalsumm){
+                }
+                else{
+                return;
+                }
+            }
+            if (payment_inputs[1].value*1+payment_inputs[3].value*1==totalsumm){
+                payment_inputs[2].value=totalsumm;
+                payment_inputs[1].value="";
+                payment_inputs[3].value="";
+            }
+            else if(payment_inputs[1].value*1+payment_inputs[3].value*1>0){
+                if (totalsumm - (payment_inputs[1].value*1+payment_inputs[3].value*1)<=0){
+                    
+                }
+                else{
+                payment_inputs[2].value=totalsumm - (payment_inputs[1].value*1+payment_inputs[3].value*1);
+                }
+            }
+            else{
+                payment_inputs[2].value=totalsumm;
+            }
+            back_function()
+        }
+        function debt(){
+            if (payment_inputs[1].value*1+payment_inputs[2].value*1>=totalsumm){
+                if (payment_inputs[1].value*1==totalsumm || payment_inputs[2].value*1==totalsumm){
+                }
+                else{
+                return;
+                }
+            }
+            if (payment_inputs[1].value*1+payment_inputs[2].value*1==totalsumm){
+                payment_inputs[3].value=totalsumm;
+                payment_inputs[1].value="";
+                payment_inputs[2].value="";
+            }
+            else if(payment_inputs[1].value*1+payment_inputs[2].value*1>0){
+                if (totalsumm - (payment_inputs[1].value*1+payment_inputs[2].value*1)<=0){
+                    
+                }
+                else{
+                payment_inputs[3].value=totalsumm - (payment_inputs[1].value*1+payment_inputs[2].value*1);
+                }
+            }
+            else{
+                payment_inputs[3].value=totalsumm;
+            }
+            back_function()
+        }
+        back_function();
+    </script>
 {% endblock %}

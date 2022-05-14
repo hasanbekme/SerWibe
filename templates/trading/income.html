@@ -1,12 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
-
-    <br>
-
     <form class="container"
-          style="width:100%; background:white; padding:25px; border-radius: 15px; box-shadow: 1px 2px 3px gray;">
+          style="width:100%; background:white; padding:5px; border-radius: 15px; box-shadow: 1px 2px 3px gray;">
         <input type="date" name="fir" id="fir" class="form-item m-2">dan-
         <input type="date" name="sec" id="sec" class="form-item m-2">gacha
         <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Filter</button>
@@ -21,9 +17,9 @@
             <td class="bg-primary text-white" style=" border-radius: 10px 0 0 0">№</td>
             <td class="bg-primary text-white">
                 <div class="dropdown">
-                    <button class="btn btn-primary p-0 dropdown-toggle"
+                    <button class="btn btn-primary p-0 dropdown-toggle "
                             type="button" id="dropdownMenu1" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
+                            aria-haspopup="true" aria-expanded="false" style="width:100%; text-align:left">
                         Kategoriya
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -48,13 +44,25 @@
                 <td>{{ food.title }}</td>
                 <td><img src="{{ food.photo }}" style="height: 50px; width:50px" alt="image"></td>
                 <td>{{ food.total_sold }}</td>
-                <td>{{ food.total_sale }} so'm</td>
+                <td><span class="moneyed">{{ food.total_sale }}</span> so'm</td>
                 <td><a href="{% url 'trading_detailed_view' pk=food.pk %}">
                     <button type="button" class="btn btn-info"><i class="fa fa-eye"></i>Tahlil</button>
                 </a></td>
             </tr>
         {% endfor %}
-
+        <tr>
+            <td>--</td>
+            <td>
+                <span class="h6 font-weight-bold text-dark text-center">Jami</span>
+            </td>
+            <td>--</td> 
+            <td>--</td> 
+            <td>--</td> 
+            <td>
+                <span class="h6 font-weight-bold text-dark text-center"><span class="moneyed">13000</span> so`m</span>
+            </td>
+            <td>--</td>
+        </tr>
     </table>
 
 
@@ -64,21 +72,20 @@
     <div class="text-center">
 
         {% if p_paginator.has_previous %}
-            <a class="btn btn-primary" href="?page={{ p_paginator.previous_page_number }}"><</a>
+            <a class="btn btn-primary mb-5" href="?page={{ p_paginator.previous_page_number }}"><</a>
         {% endif %}
-        <span class="btn btn-primary">
+        <span class="btn btn-primary mb-5">
 
     Sahifa {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
     </span>
 
 
         {% if p_paginator.has_next %}
-            <a class="btn btn-primary" href="?page={{ p_paginator.next_page_number }}">></a>
+            <a class="btn btn-primary mb-5" href="?page={{ p_paginator.next_page_number }}">></a>
         {% endif %}
     </div>
 
     <!-- End Paginator -->
-    <div class="h5 font-weight-bold text-danger text-right">Jami: {{ total }} so'm</div>
     <script type="text/javascript">
         var year = new URL(location.href).searchParams.get('fir');
         document.getElementById("fir").value = year;
@@ -92,5 +99,6 @@
         }
     </script>
 
+</script>
 
 {% endblock %}

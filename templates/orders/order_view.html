@@ -16,7 +16,7 @@
                     <tr>
                         <td>{{ orderitem.meal.title }}</td>
                         <td>{{ orderitem.quantity }} ta</td>
-                        <td>{{ orderitem.total_price }} so'm</td>
+                        <td><span class="moneyed">{{ orderitem.total_price }}</span> so'm</td>
                     </tr>
                 {% endfor %}
 
@@ -24,16 +24,16 @@
                         <td>Xizmat</td>
                         {% if order.table.tax_required %}
                         <td>{{ tax }}%</td>
-                        <td>{{ order.tax_price }} so'm</td>
+                        <td><span class="moneyed">{{ order.tax_price }}</span> so'm</td>
                         {% else %}
                         <td>{{ order.passed_time_formatted }}</td>
-                        <td>{{ order.room_service_cost }} so'm</td>
+                        <td><span class="moneyed">{{ order.room_service_cost }}</span> so'm</td>
                         {% endif %}
                     </tr>
                 <tr class="text-danger font-weight-bold">
                     <td>Umumiy</td>
                     <td>{{ order.orderitem_set.count }} ta</td>
-                    <td>{{ order.needed_payment }} so'm</td>
+                    <td><span class="moneyed">{{ order.needed_payment }}</span> so'm</td>
                 </tr>
             </table>
             <div class="mr-auto">

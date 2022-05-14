@@ -61,7 +61,7 @@
                             </div>
                             <span id="{{ food.id }}p"
                                   style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
+                                  class="text-danger moneyed">{{ food.price }} so`m</span>
                         </div>
                     {% endfor %}
                 </div>
@@ -74,7 +74,7 @@
 
         <button type="submit" style="float: right; width: 66%; height: 55px; background-color: white; border:none;"
                 class="h4 font-weight-bold text-danger">
-            <span id="allsumm">0</span> so`m
+            <span id="allsumm" class="moneyed">0</span> so`m
             <i class="fa fa-check" aria-hidden="true"></i>
         </button>
 

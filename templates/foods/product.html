@@ -51,7 +51,7 @@
                                 <td class="text-center"><i class="fa fa-times-circle-o" aria-hidden="true"
                                                            style="font-size: 2em; color:red"></i></td>
                             {% endif %}
-                            <td>{{ food.price }} so'm</td>
+                            <td><span class="moneyed">{{ food.price }}</span> so'm</td>
                             <td>{{ food.category.title }}</td>
                             <td><a href="{% url 'food_edit' pk=food.pk %}">
                                 <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Tahrir</button>
@@ -152,4 +152,5 @@
             document.getElementById("tab-A").setAttribute("class", " nav-link nav-link-style border-0");
         }
     </script>
+
 {% endblock %}
