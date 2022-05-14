@@ -47,7 +47,7 @@ def get_trading_table(category=None, start_date=None, end_date=None):
         final_models = final_models.filter(order__created_at__gt=get_start_of_the_week())
         date_string = f"{get_start_of_the_week().strftime('%d/%m/%Y')} - {today.strftime('%d/%m/%Y')}"
     elif start_date == 'month':
-        final_models = final_models.filter(order__created_at__month=get_start_of_the_month())
+        final_models = final_models.filter(order__created_at__gt=get_start_of_the_month())
         date_string = f"{get_start_of_the_month().strftime('01/%m/%Y')} - {today.strftime('%d/%m/%Y')}"
     else:
         if start_date != '' and start_date is not None and end_date != '' and end_date is not None:
