@@ -59,8 +59,8 @@ def dashboard(request):
         start_date = request.GET.get('fir')
         end_date = request.GET.get('sec')
         dashboard_info = get_dashboard_info(start_date, end_date)
-        mx = int(max(dashboard_info.yvalues) * 1.1)
-        mn = min(dashboard_info.yvalues) // 2
+        mx = int(max(dashboard_info.yvalues) * 1.2)
+        mn = 0
         return render(request, 'dashboard.html',
                       {'dashboard_info': dashboard_info, 'labels': json.dumps(dashboard_info.xvalues),
                        'data': json.dumps(dashboard_info.yvalues),

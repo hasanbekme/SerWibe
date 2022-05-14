@@ -205,7 +205,7 @@ def get_dashboard_info(start_date=None, end_date=None):
             yvalues.append(sale_amount)
             start_loop += delta
     else:
-        xvalues.append("00")
+        xvalues.append("00:00")
         yvalues.append(0)
         start_loop += delta_hour
         while start_loop < end_loop:
