@@ -2,11 +2,8 @@
 {% block content %}
 
 
-
-    <br>
-
     <form class="container"
-          style="width:100%; background:white; padding:25px; border-radius: 15px; box-shadow: 1px 2px 3px gray;">
+          style="width:100%; background:white; padding:5px; border-radius: 15px; box-shadow: 1px 2px 3px gray;">
         <input type="date" name="fir" id="fir" class="form-item m-2">dan-
         <input type="date" name="sec" id="sec" class="form-item m-2">gacha
         <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Filter</button>
@@ -56,17 +53,17 @@
             <td class="bg-primary text-white" style="padding:0 0 0 0;">
                 <table>
                     <tr>
-                        <td class="btn btn-primary p-2 m-1 shadow" onclick="filterPaid(1)">
-                            <i class="fa fa-list-alt" aria-hidden="true" style="font-size:1.2em;"></i>
+                        <td class="btn btn-info p-2 m-1 mt-2 shadow" style="height: 30px; padding-top: 5px!important;" onclick="filterPaid(1)">
+                            <i class="fa fa-list-alt" aria-hidden="true" style="font-size:1.2em; "></i>
                         </td>
-                        <td class="btn btn-primary p-2 m-1 shadow" onclick="filterPaid(2)">
-                            <i class="fa fa-money" aria-hidden="true" style="font-size:1.2em;"></i>
+                        <td class="btn btn-success p-2 m-1 mt-2 shadow" style="height: 30px; padding-top: 5px!important;" onclick="filterPaid(2)">
+                            <i class="fa fa-money" aria-hidden="true" style="font-size:1.2em; "></i>
                         </td>
-                        <td class="btn btn-primary p-2 m-1 shadow" onclick="filterPaid(3)">
-                            <i class="fa fa-credit-card" aria-hidden="true" style="font-size:1.2em;"></i>
+                        <td class="btn btn-warning p-2 m-1 mt-2 shadow" style="height: 30px; padding-top: 5px!important;" onclick="filterPaid(3)">
+                            <i class="fa fa-credit-card" aria-hidden="true" style="font-size:1.2em; "></i>
                         </td>
-                        <td class="btn btn-primary p-2 m-1 shadow" onclick="filterPaid(4)">
-                            <i class="fa fa-ban" aria-hidden="true" style="font-size:1.2em;"></i>
+                        <td class="btn btn-danger p-2 m-1 mt-2 shadow" style="height: 30px; padding-top: 5px!important;" style="width:39px" onclick="filterPaid(4)">
+                            <i class="fa fa-ban" aria-hidden="true" style="font-size:1.2em; "></i>
                         </td>
                     </tr>
                 </table>
@@ -91,17 +88,46 @@
                 <td>-------</td>
                 {% endif %}
                 <td>{{ order.tax_price }}</td>
-                <td class="text-center">
-                    <span class="paid_money1">{{ order.paid_money }} so'm</span>
-                    <span class="paid_money2">{{ order.paid_money }} so'm</span>
-                    <span class="paid_money3">{{ order.paid_money }} so'm</span>
-                    <span class="paid_money4">{{ order.paid_money }} so'm</span>
+                <td class="">
+                    <span class="paid_money1"><i class="fa fa-list-alt"></i> <span class="moneyed">{{ order.paid_money }}</span> so'm</span>
+                    <span class="paid_money2"><i class="fa fa-money"></i> <span class="moneyed">{{ order.paid_money }}</span> so'm</span>
+                    <span class="paid_money3"><i class="fa fa-credit-card"></i> <span class="moneyed">{{ order.paid_money }}</span> so'm</span>
+                    <span class="paid_money4"><i class="fa fa-ban"></i> <span class="moneyed">{{ order.paid_money }}</span> so'm</span>
                 </td>
                 <td><a href="{% url 'archive_order_view' pk=order.id %}">
                     <button type="button" class="btn btn-info"><i class="fa fa-eye"></i> Tahlil</button>
                 </a></td>
             </tr>
         {% endfor %}
+        <tr>
+            <td>
+                --
+            </td>
+            <td>
+                --
+            </td>
+            <td>
+                <span class="h6 font-weight-bold text-dark text-center">Jami</span>
+            </td>
+            <td>
+                --
+            </td>
+            <td>
+                --
+            </td>
+            <td>
+                --
+            </td>
+            <td>
+                <span class="h6 font-weight-bold text-dark text-center"><span class="moneyed">13000</span> so`m</span>
+            </td>
+            <td>
+                <span class="h6 font-weight-bold text-dark text-center"><span class="moneyed">13000</span> so`m</span>
+            </td>
+            <td>
+                --
+            </td>
+        </tr>
 
     </table>
     <!-- Paginator shu yerga if ishlatib paginator kerak bo`lmasa o`chirib qo`yadigan qiling -->
@@ -109,19 +135,18 @@
     <div class="text-center">
 
         {% if p_paginator.has_previous %}
-            <a class="btn btn-primary" href="?page={{ p_paginator.previous_page_number }}"><</a>
+            <a class="btn btn-primary mb-5" href="?page={{ p_paginator.previous_page_number }}"><</a>
         {% endif %}
-        <span class="btn btn-primary">
+        <span class="btn btn-primary mb-5">
 
     Sahifa {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
     </span>
 
 
         {% if p_paginator.has_next %}
-            <a class="btn btn-primary" href="?page={{ p_paginator.next_page_number }}">></a>
+            <a class="btn btn-primary mb-5" href="?page={{ p_paginator.next_page_number }}">></a>
         {% endif %}
     </div>
-    <div class="h5 font-weight-bold text-danger text-right">Jami: {{ total_sum }} so'm</div>
     <!-- End Paginator -->
     <script type="text/javascript">
         var year = new URL(location.href).searchParams.get('fir');
@@ -154,5 +179,14 @@
         }
         filterPaid(1);
     </script>
+        <script type="text/javascript">
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
+        var moneyeds = document.getElementsByClassName("moneyed");
+        for (var i=0; i<moneyeds.length; i++){
+            moneyeds[i].innerHTML = numberWithCommas(moneyeds[i].innerHTML);
+        }
 
+    </script>
 {% endblock %}

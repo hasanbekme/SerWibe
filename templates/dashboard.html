@@ -3,33 +3,39 @@
     <div style="position:absolute; right:0px; top: 0px">{{ user.full_name }}</div>
     <div class="row">
 
-        <div class="col-lg-3  col-10 dcard btn btn-primary m-4">
+        <div class="col-lg-3  col-10 dcard btn btn-primary m-4" onclick="location.href='/product'">
             <div class="dcard-decimal">{{ dashboard_info.food_types }}</div>
             <i class="fa fa-cutlery"></i>
             <div class="dcard-about">Taom turlari</div>
         </div>
-        <div class="col-lg-3  col-10 dcard btn btn-secondary m-4" style="background-color:cornflowerblue;">
+        <div class="col-lg-3  col-10 dcard btn btn-secondary m-4" style="background-color: #643279;"  onclick="tradingURL()">
             <div class="dcard-decimal"
-                 style="font-size: 2em; line-height: 70px; vertical-align: bottom;">{{ dashboard_info.trading }}</div>
+                 style="font-size: 1.8em; line-height: 35px; vertical-align: bottom; padding: 0;">
+            <div class="moneyed">{{ dashboard_info.trading }}</div>
+            <div style="font-size:0.5em; line-height:20px; color: mediumseagreen"><i class="fa fa-money"></i><span class="moneyed"> {{ dashboard_info.cash_p }}</span></div>
+            <div style="font-size:0.5em; line-height:20px; color: yellow"><i class="fa fa-credit-card"></i><span class="moneyed"> {{ dashboard_info.credit_card_p }}</span></div>
+            <div style="font-size:0.5em; line-height:20px; color: tomato;"><i class="fa fa-ban mr-1"></i><span class="moneyed"> {{ dashboard_info.unpaid_p }}</span></div>
+
+            </div>
             <canvas id="barChart" style="position:absolute; top:10px; right: -50px; max-width: 270px;"></canvas>
-            <div class="dcard-about" style="">Savdo</div>
+            <div class="dcard-about" style="position: absolute; bottom: 5px;">Savdo</div>
         </div>
-        <div class="col-lg-3  col-10 dcard btn btn-success m-4">
+        <div class="col-lg-3  col-10 dcard btn btn-success m-4"  onclick="location.href='/worker'">
             <div class="dcard-decimal">{{ dashboard_info.workers }}</div>
             <i class="fa fa-users"></i>
             <div class="dcard-about">Xodimlar</div>
         </div>
-        <div class="col-lg-3  col-10 dcard btn btn-danger m-4">
+        <div class="col-lg-3  col-10 dcard btn btn-danger m-4"  onclick="location.href='/product#C'">
             <div class="dcard-decimal">{{ dashboard_info.categories }}</div>
             <i class="fa fa-list-alt"></i>
             <div class="dcard-about">Kategoriyalar</div>
         </div>
-        <div class="col-lg-3  col-10 dcard btn btn-warning m-4">
+        <div class="col-lg-3  col-10 dcard btn btn-warning m-4"  onclick="location.href='/orders'">
             <div class="dcard-decimal">{{ dashboard_info.orders }}</div>
             <i class="fa fa-money"></i>
             <div class="dcard-about">Buyurtmalar</div>
         </div>
-        <div class="col-lg-3  col-10 dcard btn btn-info m-4">
+        <div class="col-lg-3  col-10 dcard btn btn-info m-4"  onclick="location.href='/rooms'">
             <div class="dcard-decimal">{{ dashboard_info.tables }}</div>
             <i class="fa fa-ban"></i>
             <div class="dcard-about">Stollar</div>
@@ -85,6 +91,13 @@
                     legend: {display: false},
                     scales: {
                         yAxes: [{ticks: {min: {{ mn }}, max: {{ mx }}, fontSize: 10}}],
+                        xAxes: [{
+        ticks: {
+          minor: {
+             fontSize: 14
+          }
+        }
+      }]
                     },
                     title:
                         {
@@ -94,6 +107,7 @@
                         }
                 }
             });
+
         </script>
     </div>
 
@@ -139,5 +153,21 @@
 
         // Fun Fact: I've lost exactly 3 of my favorite T-shirts and 2 hoodies this way :|
 
+    </script>
+    <script type="text/javascript">
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
+        var moneyeds = document.getElementsByClassName("moneyed");
+        for (var i=0; i<moneyeds.length; i++){
+            moneyeds[i].innerHTML = numberWithCommas(moneyeds[i].innerHTML);
+        }
+
+    </script>
+    <script type="text/javascript">
+        function tradingURL() {
+            var ULRDash = location.href;
+            location.href= '/trading?' + ULRDash.split("?")[1];
+        }
     </script>
 {% endblock %}
