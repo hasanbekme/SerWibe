@@ -19,17 +19,18 @@
                         <td><span class="moneyed">{{ orderitem.total_price }}</span> so'm</td>
                     </tr>
                 {% endfor %}
-
-                 <tr class="font-weight-bold">
+                {% if order.table.tax_required %}
+                    <tr class="font-weight-bold">
                         <td>Xizmat</td>
-                        {% if order.table.tax_required %}
                         <td>{{ tax }}%</td>
                         <td><span class="moneyed">{{ order.tax_price }}</span> so'm</td>
-                        {% else %}
-                        <td>{{ order.passed_time_formatted }}</td>
-                        <td><span class="moneyed">{{ order.room_service_cost }}</span> so'm</td>
-                        {% endif %}
                     </tr>
+                {% endif %}
+                <tr class="font-weight-bold">
+                    <td>Xona xizmati</td>
+                    <td>{{ order.passed_time_formatted }}</td>
+                    <td><span class="moneyed">{{ order.room_service_cost }}</span> so'm</td>
+                </tr>
                 <tr class="text-danger font-weight-bold">
                     <td>Umumiy</td>
                     <td>{{ order.orderitem_set.count }} ta</td>
@@ -38,10 +39,11 @@
             </table>
             <div class="mr-auto">
                 <a href="{% url 'orders' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
-                                                                                             aria-hidden="true"></i>
-                    Yopish</a>
-                <a href="{% url 'print_order' order_id=order.id %}" type="button" class="btn btn-primary m-1 mt-3"><i class="fa fa-print"
                                                                                               aria-hidden="true"></i>
+                    Yopish</a>
+                <a href="{% url 'print_order' order_id=order.id %}" type="button" class="btn btn-primary m-1 mt-3"><i
+                        class="fa fa-print"
+                        aria-hidden="true"></i>
                     Chop etish</a>
 
             </div>

@@ -20,15 +20,17 @@
                             <td><span class="moneyed">{{ orderitem.abstract_amount }}</span> so'm</td>
                         </tr>
                     {% endfor %}
+                    {% if order.table.tax_required %}
+                        <tr class="font-weight-bold">
+                            <td>Xizmat</td>
+                            <td>{{ tax }}%</td>
+                            <td><span class="moneyed">{{ order.tax_price }}</span> so'm</td>
+                        </tr>
+                    {% endif %}
                     <tr class="font-weight-bold">
-                        <td>Xizmat</td>
-                        {% if order.table.tax_required %}
-                        <td>{{ tax }}%</td>
-                        <td><span class="moneyed">{{ order.tax_price }}</span> so'm</td>
-                        {% else %}
+                        <td>Xona xizmati</td>
                         <td>{{ order.passed_time_formatted }}</td>
                         <td><span class="moneyed">{{ order.room_service_cost }}</span> so'm</td>
-                        {% endif %}
                     </tr>
                     <tr class="text-danger font-weight-bold">
                         <td>Umumiy</td>
@@ -38,11 +40,12 @@
                 </table>
                 {{ form.comment }}
                 <div class="input-group mt-3 button-payyed">
-                  <div class="input-group-prepend" onclick="money_cash()">
+                    <div class="input-group-prepend" onclick="money_cash()">
                     <span class="input-group-text p-1 text-center">
-                        <button type="button" class="btn btn-secondary cash_money" id="cash_money"  style="margin: auto; width:30px; height:30px; border-radius: 50%;"></button>
+                        <button type="button" class="btn btn-secondary cash_money" id="cash_money"
+                                style="margin: auto; width:30px; height:30px; border-radius: 50%;"></button>
                     </span>
-                </div>
+                    </div>
                     {{ form.cash_money }}
                     <div class="input-group-append" onclick="money_cash()">
                     <span class="input-group-text">
@@ -51,11 +54,12 @@
                     </div>
                 </div>
                 <div class="input-group mt-1 button-payyed">
-                  <div class="input-group-prepend" onclick="credit_card()">
-                    <span class="input-group-text p-1 text-center" >
-                        <button type="button" class="btn btn-secondary credit_card" id="credit_card"  style="margin: auto; width:30px; height:30px; border-radius: 50%;"></button>
+                    <div class="input-group-prepend" onclick="credit_card()">
+                    <span class="input-group-text p-1 text-center">
+                        <button type="button" class="btn btn-secondary credit_card" id="credit_card"
+                                style="margin: auto; width:30px; height:30px; border-radius: 50%;"></button>
                     </span>
-                  </div>
+                    </div>
                     {{ form.credit_card }}
                     <div class="input-group-append" onclick="credit_card()">
                       <span class="input-group-text">
@@ -64,25 +68,27 @@
                     </div>
                 </div>
                 <div class="input-group mt-1 button-payyed">
-                  <div class="input-group-prepend" onclick="debt()">
-                    <span class="input-group-text p-1 text-center" >
-                        <button type="button" class="btn btn-secondary debt_money" id="debt_money"  style="margin: auto; width:30px; height:30px; border-radius: 50%;"></button>
+                    <div class="input-group-prepend" onclick="debt()">
+                    <span class="input-group-text p-1 text-center">
+                        <button type="button" class="btn btn-secondary debt_money" id="debt_money"
+                                style="margin: auto; width:30px; height:30px; border-radius: 50%;"></button>
                     </span>
-                  </div>
+                    </div>
                     {{ form.debt_money }}
-                    <div class="input-group-append"  onclick="debt()">
+                    <div class="input-group-append" onclick="debt()">
                       <span class="input-group-text">
                           <i class="fa fa-ban"></i>
                       </span>
                     </div>
                 </div>
-                
-                
+
+
                 <div class="mr-auto mb-3">
                     <a href="{% url 'orders' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
                                                                                                   aria-hidden="true"></i>
                         Bekor qilish</a>
-                    <button type="sumbit" class="btn btn-primary m-1 mt-3" id="submitForm"><i class="fa fa-check-circle"></i> Tasdiqlash
+                    <button type="sumbit" class="btn btn-primary m-1 mt-3" id="submitForm"><i
+                            class="fa fa-check-circle"></i> Tasdiqlash
                     </button>
                 </div>
                 <span class="bottomed-name">{{ order.waiter.full_name }}</span>
@@ -100,116 +106,110 @@
         payment_inputs[2].placeholder = "Plastik karta";
         payment_inputs[3].placeholder = "To`lanmagan";
 
-        payment_inputs[1].onkeyup = function() {back_function()};
-        payment_inputs[2].onkeyup = function() {back_function()};
-        payment_inputs[3].onkeyup = function() {back_function()};
-        function back_function(){
-            
-            if (payment_inputs[1].value>0){
+        payment_inputs[1].onkeyup = function () {
+            back_function()
+        };
+        payment_inputs[2].onkeyup = function () {
+            back_function()
+        };
+        payment_inputs[3].onkeyup = function () {
+            back_function()
+        };
+
+        function back_function() {
+
+            if (payment_inputs[1].value > 0) {
                 document.getElementById('cash_money').className = "btn btn-primary";
-            }
-            else{
+            } else {
                 document.getElementById('cash_money').className = "btn btn-secondary";
             }
-            if (payment_inputs[2].value>0){
+            if (payment_inputs[2].value > 0) {
                 document.getElementById('credit_card').className = "btn btn-primary";
-            }
-            else{
+            } else {
                 document.getElementById('credit_card').className = "btn btn-secondary";
             }
-            if (payment_inputs[3].value>0){
+            if (payment_inputs[3].value > 0) {
                 document.getElementById('debt_money').className = "btn btn-primary";
-            }
-            else{
+            } else {
                 document.getElementById('debt_money').className = "btn btn-secondary";
             }
-            if (payment_inputs[1].value*1+payment_inputs[2].value*1+payment_inputs[3].value*1>=totalsumm){
+            if (payment_inputs[1].value * 1 + payment_inputs[2].value * 1 + payment_inputs[3].value * 1 >= totalsumm) {
                 document.getElementById("submitForm").disabled = false;
-            }
-            else{
+            } else {
                 document.getElementById("submitForm").disabled = true;
             }
-            
+
         }
 
-        function money_cash(){
-            if (payment_inputs[2].value*1+payment_inputs[3].value*1>=totalsumm){
-                if (payment_inputs[2].value*1==totalsumm || payment_inputs[3].value*1==totalsumm){
-                }
-                else{
-                return;
-                }
-            }
-            if (payment_inputs[2].value*1+payment_inputs[3].value*1==totalsumm){
-                payment_inputs[1].value=totalsumm;
-                payment_inputs[2].value="";
-                payment_inputs[3].value="";
-            }
-            else if(payment_inputs[2].value*1+payment_inputs[3].value*1>0){
-                if (totalsumm - (payment_inputs[2].value*1+payment_inputs[3].value*1)<=0){
-                    
-                }
-                else{
-                payment_inputs[1].value=totalsumm - (payment_inputs[2].value*1+payment_inputs[3].value*1);
+        function money_cash() {
+            if (payment_inputs[2].value * 1 + payment_inputs[3].value * 1 >= totalsumm) {
+                if (payment_inputs[2].value * 1 == totalsumm || payment_inputs[3].value * 1 == totalsumm) {
+                } else {
+                    return;
                 }
             }
-            else{
-                payment_inputs[1].value=totalsumm;
+            if (payment_inputs[2].value * 1 + payment_inputs[3].value * 1 == totalsumm) {
+                payment_inputs[1].value = totalsumm;
+                payment_inputs[2].value = "";
+                payment_inputs[3].value = "";
+            } else if (payment_inputs[2].value * 1 + payment_inputs[3].value * 1 > 0) {
+                if (totalsumm - (payment_inputs[2].value * 1 + payment_inputs[3].value * 1) <= 0) {
+
+                } else {
+                    payment_inputs[1].value = totalsumm - (payment_inputs[2].value * 1 + payment_inputs[3].value * 1);
+                }
+            } else {
+                payment_inputs[1].value = totalsumm;
             }
             back_function()
         }
-        function credit_card(){
-            if (payment_inputs[1].value*1+payment_inputs[3].value*1>=totalsumm){
-                if (payment_inputs[1].value*1==totalsumm || payment_inputs[3].value*1==totalsumm){
-                }
-                else{
-                return;
-                }
-            }
-            if (payment_inputs[1].value*1+payment_inputs[3].value*1==totalsumm){
-                payment_inputs[2].value=totalsumm;
-                payment_inputs[1].value="";
-                payment_inputs[3].value="";
-            }
-            else if(payment_inputs[1].value*1+payment_inputs[3].value*1>0){
-                if (totalsumm - (payment_inputs[1].value*1+payment_inputs[3].value*1)<=0){
-                    
-                }
-                else{
-                payment_inputs[2].value=totalsumm - (payment_inputs[1].value*1+payment_inputs[3].value*1);
+
+        function credit_card() {
+            if (payment_inputs[1].value * 1 + payment_inputs[3].value * 1 >= totalsumm) {
+                if (payment_inputs[1].value * 1 == totalsumm || payment_inputs[3].value * 1 == totalsumm) {
+                } else {
+                    return;
                 }
             }
-            else{
-                payment_inputs[2].value=totalsumm;
+            if (payment_inputs[1].value * 1 + payment_inputs[3].value * 1 == totalsumm) {
+                payment_inputs[2].value = totalsumm;
+                payment_inputs[1].value = "";
+                payment_inputs[3].value = "";
+            } else if (payment_inputs[1].value * 1 + payment_inputs[3].value * 1 > 0) {
+                if (totalsumm - (payment_inputs[1].value * 1 + payment_inputs[3].value * 1) <= 0) {
+
+                } else {
+                    payment_inputs[2].value = totalsumm - (payment_inputs[1].value * 1 + payment_inputs[3].value * 1);
+                }
+            } else {
+                payment_inputs[2].value = totalsumm;
             }
             back_function()
         }
-        function debt(){
-            if (payment_inputs[1].value*1+payment_inputs[2].value*1>=totalsumm){
-                if (payment_inputs[1].value*1==totalsumm || payment_inputs[2].value*1==totalsumm){
-                }
-                else{
-                return;
-                }
-            }
-            if (payment_inputs[1].value*1+payment_inputs[2].value*1==totalsumm){
-                payment_inputs[3].value=totalsumm;
-                payment_inputs[1].value="";
-                payment_inputs[2].value="";
-            }
-            else if(payment_inputs[1].value*1+payment_inputs[2].value*1>0){
-                if (totalsumm - (payment_inputs[1].value*1+payment_inputs[2].value*1)<=0){
-                    
-                }
-                else{
-                payment_inputs[3].value=totalsumm - (payment_inputs[1].value*1+payment_inputs[2].value*1);
+
+        function debt() {
+            if (payment_inputs[1].value * 1 + payment_inputs[2].value * 1 >= totalsumm) {
+                if (payment_inputs[1].value * 1 == totalsumm || payment_inputs[2].value * 1 == totalsumm) {
+                } else {
+                    return;
                 }
             }
-            else{
-                payment_inputs[3].value=totalsumm;
+            if (payment_inputs[1].value * 1 + payment_inputs[2].value * 1 == totalsumm) {
+                payment_inputs[3].value = totalsumm;
+                payment_inputs[1].value = "";
+                payment_inputs[2].value = "";
+            } else if (payment_inputs[1].value * 1 + payment_inputs[2].value * 1 > 0) {
+                if (totalsumm - (payment_inputs[1].value * 1 + payment_inputs[2].value * 1) <= 0) {
+
+                } else {
+                    payment_inputs[3].value = totalsumm - (payment_inputs[1].value * 1 + payment_inputs[2].value * 1);
+                }
+            } else {
+                payment_inputs[3].value = totalsumm;
             }
             back_function()
         }
+
         back_function();
     </script>
 {% endblock %}
