@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="h1">XONALAR</div>
-<main style="overflow-y: scroll; overflow-x: hidden; height:80%">
+<main>
 		<div class="row">
             {% for room in rooms %}
 			<a href="{% url 'table' pk=room.pk %}" class="col-10 col-md-5 card m-auto shadow h1 text-primary p-5" style="margin-top:5px!important">

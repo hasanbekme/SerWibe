@@ -21,6 +21,17 @@
                 </table>
                 
                 <div class="row pl-3 payment_type mt-3 ml-3">
+                    <button onclick="changed(1)" id="ccard" type="button" class="btn m-2 btn-success col-2">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                    </button>
+                    <label class="switch" style="margin-top:17px">
+                    {{ form.tax_required }}
+                        <span class="slider"></span>
+                    </label>
+                    {{ form.service_cost }}
+                </div>
+                
+                <div class="row pl-3 payment_type mt-3 ml-3">
                     <button onclick="changed(2)" id="money" type="button" class="btn m-2 btn-success col-2">
                         <i class="fa fa-user" aria-hidden="true"></i>
                     </button>
@@ -28,10 +39,6 @@
                     {{ form.tax_required }}
                         <span class="slider"></span>
                     </label>
-                    <button onclick="changed(1)" id="ccard" type="button" class="btn m-2 btn-secondary col-2">
-                        <i class="fa fa-clock-o" aria-hidden="true"></i>
-                    </button>
-                    {{ form.service_cost }}
                 </div>
 
                 <div class="mr-auto">
@@ -71,10 +78,8 @@
 
         }
         function changed(pressed = 0) {
-            if ((pressed != 2 && document.getElementById("id_tax_required").checked) || pressed == 1) {
+            if ((document.getElementById("id_tax_required").checked) || pressed == 1) {
                 document.getElementById("id_tax_required").checked = true;
-                document.getElementById("ccard").className = "btn m-2 btn-success col-2";
-                document.getElementById("money").className = "btn m-2 btn-secondary col-2";
                 document.getElementById("id_service_cost").style.display = "block";
                 console.log(document.getElementById("id_service_cost").value!="");
                 if (document.getElementById("id_service_cost").value!="" && document.getElementById("id_number").value!=""){
@@ -87,8 +92,6 @@
 
             } else {
                 document.getElementById("id_tax_required").checked = false;
-                document.getElementById("money").className = "btn m-2 btn-success col-2";
-                document.getElementById("ccard").className = "btn m-2 btn-secondary col-2";
                 document.getElementById("id_service_cost").style.display = "none";
                 if (document.getElementById("id_number").value!="" && document.getElementById("id_initial_payment").value!=""){
                     document.getElementById("FormSubmit").disabled = false;
