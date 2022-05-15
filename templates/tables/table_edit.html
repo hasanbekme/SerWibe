@@ -21,10 +21,10 @@
                 </table>
                 
                 <div class="row pl-3 payment_type mt-3 ml-3">
-                    <button onclick="changed(1)" id="ccard" type="button" class="btn m-2 btn-success col-2">
+                    <button onclick="changed()" id="ccard" type="button" class="btn m-2 btn-success col-2">
                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                     </button>
-                    <label class="switch" style="margin-top:17px">
+                    <label class="switch" style="margin-top:17px" onclick="changed()">
                     {{ form.time_required }}
                         <span class="slider"></span>
                     </label>
@@ -32,7 +32,7 @@
                 </div>
                 
                 <div class="row pl-3 payment_type mt-3 ml-3">
-                    <button onclick="changed(2)" id="money" type="button" class="btn m-2 btn-success col-2">
+                    <button id="money" type="button" class="btn m-2 btn-success col-2">
                         <i class="fa fa-user" aria-hidden="true"></i>
                     </button>
                     <label class="switch" style="margin-top:17px">
@@ -55,5 +55,15 @@
     </form>
         <script type="text/javascript">
 
+            function changed(){
+                if (document.getElementById("id_time_required").checked){
+                    document.getElementById("id_time_service_cost").style.display = "";
+                }
+                else{
+
+                    document.getElementById("id_time_service_cost").style.display = "none";
+                }
+            }
+            changed();
     </script>
 {% endblock %}
