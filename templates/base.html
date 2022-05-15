@@ -471,7 +471,11 @@
         for (var i=0; i<moneyeds.length; i++){
             moneyeds[i].innerHTML = numberWithCommas(moneyeds[i].innerHTML);
         }
-
+function addurlparameter(name, value) {
+            var sp = new URLSearchParams(window.location.search)
+            sp.set(name, value)
+            window.location.search = sp.toString()
+        }
     </script>
 
 </body>

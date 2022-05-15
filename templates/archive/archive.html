@@ -171,11 +171,7 @@
         var year = new URL(location.href).searchParams.get('sec');
         document.getElementById("sec").value = year;
 
-        function addurlparameter(name, value) {
-            var sp = new URLSearchParams(window.location.search)
-            sp.set(name, value)
-            window.location.search = sp.toString()
-        }
+        
     </script>
     <script type="text/javascript">
         function filterPaid(n) {

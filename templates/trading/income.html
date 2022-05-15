@@ -50,7 +50,7 @@
                 </a></td>
             </tr>
         {% endfor %}
-        <tr>
+        <tr class="table-primary">
             <td>--</td>
             <td>
                 <span class="h6 font-weight-bold text-dark text-center">Jami</span>
@@ -72,7 +72,7 @@
     <div class="text-center">
 
         {% if p_paginator.has_previous %}
-            <a class="btn btn-primary mb-5" href="?page={{ p_paginator.previous_page_number }}"><</a>
+            <a class="btn btn-primary mb-5 text-white" onclick="addurlparameter('page', '{{ p_paginator.previous_page_number }}')"><</a>
         {% endif %}
         <span class="btn btn-primary mb-5">
 
@@ -81,7 +81,7 @@
 
 
         {% if p_paginator.has_next %}
-            <a class="btn btn-primary mb-5" href="?page={{ p_paginator.next_page_number }}">></a>
+            <a class="btn btn-primary mb-5 text-white" onclick="addurlparameter('page', '{{ p_paginator.next_page_number }}')">></a>
         {% endif %}
     </div>
 
