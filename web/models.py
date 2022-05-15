@@ -60,8 +60,9 @@ class Room(models.Model):
 class Table(models.Model):
     number = models.IntegerField(verbose_name="Raqami")
     room = models.ForeignKey(to=Room, on_delete=models.CASCADE)
-    tax_required = models.BooleanField(default=True)
-    service_cost = models.IntegerField(null=True, blank=True)
+    tax_required = models.BooleanField(default=False)
+    time_required = models.BooleanField(default=False)
+    time_service_cost = models.IntegerField(default=0)
     initial_payment = models.IntegerField(default=0)
     is_available = models.BooleanField(default=True)
 
@@ -149,12 +150,12 @@ class Order(models.Model):
     table = models.ForeignKey(to=Table, verbose_name="Stol", on_delete=models.PROTECT, null=True)
     is_completed = models.BooleanField(default=False)
     spent_time = models.IntegerField(default=0)
+    waiter_fee = models.IntegerField(default=0)
+    place_fee = models.IntegerField(default=0)
     paid_money = models.IntegerField(verbose_name="To'langan summa", null=True, blank=True)
     cash_money = models.IntegerField(default=0)
     credit_card = models.IntegerField(default=0)
     debt_money = models.IntegerField(default=0)
-    waiter_fee = models.IntegerField(default=0)
-    place_fee = models.IntegerField(default=0)
     comment = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -162,7 +163,10 @@ class Order(models.Model):
 
     @property
     def passed_time(self):
-        self.spent_time = int((datetime.datetime.now() - self.created_at).total_seconds())
+        if self.table.time_required:
+            self.spent_time = int((datetime.datetime.now() - self.created_at).total_seconds())
+        else:
+            self.spent_time = 0
         self.save()
         return self.spent_time
 
@@ -179,9 +183,9 @@ class Order(models.Model):
     def room_service_cost(self):
         if self.table:
             if self.is_completed:
-                return (self.table.service_cost * self.spent_time // 360000) * 100 + self.table.initial_payment
+                return (self.table.time_service_cost * self.spent_time // 360000) * 100 + self.table.initial_payment
             else:
-                return (self.table.service_cost * self.passed_time // 360000) * 100 + self.table.initial_payment
+                return (self.table.time_service_cost * self.passed_time // 360000) * 100 + self.table.initial_payment
         else:
             return 0
 
@@ -190,7 +194,7 @@ class Order(models.Model):
         total = 0
         for item in self.orderitem_set.all():
             total += item.paid_amount
-        if self.order_type == 'table' and not self.table.tax_required:
+        if self.order_type == 'table':
             total += self.room_service_cost
         return total
 

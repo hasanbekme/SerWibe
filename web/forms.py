@@ -79,7 +79,8 @@ class RoomForm(ModelForm):
 class TableForm(Form):
     number = IntegerField()
     tax_required = BooleanField(required=False)
-    service_cost = IntegerField(required=False)
+    time_required = BooleanField(required=False)
+    time_service_cost = IntegerField(required=False, initial=0)
     initial_payment = IntegerField(initial=0)
 
     def __init__(self, *args, room=None, instance=None, **kwargs):
@@ -90,8 +91,9 @@ class TableForm(Form):
             self.instance: Table = instance
             self.initial = {
                 'number': instance.number,
-                'tax_required': not instance.tax_required,
-                'service_cost': instance.service_cost,
+                'tax_required': instance.tax_required,
+                'time_required': instance.time_required,
+                'time_service_cost': instance.time_service_cost,
                 'initial_payment': instance.initial_payment,
             }
         else:
@@ -100,7 +102,8 @@ class TableForm(Form):
     def save(self):
         number = self.cleaned_data.get("number")
         tax_required = self.cleaned_data.get("tax_required")
-        service_cost = self.cleaned_data.get("service_cost")
+        time_required = self.cleaned_data.get("time_required")
+        time_service_cost = self.cleaned_data.get("time_service_cost")
         initial_payment = self.cleaned_data.get("initial_payment")
 
         if self.instance is None:
@@ -108,12 +111,9 @@ class TableForm(Form):
         self.instance.number = number
         self.instance.room = self.room
         self.instance.initial_payment = initial_payment
-        if tax_required:
-            self.instance.tax_required = False
-            self.instance.service_cost = service_cost
-        else:
-            self.instance.tax_required = True
-            self.instance.service_cost = None
+        self.instance.tax_required = tax_required
+        self.instance.time_required = time_required
+        self.time_service_cost = time_service_cost
         self.instance.save()
 
 
@@ -157,7 +157,9 @@ class OrderCompletionForm(Form):
         self.instance.credit_card = credit_card
         self.instance.debt_money = debt_money
         self.instance.is_completed = True
-        self.instance.waiter_fee = int((1 + get_tax() / 100) * self.instance.without_tax)
+        if self.instance.order_type == 'table' and self.instance.table.tax_required:
+            self.instance.waiter_fee = int((get_tax() / 100) * self.instance.without_tax)
+        self.instance.place_fee = self.instance.room_service_cost
         self.instance.paid_money = cash_money + credit_card
         self.instance.save()
         if self.instance.order_type == 'table':

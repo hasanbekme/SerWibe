@@ -62,6 +62,7 @@ def get_trading_table(category=None, start_date=None, end_date=None):
         final_models = final_models.filter(meal__category_id=category)
 
     res = list(map(lambda x: FoodTrade(final_models, x), food_models))
+    print(res)
     return res, sum([x.total_sale for x in res]), date_string
 
 
@@ -239,9 +240,9 @@ def get_expenses_data(start_date=None, end_date=None):
     if start_date == 'today':
         expense_models = expense_models.filter(created_at__day=today.day)
     elif start_date == "week":
-        expense_models = expense_models.filter(created_at__gt=get_days_before(6))
+        expense_models = expense_models.filter(created_at__gt=get_start_of_the_week())
     elif start_date == "month":
-        expense_models = expense_models.filter(created_at__gt=get_days_before(29))
+        expense_models = expense_models.filter(created_at__gt=get_start_of_the_month())
     else:
         if start_date != '' and start_date is not None and end_date != '' and end_date is not None:
             start_loop = datetime.strptime(start_date, "%Y-%m-%d")
@@ -253,7 +254,7 @@ def get_expenses_data(start_date=None, end_date=None):
 
 class ArchiveInfo:
     def __init__(self, orders, stuffs, waiter_fee, orders_income, cash_money_p, credit_card_p, debt_money_p,
-                date_string):
+                 date_string):
         self.orders = orders
         self.stuffs = stuffs
         self.waiter_fee = waiter_fee

@@ -440,6 +440,8 @@ def expenses(request):
         sec = request.GET.get('sec')
         expense_models = get_expenses_data(fir, sec)
         total_amount = expense_models.aggregate(Sum('amount'))['amount__sum']
+        if total_amount is None:
+            total_amount = 0
         p = Paginator(expense_models, 10)
         page = p.get_page(request.GET.get('page'))
         expense_reason_models = ExpenseReason.objects.all()
