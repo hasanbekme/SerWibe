@@ -23,6 +23,7 @@
                     <span style="position: absolute; top: -5px; left: 5px; font-size: 2em; color: white">
                         {% if table.time_required %}
                             <i class="fa fa-clock-o"></i>
+                            <span class="h6" style="line-height: 50px; vertical-align: top">{{ table.current_order.passed_time_formatted }}</span>
                         {% endif %}
                     </span>
                     <span class="tablenum h1 text-white">{{ table.number }}</span>

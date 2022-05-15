@@ -113,7 +113,9 @@ class TableForm(Form):
         self.instance.initial_payment = initial_payment
         self.instance.tax_required = tax_required
         self.instance.time_required = time_required
-        self.time_service_cost = time_service_cost
+        if not time_required:
+            self.instance.time_service_cost = 0
+        self.instance.time_service_cost = time_service_cost
         self.instance.save()
 
 

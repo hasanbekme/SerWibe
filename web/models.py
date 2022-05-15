@@ -237,9 +237,9 @@ class OrderItem(models.Model):
         return f"{self.order.id}:{self.id}"
 
     def save(self, *args, **kwargs):
-        super(OrderItem, self).save()
         self.paid_amount = self.total_price
         self.abstract_amount = int(self.meal.price * self.quantity)
+        super(OrderItem, self).save()
 
     class Meta:
         ordering = ['-id']

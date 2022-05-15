@@ -16,7 +16,7 @@
                     <tr>
                         <td>{{ orderitem.meal.title }}</td>
                         <td>{{ orderitem.quantity }} ta</td>
-                        <td><span class="moneyed">{{ orderitem.total_price }}</span> so'm</td>
+                        <td><span class="moneyed">{{ orderitem.abstract_amount }}</span> so'm</td>
                     </tr>
                 {% endfor %}
                 {% if order.table.tax_required %}
