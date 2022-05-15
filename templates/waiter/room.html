@@ -3,13 +3,17 @@
 
 <div class="h1">XONALAR</div>
 <main>
-		<div class="row">
+		<div class="row" style="width:100%; margin:auto; text-align:center;">
             {% for room in rooms %}
-			<a href="{% url 'table' pk=room.pk %}" class="col-10 col-md-5 card m-auto shadow h1 text-primary p-5" style="margin-top:5px!important">
+			<a href="{% url 'table' pk=room.pk %}" class="col-10 col-md-5 card m-auto shadow h1 text-primary p-1" style="margin-top:5px!important; height: 200px; padding-top: 40px!important;">
 				<div class="tableindex">{{ room.busy_tables }}/{{ room.tables_count }}</div>
 				{{ room.title }}
 			</a>
             {% endfor %}
+            
+                    <div style="height: 80px;" class="col-12">
+                        
+                    </div>
 		</div>
 </main>
 

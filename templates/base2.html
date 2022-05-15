@@ -17,7 +17,9 @@
 			margin: 0;
 			padding: 0;
 			background: linear-gradient(150deg,#075295 0%, #0087ffb5 59%, #075295);
-			height: 100%;
+			background-size: cover;
+  		background-attachment: fixed;	
+  		height: 100%;
 			text-align: center;
 			
               -webkit-touch-callout: none; /* iOS Safari */
@@ -36,7 +38,7 @@
 			width: 90%;
 			padding: 5px 2px;
 			left: 5%;
-			box-shadow: 2px 3px 5px -1px #000000aa;
+			box-shadow: 2px 3px 5px 5px #000000aa;
 			text-align: center;
 		}
 		.menu > a {
@@ -205,6 +207,16 @@
 
 
 {% endblock %}
+
+    <script type="text/javascript">
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
+        var moneyeds = document.getElementsByClassName("moneyed");
+        for (var i=0; i<moneyeds.length; i++){
+            moneyeds[i].innerHTML = numberWithCommas(moneyeds[i].innerHTML);
+        }
+    </script>
 
 <script src="/static/js/jquery.min.js"></script>
 <script src="/static/js/popper.js"></script>

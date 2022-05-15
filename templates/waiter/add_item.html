@@ -1,6 +1,6 @@
 {% extends 'base2.html' %}
 {% block content %}
-    <div class="topmenu" style="position: fixed; top: 0px;">
+    <div class="topmenu" style="position: absolute; top: 0px;">
         <a class="btn btn-light text-danger p-1 " href="/room">
             <i class="fa fa-home" style="font-size:3em"></i>
         </a>
@@ -12,7 +12,7 @@
                   style="height: 34px; display: inline-block; font-size: 1.7em;  margin-top: 6px;">№{{ table.number }}</span>
         </a>
     </div>
-    <div class="container row p-0 pl-2 mb-2 text-center asdff" style="position: fixed; top:68px; z-index: 1; left: 5%">
+    <div class="container row p-0 pl-2 mb-2 text-center asdff" style="position: absolute; top:68px; z-index: 1; left: 5%">
         <label class="col-2 btn btn-danger ml-2" style="padding:6.8px; border-radius: 5px 0 0 5px; z-index: 2;"
                for="searfilter" onclick="searchactive()">
             <i class="fa fa-search" id="searchorfilter"></i>
@@ -44,35 +44,44 @@
     </div>
     <form method="POST">
         {% csrf_token %}
-        <main style="overflow-y: auto; height:70%; position: fixed; top: 120px; width: 100%;">
+        <main style=" width: 100%;">
             <div class="container">
                 <div class="row" id="filtercontent">
+
+                    <div style="height: 120px;" class="col-12">
+                        
+                    </div>      
                     {% for food in foods %}
-                        <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
-                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}">
-                            <div class="col-3 p-0">
-                                <img src="{{ food.photo }}" style="width: 70px; height: 70px; margin-top:15px"
+                         <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row ml-1 m-auto"
+                             style="margin-bottom: 15px!important;" catename="{{ food.category.title }}" >
+                        <div style="width:80%; height:100%; position:absolute; left: 0;" onclick="adding('{{ food.id }}')">
+                        </div>
+                            <div class="col-3 p-0" onclick="adding('{{ food.id }}')">
+                                <img src="{{ food.photo }}"
+                                     style="width: 70px; height: 70px; margin-top:15px"
                                      alt="image">
                             </div>
-                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2 filtercontentclass"
-                                 style="line-height: 27px; padding: 0">
+                            <div class="text-primary mt-3 col-7 h4 font-weight-bold text-left ml-2"
+                                 style="line-height: 27px; padding: 0; height:80px; position:static;" onclick="adding('{{ food.id }}')">
                                 {{ food.title }}
                             </div>
-                            <div class="text-primary col-3 h4 font-weight-bold text-left"
-                                 style="line-height: 30px; transform: scale(0.8) translateY(-15px);">
-                                <div class="addandsubt btn btn-success" onclick="adding('{{ food.id }}')"><span>+</span>
-                                </div>
-                                <input class="limit  border " type="number" name="{{ food.id }}" min="0"
+                            <div class="text-primary col-3 h4 font-weight-bold text-center row pt-2 pr-3"
+                                 >
+                                <input class="col-11  p-0 limit m-0 border" type="number" name="{{ food.id }}" min="0"
                                        id="{{ food.id }}">
 
-                                <div class="addandsubt btn btn-danger" onclick="subt('{{ food.id }}')"><span> -</span>
+                                <div class="col-11 btn btn-danger m-0 mt-1" onclick="subt('{{ food.id }}')"><span> -</span>
                                 </div>
                             </div>
                             <span id="{{ food.id }}p"
-                                  style="position:absolute; right: 15%; bottom: 5px; font-weight:700"
-                                  class="text-danger">{{ food.price }} so`m</span>
+                                  style="position:absolute; right: 25%; bottom: 5px; font-weight:700"
+                                  class="text-danger moneyed">{{ food.price }} so`m</span>
                         </div>
                     {% endfor %}
+
+                    <div style="height: 80px;" class="col-12">
+                        
+                    </div>      
                 </div>
             </div>
 
@@ -206,19 +215,22 @@
             document.getElementById("searchreset").style.display = "block"
         }
     </script>
+  <script type="text/javascript">
 
-    <script type="text/javascript">
-
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
         function calculateAll() {
             var allsumm = 0;
             var klt = 0;
             var limites = document.getElementsByClassName("limit");
-            for (var i = 0; i < limites.length; i++) {
+            for (i = 0; i < limites.length; i++) {
                 klt = document.getElementById(limites[i].id + "p").innerHTML.slice(0, -4);
-                allsumm += parseInt(parseInt(klt) * limites[i].value * (1 + {{ tax }} / 100));
+                allsumm += parseInt(klt.replace(" ", "")) * limites[i].value;
+
             }
-            document.getElementById("allsumm").innerHTML = allsumm;
-            if (allsumm === 0) {
+            document.getElementById("allsumm").innerHTML = numberWithCommas(allsumm);;
+            if (allsumm == 0) {
                 document.getElementById("centered").style.width = "";
                 document.getElementById("centered").style.boxShadow = "";
                 document.getElementById("centered").style.marginLeft = "";
@@ -230,18 +242,17 @@
         function adding(aer) {
             changer();
             document.getElementById(aer).value -= -1;
-            calculateAll()
+            calculateAll();
         }
 
         function subt(aer) {
-            if (document.getElementById(aer).value - 1 > 0) {
+            if (document.getElementById(aer).value-1 > 0) {
                 document.getElementById(aer).value -= 1;
             } else {
                 document.getElementById(aer).value = "";
             }
-            calculateAll()
+            calculateAll();
         }
     </script>
-
 
 {% endblock %}
