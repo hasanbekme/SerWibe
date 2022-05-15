@@ -588,13 +588,22 @@ def archive(request):
         order_type = request.GET.get('order_type')
         archive_info = get_archive_data(start_date, end_date, waiter, order_type)
         order_models = archive_info.orders
-        p = Paginator(order_models, 3)
+        p = Paginator(order_models, 10)
         print(p)
         page = p.get_page(request.GET.get('page'))
         return render(request, "archive/archive.html",
                       context={'archive_info': archive_info,
                                'p_paginator': page,
                                'tax': get_tax()})
+    else:
+        return redirect('room')
+
+
+@login_required(login_url='/')
+def archive_model_view(request, pk):
+    if is_admin(request):
+        order_model = get_object_or_404(Order, pk=pk)
+        return render(request, "archive/order_view.html", {'order': order_model, 'orderitems': order_model.orderitem_set.all(), 'tax': get_tax()})
     else:
         return redirect('room')
 
@@ -608,16 +617,6 @@ def send_archive_report(request):
         order_type = request.GET.get('order_type')
         report_link = export_archive_data(start_date, end_date, waiter, order_type)
         return redirect(report_link)
-    else:
-        return redirect('room')
-
-
-@login_required(login_url='/')
-def archive_order_view(request, pk):
-    if is_admin(request):
-        order_model = get_object_or_404(Order, pk=pk)
-        order_items = order_model.orderitem_set.all()
-        return render(request, 'archive/order_view.html', context={'order': order_model, 'orderitems': order_items})
     else:
         return redirect('room')
 

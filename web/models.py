@@ -207,7 +207,7 @@ class Order(models.Model):
 
     @property
     def tax_price(self):
-        return self.needed_payment - self.without_tax
+        return int(self.without_tax * (get_tax() / 100))
 
     @property
     def created_time(self):

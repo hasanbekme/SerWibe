@@ -39,9 +39,8 @@ urlpatterns = [
     path('expenses/reason/<int:pk>/delete', views.expense_reason_delete
          , name='expense_reason_delete'),
     path('trading/<int:pk>/view', views.trading_detailed_view, name='trading_detailed_view'),
-    path('archive/<int:pk>/view', views.archive_order_view, name='archive_order_view'),
+    path('archive/<int:pk>/view', views.archive_model_view, name='archive_order_view'),
     path('archiveReport', views.send_archive_report, name='archive_report'),
-
     path('room', views.room, name='room'),
     path('room/<int:pk>/tables', views.table, name='table'),
     path('room/<int:pk_room>/<int:pk_table>/add_item', views.add_item, name='add_item'),
