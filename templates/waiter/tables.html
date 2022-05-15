@@ -36,7 +36,7 @@
                                  style="margin-bottom: 15px!important">
                                 <a href="{% url 'waiter_order' pk=table.pk %}" class="cardtable text-white mt-4"
                                    style="margin-bottom: 15px!important;">
-                                    {% if not table.tax_required %}
+                                    {% if table.time_required %}
                                         <span style="position:absolute; font-size: 15px; left: 5px; top:2px">
                                 <i class="fa fa-clock-o"></i> {{ table.current_order.passed_time_formatted }}
                             </span>

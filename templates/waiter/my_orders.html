@@ -14,7 +14,7 @@
                 {% for order in orders %}
                     <div class="col-5 col-md-5 cardtable card m-auto shadow  h1 bg-info"
                          style="margin-bottom: 15px!important">
-                        {% if not order.table.tax_required %}
+                        {% if order.table.time_required %}
                             <span style="position:absolute; font-size: 15px; left: 5px; top:2px">
                                 <i class="fa fa-clock-o"></i> {{ order.passed_time_formatted }}
                             </span>

@@ -7,11 +7,6 @@
                 <!-- CARD of unusing -->
                 <div class="tablecard tablecardn ml-3 mt-2 card shadow text-center bg-info ">
                     <span style="position: absolute; top: -5px; left: 5px; font-size: 2em; color: white">
-                        {% if table.tax_required %}
-                            <i class="fa fa-user"></i>
-                        {% else %}
-                            <i class="fa fa-clock-o"></i>
-                        {% endif %}
                     </span>
                     <span class="tablenum h1 text-white">{{ table.number }}</span>
                     <div class="icons">
@@ -26,9 +21,7 @@
                 <div class="tablecard tablecard-u ml-3 mt-2 card shadow text-center bg-primary "
                      onclick="location.href='{% url 'order_view' pk=table.current_order.id %}'">
                     <span style="position: absolute; top: -5px; left: 5px; font-size: 2em; color: white">
-                        {% if table.tax_required %}
-                            <i class="fa fa-user"></i>
-                        {% else %}
+                        {% if table.time_required %}
                             <i class="fa fa-clock-o"></i>
                         {% endif %}
                     </span>
