@@ -47,7 +47,7 @@
                                 </a>
                                 <a class="startadd" style="bottom:-15px; margin-top:-15px"
                                    href="{% url 'add_item' pk_room=room.pk pk_table=table.pk %}">
-                                    <span style="position:absolute; font-size:12px; padding: 1px 2px 0 2px; right: 2px; bottom:0; color: yellow; font-weight:normal; ">{{ table.current_order.needed_payment }} so`m</span>
+                                    <span style="position:absolute; font-size:12px; padding: 1px 2px 0 2px; right: 2px; bottom:0; color: yellow; font-weight:normal; "><span class="moneyed">{{ table.current_order.needed_payment }}</span> so`m</span>
                                     +
                                 </a>
                             </div>

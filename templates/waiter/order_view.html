@@ -13,9 +13,13 @@
                   style="height: 34px; display: inline-block; font-size: 1.7em;  margin-top: 6px;">№{{ table.number }}</span>
         </a>
     </div>
-    <main style="overflow-y: auto; height:80%; position: fixed; top: 80px; width: 100%;">
+    <main style="width: 100%;">
         <div class="container">
             <div class="row" id="filtercontent">
+
+                    <div style="height: 80px;" class="col-12">
+                        
+                    </div>      
                 {% for item in orderitems %}
                     <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
                          style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
@@ -32,9 +36,13 @@
                         <span id="{{ item.meal.id }}p"
                               style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
                               class="text-danger"><span class="">{{ item.quantity }} ta</span> <span
-                                class="text-primary">x</span>  {{ item.meal.price }} so`m</span>
+                                class="text-primary">x</span class="moneyed">{{ item.meal.price }} so`m</span>
                     </div>
                 {% endfor %}
+                
+                    <div style="height: 80px;" class="col-12">
+                        
+                    </div>    
             </div>
         </div>
 
@@ -58,7 +66,7 @@
 
         <button type="submit" style="float: right; width: 70%; height: 55px; background-color: white; border:none;"
                 class="h4 font-weight-bold text-danger">
-            <span id="allsumm">{{ order.needed_payment }}</span> so`m <i class="fa fa-check-circle"
+            <span id="allsumm" class="moneyed">{{ order.needed_payment }}</span> so`m <i class="fa fa-check-circle"
                                                                          aria-hidden="true"></i>
         </button>
 
