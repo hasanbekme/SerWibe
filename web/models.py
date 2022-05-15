@@ -154,6 +154,7 @@ class Order(models.Model):
     credit_card = models.IntegerField(default=0)
     debt_money = models.IntegerField(default=0)
     waiter_fee = models.IntegerField(default=0)
+    place_fee = models.IntegerField(default=0)
     comment = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -178,18 +179,15 @@ class Order(models.Model):
     def room_service_cost(self):
         if self.table:
             if self.is_completed:
-                return (self.table.service_cost * self.spent_time // 360000) * 100
+                return (self.table.service_cost * self.spent_time // 360000) * 100 + self.table.initial_payment
             else:
-                return (self.table.service_cost * self.passed_time // 360000) * 100
+                return (self.table.service_cost * self.passed_time // 360000) * 100 + self.table.initial_payment
         else:
             return 0
 
     @property
     def needed_payment(self):
-        if self.table:
-            total = self.table.initial_payment
-        else:
-            total = 0
+        total = 0
         for item in self.orderitem_set.all():
             total += item.paid_amount
         if self.order_type == 'table' and not self.table.tax_required:

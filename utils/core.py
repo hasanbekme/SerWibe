@@ -8,6 +8,14 @@ from datetime import datetime
 import requests
 
 
+def get_templates_folder():
+    return "templates"
+
+
+def get_media_folder():
+    return get_env() + "\\media"
+
+
 def get_env():
     res = os.getenv("APPDATA") + "\\SerWibe"
     return res

@@ -10,6 +10,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 
 from utils.data_processing import get_trading_table, food_trading_data, get_dashboard_info, get_expenses_data, \
     get_archive_data
+from utils.excel import export_archive_data
 from utils.payment_receipt import print_receipt
 from utils.request_processing import get_user, is_waiter, is_admin, pickup_items_add
 from utils.request_processing import order_items_add
@@ -592,6 +593,19 @@ def archive(request):
                       context={'archive_info': archive_info,
                                'p_paginator': page,
                                'tax': get_tax()})
+    else:
+        return redirect('room')
+
+
+@login_required(login_url='/')
+def send_archive_report(request):
+    if is_admin(request):
+        start_date = request.GET.get('fir')
+        end_date = request.GET.get('sec')
+        waiter = request.GET.get('waiter')
+        order_type = request.GET.get('order_type')
+        report_link = export_archive_data(start_date, end_date, waiter, order_type)
+        return redirect(report_link)
     else:
         return redirect('room')
 
