@@ -54,8 +54,6 @@
                     {% for food in foods %}
                          <div class="col-11 col-md-5 cardproduct card shadow text-white bg-white row ml-1 m-auto"
                              style="margin-bottom: 15px!important;" catename="{{ food.category.title }}" >
-                        <div style="width:80%; height:100%; position:absolute; left: 0;" onclick="adding('{{ food.id }}')">
-                        </div>
                             <div class="col-3 p-0" onclick="adding('{{ food.id }}')">
                                 <img src="{{ food.photo }}"
                                      style="width: 70px; height: 70px; margin-top:15px"
@@ -76,6 +74,8 @@
                             <span id="{{ food.id }}p"
                                   style="position:absolute; right: 25%; bottom: 5px; font-weight:700"
                                   class="text-danger moneyed">{{ food.price }} so`m</span>
+                        </div>
+                        <div style="width:80%; height:100%; position:absolute; left: 0;" onclick="adding('{{ food.id }}')">
                         </div>
                     {% endfor %}
 

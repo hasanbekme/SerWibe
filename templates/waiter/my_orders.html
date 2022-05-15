@@ -6,7 +6,7 @@
             <div class="h5 text-primary topmenu-room-span" id="roomname" style="line-height:45px">Buyurtmalar</div>
         </a>
     </div>
-    <main style="overflow-y: auto; height:80%; margin-top:10px">
+    <main style=" margin-top:10px">
 
         <div class="container">
             <div class="row">
@@ -26,11 +26,15 @@
                         <a class="startadd" style="bottom:-15px; margin-top:-15px"
                            href="{% url 'add_item' pk_room=order.table.room.pk pk_table=order.table.pk %}">
                         <span style="position:absolute; font-size:0.3em; padding-left:2px; right: 5px; top:0">{{ order.table.room.title }}</span>
-                            <span style="position:absolute; font-size:12px; padding: 1px 2px 0 2px; right: 2px; bottom:0; color: yellow; font-weight:normal; ">{{ order.needed_payment }} so`m</span>
+                            <span style="position:absolute; font-size:12px; padding: 1px 2px 0 2px; right: 2px; bottom:0; color: yellow; font-weight:normal; "><span class="moneyed">{{ order.needed_payment }}</span> so`m</span>
                             +
                         </a>
                     </div>
                 {% endfor %}
+                
+                    <div style="height: 80px;" class="col-12">
+                        
+                    </div>
             </div>
         </div>
 
