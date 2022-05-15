@@ -10,8 +10,9 @@
         <a href="?fir=today&sec=today" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Bugun</a>
         <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Hafta</a>
         <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Oy</a>
+        <a href="" type="button" class="btn btn-success m-2 float-right" style="background-color: #158349; border-color: #158349;"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel</a>
     </form>
-    <div class="h6 text-center">{{ archive_info.date_string }}</div>
+    <div class="h6 text-center mt-1">{{ archive_info.date_string }}</div>
     <table class="table table-hover">
         <tr>
             <td class="bg-primary text-white" style=" border-radius: 10px 0 0 0">№</td>
@@ -107,7 +108,7 @@
                 </a></td>
             </tr>
         {% endfor %}
-        <tr>
+        <tr class="table-primary">
             <td>
                 --
             </td>
@@ -151,7 +152,7 @@
     <div class="text-center">
 
         {% if p_paginator.has_previous %}
-            <a class="btn btn-primary mb-5" href="?page={{ p_paginator.previous_page_number }}"><</a>
+            <a class="btn btn-primary mb-5 text-white" onclick="addurlparameter('page', '{{ p_paginator.previous_page_number }}')"><</a>
         {% endif %}
         <span class="btn btn-primary mb-5">
 
@@ -160,7 +161,7 @@
 
 
         {% if p_paginator.has_next %}
-            <a class="btn btn-primary mb-5" href="?page={{ p_paginator.next_page_number }}">></a>
+            <a class="btn btn-primary mb-5 text-white" onclick="addurlparameter('page', '{{ p_paginator.next_page_number }}')">></a>
         {% endif %}
     </div>
     <!-- End Paginator -->

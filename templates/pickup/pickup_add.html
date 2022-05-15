@@ -74,25 +74,13 @@
 
         <button type="submit" style="float: right; width: 66%; height: 55px; background-color: white; border:none;"
                 class="h4 font-weight-bold text-danger">
-            <span id="allsumm" class="moneyed">0</span> so`m
+            <span id="allsumm">0</span> so`m
             <i class="fa fa-check" aria-hidden="true"></i>
         </button>
 
     </div>
     </form>
 
-
-
-    <script type="text/javascript">
-        var vr = document.getElementById("roomname");
-        console.log(vr.innerHTML.length);
-        if (vr.innerHTML.length <= 7) {
-            vr.style.lineHeight = "45px"
-            vr.style.fontSize = "25px";
-        } else {
-            vr.style.fontSize = "25px";
-        }
-    </script>
     <script type="text/javascript">
         function delay(time) {
             return new Promise(resolve => setTimeout(resolve, time));
@@ -201,15 +189,18 @@
 
     <script type="text/javascript">
 
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        }
         function calculateAll() {
             var allsumm = 0;
             var klt = 0;
             var limites = document.getElementsByClassName("limit");
             for (i = 0; i < limites.length; i++) {
                 klt = document.getElementById(limites[i].id + "p").innerHTML.slice(0, -4);
-                allsumm += parseInt(klt) * limites[i].value;
+                allsumm += parseInt(klt.replace(" ", "")) * limites[i].value;
             }
-            document.getElementById("allsumm").innerHTML = allsumm;
+            document.getElementById("allsumm").innerHTML = numberWithCommas(allsumm);;
             if (allsumm == 0) {
                 document.getElementById("centered").style.width = "";
                 document.getElementById("centered").style.boxShadow = "";
