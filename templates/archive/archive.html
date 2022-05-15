@@ -10,8 +10,9 @@
         <a href="?fir=today&sec=today" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Bugun</a>
         <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Hafta</a>
         <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Oy</a>
+        <a  onclick="excelURL()" type="button" class="btn btn-success m-2 float-right text-white" style="background-color: #158349; border-color: #158349;"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel</a>
     </form>
-    <div class="h6 text-center">{{ archive_info.date_string }}</div>
+    <div class="h6 text-center mt-1">{{ archive_info.date_string }}</div>
     <table class="table table-hover">
         <tr>
             <td class="bg-primary text-white" style=" border-radius: 10px 0 0 0">№</td>
@@ -53,19 +54,19 @@
             <td class="bg-primary text-white" style="padding:0 0 0 0;">
                 <table>
                     <tr>
-                        <td class="btn btn-info p-2 m-1 mt-2 shadow" style="height: 30px; padding-top: 5px!important;"
+                        <td id="prises1" class="btn btn-info p-2 m-1 mt-2 shadow active" style="height: 30px; padding-top: 5px!important;"
                             onclick="filterPaid(1)">
                             <i class="fa fa-list-alt" aria-hidden="true" style="font-size:1.2em; "></i>
                         </td>
-                        <td class="btn btn-success p-2 m-1 mt-2 shadow"
+                        <td id="prises2" class="btn btn-success p-2 m-1 mt-2 shadow"
                             style="height: 30px; padding-top: 5px!important;" onclick="filterPaid(2)">
                             <i class="fa fa-money" aria-hidden="true" style="font-size:1.2em; "></i>
                         </td>
-                        <td class="btn btn-warning p-2 m-1 mt-2 shadow"
+                        <td id="prises3" class="btn btn-warning p-2 m-1 mt-2 shadow"
                             style="height: 30px; padding-top: 5px!important;" onclick="filterPaid(3)">
                             <i class="fa fa-credit-card" aria-hidden="true" style="font-size:1.2em; "></i>
                         </td>
-                        <td class="btn btn-danger p-2 m-1 mt-2 shadow" style="height: 30px; padding-top: 5px!important;"
+                        <td id="prises4" class="btn btn-danger p-2 m-1 mt-2 shadow" style="height: 30px; padding-top: 5px!important;"
                             style="width:39px" onclick="filterPaid(4)">
                             <i class="fa fa-ban" aria-hidden="true" style="font-size:1.2em; "></i>
                         </td>
@@ -107,7 +108,7 @@
                 </a></td>
             </tr>
         {% endfor %}
-        <tr>
+        <tr class="table-primary">
             <td>
                 --
             </td>
@@ -151,7 +152,7 @@
     <div class="text-center">
 
         {% if p_paginator.has_previous %}
-            <a class="btn btn-primary mb-5" href="?page={{ p_paginator.previous_page_number }}"><</a>
+            <a class="btn btn-primary mb-5 text-white" onclick="addurlparameter('page', '{{ p_paginator.previous_page_number }}')"><</a>
         {% endif %}
         <span class="btn btn-primary mb-5">
 
@@ -160,7 +161,7 @@
 
 
         {% if p_paginator.has_next %}
-            <a class="btn btn-primary mb-5" href="?page={{ p_paginator.next_page_number }}">></a>
+            <a class="btn btn-primary mb-5 text-white" onclick="addurlparameter('page', '{{ p_paginator.next_page_number }}')">></a>
         {% endif %}
     </div>
     <!-- End Paginator -->
@@ -170,11 +171,7 @@
         var year = new URL(location.href).searchParams.get('sec');
         document.getElementById("sec").value = year;
 
-        function addurlparameter(name, value) {
-            var sp = new URLSearchParams(window.location.search)
-            sp.set(name, value)
-            window.location.search = sp.toString()
-        }
+        
     </script>
     <script type="text/javascript">
         function filterPaid(n) {
@@ -182,6 +179,30 @@
             var prises2 = document.getElementsByClassName('paid_money2');
             var prises3 = document.getElementsByClassName('paid_money3');
             var prises4 = document.getElementsByClassName('paid_money4');
+
+            var prises1button = document.getElementById('prises1');
+            var prises2button = document.getElementById('prises2');
+            var prises3button = document.getElementById('prises3');
+            var prises4button = document.getElementById('prises4');
+            prises1button.className = "btn btn-info p-2 m-1 mt-2 shadow";
+            prises2button.className = "btn btn-success p-2 m-1 mt-2 shadow";
+            prises3button.className = "btn btn-warning p-2 m-1 mt-2 shadow";
+            prises4button.className = "btn btn-danger p-2 m-1 mt-2 shadow";
+            if(n==1){
+                prises1button.className = prises1button.className + " active";
+            }
+            if(n==2){
+                prises2button.className = prises2button.className + " active";
+            }
+            if(n==3){
+                prises3button.className = prises3button.className + " active";
+            }
+            if(n==4){
+                prises4button.className = prises4button.className + " active";
+            }
+
+
+
             for (var i = 0; i < prises1.length; i++) {
                 prises1[i].style.display = "none";
                 prises2[i].style.display = "none";
@@ -203,16 +224,20 @@
         }
 
         filterPaid(1);
+
+            document.getElementById('prises1').className = "btn btn-info p-2 m-1 mt-2 shadow active";
     </script>
+   
     <script type="text/javascript">
-        function numberWithCommas(x) {
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-        }
+        function excelURL(){
+            var lchref = location.href;
 
-        var moneyeds = document.getElementsByClassName("moneyed");
-        for (var i = 0; i < moneyeds.length; i++) {
-            moneyeds[i].innerHTML = numberWithCommas(moneyeds[i].innerHTML);
+            if (lchref.split("?")[1]==undefined){
+                location.href = "/archiveReport"   
+            }
+            else{
+                location.href = "/archiveReport?" + lchref.split("?")[1];
+            }
         }
-
     </script>
 {% endblock %}

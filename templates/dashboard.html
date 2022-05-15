@@ -155,13 +155,14 @@
 
     </script>
     <script type="text/javascript">
-        function numberWithCommas(x) {
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        function tradingURL(){
+            var lchref = location.href;
+            if (lchref.split("?")[1]=="t"){
+                location.href = "/archive"   
+            }
+            else{
+                location.href = "/archive?" + lchref.split("?")[1];
+            }
         }
-        var moneyeds = document.getElementsByClassName("moneyed");
-        for (var i=0; i<moneyeds.length; i++){
-            moneyeds[i].innerHTML = numberWithCommas(moneyeds[i].innerHTML);
-        }
-
     </script>
 {% endblock %}

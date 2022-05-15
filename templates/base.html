@@ -12,6 +12,15 @@
     <link rel="stylesheet" href="/static/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
     <style>
+        body{
+              -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+        }
         .payment_type > button {
             font-size: 2em;
             padding: 0px !important;
@@ -200,32 +209,14 @@
         .cardproduct{
             height: 100px;
         }
-        .addandsubt{
-            width: 38px;
-            height: 38px;
-            position: relative;
-            margin: 2px;
-
-        }
-        .addandsubt > span {
-            font-size: 2em;
-            position: absolute;
-            top: -4px;
-            left: 8px;
-            font-weight: 600;
-        }
-        .limit{
-            margin: 2px;
-            width: 38px;
-        }
         .menu-food{
-            position: absolute;
+            position: fixed;
             bottom: 20px;
             background: white;
             border-radius: 25px 0 0 25px;
             outline: 8px dashed white;
             width: 90%;
-            left: 3.5%;
+            right: 3.5%;
             box-shadow: 2px 3px 10px 5px #000000aa;
             outline-offset: -4px;
             text-align: left;
@@ -276,6 +267,20 @@
                 .plussed2{
                 right: 15%!important;
             }
+
+        .menu-food{
+            position: fixed;
+            bottom: 20px;
+            background: white;
+            border-radius: 25px 0 0 25px;
+            outline: 8px dashed white;
+            width: 70%;
+            right: 6.5%;
+            box-shadow: 2px 3px 10px 5px #000000aa;
+            outline-offset: -4px;
+            text-align: left;
+            height: 55px;
+        }
         }
         .pickup-add{
             width:50px;
@@ -345,7 +350,7 @@
             height: 44px;
             margin-top: 8px;
         }
-        .btn, .tablecard, .dropdown-item{
+        .cardproduct, .btn, .tablecard, .dropdown-item{
             cursor: pointer;
         }
         .custom-menu{
@@ -471,7 +476,11 @@
         for (var i=0; i<moneyeds.length; i++){
             moneyeds[i].innerHTML = numberWithCommas(moneyeds[i].innerHTML);
         }
-
+function addurlparameter(name, value) {
+            var sp = new URLSearchParams(window.location.search)
+            sp.set(name, value)
+            window.location.search = sp.toString()
+        }
     </script>
 
 </body>
