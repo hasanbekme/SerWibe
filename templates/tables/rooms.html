@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="row">
-        <div class="h2">Xonalar</div>
+        <div class="h2">Хоналар</div>
         <table class="table table-hover m">
 
             <tr>
                 <td class="bg-primary text-white" style="border-radius: 10px 0 0 0">№</td>
-                <td class="bg-primary text-white">Xona Nomi</td>
-                <td class="bg-primary text-white">Stollar</td>
-                <td class="bg-primary text-white">Tahrir</td>
-                <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">O`chirish</td>
+                <td class="bg-primary text-white">Хона Номи</td>
+                <td class="bg-primary text-white">Столлар</td>
+                <td class="bg-primary text-white">Таҳрир</td>
+                <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">Ўчириш</td>
             </tr>
 
             {% for room in rooms %}
@@ -18,21 +18,21 @@
                     <td>{{ room.title }}</td>
                     <td><a href="{% url 'room_tables' pk=room.pk %}">
                         <button type="button" class="btn btn-info"><i class="fa fa-table"> {{ room.tables_count }}</i>
-                            ta
+                            та
                         </button>
                     </a></td>
                     <td><a href="{% url 'room_edit' pk=room.pk %}">
-                        <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Tahrir</button>
+                        <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Таҳрир</button>
                     </a></td>
                     <td><a href="{% url 'room_delete' pk=room.pk %}">
-                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> O'chirish</button>
+                        <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Ўчириш</button>
                     </a></td>
                 </tr>
             {% endfor %}
 
         </table>
 
-        <a href="{% url 'room_new' %}" type="button" class="btn btn-primary m-1">Qo'shish</a>
+        <a href="{% url 'room_new' %}" type="button" class="btn btn-primary m-1">Қўшиш</a>
     </div>
         <div class="text-center ">
 
@@ -41,7 +41,7 @@
             {% endif %}
             <span class="btn btn-primary mb-5">
 
-                    Sahifa {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
+                    Саҳифа {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
                     </span>
 
 

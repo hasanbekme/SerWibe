@@ -3,27 +3,27 @@
     <form method="POST" enctype="multipart/form-data">
         <div class="row mt-4">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
-                <div class="h4">Buyurtma: #{{ order.id }} <span
-                        class="float-left float-sm-right float-md-right text-danger font-weight-bold">Olib Ketish</span>
+                <div class="h4">Буюртма: #{{ order.id }} <span
+                        class="float-left float-sm-right float-md-right text-danger font-weight-bold">Олиб Кетиш</span>
                 </div>
                 {% csrf_token %}
                 <table class="table tableorder">
                     <tr class="bg-primary text-white">
-                        <td>Nomi</td>
-                        <td>Soni</td>
-                        <td>Umumiy narxi</td>
+                        <td>Номи</td>
+                        <td>Сони</td>
+                        <td>Умумий нархи</td>
                     </tr>
                     {% for orderitem in orderitems %}
                         <tr>
                             <td>{{ orderitem.meal.title }}</td>
-                            <td>{{ orderitem.quantity }} ta</td>
-                            <td><span class="moneyed">{{ orderitem.total_price }}</span> so'm</td>
+                            <td>{{ orderitem.quantity }} та</td>
+                            <td><span class="moneyed">{{ orderitem.total_price }}</span> сўм</td>
                         </tr>
                     {% endfor %}
                     <tr class="text-danger font-weight-bold">
-                        <td>Umumiy</td>
+                        <td>Умумий</td>
                         <td>{{ order.orderitem_set.count }} ta</td>
-                        <td><span class="moneyed">{{ order.needed_payment }}</span> so'm</td>
+                        <td><span class="moneyed">{{ order.needed_payment }}</span> сўм</td>
                     </tr>
                 </table>
                 {{ form.comment }}
@@ -71,8 +71,8 @@
                 <div class="mr-auto">
                     <a href="{% url 'pickup' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
                                                                                                   aria-hidden="true"></i>
-                        Bekor qilish</a>
-                    <button type="sumbit" class="btn btn-primary m-1 mt-3" id="submitForm"><i class="fa fa-check-circle"></i> Tasdiqlash
+                        Бекор қилиш</a>
+                    <button type="sumbit" class="btn btn-primary m-1 mt-3" id="submitForm"><i class="fa fa-check-circle"></i> Тасдиқлаш
                     </button>
                 </div>
                 <span class="bottomed">{{ order.created_time }}</span>
@@ -81,12 +81,12 @@
     </form>
     <script type="text/javascript">
         var totalsumm = {{ order.needed_payment }};
-        document.getElementById('id_comment').placeholder = "Izoh...";
+        document.getElementById('id_comment').placeholder = "Изоҳ...";
         var payment_inputs = document.getElementsByTagName("input");
         var payment_buttons = document.getElementsByTagName("buttons");
-        payment_inputs[1].placeholder = "Naqt pul";
-        payment_inputs[2].placeholder = "Plastik karta";
-        payment_inputs[3].placeholder = "To`lanmagan";
+        payment_inputs[1].placeholder = "Нақт пул";
+        payment_inputs[2].placeholder = "Пластик карта";
+        payment_inputs[3].placeholder = "Тўланмаган";
 
         payment_inputs[1].onkeyup = function() {back_function()};
         payment_inputs[2].onkeyup = function() {back_function()};

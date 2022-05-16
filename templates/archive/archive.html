@@ -4,25 +4,25 @@
 
     <form class="container"
           style="width:100%; background:white; padding:5px; border-radius: 15px; box-shadow: 1px 2px 3px gray;">
-        <input type="date" name="fir" id="fir" class="form-item m-2">dan-
-        <input type="date" name="sec" id="sec" class="form-item m-2">gacha
-        <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Filter</button>
-        <a href="?fir=today&sec=today" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Bugun</a>
-        <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Hafta</a>
-        <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Oy</a>
+        <input type="date" name="fir" id="fir" class="form-item m-2">дан-
+        <input type="date" name="sec" id="sec" class="form-item m-2">гача
+        <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Филтер</button>
+        <a href="?fir=today&sec=today" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Бугун</a>
+        <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Ҳафта</a>
+        <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Ой</a>
         <a  onclick="excelURL()" type="button" class="btn btn-success m-2 float-right text-white" style="background-color: #158349; border-color: #158349;"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel</a>
     </form>
     <div class="h6 text-center mt-1">{{ archive_info.date_string }}</div>
     <table class="table table-hover">
         <tr>
             <td class="bg-primary text-white" style=" border-radius: 10px 0 0 0">№</td>
-            <td class="bg-primary text-white">ID</td>
+            <td class="bg-primary text-white">ИД</td>
             <td class="bg-primary text-white">
                 <div class="dropdown">
                     <button class="btn btn-primary p-0 dropdown-toggle"
                             type="button" id="dropdownMenu1" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false" style="width:100%">
-                        Xodim
+                        Ходим
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         {% for stuff in archive_info.stuffs %}
@@ -38,19 +38,19 @@
                     <button class="btn btn-primary p-0 dropdown-toggle"
                             type="button" id="dropdownMenu1" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false" style="width:100%">
-                        Turi
+                        Тури
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <a class="dropdown-item"
-                           onclick="addurlparameter('order_type', 'table')">Shu yerda</a>
+                           onclick="addurlparameter('order_type', 'table')">Шу ерда</a>
                         <a class="dropdown-item"
-                           onclick="addurlparameter('order_type', 'pickup')">Olib ketilgan</a>
+                           onclick="addurlparameter('order_type', 'pickup')">Олиб кетилган</a>
                     </div>
                 </div>
             </td>
-            <td class="bg-primary text-white">Olingan vaqt</td>
-            <td class="bg-primary text-white">Stol</td>
-            <td class="bg-primary text-white">Xizmat</td>
+            <td class="bg-primary text-white">Олинган вақт</td>
+            <td class="bg-primary text-white">Стол</td>
+            <td class="bg-primary text-white">Хизмат</td>
             <td class="bg-primary text-white" style="padding:0 0 0 0;">
                 <table>
                     <tr>
@@ -73,7 +73,7 @@
                     </tr>
                 </table>
             </td>
-            <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0">Tahlil</td>
+            <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0">Таҳлил</td>
         </tr>
 
         {% for order in p_paginator %}
@@ -95,13 +95,13 @@
                 <td>{{ order.tax_price }}</td>
                 <td class="">
                     <span class="paid_money1"><i class="fa fa-list-alt"></i> <span
-                            class="moneyed">{{ order.paid_money }}</span> so'm</span>
+                            class="moneyed">{{ order.paid_money }}</span> сўм</span>
                     <span class="paid_money2"><i class="fa fa-money"></i> <span
-                            class="moneyed">{{ order.cash_money }}</span> so'm</span>
+                            class="moneyed">{{ order.cash_money }}</span> сўм</span>
                     <span class="paid_money3"><i class="fa fa-credit-card"></i> <span
-                            class="moneyed">{{ order.credit_card }}</span> so'm</span>
+                            class="moneyed">{{ order.credit_card }}</span> сўм</span>
                     <span class="paid_money4"><i class="fa fa-ban"></i> <span
-                            class="moneyed">{{ order.debt_money }}</span> so'm</span>
+                            class="moneyed">{{ order.debt_money }}</span> сўм</span>
                 </td>
                 <td><a href="{% url 'archive_order_view' pk=order.id %}">
                     <button type="button" class="btn btn-info"><i class="fa fa-eye"></i> Tahlil</button>
@@ -116,7 +116,7 @@
                 --
             </td>
             <td>
-                <span class="h6 font-weight-bold text-dark text-center">Jami</span>
+                <span class="h6 font-weight-bold text-dark text-center">Жами</span>
             </td>
             <td>
                 --
@@ -129,17 +129,17 @@
             </td>
             <td>
                 <span class="h6 font-weight-bold text-dark text-center"><span
-                        class="moneyed">{{ archive_info.waiter_fee }}</span> so`m</span>
+                        class="moneyed">{{ archive_info.waiter_fee }}</span> сўм</span>
             </td>
             <td>
                 <span class="paid_money1 h6 font-weight-bold text-dark text-center"><i class="fa fa-list-alt"></i> <span
-                        class="moneyed">{{ archive_info.orders_income }}</span> so'm</span>
+                        class="moneyed">{{ archive_info.orders_income }}</span> сўм</span>
                 <span class="paid_money2 h6 font-weight-bold text-dark text-center"><i class="fa fa-money"></i> <span
-                        class="moneyed">{{ archive_info.cash_money_p }}</span> so'm</span>
+                        class="moneyed">{{ archive_info.cash_money_p }}</span> сўм</span>
                 <span class="paid_money3 h6 font-weight-bold text-dark text-center"><i
-                        class="fa fa-credit-card"></i> <span class="moneyed">{{ archive_info.credit_card_p }}</span> so'm</span>
+                        class="fa fa-credit-card"></i> <span class="moneyed">{{ archive_info.credit_card_p }}</span> сўм</span>
                 <span class="paid_money4 h6 font-weight-bold text-dark text-center"><i class="fa fa-ban"></i> <span
-                        class="moneyed">{{ archive_info.debt_money_p }}</span> so'm</span>
+                        class="moneyed">{{ archive_info.debt_money_p }}</span> сўм</span>
             </td>
             <td>
                 --
@@ -156,7 +156,7 @@
         {% endif %}
         <span class="btn btn-primary mb-5">
 
-    Sahifa {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
+    Саҳифа   {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
     </span>
 
 

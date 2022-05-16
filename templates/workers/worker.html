@@ -5,11 +5,11 @@
 
         <tr>
             <td class="bg-primary text-white" style="border-radius: 10px 0 0 0">№</td>
-            <td class="bg-primary text-white">Ism</td>
-            <td class="bg-primary text-white">Familiya</td>
-            <td class="bg-primary text-white">Turi</td>
-            <td class="bg-primary text-white">Tahrir</td>
-            <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">O`chirish</td>
+            <td class="bg-primary text-white">Исм</td>
+            <td class="bg-primary text-white">Фамилия</td>
+            <td class="bg-primary text-white">Тури</td>
+            <td class="bg-primary text-white">Таҳрир</td>
+            <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">Ўчириш</td>
         </tr>
 
 
@@ -21,15 +21,15 @@
                 <td>{{ i.first_name }}</td>
                 <td>{{ i.last_name }}</td>
                 {% if i.position == "admin" %}
-                    <td>Admin</td>
+                    <td>Админ</td>
                 {% else %}
-                    <td>Offitsant</td>
+                    <td>Оффицант</td>
                 {% endif %}
                 <td><a href="{% url 'user_edit' i.pk %}">
-                    <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Tahrir</button>
+                    <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Таҳрир</button>
                 </a></td>
                 <td><a href="{% url 'user_delete' i.pk %}">
-                    <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> O`chirish</button>
+                    <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Ўчириш</button>
                 </a></td>
             </tr>
         {% endfor %}
@@ -37,6 +37,6 @@
 
 
     <!-- Button trigger modal -->
-    <a href="{% url 'user_new' %}" type="button" class="btn btn-primary m-1">Qo'shish</a>
+    <a href="{% url 'user_new' %}" type="button" class="btn btn-primary m-1">Қўшиш</a>
 
 {% endblock %}

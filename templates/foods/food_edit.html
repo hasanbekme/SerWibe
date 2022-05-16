@@ -3,27 +3,27 @@
     <form method="POST" enctype="multipart/form-data">
         <div class="row mt-5">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow tableab">
-                <div class="h2">Maxsulot:</div>
+                <div class="h2">Махсулот:</div>
                 {% csrf_token %}
                 <table>
                     <tr>
-                        <td style="text-align: right;">Nomi:</td>
+                        <td style="text-align: right;">Номи:</td>
                         <td>{{ form.title }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;">Kategoriya:</td>
+                        <td style="text-align: right;">Категория:</td>
                         <td>{{ form.category }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;">Rasm:</td>
+                        <td style="text-align: right;">Расм:</td>
                         <td>{{ form.image }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;">Narxi:</td>
+                        <td style="text-align: right;">Нархи:</td>
                         <td>{{ form.price }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;">Mavjud:</td>
+                        <td style="text-align: right;">Мавжуд:</td>
                         <td><label class="switch">
                             {{ form.is_available }}
                             <span class="slider"></span>
@@ -34,8 +34,8 @@
                 <div class="mr-auto">
                     <a href="{% url 'product' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
                                                                                                      aria-hidden="true"></i>
-                        Yopish</a>
-                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> Saqlash</button>
+                        Ёпиш</a>
+                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> Сақлаш</button>
 
                 </div>
             </div>
@@ -47,7 +47,7 @@
     </script>
     <script type="text/javascript">
         if (document.getElementsByTagName("label")[0].getAttribute("for")=='image-clear_id'){
-            document.getElementsByTagName("label")[0].innerHTML = "O`chirish";
+            document.getElementsByTagName("label")[0].innerHTML = "Ўчириш";
         }
     </script>
 {% endblock %}

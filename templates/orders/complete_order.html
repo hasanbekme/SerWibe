@@ -3,39 +3,39 @@
     <form method="POST" enctype="multipart/form-data">
         <div class="row mt-4">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
-                <div class="h4">Buyurtma: #{{ order.id }} <span
+                <div class="h4">Буюртма: #{{ order.id }} <span
                         class="float-left float-sm-right float-md-right text-danger">{{ order.table.room.title }}: №{{ order.table.number }}</span>
                 </div>
                 {% csrf_token %}
                 <table class="table tableorder">
                     <tr class="bg-primary text-white">
-                        <td>Nomi</td>
-                        <td>Soni</td>
-                        <td>Umumiy narxi</td>
+                        <td>Номи</td>
+                        <td>Сони</td>
+                        <td>Умумий нархи</td>
                     </tr>
                     {% for orderitem in orderitems %}
                         <tr>
                             <td>{{ orderitem.meal.title }}</td>
                             <td>{{ orderitem.quantity }} ta</td>
-                            <td><span class="moneyed">{{ orderitem.abstract_amount }}</span> so'm</td>
+                            <td><span class="moneyed">{{ orderitem.abstract_amount }}</span> сўм</td>
                         </tr>
                     {% endfor %}
                     {% if order.table.tax_required %}
                         <tr class="font-weight-bold">
                             <td>Xizmat</td>
                             <td>{{ tax }}%</td>
-                            <td><span class="moneyed">{{ order.tax_price }}</span> so'm</td>
+                            <td><span class="moneyed">{{ order.tax_price }}</span> сўм</td>
                         </tr>
                     {% endif %}
                     <tr class="font-weight-bold">
-                        <td>Xona xizmati</td>
+                        <td>Хона хизмати</td>
                         <td>{{ order.passed_time_formatted }}</td>
-                        <td><span class="moneyed">{{ order.room_service_cost }}</span> so'm</td>
+                        <td><span class="moneyed">{{ order.room_service_cost }}</span> сўм</td>
                     </tr>
                     <tr class="text-danger font-weight-bold">
-                        <td>Umumiy</td>
+                        <td>Умумий</td>
                         <td>{{ order.orderitem_set.count }} ta</td>
-                        <td><span class="moneyed">{{ order.needed_payment }}</span> so'm</td>
+                        <td><span class="moneyed">{{ order.needed_payment }}</span> сўм</td>
                     </tr>
                 </table>
                 {{ form.comment }}

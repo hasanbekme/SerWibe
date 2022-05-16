@@ -4,12 +4,12 @@
 
         <tr>
             <td class="bg-primary text-white" style=" border-radius: 10px 0 0 0">№</td>
-            <td class="bg-primary text-white">ID</td>
-            <td class="bg-primary text-white">Xodim</td>
-            <td class="bg-primary text-white">Olingan vaqt</td>
-            <td class="bg-primary text-white">Umumiy summa</td>
-            <td class="bg-primary text-white">Tahlil</td>
-            <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">Tasdiqlash</td>
+            <td class="bg-primary text-white">ИД</td>
+            <td class="bg-primary text-white">Ходим</td>
+            <td class="bg-primary text-white">Олинган вақт</td>
+            <td class="bg-primary text-white">Умумий сумма</td>
+            <td class="bg-primary text-white">Таҳлил</td>
+            <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">Тасдиқлаш</td>
         </tr>
 
         {% for order in orders %}
@@ -18,12 +18,12 @@
                 <td>#{{ order.id }}</td>
                 <td>{{ order.waiter.full_name }}</td>
                 <td>{{ order.created_time }}</td>
-                <td><span class="moneyed">{{ order.needed_payment }}</span> so'm</td>
+                <td><span class="moneyed">{{ order.needed_payment }}</span> сўм</td>
                 <td><a href="{% url 'pickup_view' pk=order.id %}">
-                    <button type="button" class="btn btn-info"><i class="fa fa-eye"></i> Tahlil</button>
+                    <button type="button" class="btn btn-info"><i class="fa fa-eye"></i> Таҳлил</button>
                 </a></td>
                 <td><a href="{% url 'complete_pickup' pk=order.id %}">
-                    <button type="button" class="btn btn-warning"><i class="fa fa-credit-card"></i> Tugatish</button>
+                    <button type="button" class="btn btn-warning"><i class="fa fa-credit-card"></i> Тугатиш</button>
                 </a></td>
             </tr>
         {% endfor %}

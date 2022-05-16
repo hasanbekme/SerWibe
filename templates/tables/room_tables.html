@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="h3 ml-1">Xona: <span class="text-danger h3 font-weight-bold">{{ room.title }}</span></div>
+    <div class="h3 ml-1">Хона: <span class="text-danger h3 font-weight-bold">{{ room.title }}</span></div>
     <main class="row">
         {% for table in tables %}
             {% if table.is_available %}
@@ -27,7 +27,7 @@
                         {% endif %}
                     </span>
                     <span class="tablenum h1 text-white">{{ table.number }}</span>
-                    <span class="tableprice h6 text-white">{{ table.current_order.needed_payment }} so`m</span>
+                    <span class="tableprice h6 text-white">{{ table.current_order.needed_payment }} сўм</span>
 
                 </div>
             {% endif %}
@@ -37,9 +37,9 @@
     <div class="mt-4">
         <a href="{% url 'rooms' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-arrow-left"
                                                                                      aria-hidden="true"></i>
-            Ortga</a>
+            Ортга</a>
         <a href="{% url 'table_add' pk=room.pk %}" type="button" class="btn btn-primary m-1 mt-3"><i
-                class="fa fa-plus"></i> Qo'shish</a>
+                class="fa fa-plus"></i> Қўшиш</a>
 
     </div>
 {% endblock %}

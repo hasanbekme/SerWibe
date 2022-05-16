@@ -3,31 +3,31 @@
     <form method="POST" enctype="multipart/form-data">
         <div class="row mt-5">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow tableab">
-                <div class="h2">Foydalanuvchi:</div>
+                <div class="h2">ҚўшишФойдаланувчи:</div>
                 {% csrf_token %}
                 <table>
                     <tr>
-                        <td style="text-align: right;">Ismi:</td>
+                        <td style="text-align: right;">Исми:</td>
                         <td>{{ form.first_name }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;">Familiyasi:</td>
+                        <td style="text-align: right;">Фамилияси:</td>
                         <td>{{ form.last_name }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;">Turi:</td>
+                        <td style="text-align: right;">Тури:</td>
                         <td>{{ form.position }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;">Parol:</td>
+                        <td style="text-align: right;">Парол:</td>
                         <td>{{ form.password }}</td>
                     </tr>
                 </table>
                 <div class="mr-auto">
                     <a href="{% url 'worker' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
                                                                                                   aria-hidden="true"></i>
-                        Yopish</a>
-                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> Saqlash</button>
+                        Ёпиш</a>
+                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> Сақлаш</button>
 
                 </div>
             </div>
