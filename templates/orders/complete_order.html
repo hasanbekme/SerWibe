@@ -16,7 +16,7 @@
                     {% for orderitem in orderitems %}
                         <tr>
                             <td>{{ orderitem.meal.title }}</td>
-                            <td>{{ orderitem.quantity }} ta</td>
+                            <td>{{ orderitem.quantity }} та</td>
                             <td><span class="moneyed">{{ orderitem.abstract_amount }}</span> сўм</td>
                         </tr>
                     {% endfor %}
@@ -34,7 +34,7 @@
                     </tr>
                     <tr class="text-danger font-weight-bold">
                         <td>Умумий</td>
-                        <td>{{ order.orderitem_set.count }} ta</td>
+                        <td>{{ order.orderitem_set.count }} та</td>
                         <td><span class="moneyed">{{ order.needed_payment }}</span> сўм</td>
                     </tr>
                 </table>
@@ -86,9 +86,9 @@
                 <div class="mr-auto mb-3">
                     <a href="{% url 'orders' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
                                                                                                   aria-hidden="true"></i>
-                        Bekor qilish</a>
+                        Бекор қилиш</a>
                     <button type="sumbit" class="btn btn-primary m-1 mt-3" id="submitForm"><i
-                            class="fa fa-check-circle"></i> Tasdiqlash
+                            class="fa fa-check-circle"></i> Тасдиқлаш
                     </button>
                 </div>
                 <span class="bottomed-name">{{ order.waiter.full_name }}</span>
@@ -99,12 +99,12 @@
 
     <script type="text/javascript">
         var totalsumm = {{ order.needed_payment }};
-        document.getElementById('id_comment').placeholder = "Izoh...";
+        document.getElementById('id_comment').placeholder = "Изоҳ...";
         var payment_inputs = document.getElementsByTagName("input");
         var payment_buttons = document.getElementsByTagName("buttons");
-        payment_inputs[1].placeholder = "Naqt pul";
-        payment_inputs[2].placeholder = "Plastik karta";
-        payment_inputs[3].placeholder = "To`lanmagan";
+        payment_inputs[1].placeholder = "Нақт пул";
+        payment_inputs[2].placeholder = "Пластик карта";
+        payment_inputs[3].placeholder = "Тўланмаган";
 
         payment_inputs[1].onkeyup = function () {
             back_function()
