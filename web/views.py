@@ -661,7 +661,7 @@ def add_item(request, pk_room, pk_table):
             return render(request, 'waiter/add_item.html',
                           {"foods": food_models, 'categories': category_models, 'table': table_model,
                            'room': room_model, 'tax': get_tax()})
-        return redirect('my_orders')
+        return redirect('table', pk=pk_room)
     else:
         return redirect('dashboard')
 

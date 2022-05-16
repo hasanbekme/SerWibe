@@ -34,12 +34,7 @@ class Document:
         self.aligned_text(".", y, 'center')
         self.dc.EndPage()
         self.dc.EndDoc()
-        printer = win32print.OpenPrinter(self.printer)
-        win32print.StartDocPrinter(
-            printer, 1, ("Paper cut print", None, "raw"))
-        win32print.WritePrinter(printer, b'\x1dV\x01')
-        win32print.EndDocPrinter(printer)
-        win32print.ClosePrinter(printer)
+
 
     def set_font(self, family, size, bold=None, weight=None):
         if weight is None:

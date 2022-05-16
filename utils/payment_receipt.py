@@ -7,7 +7,7 @@ from web.models import Order, OrderItem
 
 def print_receipt(order: Order):
     border_string = "-" * 200
-    doc = Document(width=int(Settings().get("printer_width", int) * 51))
+    doc = Document(width=int(Settings().get("printer_width", int) * 51), printer=Settings().get("printer", str))
     doc.begin_document()
     y = 0
     doc.set_font(family="Arial", size=20, bold=True)
@@ -62,9 +62,13 @@ def print_receipt(order: Order):
     doc.aligned_text(f"{order.without_tax} so'm", y, align="right")
     y += 300
     tax = Settings().get("tax", tp=int)
-    if tax != 0:
+    if tax != 0 and order.order_type == "table" and order.table.tax_required:
         doc.aligned_text("Xizmat:", y, align="left")
-        doc.aligned_text(f"{tax} %", y, align="right")
+        doc.aligned_text(f"{tax}%, ({order.tax_price} so'm)", y, align="right")
+        y += 300
+    if order.room_service_cost:
+        doc.aligned_text("Xona xizmati:", y, align="left")
+        doc.aligned_text(f"{order.room_service_cost} so'm", y, align="right")
         y += 300
     doc.set_font(family="Arial", size=14, bold=True)
     doc.aligned_text("Jami:", y, align="left")
@@ -90,7 +94,7 @@ def printer_order_item(order_item: OrderItem, quantity: int):
     doc = Document(printer=order_item.meal.category.printer, width=int(Settings().get("printer_width", int) * 51))
     doc.begin_document()
     y = 0
-    doc.set_font(family="Segoe UI Historic", size=16, weight=900)
+    doc.set_font(family="Segoe UI Historic", size=12, weight=600)
     doc.aligned_text(now.strftime("%d.%m.%Y %H:%M"), y=y, align="center")
     y += 300
     doc.aligned_text(f"Buyurtma:   #{order_item.order.id}", y=y, align="center")
