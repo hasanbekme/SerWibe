@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Sozlamalar</string>
+   <string>Созламалар</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -30,7 +30,7 @@
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab1">
       <property name="styleSheet">
@@ -42,7 +42,7 @@
        </iconset>
       </attribute>
       <attribute name="title">
-       <string>Asosiy</string>
+       <string>Асосий</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0">
@@ -65,7 +65,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Asosiy sozlamalar</string>
+            <string>Асосий созламалар</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -83,7 +83,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Avto boshlash:</string>
+              <string>Авто бошлаш</string>
              </property>
             </widget>
            </item>
@@ -111,7 +111,7 @@
             </font>
            </property>
            <property name="text">
-            <string> Dasturchilarga yuborish</string>
+            <string>Дастурчиларга юбориш</string>
            </property>
            <property name="icon">
             <iconset>
@@ -150,7 +150,7 @@
        </iconset>
       </attribute>
       <attribute name="title">
-       <string>Chek</string>
+       <string>Чек</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
@@ -173,7 +173,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Chek ma'lumotlari</string>
+            <string>Чек маълумотлари</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -191,7 +191,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Tashkilot nomi:</string>
+              <string>Ташкилот номи:</string>
              </property>
             </widget>
            </item>
@@ -233,7 +233,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Manzil:</string>
+              <string>Манзил:</string>
              </property>
             </widget>
            </item>
@@ -317,7 +317,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Tax:</string>
+              <string>Оффитсант учун:</string>
              </property>
             </widget>
            </item>
@@ -389,7 +389,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Oxirgi satr:</string>
+              <string>Охирги сатр:</string>
              </property>
             </widget>
            </item>
@@ -431,7 +431,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Printer:</string>
+              <string>Касса принтер:</string>
              </property>
             </widget>
            </item>
@@ -464,7 +464,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Printer o'lchami:</string>
+              <string>Принтер ўлчами:</string>
              </property>
             </widget>
            </item>
@@ -523,7 +523,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>mm</string>
+                <string>мм</string>
                </property>
               </widget>
              </item>
@@ -554,7 +554,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Bekor qilish</string>
+              <string>Бекор қилиш</string>
              </property>
             </widget>
            </item>
@@ -592,7 +592,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Saqlash</string>
+              <string>Сақлаш</string>
              </property>
             </widget>
            </item>
@@ -609,7 +609,7 @@
        </iconset>
       </attribute>
       <attribute name="title">
-       <string>Yangilash</string>
+       <string>Янгилаш</string>
       </attribute>
      </widget>
     </widget>

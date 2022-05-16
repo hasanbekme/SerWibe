@@ -35,7 +35,6 @@ class Document:
         self.dc.EndPage()
         self.dc.EndDoc()
 
-
     def set_font(self, family, size, bold=None, weight=None):
         if weight is None:
             weight = 400

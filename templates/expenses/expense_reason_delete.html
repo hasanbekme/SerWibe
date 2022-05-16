@@ -4,17 +4,17 @@
         <div class="row mt-5">
             {% csrf_token %}
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
-                <div class="h4">Xarajat turi:
+                <div class="h4">Харажат тури:
                     <span class="text-danger h2">
                         {{ reason.title }}
                     </span>
                 </div>
-                <div class="mt-2 mb-4">Xarajat turini o`chirib yuborishga rozimisiz?
+                <div class="mt-2 mb-4">Харажат турини ўчириб юборишга розимисиз?
                 </div>
                 <div class="m-auto">
                     <a href="{% url 'expenses' %}#C" type="button" class="btn btn-danger mr-4 mb-0 "><i
-                            class="fa fa-times" aria-hidden="true"></i>Bekor qilish</a>
-                    <button type="sumbit" class="btn btn-primary ml-4 mb-0 "><i class="fa fa-trash"></i> O`chirish
+                            class="fa fa-times" aria-hidden="true"></i>Бекор қилиш</a>
+                    <button type="sumbit" class="btn btn-primary ml-4 mb-0 "><i class="fa fa-trash"></i> Ўчириш
                     </button>
                 </div>
             </div>

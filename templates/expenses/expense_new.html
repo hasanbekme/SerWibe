@@ -3,23 +3,23 @@
     <form method="POST" enctype="multipart/form-data">
         <div class="row mt-5">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow tableab">
-                <div class="h2">Yangi xarajat:</div>
+                <div class="h2">Янги харажат:</div>
                 {% csrf_token %}
                 <table>
                     <tr>
-                        <td style="text-align: right;">Sababi:</td>
+                        <td style="text-align: right;">Сабаби:</td>
                         <td>{{ form.reason }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;">Sarflangan summa:</td>
+                        <td style="text-align: right;">Сарфланган сумм:</td>
                         <td>{{ form.amount }}</td>
                     </tr>
                 </table>
                 <div class="mr-auto">
                     <a href="{% url 'expenses' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
                                                                                                     aria-hidden="true"></i>
-                        Yopish</a>
-                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> Saqlash</button>
+                        Ёпиш</a>
+                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> Сақлаш</button>
 
                 </div>
             </div>

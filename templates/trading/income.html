@@ -3,12 +3,12 @@
 
     <form class="container"
           style="width:100%; background:white; padding:5px; border-radius: 15px; box-shadow: 1px 2px 3px gray;">
-        <input type="date" name="fir" id="fir" class="form-item m-2">dan-
-        <input type="date" name="sec" id="sec" class="form-item m-2">gacha
-        <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Filter</button>
-        <a href="?fir=today&sec=today" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Bugun</a>
-        <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Hafta</a>
-        <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Oy</a>
+        <input type="date" name="fir" id="fir" class="form-item m-2">дан-
+        <input type="date" name="sec" id="sec" class="form-item m-2">дан-
+        <button type="sumbit" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Филтер</button>
+        <a href="?fir=today&sec=today" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Филтер</a>
+        <a href="?fir=week&sec=week" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Филтер</a>
+        <a href="?fir=month&sec=month" type="button" class="btn btn-primary m-2"><i class="fa fa-filter"></i> Ой</a>
     </form>
     <div class="h6 text-center">{{ date_string }}</div>
     <table class="table table-hover">
@@ -20,7 +20,7 @@
                     <button class="btn btn-primary p-0 dropdown-toggle "
                             type="button" id="dropdownMenu1" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false" style="width:100%; text-align:left">
-                        Kategoriya
+                        Категория
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         {% for category in categories %}
@@ -30,11 +30,11 @@
                     </div>
                 </div>
             </td>
-            <td class="bg-primary text-white">Nomi</td>
-            <td class="bg-primary text-white">Rasmi</td>
-            <td class="bg-primary text-white">Nechta</td>
-            <td class="bg-primary text-white">Savdo</td>
-            <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">Tahlil</td>
+            <td class="bg-primary text-white">Номи</td>
+            <td class="bg-primary text-white">Расми</td>
+            <td class="bg-primary text-white">Нечта</td>
+            <td class="bg-primary text-white">Савдо</td>
+            <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">Тахлил</td>
         </tr>
 
         {% for food in foods %}
@@ -44,22 +44,22 @@
                 <td>{{ food.title }}</td>
                 <td><img src="{{ food.photo }}" style="height: 50px; width:50px" alt="image"></td>
                 <td>{{ food.total_sold }}</td>
-                <td><span class="moneyed">{{ food.total_sale }}</span> so'm</td>
+                <td><span class="moneyed">{{ food.total_sale }}</span> сўм</td>
                 <td><a href="{% url 'trading_detailed_view' pk=food.pk %}">
-                    <button type="button" class="btn btn-info"><i class="fa fa-eye"></i>Tahlil</button>
+                    <button type="button" class="btn btn-info"><i class="fa fa-eye"></i>Тахлил</button>
                 </a></td>
             </tr>
         {% endfor %}
         <tr class="table-primary">
             <td>--</td>
             <td>
-                <span class="h6 font-weight-bold text-dark text-center">Jami</span>
+                <span class="h6 font-weight-bold text-dark text-center">Жами</span>
             </td>
             <td>--</td> 
             <td>--</td> 
             <td>--</td> 
             <td>
-                <span class="h6 font-weight-bold text-dark text-center"><span class="moneyed">{{ total }}</span> so`m</span>
+                <span class="h6 font-weight-bold text-dark text-center"><span class="moneyed">{{ total }}</span> сўм</span>
             </td>
             <td>--</td>
         </tr>
@@ -76,7 +76,7 @@
         {% endif %}
         <span class="btn btn-primary mb-5">
 
-    Sahifa {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
+    Сахифа {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
     </span>
 
 

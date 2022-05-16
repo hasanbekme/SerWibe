@@ -2,11 +2,11 @@
 {% block content %}
     <ul id="tabs" class="nav nav-tabs nav-tabs-style" role="tablist" style=" border: none;">
         <li class="nav-item ">
-            <a id="tab-A" href="#pane-A" class="nav-link nav-link-style active border-0" data-toggle="tab" role="tab">XARAJATLAR</a>
+            <a id="tab-A" href="#pane-A" class="nav-link nav-link-style active border-0" data-toggle="tab" role="tab">ХАРАЖАТЛАР</a>
         </li>
         <li class="nav-item">
-            <a id="tab-B" href="#pane-B" class="nav-link nav-link-style border-0" data-toggle="tab" role="tab">XARAJAT
-                SABABLARI</a>
+            <a id="tab-B" href="#pane-B" class="nav-link nav-link-style border-0" data-toggle="tab" role="tab">ХАРАЖАТ
+                САБАБЛАРИ</a>
         </li>
     </ul>
 
@@ -18,50 +18,60 @@
 
                     <tr>
                         <td class="bg-primary text-white">№</td>
-                        <td class="bg-primary text-white">Sababi</td>
+                        <td class="bg-primary text-white">Сабаби</td>
                         <td class="bg-primary text-white">
-                            <div class="dropdown" >
+                            <div class="dropdown">
                                 <button class="btn btn-primary p-0 dropdown-toggle text-left"
                                         type="button" id="dropdownMenu1" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false" style="width: 100%;">
-                                    Sana
+                                    Сана
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1" style="min-width: 300px;">
                                     <form class="h6">
                                         <table class="tableab">
                                             <tr>
                                                 <td>
-                                                    <div class="p-1" style="font-size: 13px;"><input type="date" name="fir" id="fir" class="form-item m-1" style="border: 1px solid black">dan</div>            
+                                                    <div class="p-1" style="font-size: 13px;"><input type="date"
+                                                                                                     name="fir" id="fir"
+                                                                                                     class="form-item m-1"
+                                                                                                     style="border: 1px solid black">дан
+                                                    </div>
                                                 </td>
                                                 <td rowspan="2">
-                                                    <button type="sumbit" class="btn btn-primary m-2 mt-3"><i class="fa fa-filter"></i> Filter</button>
+                                                    <button type="sumbit" class="btn btn-primary m-2 mt-3"><i
+                                                            class="fa fa-filter"></i> Филтер
+                                                    </button>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div class="p-1" style="font-size: 13px;"><input type="date" name="sec" id="sec" class="form-item m-1" style="border: 1px solid black">gacha</div>
+                                                    <div class="p-1" style="font-size: 13px;"><input type="date"
+                                                                                                     name="sec" id="sec"
+                                                                                                     class="form-item m-1"
+                                                                                                     style="border: 1px solid black">гача
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </table>
                                         <a href="?fir=today&sec=today" type="button" class="btn btn-primary ml-2">
                                             <i class="fa fa-filter"></i>
-                                            Bugun
+                                            Бугун
                                         </a>
                                         <a href="?fir=week&sec=week" type="button" class="btn btn-primary ml-2">
                                             <i class="fa fa-filter"></i>
-                                            Hafta
+                                            Ҳафта
                                         </a>
                                         <a href="?fir=month&sec=month" type="button" class="btn btn-primary ml-2">
-                                            <i class="fa fa-filter"></i> 
-                                            Oy
+                                            <i class="fa fa-filter"></i>
+                                            Ой
                                         </a>
                                     </form>
                                 </div>
                             </div>
                         </td>
-                        <td class="bg-primary text-white text-center">Amalga oshirdi</td>
-                        <td class="bg-primary text-white">Summa</td>
-                        <td class="bg-primary text-white">O`chirish</td>
+                        <td class="bg-primary text-white text-center">Амалга оширди</td>
+                        <td class="bg-primary text-white">Сумма</td>
+                        <td class="bg-primary text-white">Ўчириш</td>
                     </tr>
                     {% for expense in expenses %}
                         <tr>
@@ -69,50 +79,53 @@
                             <td>{{ expense.reason.title }}</td>
                             <td>{{ expense.created_time }}</td>
                             <td>{{ expense.performer.full_name }}</td>
-                            <td><span class="moneyed">{{ expense.amount }}</span> so'm</td>
+                            <td><span class="moneyed">{{ expense.amount }}</span> сўм</td>
                             <td><a href="{% url 'expense_delete' pk=expense.pk %}">
-                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> O`chirish
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Ўчириш
                                 </button>
                                 <a>
                             </td>
                         </tr>
                     {% endfor %}
-        <tr class="table-primary">
-            <td>--</td>
-            <td>
-                <span class="h6 font-weight-bold text-dark text-center">Jami</span>
-            </td>
-            <td>--</td> 
-            <td>--</td>
-            <td>
-                <span class="h6 font-weight-bold text-dark text-center"><span class="moneyed">{{ total_amount }}</span> so`m</span>
-            </td>
-            <td>--</td>
-        </tr>
+                    <tr class="table-primary">
+                        <td>--</td>
+                        <td>
+                            <span class="h6 font-weight-bold text-dark text-center">Жами</span>
+                        </td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>
+                            <span class="h6 font-weight-bold text-dark text-center"><span
+                                    class="moneyed">{{ total_amount }}</span> сўм</span>
+                        </td>
+                        <td>--</td>
+                    </tr>
                 </table>
 
 
                 <!-- Button trigger modal -->
-                <a href="{% url 'expense_new' %}" type="button" class="btn btn-primary m-1">Qo'shish</a>
+                <a href="{% url 'expense_new' %}" type="button" class="btn btn-primary m-1">Қўшиш</a>
 
             </div>
             <!-- Paginator shu yerga if ishlatib paginator kerak bo`lmasa o`chirib qo`yadigan qiling -->
 
             <div class="text-center">
 
-        {% if p_paginator.has_previous %}
-            <a class="btn btn-primary mb-5 text-white" onclick="addurlparameter('page', '{{ p_paginator.previous_page_number }}')"><</a>
-        {% endif %}
-        <span class="btn btn-primary mb-5">
+                {% if p_paginator.has_previous %}
+                    <a class="btn btn-primary mb-5 text-white"
+                       onclick="addurlparameter('page', '{{ p_paginator.previous_page_number }}')"><</a>
+                {% endif %}
+                <span class="btn btn-primary mb-5">
 
-    Sahifa {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
+    Саҳифа {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
     </span>
 
 
-        {% if p_paginator.has_next %}
-            <a class="btn btn-primary mb-5 text-white" onclick="addurlparameter('page', '{{ p_paginator.next_page_number }}')">></a>
-        {% endif %}
-    </div>
+                {% if p_paginator.has_next %}
+                    <a class="btn btn-primary mb-5 text-white"
+                       onclick="addurlparameter('page', '{{ p_paginator.next_page_number }}')">></a>
+                {% endif %}
+            </div>
 
             <!-- End Paginator -->
         </div>
@@ -125,10 +138,10 @@
 
                     <tr>
                         <td class="bg-primary text-white text-center">№</td>
-                        <td class="bg-primary text-white ">Nomi</td>
-                        <td class="bg-primary text-white text-center">Sarflash</td>
-                        <td class="bg-primary text-white text-center">Tahrir</td>
-                        <td class="bg-primary text-white text-center">O`chirish</td>
+                        <td class="bg-primary text-white ">Номи</td>
+                        <td class="bg-primary text-white text-center">Сарфлаш</td>
+                        <td class="bg-primary text-white text-center">Таҳрир</td>
+                        <td class="bg-primary text-white text-center">Ўчириш</td>
                     </tr>
 
                     {% for i in expense_reasons %}
@@ -136,13 +149,13 @@
                             <td class="text-center">{{ forloop.counter }}</td>
                             <td>{{ i.title }}</td>
                             <td class="text-center"><a href="{% url 'expense_new' %}?reason={{ i.id }}">
-                                <button type="button" class="btn btn-info"><i class="fa fa-money"></i> Sarflash</button>
+                                <button type="button" class="btn btn-info"><i class="fa fa-money"></i> Сарфлаш</button>
                             </a></td>
                             <td class="text-center"><a href="{% url 'expense_reason_edit' pk=i.pk %}">
-                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Tahrir</button>
+                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Таҳрир</button>
                             </a></td>
                             <td class="text-center"><a href="{% url 'expense_reason_delete' pk=i.pk %}">
-                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> O`chirish
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Ўчириш
                                 </button>
                             </a></td>
                         </tr>
@@ -152,7 +165,7 @@
 
 
                 <!-- Button trigger modal -->
-                <a href="{% url 'expense_reason_new' %}" type="button" class="btn btn-primary m-1">Qo'shish</a>
+                <a href="{% url 'expense_reason_new' %}" type="button" class="btn btn-primary m-1">Қўшиш</a>
             </div>
         </div>
 
