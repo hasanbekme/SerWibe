@@ -59,7 +59,7 @@
                             </div>
                             <span id="{{ food.id }}p"
                                   style="position:absolute; right: 25%; bottom: 5px; font-weight:700"
-                                  class="text-danger moneyed">{{ food.price }} сўм</span>
+                                  class="text-danger moneyed">{{ food.price }} {{ pickup_07 }}</span>
                         <div style="width:80%; height:100%; position:absolute; left: 0;" onclick="adding('{{ food.id }}')">
                         </div>
                         </div>
@@ -77,8 +77,8 @@
 
         <button type="submit" style="float: right; width: 66%; height: 55px; background-color: white; border:none;"
                 class="h4 font-weight-bold text-danger">
-            <span id="allsumm">0</span> сўм
-            <i class="fa fa-check" aria-hidden="true"></i>
+            <span id="allsumm">0</span> {{ pickup_07 }}
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
         </button>
 
     </div>

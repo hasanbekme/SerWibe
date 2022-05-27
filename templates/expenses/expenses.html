@@ -2,11 +2,10 @@
 {% block content %}
     <ul id="tabs" class="nav nav-tabs nav-tabs-style" role="tablist" style=" border: none;">
         <li class="nav-item ">
-            <a id="tab-A" href="#pane-A" class="nav-link nav-link-style active border-0" data-toggle="tab" role="tab">ХАРАЖАТЛАР</a>
+            <a id="tab-A" href="#pane-A" class="nav-link nav-link-style active border-0" data-toggle="tab" role="tab">{{ expe_01 }}</a>
         </li>
         <li class="nav-item">
-            <a id="tab-B" href="#pane-B" class="nav-link nav-link-style border-0" data-toggle="tab" role="tab">ХАРАЖАТ
-                САБАБЛАРИ</a>
+            <a id="tab-B" href="#pane-B" class="nav-link nav-link-style border-0" data-toggle="tab" role="tab">{{ expe_02 }}</a>
         </li>
     </ul>
 
@@ -18,60 +17,54 @@
 
                     <tr>
                         <td class="bg-primary text-white">№</td>
-                        <td class="bg-primary text-white">Сабаби</td>
+                        <td class="bg-primary text-white">{{ expe_03 }}</td>
                         <td class="bg-primary text-white">
                             <div class="dropdown">
                                 <button class="btn btn-primary p-0 dropdown-toggle text-left"
                                         type="button" id="dropdownMenu1" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false" style="width: 100%;">
-                                    Сана
+                                    {{ expe_04 }}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1" style="min-width: 300px;">
                                     <form class="h6">
                                         <table class="tableab">
                                             <tr>
                                                 <td>
-                                                    <div class="p-1" style="font-size: 13px;"><input type="date"
-                                                                                                     name="fir" id="fir"
-                                                                                                     class="form-item m-1"
-                                                                                                     style="border: 1px solid black">дан
+                                                    <div class="p-1" style="font-size: 13px;"><input type="date" name="fir" id="fir" class="form-item m-1" style="border: 1px solid black">{{ expe_05 }}
                                                     </div>
                                                 </td>
                                                 <td rowspan="2">
                                                     <button type="sumbit" class="btn btn-primary m-2 mt-3"><i
-                                                            class="fa fa-filter"></i> Филтер
+                                                            class="fa fa-filter"></i> {{ expe_07 }}
                                                     </button>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <div class="p-1" style="font-size: 13px;"><input type="date"
-                                                                                                     name="sec" id="sec"
-                                                                                                     class="form-item m-1"
-                                                                                                     style="border: 1px solid black">гача
+                                                    <div class="p-1" style="font-size: 13px;"><input type="date" name="sec" id="sec" class="form-item m-1" style="border: 1px solid black">{{ expe_06 }}
                                                     </div>
                                                 </td>
                                             </tr>
                                         </table>
                                         <a href="?fir=today&sec=today" type="button" class="btn btn-primary ml-2">
                                             <i class="fa fa-filter"></i>
-                                            Бугун
+                                            {{ expe_08 }}
                                         </a>
                                         <a href="?fir=week&sec=week" type="button" class="btn btn-primary ml-2">
                                             <i class="fa fa-filter"></i>
-                                            Ҳафта
+                                            {{ expe_09 }}
                                         </a>
                                         <a href="?fir=month&sec=month" type="button" class="btn btn-primary ml-2">
                                             <i class="fa fa-filter"></i>
-                                            Ой
+                                            {{ expe_10 }}
                                         </a>
                                     </form>
                                 </div>
                             </div>
                         </td>
-                        <td class="bg-primary text-white text-center">Амалга оширди</td>
-                        <td class="bg-primary text-white">Сумма</td>
-                        <td class="bg-primary text-white">Ўчириш</td>
+                        <td class="bg-primary text-white text-center">{{ expe_11 }}</td>
+                        <td class="bg-primary text-white">{{ expe_12 }}</td>
+                        <td class="bg-primary text-white">{{ expe_13 }}</td>
                     </tr>
                     {% for expense in expenses %}
                         <tr>
@@ -79,9 +72,9 @@
                             <td>{{ expense.reason.title }}</td>
                             <td>{{ expense.created_time }}</td>
                             <td>{{ expense.performer.full_name }}</td>
-                            <td><span class="moneyed">{{ expense.amount }}</span> сўм</td>
+                            <td><span class="moneyed">{{ expense.amount }}</span> {{ expe_14 }}</td>
                             <td><a href="{% url 'expense_delete' pk=expense.pk %}">
-                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Ўчириш
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> {{ expe_13 }}
                                 </button>
                                 <a>
                             </td>
@@ -90,13 +83,13 @@
                     <tr class="table-primary">
                         <td>--</td>
                         <td>
-                            <span class="h6 font-weight-bold text-dark text-center">Жами</span>
+                            <span class="h6 font-weight-bold text-dark text-center">{{ expe_15 }}</span>
                         </td>
                         <td>--</td>
                         <td>--</td>
                         <td>
                             <span class="h6 font-weight-bold text-dark text-center"><span
-                                    class="moneyed">{{ total_amount }}</span> сўм</span>
+                                    class="moneyed">{{ total_amount }}</span> {{ expe_14 }}</span>
                         </td>
                         <td>--</td>
                     </tr>
@@ -104,7 +97,7 @@
 
 
                 <!-- Button trigger modal -->
-                <a href="{% url 'expense_new' %}" type="button" class="btn btn-primary m-1">Қўшиш</a>
+                <a href="{% url 'expense_new' %}" type="button" class="btn btn-primary m-1">{{ expe_16 }}</a>
 
             </div>
             <!-- Paginator shu yerga if ishlatib paginator kerak bo`lmasa o`chirib qo`yadigan qiling -->
@@ -117,7 +110,7 @@
                 {% endif %}
                 <span class="btn btn-primary mb-5">
 
-    Саҳифа {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
+    {{ paginator_ }} {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
     </span>
 
 
@@ -138,10 +131,10 @@
 
                     <tr>
                         <td class="bg-primary text-white text-center">№</td>
-                        <td class="bg-primary text-white ">Номи</td>
-                        <td class="bg-primary text-white text-center">Сарфлаш</td>
-                        <td class="bg-primary text-white text-center">Таҳрир</td>
-                        <td class="bg-primary text-white text-center">Ўчириш</td>
+                        <td class="bg-primary text-white ">{{ expe_17 }}</td>
+                        <td class="bg-primary text-white text-center">{{ expe_18 }}</td>
+                        <td class="bg-primary text-white text-center">{{ expe_19 }}</td>
+                        <td class="bg-primary text-white text-center">{{ expe_13 }}</td>
                     </tr>
 
                     {% for i in expense_reasons %}
@@ -149,13 +142,13 @@
                             <td class="text-center">{{ forloop.counter }}</td>
                             <td>{{ i.title }}</td>
                             <td class="text-center"><a href="{% url 'expense_new' %}?reason={{ i.id }}">
-                                <button type="button" class="btn btn-info"><i class="fa fa-money"></i> Сарфлаш</button>
+                                <button type="button" class="btn btn-info"><i class="fa fa-money"></i> {{ expe_18 }}</button>
                             </a></td>
                             <td class="text-center"><a href="{% url 'expense_reason_edit' pk=i.pk %}">
-                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Таҳрир</button>
+                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> {{ expe_19 }}</button>
                             </a></td>
                             <td class="text-center"><a href="{% url 'expense_reason_delete' pk=i.pk %}">
-                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Ўчириш
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> {{ expe_13 }}
                                 </button>
                             </a></td>
                         </tr>
@@ -165,7 +158,7 @@
 
 
                 <!-- Button trigger modal -->
-                <a href="{% url 'expense_reason_new' %}" type="button" class="btn btn-primary m-1">Қўшиш</a>
+                <a href="{% url 'expense_reason_new' %}" type="button" class="btn btn-primary m-1">{{ expe_16 }}</a>
             </div>
         </div>
 

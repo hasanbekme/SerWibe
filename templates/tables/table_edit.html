@@ -3,19 +3,19 @@
     <form method="POST" enctype="multipart/form-data">
         <div class="row mt-5">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow tableab">
-                <div class="h3">Стол:</div>
+                <div class="h3">{{ tabl_14 }}:</div>
                 {% csrf_token %}
                 <table>
                     <tr>
-                        <td style="text-align: center ">Хона: </td>
+                        <td style="text-align: center ">{{ tabl_14 }}: </td>
                         <td class="text-info h5 font-weight-bold"> {{ room.title }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: center ">Стол рақами: </td>
+                        <td style="text-align: center ">{{ tabl_15 }}: </td>
                         <td> {{ form.number }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: center ">Бошланғиш қиймат: </td>
+                        <td style="text-align: center ">{{ tabl_16 }}: </td>
                         <td> {{ form.initial_payment }}</td>
                     </tr>
                 </table>
@@ -42,11 +42,9 @@
                 </div>
 
                 <div class="mr-auto">
-                    <a href="{% url 'room_tables' room.id %}" type="button" class="btn btn-danger m-1 mt-3"><i
-                            class="fa fa-times"
-                            aria-hidden="true"></i>
-                        Ёпиш</a>
-                    <button type="sumbit" id="FormSubmit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> Сақлаш</button>
+                    <a href="{% url 'room_tables' room.id %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times" aria-hidden="true"></i>
+                        {{ tabl_08 }}</a>
+                    <button type="sumbit" id="FormSubmit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> {{ tabl_09 }}</button>
 
                 </div>
 

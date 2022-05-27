@@ -11,364 +11,15 @@
 
     <link rel="stylesheet" href="/static/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
-    <style>
-        body{
-              -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
-        }
-        .payment_type > button {
-            font-size: 2em;
-            padding: 0px !important;
-        }
-
-        .btn.btn-primary:hover {
-            transition: 0.1s;
-            background-color: #084982 !important;
-        }
-
-        .btn-info:hover {
-            background-color: #1b71a3 !important;
-        }
-
-        .bg-info:hover {
-            background-color: #1b71a3 !important;
-        }
-
-        .dcard {
-            height: 150px;
-            text-align: left;
-            position: relative;
-        }
-
-        .dcard-decimal {
-            font-size: 3em;
-            color: white;
-            padding-left: 15px;
-            text-align: left;
-            display: inline-block;
-        }
-
-        .dcard > i {
-            font-size: 5.5em;
-            position: absolute;
-            color: black;
-            opacity: 0.1;
-            right: 30px;
-            top: 20px;
-        }
-
-        .dcard-about {
-            margin-top: 30px;
-            font-size: 1.5em;
-            text-transform: uppercase;
-        }
-
-        .dcard2 {
-            height: 250px;
-            text-align: left;
-            position: relative;
-        }
-
-        .dcard2 > i {
-            font-size: 8.5em;
-            position: absolute;
-            color: black;
-            opacity: 0.1;
-            right: 20%;
-            top: 60px;
-        }
-
-        .dcard-about2 {
-            margin-top: 130px;
-            font-size: 1.5em;
-            text-transform: uppercase;
-        }
-
-        .nav-link-style.active {
-            background-color: #075295 !important;
-            color: white !important;
-        }
-
-        .dropdown-toggle:after {
-            right: 0%;
-        }
-
-        .tableab td {
-            padding: 10px 2px;
-
-        }
-
-        .switch {
-            transform: translateY(3px);
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 27px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 22px;
-            width: 22px;
-            left: 2px;
-            bottom: 2.5px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        input:checked + .slider {
-            background-color: var(--primary);
-        }
-
-        input:focus + .slider {
-            box-shadow: 0 0 1px var(--primary);
-        }
-
-        input:checked + .slider:before {
-            -webkit-transform: translateX(23px);
-            -ms-transform: translateX(23px);
-            transform: translateX(23px);
-        }
-
-        /* Rounded sliders */
-        .slider {
-            border-radius: 34px;
-        }
-
-        .slider:before {
-            border-radius: 50%;
-        }
-
-        .tablecard {
-            position: relative;
-            width: 130px;
-            height: 130px;
-            float: right;
-            transition: 0.2s;
-        }
-
-        .tablecardu:hover {
-            background-color: #57a3ce;
-        }
-
-        .tablenum {
-            margin-top: 40px;
-        }
-
-        .tableprice {
-            position: absolute;
-            bottom: -5px;
-            right: 7px;
-        }
-
-        .icons {
-            position: absolute;
-            font-size: 1.8em;
-            width: 135px;
-            bottom: -5px;
-            color: white;
-            letter-spacing: 5px;
-        }
-        .icons > a{
-            margin: 0 10px;
-        }
-
-        #id_comment {
-            height: 75px;
-        }
-        .tableab td {
-            padding: 2px;
-            vertical-align: none;
-            border-top: none;}
-
-        .cardproduct{
-            height: 100px;
-        }
-        .menu-food{
-            position: fixed;
-            bottom: 20px;
-            background: white;
-            border-radius: 25px 0 0 25px;
-            outline: 8px dashed white;
-            width: 90%;
-            right: 3.5%;
-            box-shadow: 2px 3px 10px 5px #000000aa;
-            outline-offset: -4px;
-            text-align: left;
-            height: 55px;
-        }
-        .menu-food > a {
-            padding: 1px 15px;
-            border: none;
-        }
-        .menu-food > a >i{
-            padding: 15px;
-            font-size: 2em;
-            border-radius: 15px;
-        }
-        .menu-food > .left{
-            background-color:#075295;
-            height:100%;
-            transform: scale(1.15);
-            box-shadow: -1px 0px 5px 1px #000000aa;
-            display: inline-block;
-            border-radius: 25px 0 0 25px;
-            color: white;
-
-        }
-        .menu-food > .centered{
-            background-color:#075295;
-            position: absolute;
-            height:56px;
-            width: 61%;
-            transform: scale(1.15);
-            box-shadow: 6px 0px 4px 1px #000000aa;
-            display: inline-block;
-            color: white;
-            margin-left: 6%;
-            transition: 0.7s;
-
-
-        }
-                @media only screen and (min-width: 600px) {
-            .asdff{
-                left:10%!important;     }
-            #centered{
-                width: 80%;
-            }
-            .plussed{
-                right: 12.5%!important;
-            }
-                .plussed2{
-                right: 20%!important;
-            }
-
-        .menu-food{
-            position: fixed;
-            bottom: 20px;
-            background: white;
-            border-radius: 25px 0 0 25px;
-            outline: 8px dashed white;
-            width: 70%;
-            right: 6.5%;
-            box-shadow: 2px 3px 10px 5px #000000aa;
-            outline-offset: -4px;
-            text-align: left;
-            height: 55px;
-        }
-        }
-        .pickup-add{
-            width:50px;
-            height: 50px;
-            background: var(--primary);
-            border-radius: 50%;
-            text-align:center;
-            line-height:65px;
-            position: fixed;
-            right:7%;
-            bottom:50px;
-            transform:scale(1.6);
-            box-shadow: 0px 0.7px 2px 2px #00000077;
-            transition: 0.1s;
-        }
-        .pickup-add:hover{
-            transform: translateY(-2px) scale(1.6);
-            box-shadow: 0px 0.9px 3px 2px #00000077;
-            filter: grayscale(20%);
-        }
-        .button-payyed > input{
-            width: 75%;
-            text-align: right;
-
-        }
-        .button-payyed > .input-group-prepend{
-            width: 15%;
-            cursor: pointer;
-        }
-        .button-payyed .input-group-text{
-            width: 100%;
-        }
-        .button-payyed .input-group-append{
-            width: 10%;
-            cursor: pointer;
-            text-align: center;
-        }
-        .input-group-append > .input-group-text{
-            text-align: center;
-            padding: 0;
-        }
-        .input-group-append > .input-group-text > i{
-            margin: auto;
-        }
-        #id_comment{
-            height: 50px;
-            padding: 8px;
-        }
-        .tableorder>tr, .tableorder td{
-            padding: 4px 7px;
-
-        }
-        .bottomed{
-            position: absolute;
-            right: 15px;
-            bottom: 0px;
-        }
-        .bottomed-name{
-            position: absolute;
-            left: 15px;
-            bottom: 0px; 
-        }
-        #id_tax_required{
-            display: none;
-        }
-        #id_time_service_cost{
-            height: 44px;
-            margin-top: 8px;
-            margin-left: 8px;
-        }
-        .cardproduct, .btn, .tablecard, .dropdown-item{
-            cursor: pointer;
-        }
-        .custom-menu{
-            z-index: 2;
-        }
-        .bg-primary, .btn-primary{
-            background-color: #075295!important;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/mystyle.css">
 </head>
 <body>
 
 <div class="wrapper d-flex align-items-stretch">
     <nav id="sidebar">
-        <div class="custom-menu" id="siljish">
-            <button type="button" id="sidebarCollapse" class="btn btn-primary"
-                    style="position: fixed; margin:0 0 0 -60px">
+        <div class="custom-menu" id="siljish" >
+            <button type="button"  class="btn btn-sitebar" id="sidebarCollapse"
+                    style="position: fixed; margin:0 0 0 -60px; ">
                 <i class="fa fa-bars"></i>
                 <span class="sr-only">Toggle Menu</span>
             </button>
@@ -382,17 +33,17 @@
 
 
             <ul class="list-unstyled components ml-2">
-                <li><a href="{% url 'dashboard' %}"><i class="fa fa-tachometer" aria-hidden="true"></i> ДАШБОАРД</a></li>
-                <li><a href="{% url 'pickup' %}"><i class="fa fa-truck" aria-hidden="true"></i> ОЛИБ КEТИШ</a></li>
-                <li><a href="{% url 'orders' %}"><i class="fa fa-money" aria-hidden="true"></i> БУЮРТМАЛАР</a></li>
-                <li><a href="{% url 'worker' %}"><i class="fa fa-user"></i> ХОДИМЛАР</a></li>
-                <li><a href="{% url 'product' %}"><i class="fa fa-cutlery" aria-hidden="true"></i> ТАОМЛАР</a></li>
-                <li><a href="{% url 'rooms' %}"><i class="fa fa-table"></i> СТОЛЛАР</a></li>
-                <li><a href="{% url 'expenses' %}"><i class="fa fa-upload"></i> ХАРАЖАТЛАР</a></li>
-                <li><a href="{% url 'trading' %}"><i class="fa fa-shopping-cart"></i> САВДО</a></li>
-                <li><a href="{% url 'archive' %}"><i class="fa fa-archive" aria-hidden="true"></i> АРХИВ</a></li>
+                <li><a href="{% url 'dashboard' %}"><i class="fa fa-tachometer" aria-hidden="true"></i> {{ base_01 }}</a></li>
+                <li><a href="{% url 'pickup' %}"><i class="fa fa-truck" aria-hidden="true"></i> {{ base_02 }} </a></li>
+                <li><a href="{% url 'orders' %}"><i class="fa fa-money" aria-hidden="true"></i> {{ base_03 }} </a></li>
+                <li><a href="{% url 'worker' %}"><i class="fa fa-user"></i> {{ base_04 }} </a></li>
+                <li><a href="{% url 'product' %}"><i class="fa fa-cutlery" aria-hidden="true"></i> {{ base_05 }} </a></li>
+                <li><a href="{% url 'rooms' %}"><i class="fa fa-table"></i> {{ base_06 }} </a></li>
+                <li><a href="{% url 'expenses' %}"><i class="fa fa-upload"></i> {{ base_07 }} </a></li>
+                <li><a href="{% url 'trading' %}"><i class="fa fa-shopping-cart"></i> {{ base_08 }} </a></li>
+                <li><a href="{% url 'archive' %}"><i class="fa fa-archive" aria-hidden="true"></i> {{ base_09 }} </a></li>
 
-                <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> ЧИҚИШ</a></li>
+                <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ base_10 }} </a></li>
 
 
             </ul>
@@ -463,8 +114,7 @@
     var comps = document.getElementsByClassName("components")[0];
     var lis = comps.getElementsByTagName("a");
     for (var i = 0; i < lis.length; i++) {
-        if (lis[i].href == location.href) {
-            console.log();
+        if (lis[i].href.split("/")[3]== location.href.split("/")[3]) {
             lis[i].className = "text-white";
         } else {
 

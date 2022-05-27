@@ -4,14 +4,14 @@
 
         <tr>
             <td class="bg-primary text-white" style=" border-radius: 10px 0 0 0">№</td>
-            <td class="bg-primary text-white">ИД</td>
-            <td class="bg-primary text-white">Оффицант</td>
-            <td class="bg-primary text-white">Олинган вақт</td>
-            <td class="bg-primary text-white">Хона</td>
-            <td class="bg-primary text-white">Стол</td>
-            <td class="bg-primary text-white">Умумий сумма</td>
-            <td class="bg-primary text-white">Таҳлил</td>
-            <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">Тасдиқлаш</td>
+            <td class="bg-primary text-white">{{ pickup_01 }}</td>
+            <td class="bg-primary text-white">{{ pickup_02 }}</td>
+            <td class="bg-primary text-white">{{ pickup_03 }}</td>
+            <td class="bg-primary text-white">{{ pickup_24 }}</td>
+            <td class="bg-primary text-white">{{ pickup_25 }}</td>
+            <td class="bg-primary text-white">{{ pickup_04 }}</td>
+            <td class="bg-primary text-white">{{ pickup_08 }}</td>
+            <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;">{{ pickup_06 }}</td>
         </tr>
 
         {% for order in orders %}
@@ -22,12 +22,12 @@
                 <td>{{ order.created_time }}</td>
                 <td>{{ order.table.room.title }}</td>
                 <td>{{ order.table.number }}</td>
-                <td><span class="moneyed">{{ order.needed_payment }}</span> so'm</td>
+                <td><span class="moneyed">{{ order.needed_payment }}</span> {{ pickup_07 }}</td>
                 <td><a href="{% url 'order_view' pk=order.id %}">
-                    <button type="button" class="btn btn-info"><i class="fa fa-eye"></i> Таҳлил</button>
+                    <button type="button" class="btn btn-info"><i class="fa fa-eye"></i> {{ pickup_08 }}</button>
                 </a></td>
                 <td><a href="{% url 'order_complete' pk=order.pk %}">
-                    <button type="button" class="btn btn-warning"><i class="fa fa-credit-card"></i> Тугатиш
+                    <button type="button" class="btn btn-warning"><i class="fa fa-credit-card"></i> {{ pickup_09 }}
                     </button>
                 </a></td>
         </tr>
