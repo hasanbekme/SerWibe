@@ -22,7 +22,7 @@
                             <span id="{{ item.meal.id }}p"
                                   style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.3em;"
                                   class="text-danger"><span class="">{{ item.quantity }} ta</span> <span
-                                    class="text-primary">x</span>  <span class="moneyed">{{ item.meal.price }}</span> сўм</span>
+                                    class="text-primary">x</span>  <span class="moneyed">{{ item.meal.price }}</span> {{ pickup_07 }}</span>
                         </div>
                     {% endfor %}
                 </div>
@@ -52,7 +52,7 @@
 
         <button type="submit" style="float: right; width: 66%; height: 55px; background-color: white; border:none;"
                 class="h4 font-weight-bold text-danger">
-            <span id="allsumm" class="moneyed">{{ order.needed_payment }}</span> сўм
+            <span id="allsumm" class="moneyed">{{ order.needed_payment }}</span> {{ pickup_07 }}
             <i class="fa fa-check" aria-hidden="true"></i>
         </button>
 

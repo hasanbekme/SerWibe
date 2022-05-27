@@ -3,27 +3,27 @@
     <form method="POST" enctype="multipart/form-data">
         <div class="row mt-5">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow tableab">
-                <div class="h2">Махсулот:</div>
+                <div class="h2">{{ prod_15 }}:</div>
                 {% csrf_token %}
                 <table>
                     <tr>
-                        <td style="text-align: right;">Номи:</td>
+                        <td style="text-align: right;">{{ prod_03 }}:</td>
                         <td>{{ form.title }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;">Категория:</td>
+                        <td style="text-align: right;">{{ prod_07 }}:</td>
                         <td>{{ form.category }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;">Расм:</td>
+                        <td style="text-align: right;">{{ prod_04 }}:</td>
                         <td>{{ form.image }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;">Нархи:</td>
+                        <td style="text-align: right;">{{ prod_06 }}:</td>
                         <td>{{ form.price }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;">Мавжуд:</td>
+                        <td style="text-align: right;">{{ prod_05 }}:</td>
                         <td><label class="switch">
                             {{ form.is_available }}
                             <span class="slider"></span>
@@ -32,22 +32,20 @@
                     </tr>
                 </table>
                 <div class="mr-auto">
-                    <a href="{% url 'product' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
-                                                                                                     aria-hidden="true"></i>
-                        Ёпиш</a>
-                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> Сақлаш</button>
+                    <a href="{% url 'product' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times" aria-hidden="true"></i> {{ prod_16 }}</a>
+                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> {{ prod_17 }}</button>
 
                 </div>
             </div>
         </div>
     </form>
     <script type="text/javascript">
-        document.getElementById("id_price").placeholder = "(so`m)";
+        document.getElementById("id_price").placeholder = "({{ prod_10 }})";
         document.getElementById("id_price").style="text-align:right"
     </script>
     <script type="text/javascript">
         if (document.getElementsByTagName("label")[0].getAttribute("for")=='image-clear_id'){
-            document.getElementsByTagName("label")[0].innerHTML = "Ўчириш";
+            document.getElementsByTagName("label")[0].innerHTML = "{{ prod_09 }}";
         }
     </script>
 {% endblock %}

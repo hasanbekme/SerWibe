@@ -3,11 +3,11 @@
     <form method="POST" enctype="multipart/form-data">
         <div class="row mt-5">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow tableab">
-                <div class="h2">Харажат тури:</div>
+                <div class="h2">{{ expe_24 }}:</div>
                 {% csrf_token %}
                 <table>
                     <tr>
-                        <td style="text-align: right;">Номи:</td>
+                        <td style="text-align: right;">{{ expe_17 }}:</td>
                         <td>{{ form.title }}</td>
                     </tr>
                 </table>
@@ -15,8 +15,8 @@
                     <a href="{% url 'expenses' %}#C" type="button" class="btn btn-danger m-1 mt-3"><i
                             class="fa fa-times"
                             aria-hidden="true"></i>
-                        Ёпиш</a>
-                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> Сақлаш</button>
+                        {{ expe_22 }}</a>
+                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> {{ expe_23 }}</button>
 
                 </div>
             </div>

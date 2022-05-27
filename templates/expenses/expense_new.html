@@ -3,30 +3,30 @@
     <form method="POST" enctype="multipart/form-data">
         <div class="row mt-5">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow tableab">
-                <div class="h2">Янги харажат:</div>
+                <div class="h2">{{ expe_20 }}:</div>
                 {% csrf_token %}
                 <table>
                     <tr>
-                        <td style="text-align: right;">Сабаби:</td>
+                        <td style="text-align: right;">{{ expe_03 }}:</td>
                         <td>{{ form.reason }}</td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;">Сарфланган сумм:</td>
+                        <td style="text-align: right;">{{ expe_21 }}:</td>
                         <td>{{ form.amount }}</td>
                     </tr>
                 </table>
                 <div class="mr-auto">
-                    <a href="{% url 'expenses' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
-                                                                                                    aria-hidden="true"></i>
-                        Ёпиш</a>
-                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> Сақлаш</button>
+                    <a href="{% url 'expenses' %}" type="button" class="btn btn-danger m-1 mt-3">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                        {{ expe_22 }}</a>
+                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> {{ expe_23 }}</button>
 
                 </div>
             </div>
         </div>
     </form>
     <script type="text/javascript">
-        document.getElementById("id_amount").placeholder = "(so`m)";
+        document.getElementById("id_amount").placeholder = "({{ expe_14 }})";
         document.getElementById("id_amount").style="text-align:right"
     </script>
 {% endblock %}

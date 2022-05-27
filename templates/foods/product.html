@@ -2,10 +2,10 @@
 {% block content %}
     <ul id="tabs" class="nav nav-tabs nav-tabs-style" role="tablist" style=" border: none;">
         <li class="nav-item ">
-            <a id="tab-A" href="#pane-A" class="nav-link nav-link-style active border-0" data-toggle="tab" role="tab">ТАОМЛАР</a>
+            <a id="tab-A" href="#pane-A" class="nav-link nav-link-style active border-0" data-toggle="tab" role="tab">{{ prod_01 }}</a>
         </li>
         <li class="nav-item">
-            <a id="tab-B" href="#pane-B" class="nav-link nav-link-style border-0" data-toggle="tab" role="tab">КАТEГОРИЯЛАР</a>
+            <a id="tab-B" href="#pane-B" class="nav-link nav-link-style border-0" data-toggle="tab" role="tab">{{ prod_02 }}</a>
         </li>
     </ul>
 
@@ -17,16 +17,16 @@
 
                     <tr>
                         <td class="bg-primary text-white">№</td>
-                        <td class="bg-primary text-white">Номи</td>
-                        <td class="bg-primary text-white">Расм</td>
-                        <td class="bg-primary text-white text-center">Мавжуд</td>
-                        <td class="bg-primary text-white">Нарх</td>
+                        <td class="bg-primary text-white">{{ prod_03 }}</td>
+                        <td class="bg-primary text-white">{{ prod_04 }}</td>
+                        <td class="bg-primary text-white text-center">{{ prod_05 }}</td>
+                        <td class="bg-primary text-white">{{ prod_06 }}</td>
                         <td class="bg-primary text-white">
                             <div class="dropdown">
                                 <button class="btn btn-primary p-0 dropdown-toggle"
                                         type="button" id="dropdownMenu1" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
-                                    Категория
+                                    {{ prod_07 }}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                     {% for category in categories %}
@@ -36,8 +36,8 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="bg-primary text-white">Таҳрир</td>
-                        <td class="bg-primary text-white">Ўчириш</td>
+                        <td class="bg-primary text-white">{{ prod_08 }}</td>
+                        <td class="bg-primary text-white">{{ prod_09 }}</td>
                     </tr>
                     {% for food in foods %}
                         <tr>
@@ -51,13 +51,13 @@
                                 <td class="text-center"><i class="fa fa-times-circle-o" aria-hidden="true"
                                                            style="font-size: 2em; color:red"></i></td>
                             {% endif %}
-                            <td><span class="moneyed">{{ food.price }}</span> сўм</td>
+                            <td><span class="moneyed">{{ food.price }}</span> {{ prod_10 }}</td>
                             <td>{{ food.category.title }}</td>
                             <td><a href="{% url 'food_edit' pk=food.pk %}">
-                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Таҳрир</button>
+                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> {{ prod_08 }}</button>
                             </a></td>
                             <td><a href="{% url 'food_delete' pk=food.pk %}">
-                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Ўчириш
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> {{ prod_09 }}
                                 </button>
                             </a></td>
                         </tr>
@@ -67,7 +67,7 @@
 
 
                 <!-- Button trigger modal -->
-                <a href="{% url 'food_new' %}" type="button" class="btn btn-primary m-1">Қўшиш</a>
+                <a href="{% url 'food_new' %}" type="button" class="btn btn-primary m-1">{{ prod_14 }}</a>
                 <div class="text-center">
 
                     {% if p_paginator.has_previous %}
@@ -75,7 +75,7 @@
                     {% endif %}
                     <span class="btn btn-primary mb-5">
 
-                    Саҳифа {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
+                    {{ paginator_ }} {{ p_paginator.number }}/{{ p_paginator.paginator.num_pages }}
                     </span>
 
 
@@ -96,13 +96,13 @@
 
                     <tr>
                         <td class="bg-primary text-white text-center">№</td>
-                        <td class="bg-primary text-white ">Номи</td>
-                        <td class="bg-primary text-white text-center">Расми</td>
-                        <td class="bg-primary text-white text-center">Фаол</td>
-                        <td class="bg-primary text-white text-center">Чоп этиш</td>
-                        <td class="bg-primary text-white text-center">Принтер</td>
-                        <td class="bg-primary text-white text-center">Таҳрир</td>
-                        <td class="bg-primary text-white text-center">Ўчириш</td>
+                        <td class="bg-primary text-white ">{{ prod_03 }}</td>
+                        <td class="bg-primary text-white text-center">{{ prod_04 }}</td>
+                        <td class="bg-primary text-white text-center">{{ prod_11 }}</td>
+                        <td class="bg-primary text-white text-center">{{ prod_12 }}</td>
+                        <td class="bg-primary text-white text-center">{{ prod_13 }}</td>
+                        <td class="bg-primary text-white text-center">{{ prod_08 }}</td>
+                        <td class="bg-primary text-white text-center">{{ prod_09 }}</td>
                     </tr>
 
                     {% for i in categories %}
@@ -126,10 +126,10 @@
                             {% endif %}
                             <td class="text-center">{{ i.printer }}</td>
                             <td class="text-center"><a href="{% url 'category' pk=i.pk %}">
-                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> Таҳрир</button>
+                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> {{ prod_08 }}</button>
                             </a></td>
                             <td class="text-center"><a href="{% url 'category_delete' pk=i.pk %}">
-                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> Ўчириш
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> {{ prod_09 }}
                                 </button>
                             </a></td>
                         </tr>
@@ -139,7 +139,7 @@
 
 
                 <!-- Button trigger modal -->
-                <a href="{% url 'category_new' %}" type="button" class="btn btn-primary m-1">Қўшиш</a>
+                <a href="{% url 'category_new' %}" type="button" class="btn btn-primary m-1">{{ prod_14 }}</a>
             </div>
         </div>
 

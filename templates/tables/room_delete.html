@@ -3,19 +3,21 @@
     <form method="POST" enctype="multipart/form-data">
         <div class="row mt-5">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
-                <div class="h2">Хона:
+                <div class="h2">{{ tabl_10 }}:
                     {% csrf_token %}
                     <span class="text-danger h2">
-                {{ room.title }}
-            </span>
+                    {{ food.title }}
+                    </span>
                 </div>
                 <div class="mt-2 mb-4">
-                    Ростдан хам бу хонани ўчирмоқчимисиз? Ушбу хона ўчирилса у билан бирга барча столлари хам ўчади!!!
+                    {{ tabl_11 }}
                 </div>
                 <div class="m-auto">
                     <a href="{% url 'rooms' %}" type="button" class="btn btn-danger mr-4 mb-0 "><i
-                            class="fa fa-times" aria-hidden="true"></i>Бекор қилиш</a>
-                    <button type="sumbit" class="btn btn-primary ml-4 mb-0 "><i class="fa fa-trash"></i> Ўчириш
+                            class="fa fa-times" aria-hidden="true"></i> {{ tabl_12 }}</a>
+                    <button type="sumbit" class="btn btn-primary ml-4 mb-0 ">
+                        <i class="fa fa-trash"></i>
+                         {{ tabl_05 }}
                     </button>
                 </div>
             </div>

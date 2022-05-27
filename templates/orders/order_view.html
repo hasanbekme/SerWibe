@@ -2,49 +2,45 @@
 {% block content %}
     <div class="row mt-5">
         <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
-            <div class="h4">Буюртма: #{{ order.id }} <span
+            <div class="h4">{{ pickup_10 }}: #{{ order.id }} <span
                     class="float-left float-sm-right float-md-right text-danger font-weight-bold">{{ order.table.room.title }}: №{{ order.table.number }}</span>
             </div>
             {% csrf_token %}
             <table class="table tableorder">
                 <tr class="bg-primary text-white">
-                    <td>Номи</td>
-                    <td>Сони</td>
-                    <td>Умумий нархи</td>
+                    <td>{{ pickup_12 }}</td>
+                    <td>{{ pickup_13 }}</td>
+                    <td>{{ pickup_14 }}</td>
                 </tr>
                 {% for orderitem in orderitems %}
                     <tr>
                         <td>{{ orderitem.meal.title }}</td>
                         <td>{{ orderitem.quantity }} ta</td>
-                        <td><span class="moneyed">{{ orderitem.abstract_amount }}</span> сўм</td>
+                        <td><span class="moneyed">{{ orderitem.abstract_amount }}</span> {{ pickup_07 }}</td>
                     </tr>
                 {% endfor %}
                 {% if order.table.tax_required %}
                     <tr class="font-weight-bold">
-                        <td>Xizmat</td>
+                        <td>{{ pickup_26 }}</td>
                         <td>{{ tax }}%</td>
-                        <td><span class="moneyed">{{ order.tax_price }}</span> сўм</td>
+                        <td><span class="moneyed">{{ order.tax_price }}</span> {{ pickup_07 }}</td>
                     </tr>
                 {% endif %}
                 <tr class="font-weight-bold">
-                    <td>Хона хизмати</td>
+                    <td>{{ pickup_27 }}</td>
                     <td>{{ order.passed_time_formatted }}</td>
-                    <td><span class="moneyed">{{ order.room_service_cost }}</span> сўм</td>
+                    <td><span class="moneyed">{{ order.room_service_cost }}</span> {{ pickup_07 }}</td>
                 </tr>
                 <tr class="text-danger font-weight-bold">
-                    <td>Умумий</td>
+                    <td>{{ pickup_28 }}</td>
                     <td>{{ order.orderitem_set.count }} ta</td>
-                    <td><span class="moneyed">{{ order.needed_payment }}</span> сўм</td>
+                    <td><span class="moneyed">{{ order.needed_payment }}</span> {{ pickup_07 }}</td>
                 </tr>
             </table>
             <div class="mr-auto">
-                <a href="{% url 'orders' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
-                                                                                              aria-hidden="true"></i>
-                    Ёпиш</a>
-                <a href="{% url 'print_order' order_id=order.id %}" type="button" class="btn btn-primary m-1 mt-3"><i
-                        class="fa fa-print"
-                        aria-hidden="true"></i>
-                    Чоп этиш</a>
+                <a href="{% url 'orders' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times" aria-hidden="true"></i>
+                    {{ pickup_29 }}</a>
+                <a href="{% url 'print_order' order_id=order.id %}" type="button" class="btn btn-primary m-1 mt-3"><i class="fa fa-print" aria-hidden="true"></i> {{ pickup_30 }}</a>
 
             </div>
         </div>
