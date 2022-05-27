@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>495</width>
+    <width>505</width>
     <height>663</height>
    </rect>
   </property>
@@ -30,7 +30,7 @@
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab1">
       <property name="styleSheet">
@@ -111,7 +111,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Дастурчиларга юбориш</string>
+            <string> Дастурчиларга юбориш</string>
            </property>
            <property name="icon">
             <iconset>
@@ -272,7 +272,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Telefon:</string>
+              <string>Телефон:</string>
              </property>
             </widget>
            </item>

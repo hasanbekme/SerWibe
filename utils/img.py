@@ -12,6 +12,7 @@ class Receipt:
         self.y = 0
 
     def set_font(self, family: str, size: int):
+        size = int(self.width / 320 * size)
         self.font = ImageFont.truetype(f"fonts/{family}.ttf", size=size)
 
     def text(self, text: str, align="center", space=False):
@@ -32,5 +33,6 @@ class Receipt:
     def save(self, path=None):
         self.height = self.y + 5
         self.image = self.image.crop((0, 0, self.width, self.height))
+        self.image.show()
         if path is not None:
             self.image.save(path)

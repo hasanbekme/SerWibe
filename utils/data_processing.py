@@ -62,7 +62,6 @@ def get_trading_table(category=None, start_date=None, end_date=None):
         final_models = final_models.filter(meal__category_id=category)
 
     res = list(map(lambda x: FoodTrade(final_models, x), food_models))
-    print(res)
     return res, sum([x.total_sale for x in res]), date_string
 
 
