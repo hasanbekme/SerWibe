@@ -57,7 +57,7 @@ def print_receipt(order: Order):
     page.set_font(family="courbd", size=15)
     for order_item in order.orderitem_set.all():
         page.text(f"{order_item.quantity} x {order_item.meal.title}", align="left")
-        page.text(f"{order_item.total_price} сўм", align="right", space=True)
+        page.text(f"{order_item.abstract_amount} сўм", align="right", space=True)
         page.br(10)
     page.set_font(family="cour", size=18)
     page.y -= 4
