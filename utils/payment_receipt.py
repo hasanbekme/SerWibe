@@ -10,7 +10,7 @@ def print_receipt(order: Order):
     border_string = "-" * 200
     doc = Document(width=int(Settings().get("printer_width", int) * 51), printer=Settings().get("printer", str))
     doc.begin_document()
-    page = Receipt(width=Settings().get("printer_width", int) * 4 - 20)
+    page = Receipt(width=Settings().get("printer_width", int) * 80 - 400)
     page.set_font(family="courbd", size=38)
     company_name = Settings().get(key="company_name", tp=str)
     if company_name == "":
@@ -106,7 +106,7 @@ def printer_order_item(order_item: OrderItem, quantity: int):
     now = datetime.now()
     doc = Document(printer=order_item.meal.category.printer, width=int(Settings().get("printer_width", int) * 51))
     doc.begin_document()
-    page = Receipt(width=Settings().get("printer_width", int) * 4 - 20)
+    page = Receipt(width=Settings().get("printer_width", int) * 80 - 400)
     page.set_font(family="courbd", size=17)
     page.text(now.strftime("%d.%m.%Y %H:%M"), space=True)
     page.br(8)

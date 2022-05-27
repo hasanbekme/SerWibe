@@ -3,7 +3,7 @@ import win32print
 import win32ui
 from PIL import ImageWin, Image
 
-scale_factor = 20
+scale_factor = 1
 
 
 def get_printers():

@@ -2,17 +2,17 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 class Receipt:
-    def __init__(self, width=300):
+    def __init__(self, width=6000):
         # 4px == 1mm
         self.width = width
         self.height = 0
-        self.image = Image.new(mode='1', size=(width, 4000), color="white")
+        self.image = Image.new(mode='1', size=(width, 80000), color="white")
         self.draw = ImageDraw.Draw(self.image)
         self.font = ImageFont.truetype("fonts/cour.ttf", size=24)
         self.y = 0
 
     def set_font(self, family: str, size: int):
-        size = int(self.width / 300 * size)
+        size = int(self.width * size / 300)
         self.font = ImageFont.truetype(f"fonts/{family}.ttf", size=size)
 
     def text(self, text: str, align="center", space=False):
@@ -28,10 +28,11 @@ class Receipt:
             self.y += h
 
     def br(self, delta):
-        self.y += delta
+        self.y += delta * 20
 
     def save(self, path=None):
         self.height = self.y + 5
         self.image = self.image.crop((0, 0, self.width, self.height))
+        self.image.show()
         if path is not None:
             self.image.save(path)
