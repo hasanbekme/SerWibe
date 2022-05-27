@@ -6,6 +6,8 @@ from PyQt5.QtCore import QSettings
 import res_rc
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QSystemTrayIcon, QMenu, QAction
+
+from SourceFiles.main_window import MainWindow
 from SourceFiles.settings_widget import SettingsWidget
 
 
@@ -15,6 +17,7 @@ class MyTray(QSystemTrayIcon):
         self.s_w = SettingsWidget()
         self.setIcon(QIcon(":/main/logo.png"))
         self.menu = QMenu()
+        self.main_frame = MainWindow()
         self.settings = QSettings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
                                   QSettings.NativeFormat)
 

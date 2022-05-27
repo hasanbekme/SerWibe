@@ -2,7 +2,7 @@ import win32print
 from PyQt5.QtCore import QSettings, QThread
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import QWidget
-from future.backports.datetime import datetime
+from datetime import datetime
 
 from Resources.ui import settings_widget
 from utils.bot_config import logs_channel, bot

@@ -28,7 +28,7 @@ def set_autostart(state):
 if __name__ == '__main__':
     try:
         if check_running_server():
-            open_website()
+            pass
         else:
             app = QApplication(sys.argv)
 
@@ -42,7 +42,8 @@ if __name__ == '__main__':
             tray_icon.open_action.triggered.connect(open_website)
             tray_icon.s_w.autostart.stateChanged.connect(set_autostart)
 
-            open_website()
+            tray_icon.main_frame.showMaximized()
             sys.exit(app.exec())
     except Exception as ex:
+        print(ex)
         logging.error(ex)
