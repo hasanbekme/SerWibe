@@ -728,7 +728,7 @@ def my_profile(request):
         user = get_user(request)
         today = date.today()
         order_models = Order.objects.filter(waiter=user, created_at__gt=today)
-        orders_amount = order_models.aggregate(Sum('paid_money'))['paid_money__sum']
+        orders_amount = order_models.aggregate(Sum('waiter_fee'))['waiter_fee__sum']
         if orders_amount is None:
             orders_amount = 0
         return render(request, 'waiter/my_profile.html',

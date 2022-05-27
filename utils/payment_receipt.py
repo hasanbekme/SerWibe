@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from utils.img import Receipt
 from utils.printer import Document
 from utils.system_settings import Settings
 from web.models import Order, OrderItem
@@ -9,101 +10,116 @@ def print_receipt(order: Order):
     border_string = "-" * 200
     doc = Document(width=int(Settings().get("printer_width", int) * 51), printer=Settings().get("printer", str))
     doc.begin_document()
-    y = 0
-    doc.set_font(family="Arial", size=20, bold=True)
+    page = Receipt(width=Settings().get("printer_width", int) * 4 - 20)
+    page.set_font(family="courbd", size=38)
     company_name = Settings().get(key="company_name", tp=str)
     if company_name == "":
         company_name = "SerWibe"
-    doc.aligned_text(company_name, y=y, align="center")
-    y += 400
-    doc.set_font(family="Arial", size=8, bold=False)
+    page.text(text=company_name, space=True)
+    page.br(8)
+    page.set_font(family="cour", size=12)
     if Settings().get("address", tp=str):
-        doc.aligned_text("Manzil: " + Settings().get(key="address", tp=str), y=y, align="center")
-        y += 150
+        page.text("Манзил: " + Settings().get(key="address", tp=str), space=True)
+        page.br(5)
     phone_number = Settings().get("phone_number", tp=str)
     if len(phone_number) != 17:
-        doc.aligned_text("Tel: " + Settings().get(key="phone_number", tp=str), y=y, align="center")
-        y += 150
-    doc.set_font(family="Arial", size=12, bold=False)
-    doc.aligned_text(border_string, y, align="center")
-    y += 200
-    doc.aligned_text("Sana:", y, align="left")
-    doc.aligned_text(datetime.now().strftime("%d/%m/%Y, %H:%M:%S"), y, align="right")
-    y += 300
-    doc.aligned_text("Buyurtma raqami:", y, align="left")
-    doc.aligned_text('#' + str(order.id), y, align="right")
-    y += 300
+        page.text("Тел: " + Settings().get(key="phone_number", tp=str), space=True)
+        page.br(5)
+    page.set_font(family="cour", size=18)
+    page.text(border_string, space=True)
+    page.br(4)
+    page.text("Сана:", align="left")
+    page.set_font(family="courbd", size=16)
+    page.text(datetime.now().strftime("%d/%m/%Y, %H:%M:%S"), align="right", space=True)
+    page.set_font(family="cour", size=18)
+    page.br(5)
+    page.text("Буюртма рақами:", align="left")
+    page.text('#' + str(order.id), align="right", space=True)
+    page.br(5)
     if order.order_type == 'table':
-        doc.aligned_text("Xona:", y, align="left")
-        doc.aligned_text(str(order.table.room.title), y, align="right")
-        y += 300
-        doc.aligned_text("Stol raqami:", y, align="left")
-        doc.aligned_text(str(order.table.number), y, align="right")
-        y += 300
-    doc.aligned_text("Offitsant:", y, align="left")
-    doc.aligned_text(str(order.waiter.full_name), y, align="right")
-    y += 200
-    doc.aligned_text(border_string, y, align="center")
-    y += 200
-    doc.set_font(family="Arial", size=16, bold=True)
-    doc.aligned_text("Buyurtmalar", y, align="center")
-    doc.set_font(family="Arial", size=12, bold=False)
-    y += 300
-    doc.aligned_text(border_string, y, align="center")
-    y += 200
+        page.text("Хона:", align="left")
+        page.text(str(order.table.room.title), align="right", space=True)
+        page.br(5)
+        page.text("Стол рақами:", align="left")
+        page.text(str(order.table.number), align="right", space=True)
+        page.br(5)
+    page.text("Оффитсант:", align="left")
+    page.text(str(order.waiter.full_name), align="right", space=True)
+    page.br(8)
+    page.text(border_string, space=True)
+    page.br(4)
+    page.set_font(family="courbd", size=22)
+    page.text("Буюртмалар", space=True)
+    page.set_font(family="cour", size=18)
+    page.br(4)
+    page.text(border_string, space=True)
+    page.br(8)
+    page.set_font(family="courbd", size=15)
     for order_item in order.orderitem_set.all():
-        doc.aligned_text(f"{order_item.quantity} x {order_item.meal.title}", y, align="left")
-        doc.aligned_text(f"{order_item.total_price} so'm", y, align="right")
-        y += 300
-    y -= 100
-    doc.aligned_text(border_string, y, align="center")
-    y += 200
-    doc.aligned_text("Umumiy summa:", y, align="left")
-    doc.aligned_text(f"{order.without_tax} so'm", y, align="right")
-    y += 300
+        page.text(f"{order_item.quantity} x {order_item.meal.title}", align="left")
+        page.text(f"{order_item.total_price} сўм", align="right", space=True)
+        page.br(10)
+    page.set_font(family="cour", size=18)
+    page.y -= 4
+    page.text(border_string, space=True)
+    page.br(4)
+    page.set_font(family="cour", size=18)
+    page.text("Умумий сумма:", align="left")
+    page.set_font(family="courbd", size=16)
+    page.text(f"{order.without_tax} сўм", align="right", space=True)
+    page.br(4)
     tax = Settings().get("tax", tp=int)
     if tax != 0 and order.order_type == "table" and order.table.tax_required:
-        doc.aligned_text("Xizmat:", y, align="left")
-        doc.aligned_text(f"{tax}%, ({order.tax_price} so'm)", y, align="right")
-        y += 300
+        page.set_font(family="cour", size=18)
+        page.text("Хизмат:", align="left")
+        page.set_font(family="courbd", size=16)
+        page.text(f"{tax}%,({order.tax_price} сўм)", align="right", space=True)
+        page.br(10)
     if order.room_service_cost:
-        doc.aligned_text("Xona xizmati:", y, align="left")
-        doc.aligned_text(f"{order.room_service_cost} so'm", y, align="right")
-        y += 300
-    doc.set_font(family="Arial", size=14, bold=True)
-    doc.aligned_text("Jami:", y, align="left")
-    doc.aligned_text(f"{order.needed_payment} so'm", y, align="right")
-    doc.set_font(family="Arial", size=12, bold=False)
+        page.set_font(family="cour", size=18)
+        page.text("Хона хизмати:", align="left")
+        page.set_font(family="courbd", size=16)
+        page.text(f"{order.room_service_cost} сўм", align="right", space=True)
+        page.br(10)
+    page.set_font(family="courbd", size=18)
+    page.text("Жами:", align="left")
+    page.text(f"{order.needed_payment} сўм", align="right", space=True)
+    page.set_font(family="cour", size=18)
     if Settings().get("last_message", tp=str):
-        y += 500
-        doc.aligned_text(border_string, y, align="center")
-        y += 200
-        doc.set_font(family="Arial", size=20, bold=True)
-        doc.aligned_text(Settings().get(key="last_message", tp=str), y=y, align="center")
-        doc.set_font(family="Arial", size=12, bold=False)
-        y += 400
-        doc.aligned_text(border_string, y, align="center")
-    y += 200
-    doc.set_font(family="Arial", size=8, bold=False)
-    doc.aligned_text("Created by serwibe.uz", y, align="right")
-    doc.end_document(y)
+        page.br(10)
+        page.text(border_string, align="center", space=True)
+        page.br(4)
+        page.set_font(family="courbd", size=26)
+        page.text(Settings().get(key="last_message", tp=str), space=True)
+        page.br(4)
+        page.set_font(family="cour", size=18)
+        page.text(border_string, space=True)
+    page.br(6)
+    page.set_font(family="cour", size=12)
+    page.text("created by serwibe.uz", align="right", space=True)
+    page.save()
+    doc.image(image=page.image, position=(0, 0), size=(page.width, page.height))
+    doc.end_document()
 
 
 def printer_order_item(order_item: OrderItem, quantity: int):
     now = datetime.now()
     doc = Document(printer=order_item.meal.category.printer, width=int(Settings().get("printer_width", int) * 51))
     doc.begin_document()
-    y = 0
-    doc.set_font(family="Segoe UI Historic", size=12, weight=600)
-    doc.aligned_text(now.strftime("%d.%m.%Y %H:%M"), y=y, align="center")
-    y += 300
-    doc.aligned_text(f"Buyurtma:   #{order_item.order.id}", y=y, align="center")
-    y += 300
+    page = Receipt(width=Settings().get("printer_width", int) * 4 - 20)
+    page.set_font(family="courbd", size=17)
+    page.text(now.strftime("%d.%m.%Y %H:%M"), space=True)
+    page.br(8)
+    page.text(f"Буюртма:   #{order_item.order.id}", space=True)
+    page.br(8)
     if order_item.order.order_type == 'table':
-        doc.aligned_text(f"Stol:   {order_item.order.table.room.title}, {order_item.order.table.number}", y=y, align="center")
-        y += 300
-    doc.aligned_text(f"Offitsant:   {str(order_item.order.waiter.full_name)}", y=y, align="center")
-    y += 300
-    doc.aligned_text("  " + order_item.meal.title, y=y, align="left")
-    doc.aligned_text(str(quantity), y=y, align="right")
-    doc.end_document(y)
+        page.text(f"Стол:   {order_item.order.table.room.title}, {order_item.order.table.number}", space=True)
+        page.br(8)
+    page.text(f"Оффитсант:   {str(order_item.order.waiter.full_name)}", space=True)
+    page.br(8)
+    page.text(order_item.meal.title, align="left")
+    page.text(str(quantity), align="right", space=True)
+    page.br(4)
+    page.save()
+    doc.image(image=page.image, position=(0, 0), size=(page.width, page.height))
+    doc.end_document()

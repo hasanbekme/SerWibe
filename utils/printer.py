@@ -14,7 +14,7 @@ def get_printers():
 class Document:
     def __init__(self, printer=None, width=None):
         # width, 1 mm = 53.325
-        self.height = None
+        self.height = 300
         self.font = None
         self.dc = None
         self.width = width
@@ -29,9 +29,7 @@ class Document:
         self.dc.StartPage()
         self.dc.SetMapMode(win32con.MM_TWIPS)
 
-    def end_document(self, y):
-        y += 400
-        self.aligned_text(".", y, 'center')
+    def end_document(self):
         self.dc.EndPage()
         self.dc.EndDoc()
 
@@ -57,10 +55,10 @@ class Document:
         self.dc.DrawText(text, (0, -1 * y, self.width, -1 * (y + self.height)), aligns[align])
 
     def text(self, position, text):
-        self.dc.TetxtOut(scale_factor * position[0], -1 * scale_factor * position[1], text)
+        self.dc.TextOut(scale_factor * position[0], -1 * scale_factor * position[1], text)
 
-    def image(self, position, image_path, size):
-        img = Image.open(image_path)
+    def image(self, position, image, size):
+        img = image
         img.convert('1')
         dib = ImageWin.Dib(img)
         end_pos = (position[0] + size[0], position[1] + size[1])
