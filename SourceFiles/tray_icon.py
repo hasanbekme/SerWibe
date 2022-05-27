@@ -23,12 +23,9 @@ class MyTray(QSystemTrayIcon):
 
         self.stop_action = QAction("Stop server")
         self.stop_action.setIcon(QIcon(":/main/stop_icon.png"))
-        self.open_action = QAction("Open")
-        self.open_action.setIcon(QIcon(":/main/open_icon.png"))
         self.open_settings = QAction("Settings")
         self.open_settings.setIcon(QIcon(":/main/settings.png"))
 
-        self.menu.addAction(self.open_action)
         self.menu.addAction(self.open_settings)
         self.menu.addAction(self.stop_action)
 

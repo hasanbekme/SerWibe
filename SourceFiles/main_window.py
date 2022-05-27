@@ -16,7 +16,3 @@ class MainWindow(QMainWindow, main_window.Ui_MainWindow):
 
         self.browser.load(QUrl(base_url))
 
-    def showFullScreen(self):
-        super(MainWindow, self).showFullScreen()
-        self.load_browser()
-

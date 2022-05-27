@@ -31,19 +31,15 @@ if __name__ == '__main__':
             pass
         else:
             app = QApplication(sys.argv)
-
-            server = Thread(target=run_server, args=[], daemon=True)
-            server.start()
-
             tray_icon = MyTray()
+            tray_icon.server = Thread(target=run_server, args=[], daemon=True)
+            tray_icon.server.start()
             tray_icon.setVisible(True)
             tray_icon.stop_action.triggered.connect(app.quit)
-            tray_icon.stop_action.triggered.connect(server.stop)
-            tray_icon.open_action.triggered.connect(open_website)
+            tray_icon.stop_action.triggered.connect(tray_icon.server.stop)
             tray_icon.s_w.autostart.stateChanged.connect(set_autostart)
 
             tray_icon.main_frame.showMaximized()
             sys.exit(app.exec())
     except Exception as ex:
-        print(ex)
         logging.error(ex)
