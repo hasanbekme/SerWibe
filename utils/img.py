@@ -28,7 +28,7 @@ class Receipt:
             self.y += h
 
     def br(self, delta):
-        self.y += delta * 20
+        self.y += int(delta * self.width / 300)
 
     def save(self, path=None):
         self.height = self.y + 5
