@@ -33,6 +33,5 @@ class Receipt:
     def save(self, path=None):
         self.height = self.y + 5
         self.image = self.image.crop((0, 0, self.width, self.height))
-        self.image.show()
         if path is not None:
             self.image.save(path)
