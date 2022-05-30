@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>505</width>
-    <height>663</height>
+    <width>518</width>
+    <height>655</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,7 +27,53 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">
+QLineEdit{
+background-color: white;
+border: 1px solid #59CDF2;
+border-radius: 3px;
+}
+
+QLineEdit::focus{
+border: 1px solid #29e1ff;
+border-radius: 5px;
+}
+QComboBox {
+    border: 1px solid #7cd0ef;
+    border-radius: 5px;
+}
+QComboBox:hover{
+border-color: #5487ee;
+}
+
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+	subcontrol-position: top right;
+	width: 30px;
+ 
+	border-left-width: 1px;
+	border-left-color: darkgray;
+	border-left-style: solid;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+
+
+QComboBox::down-arrow {
+  image: url(:/main/drop_down.png);
+height: 18px;
+width: 18px;
+}
+QComboBox::drop-down:hover {
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #d8d7d7, stop: 1 #e9e9e9);
+}
+
+QComboBox::down-arrow:on { /* shift the arrow when popup is open */
+    top: 1px;
+    left: 1px;
+}</string>
      </property>
      <property name="currentIndex">
       <number>0</number>
@@ -42,14 +88,11 @@
        </iconset>
       </attribute>
       <attribute name="title">
-       <string>Асосий</string>
+       <string>Asosiy</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="0">
         <layout class="QVBoxLayout" name="verticalLayout_2">
-         <property name="spacing">
-          <number>20</number>
-         </property>
          <item>
           <widget class="QLabel" name="title_2">
            <property name="maximumSize">
@@ -65,7 +108,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Асосий созламалар</string>
+            <string>Asosiy sozlamalar</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -75,17 +118,30 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_10">
            <item>
-            <widget class="QLabel" name="company_name_2">
+            <widget class="QLabel" name="autostart_title">
              <property name="font">
               <font>
-               <family>Segoe UI Historic</family>
+               <family>Georgia</family>
                <pointsize>14</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>Авто бошлаш</string>
+              <string>Avto boshlash:</string>
              </property>
             </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item>
             <widget class="QCheckBox" name="autostart">
@@ -95,6 +151,219 @@
             </widget>
            </item>
           </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_14">
+           <item>
+            <widget class="QLabel" name="language_title">
+             <property name="font">
+              <font>
+               <family>Georgia</family>
+               <pointsize>14</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Til:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="language_box">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Segoe UI Emoji</family>
+               <pointsize>12</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+             <item>
+              <property name="text">
+               <string>O'zbek (Lotin)</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normalon>:/main/uzbek_flag.png</normalon>
+               </iconset>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Ўзбек (крилл)</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normalon>:/main/uzbek_flag.png</normalon>
+               </iconset>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_13">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_11">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="id_bot">
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton {
+background-color: None;
+border: None;
+border-radius: 10px;
+}
+QPushButton:hover {
+background-color: rgba(85, 170, 255, 0.2);
+}
+QPushButton:pressed {
+background-color: rgba(85, 170, 255, 0.4);
+}</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normalon>:/main/telegram.png</normalon>
+                </iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>45</width>
+                 <height>45</height>
+                </size>
+               </property>
+               <property name="shortcut">
+                <string>Ctrl+Z, Ctrl+Z</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="font">
+                <font>
+                 <family>Georgia</family>
+                 <pointsize>14</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Admin ID:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="admin_id_edit">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>250</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>14</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QPushButton" name="admin_report">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+background-color: white;
+border-radius: 5px;
+border: 2px solid #6AF2F0;
+}
+QPushButton:hover {
+color: white;
+background-color: #6AF2F0;
+}
+QPushButton:pressed {
+color: white;
+background-color: rgb(47, 231, 247);
+border: 2px solid rgb(47, 231, 247);
+}</string>
+           </property>
+           <property name="text">
+            <string>Adminga xisobot</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/main/submit_document.png</normalon>
+             <disabledoff>:/main/submit_document.png</disabledoff>
+            </iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QPushButton" name="send_logs">
@@ -110,18 +379,38 @@
              <pointsize>12</pointsize>
             </font>
            </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+background-color: white;
+border-radius: 5px;
+border: 2px solid #6AF2F0;
+}
+QPushButton:hover {
+color: white;
+background-color: #6AF2F0;
+}
+QPushButton:pressed {
+color: white;
+background-color: rgb(47, 231, 247);
+border: 2px solid rgb(47, 231, 247);
+}</string>
+           </property>
            <property name="text">
-            <string> Дастурчиларга юбориш</string>
+            <string>Xatolik xaqida ma'lumot</string>
            </property>
            <property name="icon">
             <iconset>
-             <normalon>:/main/send.png</normalon>
+             <normalon>:/main/send_logs.png</normalon>
+             <disabledoff>:/main/send_logs.png</disabledoff>
             </iconset>
            </property>
            <property name="iconSize">
             <size>
-             <width>32</width>
-             <height>32</height>
+             <width>40</width>
+             <height>40</height>
             </size>
            </property>
           </widget>
@@ -130,6 +419,9 @@
           <spacer name="verticalSpacer">
            <property name="orientation">
             <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::MinimumExpanding</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -150,7 +442,7 @@
        </iconset>
       </attribute>
       <attribute name="title">
-       <string>Чек</string>
+       <string>Chek</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
@@ -173,7 +465,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Чек маълумотлари</string>
+            <string>Chek ma'lumotlari</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -187,11 +479,11 @@
              <property name="font">
               <font>
                <family>Georgia</family>
-               <pointsize>16</pointsize>
+               <pointsize>14</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>Ташкилот номи:</string>
+              <string>Tashkilot nomi:</string>
              </property>
             </widget>
            </item>
@@ -199,7 +491,7 @@
             <widget class="QLineEdit" name="company_name_edit">
              <property name="minimumSize">
               <size>
-               <width>220</width>
+               <width>240</width>
                <height>40</height>
               </size>
              </property>
@@ -229,11 +521,11 @@
              <property name="font">
               <font>
                <family>Georgia</family>
-               <pointsize>16</pointsize>
+               <pointsize>14</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>Манзил:</string>
+              <string>Manzil:</string>
              </property>
             </widget>
            </item>
@@ -268,11 +560,11 @@
              <property name="font">
               <font>
                <family>Georgia</family>
-               <pointsize>16</pointsize>
+               <pointsize>14</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>Телефон:</string>
+              <string>Telefon:</string>
              </property>
             </widget>
            </item>
@@ -313,11 +605,11 @@
              <property name="font">
               <font>
                <family>Georgia</family>
-               <pointsize>16</pointsize>
+               <pointsize>14</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>Оффитсант учун:</string>
+              <string>Offitsant uchun:</string>
              </property>
             </widget>
            </item>
@@ -385,11 +677,11 @@
              <property name="font">
               <font>
                <family>Georgia</family>
-               <pointsize>16</pointsize>
+               <pointsize>14</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>Охирги сатр:</string>
+              <string>Oxirgi satr:</string>
              </property>
             </widget>
            </item>
@@ -413,8 +705,11 @@
                <pointsize>14</pointsize>
               </font>
              </property>
+             <property name="text">
+              <string>РАХМАТ</string>
+             </property>
              <property name="placeholderText">
-              <string>Tashrifingiz uchun raxmat.</string>
+              <string>РАХМАТ</string>
              </property>
             </widget>
            </item>
@@ -423,15 +718,15 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_12">
            <item>
-            <widget class="QLabel" name="last_message_label_2">
+            <widget class="QLabel" name="cash_register">
              <property name="font">
               <font>
                <family>Georgia</family>
-               <pointsize>16</pointsize>
+               <pointsize>14</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>Касса принтер:</string>
+              <string>Kassa printer:</string>
              </property>
             </widget>
            </item>
@@ -449,6 +744,12 @@
                <height>16777215</height>
               </size>
              </property>
+             <property name="font">
+              <font>
+               <family>Segoe UI Emoji</family>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
             </widget>
            </item>
           </layout>
@@ -456,15 +757,15 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_8">
            <item>
-            <widget class="QLabel" name="p">
+            <widget class="QLabel" name="printer_size_label">
              <property name="font">
               <font>
                <family>Georgia</family>
-               <pointsize>16</pointsize>
+               <pointsize>14</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>Принтер ўлчами:</string>
+              <string>Printer o'lchami:</string>
              </property>
             </widget>
            </item>
@@ -554,7 +855,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Бекор қилиш</string>
+              <string>Bekor qilish</string>
              </property>
             </widget>
            </item>
@@ -592,7 +893,7 @@
               </font>
              </property>
              <property name="text">
-              <string>Сақлаш</string>
+              <string>Saqlash</string>
              </property>
             </widget>
            </item>
@@ -609,7 +910,7 @@
        </iconset>
       </attribute>
       <attribute name="title">
-       <string>Янгилаш</string>
+       <string>Yangilanish</string>
       </attribute>
      </widget>
     </widget>

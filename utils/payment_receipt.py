@@ -115,8 +115,9 @@ def printer_order_item(order_item: OrderItem, quantity: int):
     if order_item.order.order_type == 'table':
         page.text(f"Стол:   {order_item.order.table.room.title}, {order_item.order.table.number}", space=True)
         page.br(8)
-    page.text(f"Оффитсант:   {str(order_item.order.waiter.full_name)}", space=True)
+    page.text(f"Оффитсант:   {order_item.order.waiter.first_name} {order_item.order.waiter.last_name[0]}", space=True)
     page.br(8)
+    page.set_font(family="courbd", size=22)
     page.text(order_item.meal.title, align="left")
     page.text(str(quantity), align="right", space=True)
     page.br(4)

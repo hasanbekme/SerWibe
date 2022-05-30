@@ -1,12 +1,17 @@
 <RCC>
   <qresource prefix="main">
+    <file>drop_down.png</file>
+    <file>russian_flag.png</file>
+    <file>uzbek_flag.png</file>
+    <file>upload.gif</file>
+    <file>telegram.png</file>
     <file>submit_document.png</file>
     <file>license.png</file>
     <file>locked.png</file>
     <file>main_settings.png</file>
     <file>receipt.png</file>
-    <file>send.png</file>
     <file>unlocked.png</file>
+    <file>send_logs.png</file>
     <file>update.png</file>
     <file>settings.png</file>
     <file>open_icon.png</file>
