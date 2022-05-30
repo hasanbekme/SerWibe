@@ -4,7 +4,7 @@
 <br>
     <div class="card m-2 text-left p-3 font-weight-bold text-dark row h5  col-md-5 m-auto" >
         <div class="text-center h1 text-primary font-weight-bold">
-            ПРОФИЛ
+            {{ waiter_04 }}
         </div>
         <div >
             <i class="fa fa-user"></i>
@@ -12,7 +12,7 @@
         </div>
         <a href="/logout" class="btn btn-danger block mt-2">
             <div>
-                Аcооунтдан чиқиш
+                {{ waiter_05  }}
                 <i class="fa fa-sign-out"></i>
             </div>
         </a>
@@ -20,15 +20,15 @@
     <br>    
     <div class="card m-2 text-left p-3 font-weight-bold text-dark row h5 col-md-5 m-auto mt-2">
         <div class="text-center h1 font-weight-bold btn btn-primary">
-            БУГУН
+            {{ waiter_06 }}
         </div>
         <div class="h6">
             <i class="fa fa-money mr-2" ></i>
-            Буюртмалар сони: {{ orders_count }} та
+            {{ waiter_07 }}: {{ orders_count }} {{ waiter_08 }}
         </div>
         <div  class="h6">
             <i class="fa fa-dollar ml-0 mr-3"></i>
-            Буюртмалар нархи: <span class="moneyed">{{ orders_amount }}</span> сўм
+            {{ waiter_09 }}: <span class="moneyed">{{ orders_amount }}</span> {{ waiter_03 }}
         </div>
     </div>
 

@@ -191,7 +191,10 @@
     </script>
 
     <script type="text/javascript">
-
+    var limites = document.getElementsByClassName("limit");
+        for (i = 0; i < limites.length; i++) {
+                limites[i].onkeyup = function() { calculateAll(); };
+            }
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         }

@@ -318,18 +318,131 @@ expense = {
 	}
 }
 
-order = {
+trad = {
 	"uz":{
-		"ord_01":"fasd",
-		"ord_02":"fasd",
-		"ord_03":"fasd",
-		"ord_04":"fasd",
-		"ord_05":"fasd",
-		"ord_06":"fasd",
-		"ord_07":"fasd",
-		"ord_08":"fasd",
-		"ord_09":"fasd",
-		"ord_10":"fasd",
+		"ord_01":"dan",
+		"ord_02":"gacha",
+		"ord_03":"Filter",
+		"ord_04":"Bugun",
+		"ord_05":"Hafta",
+		"ord_06":"Oy",
+		"ord_07":"Kategoriya",
+		"ord_08":"Nomi",
+		"ord_09":"Rasm",
+		"ord_10":"Nechta",
+		"ord_11":"Savdo",
+		"ord_12":"Tahlil",
+		"ord_13":"Jami",
+		"ord_14":"so`m",
+		"ord_15":"Hafta",
+		"ord_16":"Oy",
+		"ord_17":"Sana",
+	},
+	"uzk":{
+		"ord_01":"дан",
+		"ord_02":"гача",
+		"ord_03":"Филтер",
+		"ord_04":"Бугун",
+		"ord_05":"Ҳафта",
+		"ord_06":"Ой",
+		"ord_07":"Категория",
+		"ord_08":"Номи",
+		"ord_09":"Расм",
+		"ord_10":"Нечта",
+		"ord_11":"Савдо",
+		"ord_12":"Таҳлил",
+		"ord_13":"Жами",
+		"ord_14":"сўм",
+		"ord_15":"Ҳафта",
+		"ord_16":"Ой",
+		"ord_17":"Сана",
+	}
+}
+
+archive = {
+	"uz":{
+		'arch_01':'dan',
+		'arch_02':'gacha',
+		'arch_03':'Filter',
+		'arch_04':'Bugun',
+		'arch_05':'Hafta',
+		'arch_06':'Oy',
+		'arch_07':'ID',
+		'arch_08':'Xodim',
+		'arch_09':'Turi',
+		'arch_10':'olingan vaqt',
+		'arch_11':'Stol',
+		'arch_12':'Xizmat',
+		'arch_13':'Tahlil',
+		'arch_14':'so`m',
+		'arch_15':'Jami',
+		'arch_16':'Shu yerda',
+		'arch_17':'Olib ketilgan',
+		'arch_18':'Xodim',
+		'arch_19':'Turi',
+		'arch_20':'olingan vaqt',
+	},
+	"uzk":{
+		'arch_01':'дан',
+		'arch_02':'гача',
+		'arch_03':'Филтер',
+		'arch_04':'Бугун',
+		'arch_05':'Ҳафта',
+		'arch_06':'Ой',
+		'arch_07':'ИД',
+		'arch_08':'Ходим',
+		'arch_09':'Тури',
+		'arch_10':'олинган вақт',
+		'arch_11':'Стол',
+		'arch_12':'Хизмат',
+		'arch_13':'Таҳлил',
+		'arch_14':'сўм',
+		'arch_15':'Жами',
+		'arch_16':'Шу ерда',
+		'arch_17':'Олиб кетилган',
+		'arch_18':'Ходим',
+		'arch_19':'Тури',
+		'arch_20':'олинган вақт',
+	}
+}
+
+signin = {
+	"uz":{
+		"signin_01":"Parol",
+		"signin_02":"Kirish",
+	},
+	"uzk":{
+		"signin_01":"Парол",
+		"signin_02":"Кириш",
+	}
+}
+
+waiter = {
+	"uz":{
+		"waiter_01":"XONALAR",
+		"waiter_02":"Buyurtmalar",
+		"waiter_03":"so`m",
+		"waiter_04":"PROFIL",
+		"waiter_05":"Prolfildan chiqish",
+		"waiter_06":"BUGUN",
+		"waiter_07":"Buyurtmalar soni",
+		"waiter_08":"ta",
+		"waiter_09":"Buyurtmalar narxi",
+		"waiter_10":"Kategoriya",
+		"waiter_11":"Qidirish",
+	},
+	"uzk":{
+		"waiter_01":"ХОНАЛАР",
+		"waiter_02":"Буюртмалар",
+		"waiter_03":"сўм",
+		"waiter_04":"ПРОФИЛ",
+		"waiter_05":"Пролфилдан чиқиш",
+		"waiter_06":"БУГУН",
+		"waiter_07":"Буюртмалар сони",
+		"waiter_08":"та",
+		"waiter_09":"Буюртмалар нархи",
+		"waiter_10":"Категория",
+		"waiter_11":"Қидириш",
 	}
 }
 
@@ -341,5 +454,9 @@ def base(request):
 	baseL[lang].update(product[lang])
 	baseL[lang].update(tables[lang])
 	baseL[lang].update(expense[lang])
+	baseL[lang].update(trad[lang])
+	baseL[lang].update(archive[lang])
+	baseL[lang].update(signin[lang])
+	baseL[lang].update(waiter[lang])
 	context = baseL[lang]
 	return context

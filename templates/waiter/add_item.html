@@ -17,7 +17,7 @@
                for="searfilter" onclick="searchactive()">
             <i class="fa fa-search" id="searchorfilter"></i>
         </label>
-        <input id="searfilter" placeholder="Қидириш" type="search" class="btn border"
+        <input id="searfilter" placeholder="{{ waiter_11 }}" type="search" class="btn border"
                style="display: none; background-color: white; position:absolute; left: 20%; z-index: 1; text-align: left; width: 74%;"
                onkeyup="searchFunction()" onmousemove="searchFunction()">
         <button id="searchreset" type="button" class="btn btn-danger"
@@ -28,7 +28,7 @@
             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false"
                     style="width: 100%; border-radius: 0 5px 5px 0; font-weight: 800; color:var(--danger); text-align:left">
-                <i class="fa fa-filter"></i><span id="catname"> Категория</span>
+                <i class="fa fa-filter"></i><span id="catname"> {{ waiter_10 }}</span>
                 <button id="filterreset" type="button" class="btn btn-danger"
                         style="position:absolute; right:-15px; transform:scale(1.05);" onclick="filterFunction('');"><i
                         class="fa fa-close"></i></button>
@@ -73,7 +73,7 @@
                             </div>
                             <span id="{{ food.id }}p"
                                   style="position:absolute; right: 25%; bottom: 5px; font-weight:700"
-                                  class="text-danger moneyed">{{ food.price }} сўм</span>
+                                  class="text-danger moneyed">{{ food.price }} {{ waiter_03 }}</span>
                         <div style="width:80%; height:100%; position:absolute; left: 0;" onclick="adding('{{ food.id }}')">
                         </div>
                         </div>
@@ -87,14 +87,15 @@
 
         </main>
         <div class="menu-food">
-            <a href="{% url 'table' pk=room.pk %}" class="left"><i class="fa fa-arrow-left"
-                                                                   aria-hidden="true"></i></a>
+            <a href="{% url 'table' pk=room.pk %}" class="left">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </a>
             <a href="{% url 'table' pk=room.pk %}" style="padding:0" class="centered" id="centered"></a>
 
             <button type="submit" style="float: right; width: 66%; height: 55px; background-color: white; border:none;"
                     class="h4 font-weight-bold text-danger">
-                <span id="allsumm">0</span> сўм
-                <i class="fa fa-check" aria-hidden="true"></i>
+                <span id="allsumm">0</span> {{ waiter_03 }}
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
             </button>
 
         </div>
@@ -216,7 +217,10 @@
         }
     </script>
   <script type="text/javascript">
-
+    var limites = document.getElementsByClassName("limit");
+        for (i = 0; i < limites.length; i++) {
+                limites[i].onkeyup = function() { calculateAll(); };
+            }
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
         }
