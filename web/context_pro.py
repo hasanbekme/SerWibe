@@ -420,10 +420,14 @@ signin = {
     "uz": {
         "signin_01": "Parol",
         "signin_02": "Kirish",
+        "signin_03": "Ofitsant",
+        "signin_04": "Admin",
     },
     "uzk": {
         "signin_01": "Парол",
         "signin_02": "Кириш",
+        "signin_03": "Офицант",
+        "signin_04": "Админ",
     }
 }
 
@@ -471,7 +475,7 @@ settings_window = {
         "s_11": "Tashkilot nomi:",
         "s_12": "Manzil:",
         "s_13": "Telefon:",
-        "s_14": "Offitsant uchun:",
+        "s_14": "Ofitsant uchun:",
         "s_15": "Oxirgi satr:",
         "s_16": "Kassa printer:",
         "s_17": "Printer o'lchami:",
@@ -492,7 +496,7 @@ settings_window = {
         "s_11": "Ташкилот номи:",
         "s_12": "Манзил:",
         "s_13": "Телефон:",
-        "s_14": "Оффитсант учун:",
+        "s_14": "Офитсант учун:",
         "s_15": "Охирги сатр:",
         "s_16": "Касса принтер:",
         "s_17": "Принтер ўлчами:",
