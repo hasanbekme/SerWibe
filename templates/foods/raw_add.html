@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        <div class="row mt-5">
+            <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow tableab">
+                <div class="h2">{{ prod_15 }}: Title</div>
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td style="text-align: right;">{{ prod_23 }}:</td>
+                        <td>{{ form.title }}</td>
+                    </tr>
+                </table>
+                <div class="mr-auto">
+                    <a href="{% url 'product' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times" aria-hidden="true"></i> {{ prod_16 }}</a>
+                    <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> {{ prod_17 }}</button>
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+        document.getElementById("id_price").placeholder = "({{ prod_10 }})";
+        document.getElementById("id_price").style="text-align:right"
+    </script>
+    <script type="text/javascript">
+        if (document.getElementsByTagName("label")[0].getAttribute("for")=='image-clear_id'){
+            document.getElementsByTagName("label")[0].innerHTML = "{{ prod_09 }}";
+        }
+    </script>
+{% endblock %}

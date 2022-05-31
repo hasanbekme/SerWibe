@@ -86,6 +86,7 @@
                 <div class="mr-auto mb-3">
                     <a href="{% url 'orders' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times" aria-hidden="true"></i>
                         {{ pickup_16 }}</a>
+                <a href="{% url 'print_order' order_id=order.id %}" type="button" class="btn btn-primary m-1 mt-3"><i class="fa fa-print" aria-hidden="true"></i> {{ pickup_30 }}</a>
                     <button type="sumbit" class="btn btn-primary m-1 mt-3" id="submitForm"><i
                             class="fa fa-check-circle"></i> {{ pickup_06 }}
                     </button>

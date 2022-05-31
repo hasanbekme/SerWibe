@@ -114,7 +114,7 @@
     var comps = document.getElementsByClassName("components")[0];
     var lis = comps.getElementsByTagName("a");
     for (var i = 0; i < lis.length; i++) {
-        if (lis[i].href.split("/")[3]== location.href.split("/")[3]) {
+        if (lis[i].href.split("/")[3]== location.href.split("/")[3].split("?")[0]) {
             lis[i].className = "text-white";
         } else {
 

@@ -184,15 +184,17 @@ product = {
         "prod_10": "so`m",
         "prod_11": "Faoligi",
         "prod_12": "Chop etish",
-        "prod_13": "Printer",
+        "prod_13": "Printer ",
         "prod_14": "Qo`shish",
         "prod_15": "Maxsulot",
         "prod_16": "Yopish",
         "prod_17": "Saqlash",
         "prod_18": "Bekor qilish",
         "prod_19": "Mahsulotni o`chirib yuborishga rozimisiz?",
-        "prod_20": "Kategoriyani o`chirib yuborishga rozimisiz? O`chirib yuborganingizdan so`ng Taomlarni qaytib "
-                   "ko`rib chiqishingizni so`raymiz!",
+        "prod_20": "Kategoriyani o`chirib yuborishga rozimisiz? O`chirib yuborganingizdan so`ng Taomlarni qaytib ko`rib chiqishingizni so`raymiz!",
+        "prod_21": "Ombor",
+        "prod_22": "Sana",
+        "prod_23": "Miqdori (ta || kg)",
     },
 
     'uzk': {
@@ -215,8 +217,10 @@ product = {
         "prod_17": "Сақлаш",
         "prod_18": "Бекор қилиш",
         "prod_19": "Маҳсулотни ўчириб юборишга розимисиз?",
-        "prod_20": "Категорияни ўчириб юборишга розимисиз? Ўчириб юборганингиздан сўнг Таомларни қайтиб кўриб "
-                   "чиқишингизни сўраймиз!",
+        "prod_20": "Категорияни ўчириб юборишга розимисиз? Ўчириб юборганингиздан сўнг Таомларни қайтиб кўриб чиқишингизни сўраймиз!",
+        "prod_21": "Омбор",
+        "prod_22": "Сана",
+        "prod_23": "Миқдори (та || кг)",
     }
 }
 

@@ -7,6 +7,9 @@
         <li class="nav-item">
             <a id="tab-B" href="#pane-B" class="nav-link nav-link-style border-0" data-toggle="tab" role="tab">{{ prod_02 }}</a>
         </li>
+        <li class="nav-item">
+            <a id="tab-C" href="#pane-C" class="nav-link nav-link-style border-0" data-toggle="tab" role="tab">{{ prod_21 }}</a>
+        </li>
     </ul>
 
     <div id="content" class="tab-content" role="tablist">
@@ -143,13 +146,64 @@
             </div>
         </div>
 
+        <div id="pane-C" class=" border-top-0 tab-pane fade" role="tabpanel" aria-labelledby="tab-C">
+            <div role="tab" id="heading-C">
+
+                <table class="table table-hover m">
+                    <tr>
+                        <td class="bg-primary text-white text-center">№</td>
+                        <td class="bg-primary text-white ">{{ prod_03 }}</td>
+                        <td class="bg-primary text-white ">{{ prod_06 }}</td>
+                        <td class="bg-primary text-white ">{{ prod_22 }}</td>
+                        <td class="bg-primary text-white ">{{ prod_23 }}</td>
+                        <td class="bg-primary text-white text-center">{{ prod_08 }}</td>
+                        <td class="bg-primary text-white text-center">{{ prod_09 }}</td>
+                        <td class="bg-primary text-white text-center">{{ prod_14 }}</td>
+                    </tr>
+
+                        <tr>
+                            <td class="text-center"> 1 <!--{{ forloop.counter }} --> </td>
+                            <td>Lavash hamr</td>
+                            <td>1600 {{ prod_10 }}</td>
+                            <td>12:33 12/03/2022</td>
+                            <td>2135 </td>
+                            <td class="text-center"><a href="">
+                                <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> {{ prod_08 }}</button>
+                            </a></td>
+                            <td class="text-center"><a href="">
+                                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> {{ prod_09 }}
+                                </button>
+                            </a></td>
+                            <td class="text-center"><a href="">
+                                <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> {{ prod_14 }}
+                                </button>
+                            </a></td>
+                        </tr>
+                </table>
+
+
+                <!-- Button trigger modal -->
+                <a href="{% url 'category_new' %}" type="button" class="btn btn-primary m-1">{{ prod_14 }}</a>
+            </div>
+        </div>
+
     </div>
     <script type="text/javascript">
         if (window.location.href.slice(-2) === "#C") {
             document.getElementById("pane-A").setAttribute("class", " border-top-0 tab-pane fade");
             document.getElementById("pane-B").setAttribute("class", " border-top-0 tab-pane fade show active");
+            document.getElementById("pane-C").setAttribute("class", " border-top-0 tab-pane fade");
             document.getElementById("tab-B").setAttribute("class", " nav-link nav-link-style active border-0");
             document.getElementById("tab-A").setAttribute("class", " nav-link nav-link-style border-0");
+            document.getElementById("tab-C").setAttribute("class", " nav-link nav-link-style border-0");
+        }
+        else if (window.location.href.slice(-2) === "#O") {
+            document.getElementById("pane-A").setAttribute("class", " border-top-0 tab-pane fade");
+            document.getElementById("pane-C").setAttribute("class", " border-top-0 tab-pane fade show active");
+            document.getElementById("pane-B").setAttribute("class", " border-top-0 tab-pane fade");
+            document.getElementById("tab-C").setAttribute("class", " nav-link nav-link-style active border-0");
+            document.getElementById("tab-A").setAttribute("class", " nav-link nav-link-style border-0");
+            document.getElementById("tab-B").setAttribute("class", " nav-link nav-link-style border-0");
         }
     </script>
 

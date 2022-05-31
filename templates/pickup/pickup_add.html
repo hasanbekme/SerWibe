@@ -5,7 +5,7 @@
                for="searfilter" onclick="searchactive()">
             <i class="fa fa-search" id="searchorfilter"></i>
         </label>
-        <input id="searfilter" placeholder="Қидириш" type="search" class="btn border"
+        <input id="searfilter" placeholder="{{ pickup_23 }}" type="search" class="btn border"
                style="display: none; background-color: white; position:absolute; left: 16.6%; z-index: 1; text-align: left; width:  83.4%;"
                onkeyup="searchFunction()" onmousemove="searchFunction()">
         <button id="searchreset" type="button" class="btn btn-primary"
@@ -16,7 +16,7 @@
             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false"
                     style="width: 100%; border-radius: 0 5px 5px 0; font-weight: 800; color:var(--primary); text-align:left; border:2px solid gray;">
-                <i class="fa fa-filter"></i><span id="catname"> Категория</span>
+                <i class="fa fa-filter"></i><span id="catname"> {{ pickup_22 }}</span>
                 <button id="filterreset" type="button" class="btn btn-primary"
                         style="position:absolute; right:0px; transform:scale(1.05);" onclick="filterFunction('');"><i
                         class="fa fa-close"></i></button>
