@@ -99,7 +99,6 @@ def print_receipt(order: Order):
     page.set_font(family="courbd", size=12)
     page.text("created by serwibe.uz", align="right", space=True)
     page.save()
-    page.image.show()
     doc.image(image=page.image, position=(0, 0), size=(page.width, page.height))
     doc.end_document()
 
@@ -124,6 +123,5 @@ def printer_order_item(order_item: OrderItem, quantity: int):
     page.text(str(quantity), align="right", space=True)
     page.br(4)
     page.save()
-    page.image.show()
     doc.image(image=page.image, position=(0, 0), size=(page.width, page.height))
     doc.end_document()

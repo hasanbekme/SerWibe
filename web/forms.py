@@ -3,7 +3,7 @@ from django.forms import Form, CharField, ChoiceField, PasswordInput, ModelForm,
 
 from utils.printer import get_printers
 from utils.system_settings import get_tax
-from .models import Worker, Category, Food, Room, Table, ExpenseReason, Expense, Order
+from .models import Worker, Category, Food, Room, Table, ExpenseReason, Expense, Order, Product
 
 
 class CreateUserForm(Form):
@@ -167,3 +167,22 @@ class OrderCompletionForm(Form):
         if self.instance.order_type == 'table':
             self.instance.table.is_available = True
             self.instance.table.save()
+
+
+class ProductForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+
+class NewProductForm(Form):
+    quantity = IntegerField()
+
+    def __init__(self, *args, instance=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.instance: Product = instance
+
+    def save(self):
+        quantity = self.cleaned_data.get('quantity')
+        self.instance.quantity += quantity
+        self.instance.save()

@@ -161,29 +161,31 @@
                         <td class="bg-primary text-white text-center">{{ prod_14 }}</td>
                     </tr>
 
+                        {% for product in products %}
                         <tr>
                             <td class="text-center"> 1 <!--{{ forloop.counter }} --> </td>
-                            <td>Lavash hamr</td>
-                            <td>1600 {{ prod_10 }}</td>
-                            <td>12:33 12/03/2022</td>
-                            <td>2135 </td>
-                            <td class="text-center"><a href="">
+                            <td>{{ product.title }}</td>
+                            <td>{{ product.price }} {{ prod_10 }}</td>
+                            <td>{{ product.last_added_time_formatted }}</td>
+                            <td>{{ product.quantity }} </td>
+                            <td class="text-center"><a href="{% url 'raw_product_edit' pk=product.pk %}">
                                 <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> {{ prod_08 }}</button>
                             </a></td>
-                            <td class="text-center"><a href="">
+                            <td class="text-center"><a href="{% url 'raw_product_delete' pk=product.pk %}">
                                 <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i> {{ prod_09 }}
                                 </button>
                             </a></td>
-                            <td class="text-center"><a href="">
+                            <td class="text-center"><a href="{% url 'add_raw_to_stock' pk=product.pk %}">
                                 <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> {{ prod_14 }}
                                 </button>
                             </a></td>
                         </tr>
+                    {% endfor %}
                 </table>
 
 
                 <!-- Button trigger modal -->
-                <a href="{% url 'category_new' %}" type="button" class="btn btn-primary m-1">{{ prod_14 }}</a>
+                <a href="{% url 'raw_product_new' %}" type="button" class="btn btn-primary m-1">{{ prod_14 }}</a>
             </div>
         </div>
 

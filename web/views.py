@@ -16,8 +16,8 @@ from utils.request_processing import get_user, is_waiter, is_admin, pickup_items
 from utils.request_processing import order_items_add
 from utils.system_settings import get_tax
 from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm, TableForm, ExpenseReasonForm, ExpenseForm, \
-    OrderCompletionForm
-from .models import Worker, Category, Food, Room, Table, Order, Expense, ExpenseReason, OrderItem
+    OrderCompletionForm, ProductForm, NewProductForm
+from .models import Worker, Category, Food, Room, Table, Order, Expense, ExpenseReason, OrderItem, Product
 
 
 # authentication views -------------------------------------------------------------------------------------------------
@@ -198,9 +198,10 @@ def product(request):
             foods = Food.objects.filter(category_id=int(category_id))
         else:
             foods = Food.objects.all()
+        raw_products = Product.objects.all()
         p = Paginator(foods, 10)
         page = p.get_page(request.GET.get('page'))
-        context = {'categories': categories, 'foods': page, 'p_paginator': page}
+        context = {'categories': categories, 'foods': page, 'products': raw_products, 'p_paginator': page}
         return render(request, 'foods/product.html', context)
     else:
         return redirect('room')
@@ -237,6 +238,70 @@ def category_new(request):
         else:
             form = CategoryForm()
         return render(request, 'foods/category_edit.html', {'form': form})
+    else:
+        return redirect('room')
+
+
+@login_required(login_url='/')
+def product_new(request):
+    if is_admin(request):
+        if request.method == "POST":
+            form = ProductForm(request.POST)
+            if form.is_valid():
+                model = form.save(commit=False)
+                model.save()
+                return redirect(reverse('product') + '#O')
+            else:
+                print(form.errors)
+        else:
+            form = ProductForm()
+        return render(request, 'foods/raw_edit.html', {'form': form})
+    else:
+        return redirect('room')
+
+
+@login_required(login_url='/')
+def raw_product_edit(request, pk):
+    if is_admin(request):
+        product_model = get_object_or_404(Product, pk=pk)
+        if request.method == 'POST':
+            form = ProductForm(request.POST, instance=product_model)
+            if form.is_valid():
+                model = form.save(commit=False)
+                model.save()
+                return redirect(reverse('product') + '#O')
+        else:
+            form = ProductForm(instance=product_model)
+        return render(request, 'foods/raw_edit.html', {'form': form})
+    else:
+        return redirect('room')
+
+
+@login_required(login_url='/')
+def raw_product_delete(request, pk):
+    if is_admin(request):
+        obj = get_object_or_404(Product, pk=pk)
+        if request.method == "POST":
+            obj.delete()
+            return redirect(reverse('product') + '#O')
+
+        return render(request, "foods/raw_delete.html", {'product': obj})
+    else:
+        redirect('room')
+
+
+@login_required(login_url='/')
+def add_raw_to_stock(request, pk):
+    if is_admin(request):
+        model = get_object_or_404(Product, pk=pk)
+        if request.method == "POST":
+            form = NewProductForm(request.POST, instance=model)
+            if form.is_valid():
+                form.save()
+                return redirect(reverse('product') + '#O')
+        else:
+            form = NewProductForm(instance=model)
+        return render(request, 'foods/raw_add.html', {'form': form})
     else:
         return redirect('room')
 
@@ -603,7 +668,8 @@ def archive(request):
 def archive_model_view(request, pk):
     if is_admin(request):
         order_model = get_object_or_404(Order, pk=pk)
-        return render(request, "archive/order_view.html", {'order': order_model, 'orderitems': order_model.orderitem_set.all(), 'tax': get_tax()})
+        return render(request, "archive/order_view.html",
+                      {'order': order_model, 'orderitems': order_model.orderitem_set.all(), 'tax': get_tax()})
     else:
         return redirect('room')
 

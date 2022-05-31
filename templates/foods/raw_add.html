@@ -3,12 +3,12 @@
     <form method="POST" enctype="multipart/form-data">
         <div class="row mt-5">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow tableab">
-                <div class="h2">{{ prod_15 }}: Title</div>
+                <div class="h2">{{ prod_15 }}:</div>
                 {% csrf_token %}
                 <table>
                     <tr>
                         <td style="text-align: right;">{{ prod_23 }}:</td>
-                        <td>{{ form.title }}</td>
+                        <td>{{ form.quantity }}</td>
                     </tr>
                 </table>
                 <div class="mr-auto">

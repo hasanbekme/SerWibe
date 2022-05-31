@@ -267,3 +267,24 @@ class Expense(models.Model):
 
     class Meta:
         ordering = ['-id']
+
+
+class Product(models.Model):
+    title = models.CharField(max_length=50, verbose_name="Nomi")
+    price = models.IntegerField(verbose_name="Narxi")
+    quantity = models.FloatField(verbose_name="Qolgan soni", default=0)
+    last_added_time = models.DateTimeField(null=True, blank=True)
+
+    @property
+    def last_added_time_formatted(self):
+        return self.last_added_time.strftime("%H:%M, %d/%m/%Y")
+
+    def fill_stock(self, value):
+        self.quantity += value
+        self.last_added = datetime.datetime.now()
+        self.save()
+
+    def save(self, *args, **kwargs):
+        if self.last_added_time is None:
+            self.last_added_time = datetime.datetime.now()
+        super(Product, self).save()
