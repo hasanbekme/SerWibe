@@ -389,6 +389,7 @@ archive = {
         'arch_18': 'Xodim',
         'arch_19': 'Turi',
         'arch_20': 'olingan vaqt',
+        "arch_21": 'Yopish',
     },
     "uzk": {
         'arch_01': 'дан',
@@ -411,6 +412,7 @@ archive = {
         'arch_18': 'Ходим',
         'arch_19': 'Тури',
         'arch_20': 'олинган вақт',
+        "arch_21": 'Ёпиш',
     }
 }
 

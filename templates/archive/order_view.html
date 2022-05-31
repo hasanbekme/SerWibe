@@ -2,64 +2,64 @@
 {% block content %}
     <div class="row mt-4">
         <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow">
-            <div class="h4">Буюртма: #{{ order.id }}
+            <div class="h4">{{ pickup_10 }} : #{{ order.id }}
                 {% if order.table %}
                 <span
                         class="float-left float-sm-right float-md-right text-danger">{{ order.table.room.title }}: №{{ order.table.number }}</span>
                 {% else %}
                 <span
-                        class="float-left float-sm-right float-md-right text-danger">Олиб кетилган</span>
+                        class="float-left float-sm-right float-md-right text-danger">{{ arch_17 }}</span>
                 {% endif %}
             </div>
             {% csrf_token %}
             <table class="table tableorder">
                 <tr class="bg-primary text-white">
-                    <td>Номи</td>
-                    <td>Сони</td>
-                    <td>Умумий нархи</td>
+                    <td>{{ pickup_12 }}</td>
+                    <td>{{ pickup_13 }}</td>
+                    <td>{{ pickup_14 }}</td>
                 </tr>
                 {% for orderitem in orderitems %}
                     <tr>
                         <td>{{ orderitem.meal.title }}</td>
-                        <td>{{ orderitem.quantity }} ta</td>
-                        <td>{{ orderitem.abstract_amount }} сўм</td>
+                        <td>{{ orderitem.quantity }} {{ pickup_15 }}</td>
+                        <td>{{ orderitem.abstract_amount }} {{ arch_14 }}</td>
                     </tr>
                 {% endfor %}
                 {% if order.table.tax_required %}
                     <tr class="font-weight-bold">
-                        <td>Хизмат</td>
+                        <td>{{ pickup_26 }}</td>
                         <td>{{ tax }}%</td>
-                        <td><span class="moneyed">{{ order.tax_price }}</span> сўм</td>
+                        <td><span class="moneyed">{{ order.tax_price }}</span> {{ arch_14 }}</td>
                     </tr>
                 {% endif %}
                 <tr class="font-weight-bold">
-                    <td>Хона хизмати</td>
+                    <td>{{ pickup_27 }}</td>
                     <td>{{ order.passed_time_formatted }}</td>
-                    <td><span class="moneyed">{{ order.room_service_cost }}</span> сўм</td>
+                    <td><span class="moneyed">{{ order.room_service_cost }}</span> {{ arch_14 }}</td>
                 </tr>
                 <tr class="text-danger font-weight-bold">
-                    <td>Умумий</td>
-                    <td>{{ order.orderitem_set.count }} та</td>
-                    <td>{{ order.needed_payment }} сўм</td>
+                    <td>{{ pickup_28 }}</td>
+                    <td>{{ order.orderitem_set.count }} {{ pickup_15 }}</td>
+                    <td>{{ order.needed_payment }} {{ arch_14 }}</td>
                 </tr>
             </table>
-            <textarea>{{ order.comment }}</textarea>
+            <textarea id="id_comment" disabled>{{ order.comment }}</textarea>
             <div class="input-group mt-3 button-payyed">
-                <div class="input-group-prepend" onclick="money_cash()">
+                <div class="input-group-prepend" >
                     <span class="input-group-text p-1 text-center">
                         <button type="button" class="btn btn-secondary cash_money" id="cash_money"
                                 style="margin: auto; width:30px; height:30px; border-radius: 50%;"></button>
                     </span>
                 </div>
                 <input readonly type="number" id="id_cash_money" value="{{ order.cash_money }}">
-                <div class="input-group-append" onclick="money_cash()">
+                <div class="input-group-append" >
                     <span class="input-group-text">
                         <i class="fa fa-money"></i>
                     </span>
                 </div>
             </div>
             <div class="input-group mt-1 button-payyed">
-                <div class="input-group-prepend" onclick="credit_card()">
+                <div class="input-group-prepend" >
                     <span class="input-group-text p-1 text-center">
                         <button type="button" class="btn btn-secondary credit_card" id="credit_card"
                                 style="margin: auto; width:30px; height:30px; border-radius: 50%;"></button>
@@ -68,14 +68,14 @@
 
                 <input readonly type="number" id="id_credit_card" value="{{ order.credit_card }}">
 
-                <div class="input-group-append" onclick="credit_card()">
+                <div class="input-group-append" >
                       <span class="input-group-text">
                           <i class="fa fa-credit-card"></i>
                       </span>
                 </div>
             </div>
             <div class="input-group mt-1 button-payyed">
-                <div class="input-group-prepend" onclick="debt()">
+                <div class="input-group-prepend" >
                     <span class="input-group-text p-1 text-center">
                         <button type="button" class="btn btn-secondary debt_money" id="debt_money"
                                 style="margin: auto; width:30px; height:30px; border-radius: 50%;"></button>
@@ -83,7 +83,7 @@
                 </div>
 
                 <input readonly type="number" id="id_debt_money" value="{{ order.debt_money }}">
-                <div class="input-group-append" onclick="debt()">
+                <div class="input-group-append" >
                       <span class="input-group-text">
                           <i class="fa fa-ban"></i>
                       </span>
@@ -94,7 +94,8 @@
             <div class="mr-auto mb-3">
                 <a href="{% url 'archive' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times"
                                                                                               aria-hidden="true"></i>
-                    Бекор қилиш</a>
+                    {{ arch_21 }}</a>
+                    <a href="{% url 'print_order' order_id=order.id %}" type="button" class="btn btn-primary m-1 mt-3"><i class="fa fa-print" aria-hidden="true"></i> {{ pickup_30 }}</a>
             </div>
             <span class="bottomed-name">{{ order.waiter.full_name }}</span>
             <span class="bottomed">{{ order.created_time }}</span>
@@ -104,7 +105,9 @@
 
     <script type="text/javascript">
         var totalsumm = {{ order.needed_payment }};
-        document.getElementById('id_comment').placeholder = "Изоҳ...";
+        if (document.getElementById('id_comment').innerHTML == ""){
+            document.getElementById('id_comment').style.display = "none";
+        }
         var payment_inputs = document.getElementsByTagName("input");
         var payment_buttons = document.getElementsByTagName("buttons");
         payment_inputs[1].placeholder = "Нақт пул";
