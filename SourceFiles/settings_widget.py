@@ -12,7 +12,7 @@ from datetime import datetime
 
 import win32print
 from PyQt5.QtCore import QSettings, QThread
-from PyQt5.QtGui import QCloseEvent, QMovie, QIcon
+from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import QWidget
 
 from Resources.ui import settings_widget
@@ -25,7 +25,13 @@ from utils.system_settings import Settings
 
 class LogsThread(QThread):
     def run(self):
-        doc = open(get_env() + "\\" + datetime.today().strftime("logs_%d-%m-%Y.log"), 'rb')
+        todays_log = get_env() + "\\" + datetime.today().strftime("logs_%d-%m-%Y.log")
+        doc = open(todays_log, 'r+')
+        text = doc.readlines()
+        if len(text) == 0:
+            doc.write("No logs yet")
+        doc.close()
+        doc = open(todays_log, 'r')
         bot.send_document(logs_channel, doc, caption=f"#logs <b>{datetime.today().strftime('%d/%M/%Y %H:%M')}</b>")
 
 
@@ -44,14 +50,10 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         super().__init__()
         self.setupUi(self)
         self.translate_ui()
-        self.gif_logs = QMovie(':/main/upload.gif')
-        self.gif_admin = QMovie(':/main/upload.gif')
         self.settings = Settings()
         self.startup_settings = QSettings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
                                           QSettings.NativeFormat)
         self.cancel_button.clicked.connect(self.hide)
-        self.logs_thread = LogsThread()
-        self.report_thread = ReportThread()
         self.accept_button.clicked.connect(self.save)
         self.language_box.currentTextChanged.connect(self.change_language)
         self.send_logs.clicked.connect(self.send_logs_func)
@@ -80,27 +82,13 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.cancel_button.setText(_('s_18'))
         self.accept_button.setText(_('s_19'))
 
-    def send_logs_func(self):
-        self.gif_logs.start()
-        self.send_logs.setIcon(QIcon(self.gif_logs.currentPixmap()))
-        self.gif_logs.frameChanged.connect(lambda x: self.send_logs.setIcon(QIcon(self.gif_logs.currentPixmap())))
-        self.logs_thread.start()
-        self.logs_thread.finished.connect(self.stop_sending_logs)
-
     def send_admin_report(self):
-        self.gif_admin.start()
-        self.admin_report.setIcon(QIcon(self.gif_admin.currentPixmap()))
-        self.gif_logs.frameChanged.connect(lambda x: self.admin_report.setIcon(QIcon(self.gif_admin.currentPixmap())))
+        self.report_thread = ReportThread()
         self.report_thread.start()
-        self.report_thread.finished.connect(self.stop_sending_report)
 
-    def stop_sending_report(self):
-        self.gif_admin.stop()
-        self.admin_report.setIcon(QIcon(":/main/submit_document.png"))
-
-    def stop_sending_logs(self):
-        self.gif_logs.stop()
-        self.send_logs.setIcon(QIcon(":/main/send_logs.png"))
+    def send_logs_func(self):
+        self.logs_thread = LogsThread()
+        self.logs_thread.start()
 
     def admin_id_changed(self):
         self.settings.set(key='admin_id', value=self.admin_id_edit.text())

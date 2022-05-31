@@ -495,6 +495,45 @@ settings_window = {
     }
 }
 
+receipt_info = {
+    "uz": {
+        "r_1": "Manzil:",
+        "r_2": "Tel:",
+        "r_21": "Sana:",
+        "r_3": "Buyurtma raqami:",
+        "r_4": "Xona:",
+        "r_41": "Stol raqami",
+        "r_5": "Stol raqami:",
+        "r_6": "Ofitsant:",
+        "r_7": "Buyurtmalar",
+        "r_8": "so'm",
+        "r_9": "Umumiy summa:",
+        "r_10": "Xizmat:",
+        "r_11": "Xona xizmati:",
+        "r_12": "Jami:",
+        "r_13": "Buyurtma:",
+        "r_14": "Stol:",
+    },
+    "uzk": {
+        "r_1": "Манзил:",
+        "r_2": "Тел:",
+        "r_21": "Сана:",
+        "r_3": "Буюртма рақами:",
+        "r_4": "Хона:",
+        "r_41": "Стол рақами:",
+        "r_5": "Стол рақами:",
+        "r_6": "Офитсант:",
+        "r_7": "Буюртмалар",
+        "r_8": "сўм",
+        "r_9": "Умумий сумма:",
+        "r_10": "Хизмат:",
+        "r_11": "Хона хизмати:",
+        "r_12": "Жами:",
+        "r_13": "Буюртма:",
+        "r_14": "Стол:",
+    }
+}
+
 languages = {
     'uz': "O'zbek (Lotin)",
     'uzk': "Ўзбек (крилл)",
@@ -520,6 +559,7 @@ def base(request):
     baseL[lang].update(signin[lang])
     baseL[lang].update(waiter[lang])
     baseL[lang].update(settings_window[lang])
+    baseL[lang].update(receipt_info[lang])
     context = baseL[lang]
     return context
 

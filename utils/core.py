@@ -63,3 +63,7 @@ def run_server():
     except Exception as exc:
         logging.error(exc)
         return
+
+
+def thd_sp(value: int):
+    return '{:,}'.format(value).replace(',', ' ')
