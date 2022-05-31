@@ -195,6 +195,13 @@
 
         .cardproduct{
             height: 100px;
+            transition: 0.5s;
+        }
+        .cardproduct:hover{
+            transform: scale(1.02);
+        }
+        .cardproduct:active{
+            transform: scale(0.95);
         }
         .menu-food{
             position: fixed;
