@@ -1,5 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
+<style type="text/css">
+    p{
+    display: inline!important;
+    width: 50px;
+ }
+ .dsa{
+    display: inline;
+    text-align: center;
+    background: #efefef;
+ }
+ .dsa > input[type=number]{
+    width: 40%;
+    height: 30px;
+ }
+.dsa > select{
+    width: 40%;
+    height: 30px;
+ }
+.dsa >  input[type=checkbox]{
+ }
+.dsa:hover{
+    background: #d1d1d1;
+}
+
+</style>
     <form method="POST" enctype="multipart/form-data">
         <div class="row mt-5">
             <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow tableab">
@@ -26,11 +51,21 @@
                         <td style="text-align: right;">{{ prod_05 }}:</td>
                         <td><label class="switch">
                             {{ form.is_available }}
-                            <span class="slider"></span>
+                            <span class="slider"></span> 
                         </label>
                         </td>
                     </tr>
                 </table>
+                <div class="container mt-1">
+    <table class="table table-hover mb-0">
+        <tr>
+            <td class="bg-primary text-white" style=" border-radius: 10px 0 0 0; width: 40%; text-align: center;">Maxsulot</td>
+            <td class="bg-primary text-white" style="width: 40%; text-align: center;">Miqdori</td>
+            <td class="bg-primary text-white" style=" border-radius: 0 10px 0 0;  text-align: center;">O`chirish</td>
+        </tr>
+    </table>
+                {{ formset.as_p }}
+                </div>
                 <div class="mr-auto">
                     <a href="{% url 'product' %}" type="button" class="btn btn-danger m-1 mt-3"><i class="fa fa-times" aria-hidden="true"></i> {{ prod_16 }}</a>
                     <button type="sumbit" class="btn btn-primary m-1 mt-3"><i class="fa fa-save"></i> {{ prod_17 }}</button>
@@ -48,4 +83,22 @@
             document.getElementsByTagName("label")[0].innerHTML = "{{ prod_09 }}";
         }
     </script>
+    <script type="text/javascript">
+      //console.log(document.getElementsByTagName("p"));
+      for (var i=0; i<document.getElementsByTagName("p").length; i++){
+        if (i%3==0){
+                document.getElementsByTagName("p")[i].innerHTML="<div class='fds0 dsa'>" + document.getElementsByTagName("p")[i].innerHTML + "</div>";}
+        else if (i%3==1){
+                document.getElementsByTagName("p")[i].innerHTML="<div class='fds1 dsa'>" + document.getElementsByTagName("p")[i].innerHTML + "</div>";}
+        else if (i%3==2){
+                document.getElementsByTagName("p")[i].innerHTML="<div class='fds2 dsa'>" + document.getElementsByTagName("p")[i].innerHTML + "</div><br>";}
+
+
+        console.log(document.getElementsByTagName("p")[i]);
+      }
+
+      for (var i=1; i<document.getElementsByTagName("label").length; i++){
+        document.getElementsByTagName("label")[i].style.display = "none";
+      }
+  </script>
 {% endblock %}
