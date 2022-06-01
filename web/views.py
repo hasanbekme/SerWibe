@@ -17,7 +17,8 @@ from utils.request_processing import order_items_add
 from utils.system_settings import get_tax
 from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm, TableForm, ExpenseReasonForm, ExpenseForm, \
     OrderCompletionForm, ProductForm, NewProductForm
-from .models import Worker, Category, Food, Room, Table, Order, Expense, ExpenseReason, OrderItem, Product
+from .models import Worker, Category, Food, Room, Table, Order, Expense, ExpenseReason, OrderItem, Product, \
+    IngredientFormSet
 
 
 # authentication views -------------------------------------------------------------------------------------------------
@@ -326,13 +327,17 @@ def food_edit(request, pk):
         food = get_object_or_404(Food, pk=pk)
         if request.method == "POST":
             form = FoodForm(request.POST, request.FILES, instance=food)
+            formset = IngredientFormSet(request.post, request.FILES, instance=food)
             if form.is_valid():
                 model = form.save(commit=False)
-                model.save()
-                return redirect('product')
+                if formset.is_valid():
+                    model.save()
+                    formset.save()
+                    return redirect('product')
         else:
             form = FoodForm(instance=food)
-        return render(request, 'foods/food_edit.html', {'form': form})
+            formset = IngredientFormSet(instance=food)
+        return render(request, 'foods/food_edit.html', {'form': form, 'formset': formset})
     else:
         return redirect('room')
 
@@ -342,15 +347,20 @@ def food_new(request):
     if is_admin(request):
         if request.method == "POST":
             form = FoodForm(request.POST, request.FILES)
+            formset = IngredientFormSet(request.POST, request.FILES)
             if form.is_valid():
                 model = form.save(commit=False)
-                model.save()
+                formset = IngredientFormSet(request.POST, request.FILES, instance=model)
+                if formset.is_valid():
+                    model.save()
+                    formset.save()
                 return redirect('product')
             else:
                 print(form.errors)
         else:
             form = FoodForm()
-        return render(request, 'foods/food_edit.html', {'form': form})
+            formset = IngredientFormSet()
+        return render(request, 'foods/food_edit.html', {'form': form, 'formset': formset})
     else:
         return redirect('room')
 

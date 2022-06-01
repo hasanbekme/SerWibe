@@ -3,6 +3,7 @@ import datetime
 from PIL import Image
 from django.contrib.auth.models import User
 from django.db import models
+from django.forms import inlineformset_factory
 
 from utils.system_settings import get_tax
 
@@ -275,6 +276,9 @@ class Product(models.Model):
     quantity = models.FloatField(verbose_name="Qolgan soni", default=0)
     last_added_time = models.DateTimeField(null=True, blank=True)
 
+    def __str__(self):
+        return self.title
+
     @property
     def last_added_time_formatted(self):
         return self.last_added_time.strftime("%H:%M, %d/%m/%Y")
@@ -288,3 +292,13 @@ class Product(models.Model):
         if self.last_added_time is None:
             self.last_added_time = datetime.datetime.now()
         super(Product, self).save()
+
+
+class FoodParts(models.Model):
+    food = models.ForeignKey(Food, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    needed_amount = models.FloatField(default=0)
+
+
+IngredientFormSet = inlineformset_factory(Food, FoodParts, fields=('product', 'needed_amount'))
+
