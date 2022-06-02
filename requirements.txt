@@ -32,7 +32,6 @@ pytz==2022.1
 pywin32==303
 pywin32-ctypes==0.2.0
 qt5-applications==5.15.2.2.2
-qt5-tools==5.15.2.1.2
 requests==2.27.1
 sqlparse==0.4.2
 typing_extensions==4.1.1
