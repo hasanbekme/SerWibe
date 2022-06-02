@@ -66,6 +66,7 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.id_bot.clicked.connect(open_id_bot)
         self.admin_id_edit.textChanged.connect(self.admin_id_changed)
         self.new_license_btn.pressed.connect(self.add_activation)
+        self.open_from_browser.stateChanged.connect(self.open_setting_changed)
 
     def translate_ui(self):
         self.tab.setTabText(0, _('s_1'))
@@ -87,6 +88,7 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.printer_size_label.setText(_('s_17'))
         self.cancel_button.setText(_('s_18'))
         self.accept_button.setText(_('s_19'))
+        self.open_from_browser_label.setText(_('s_20'))
         self.current_status_msg.setText(_('ac_3'))
         self.license_status.setText(_('ac_4'))
         self.label_4.setText(_('ac_7'))
@@ -133,6 +135,9 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
     def admin_id_changed(self):
         self.settings.set(key='admin_id', value=self.admin_id_edit.text())
 
+    def open_setting_changed(self):
+        self.settings.set(key='open_from_browser', value=self.open_from_browser.isChecked())
+
     def change_language(self):
         self.settings.set(key='lang_code', value=get_lang_code(self.language_box.currentText()))
         self.translate_ui()
@@ -142,6 +147,7 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
             self.autostart.setChecked(True)
         else:
             self.autostart.setChecked(False)
+        self.open_from_browser.setChecked(self.settings.get(key='open_from_browser', tp=bool))
         lang_code = self.settings.get(key='lang_code', tp=str)
         if lang_code is "":
             lang_code = 'uz'

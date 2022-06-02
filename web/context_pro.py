@@ -481,6 +481,7 @@ settings_window = {
         "s_17": "Printer o'lchami:",
         "s_18": "Bekor qilish",
         "s_19": "Saqlash",
+        "s_20": "Brauzerda ochish",
     },
     'uzk': {
         "s_1": "Асосий",
@@ -502,6 +503,7 @@ settings_window = {
         "s_17": "Принтер ўлчами:",
         "s_18": "Бекор қилиш",
         "s_19": "Сақлаш",
+        "s_20": "Браузерда очиш"
     }
 }
 

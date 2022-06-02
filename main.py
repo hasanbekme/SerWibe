@@ -34,7 +34,7 @@ if __name__ == '__main__':
             tray_icon.s_w.autostart.stateChanged.connect(set_autostart)
             if tray_icon.license.is_allowed_today():
                 tray_icon.server.start()
-                tray_icon.main_frame.showMaximized()
+                tray_icon.open_app()
             else:
                 tray_icon.s_w.show()
                 tray_icon.s_w.tab.setCurrentIndex(2)
