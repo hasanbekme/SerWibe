@@ -59,10 +59,10 @@
             </div>
             <select class="form-control" placeholder="Username" name="username" style="font-size:1rem; padding:3px">
                 {% for waiter in waiters %}
-                    <option value="{{ waiter.user.username }}">{{ waiter.full_name }} (Ишчи)</option>
+                    <option value="{{ waiter.user.username }}">{{ waiter.full_name }} ({{ signin_03 }})</option>
                 {% endfor %}
                 {% for admin in admins %}
-                    <option value="{{ admin.user.username }}">{{ admin.full_name }} (Админ)</option>
+                    <option value="{{ admin.user.username }}">{{ admin.full_name }} ({{ signin_04 }})</option>
                 {% endfor %}
             </select>
         </div>

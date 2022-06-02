@@ -186,7 +186,7 @@ product = {
         "prod_12": "Chop etish",
         "prod_13": "Printer ",
         "prod_14": "Qo`shish",
-        "prod_15": "Maxsulot",
+        "prod_15": "Mahsulot",
         "prod_16": "Yopish",
         "prod_17": "Saqlash",
         "prod_18": "Bekor qilish",
