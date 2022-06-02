@@ -129,6 +129,13 @@ class Food(models.Model):
         else:
             return "/static/img/default_image.png"
 
+    @property
+    def expenditure(self):
+        res = 0
+        for i in self.foodparts_set.all():
+            res += i.total_expenditure()
+        return res
+
     def save(self, *args, **kwargs):
         super(Food, self).save(*args, **kwargs)
         if self.image:
@@ -308,6 +315,9 @@ class FoodParts(models.Model):
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     needed_amount = models.FloatField()
+
+    def total_expenditure(self):
+        return self.needed_amount * self.product.price
 
 
 IngredientFormSet = inlineformset_factory(Food, FoodParts, fields=('product', 'needed_amount'))

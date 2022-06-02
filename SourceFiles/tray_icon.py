@@ -1,7 +1,7 @@
 # Adding item on the menu bar
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QSystemTrayIcon, QMenu, QAction, qApp
+from PyQt5.QtWidgets import QSystemTrayIcon, QMenu, QAction
 from django.conf import Settings
 
 from SourceFiles.main_window import MainWindow
