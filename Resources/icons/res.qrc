@@ -1,5 +1,9 @@
 <RCC>
   <qresource prefix="main">
+    <file>key.png</file>
+    <file>copy.png</file>
+    <file>paste.png</file>
+    <file>add.png</file>
     <file>drop_down.png</file>
     <file>russian_flag.png</file>
     <file>uzbek_flag.png</file>

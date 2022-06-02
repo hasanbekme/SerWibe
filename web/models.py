@@ -162,6 +162,10 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
+    def update_stock(self):
+        for item in self.orderitem_set.all():
+            item.update_stock()
+
     @property
     def passed_time(self):
         if self.table.time_required:
@@ -237,6 +241,12 @@ class OrderItem(models.Model):
     def __str__(self):
         return f"{self.order.id}:{self.id}"
 
+    def update_stock(self):
+        parts = self.meal.foodparts_set.all()
+        for part in parts:
+            part.product.quantity -= self.quantity * part.needed_amount
+            part.product.save()
+
     def save(self, *args, **kwargs):
         self.paid_amount = self.total_price
         self.abstract_amount = int(self.meal.price * self.quantity)
@@ -297,8 +307,7 @@ class Product(models.Model):
 class FoodParts(models.Model):
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    needed_amount = models.FloatField(default=0)
+    needed_amount = models.FloatField()
 
 
 IngredientFormSet = inlineformset_factory(Food, FoodParts, fields=('product', 'needed_amount'))
-

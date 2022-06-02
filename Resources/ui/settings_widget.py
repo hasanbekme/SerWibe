@@ -35,6 +35,44 @@ class Ui_Form(object):
 "border: 1px solid #29e1ff;\n"
 "border-radius: 5px;\n"
 "}\n"
+"QDateEdit {\n"
+"    border: 1px solid #7cd0ef;\n"
+"    border-radius: 5px;\n"
+"}\n"
+"QDateEdit:hover{\n"
+"border-color: #5487ee;\n"
+"}\n"
+"\n"
+"\n"
+"QDateEdit::drop-down {\n"
+"    subcontrol-origin: padding;\n"
+"    subcontrol-position: top right;\n"
+"    width: 30px;\n"
+" \n"
+"    border-left-width: 1px;\n"
+"    border-left-color: darkgray;\n"
+"    border-left-style: solid;\n"
+"    border-top-right-radius: 3px;\n"
+"    border-bottom-right-radius: 3px;\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"QDateEdit::down-arrow {\n"
+"  image: url(:/main/drop_down.png);\n"
+"height: 18px;\n"
+"width: 18px;\n"
+"}\n"
+"QDateEdit::drop-down:hover {\n"
+"    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #d8d7d7, stop: 1 #e9e9e9);\n"
+"}\n"
+"\n"
+"QDateEdit::down-arrow:on { /* shift the arrow when popup is open */\n"
+"    top: 1px;\n"
+"    left: 1px;\n"
+"}\n"
+"\n"
+"\n"
 "QComboBox {\n"
 "    border: 1px solid #7cd0ef;\n"
 "    border-radius: 5px;\n"
@@ -445,10 +483,153 @@ class Ui_Form(object):
         self.tab.addTab(self.tab2, icon6, "")
         self.tab3 = QtWidgets.QWidget()
         self.tab3.setObjectName("tab3")
+        self.gridLayout_6 = QtWidgets.QGridLayout(self.tab3)
+        self.gridLayout_6.setObjectName("gridLayout_6")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.horizontalLayout_32 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_32.setObjectName("horizontalLayout_32")
+        self.current_status_msg = QtWidgets.QLabel(self.tab3)
+        font = QtGui.QFont()
+        font.setFamily("Georgia")
+        font.setPointSize(14)
+        self.current_status_msg.setFont(font)
+        self.current_status_msg.setObjectName("current_status_msg")
+        self.horizontalLayout_32.addWidget(self.current_status_msg)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_32.addItem(spacerItem6)
+        self.license_status_icon = QtWidgets.QPushButton(self.tab3)
+        self.license_status_icon.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.license_status_icon.setStyleSheet("background: None;\n"
+"border: None;")
+        self.license_status_icon.setText("")
+        self.license_status_icon.setIcon(icon2)
+        self.license_status_icon.setIconSize(QtCore.QSize(30, 30))
+        self.license_status_icon.setObjectName("license_status_icon")
+        self.horizontalLayout_32.addWidget(self.license_status_icon)
+        self.license_status = QtWidgets.QLabel(self.tab3)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(16)
+        self.license_status.setFont(font)
+        self.license_status.setObjectName("license_status")
+        self.horizontalLayout_32.addWidget(self.license_status)
+        self.verticalLayout_6.addLayout(self.horizontalLayout_32)
+        self.horizontalLayout_33 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_33.setObjectName("horizontalLayout_33")
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_33.addItem(spacerItem7)
+        self.remaining_days = QtWidgets.QLabel(self.tab3)
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        self.remaining_days.setFont(font)
+        self.remaining_days.setObjectName("remaining_days")
+        self.horizontalLayout_33.addWidget(self.remaining_days)
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_33.addItem(spacerItem8)
+        self.verticalLayout_6.addLayout(self.horizontalLayout_33)
+        spacerItem9 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_6.addItem(spacerItem9)
+        self.license_info = QtWidgets.QFrame(self.tab3)
+        self.license_info.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.license_info.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.license_info.setObjectName("license_info")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.license_info)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.line = QtWidgets.QFrame(self.license_info)
+        self.line.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line.setObjectName("line")
+        self.verticalLayout_5.addWidget(self.line)
+        self.horizontalLayout_30 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_30.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
+        self.horizontalLayout_30.setObjectName("horizontalLayout_30")
+        spacerItem10 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_30.addItem(spacerItem10)
+        self.label_4 = QtWidgets.QLabel(self.license_info)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        self.label_4.setFont(font)
+        self.label_4.setObjectName("label_4")
+        self.horizontalLayout_30.addWidget(self.label_4)
+        spacerItem11 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_30.addItem(spacerItem11)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_30)
+        spacerItem12 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_5.addItem(spacerItem12)
+        self.horizontalLayout_29 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_29.setObjectName("horizontalLayout_29")
+        self.start_date = QtWidgets.QDateEdit(self.license_info)
+        self.start_date.setMinimumSize(QtCore.QSize(0, 40))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        self.start_date.setFont(font)
+        self.start_date.setStyleSheet("")
+        self.start_date.setCalendarPopup(True)
+        self.start_date.setObjectName("start_date")
+        self.horizontalLayout_29.addWidget(self.start_date)
+        self.label_5 = QtWidgets.QLabel(self.license_info)
+        self.label_5.setMaximumSize(QtCore.QSize(20, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Courier New")
+        font.setPointSize(20)
+        self.label_5.setFont(font)
+        self.label_5.setObjectName("label_5")
+        self.horizontalLayout_29.addWidget(self.label_5)
+        self.end_date = QtWidgets.QDateEdit(self.license_info)
+        self.end_date.setMinimumSize(QtCore.QSize(0, 40))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        font.setPointSize(12)
+        self.end_date.setFont(font)
+        self.end_date.setCalendarPopup(True)
+        self.end_date.setObjectName("end_date")
+        self.horizontalLayout_29.addWidget(self.end_date)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_29)
+        self.verticalLayout_6.addWidget(self.license_info)
+        self.horizontalLayout_31 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_31.setObjectName("horizontalLayout_31")
+        spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_31.addItem(spacerItem13)
+        self.new_license_btn = QtWidgets.QPushButton(self.tab3)
+        self.new_license_btn.setMinimumSize(QtCore.QSize(250, 50))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        self.new_license_btn.setFont(font)
+        self.new_license_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.new_license_btn.setStyleSheet("QPushButton {\n"
+"background-color: white;\n"
+"border-radius: 5px;\n"
+"border: 2px solid #6AF2F0;\n"
+"}\n"
+"QPushButton:hover {\n"
+"color: white;\n"
+"background-color: #6AF2F0;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"color: white;\n"
+"background-color: rgb(47, 231, 247);\n"
+"border: 2px solid rgb(47, 231, 247);\n"
+"}")
         icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap(":/main/update.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
-        self.tab.addTab(self.tab3, icon7, "")
-        self.gridLayout_2.addWidget(self.tab, 0, 0, 1, 1)
+        icon7.addPixmap(QtGui.QPixmap(":/main/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon7.addPixmap(QtGui.QPixmap(":/main/submit_document.png"), QtGui.QIcon.Disabled, QtGui.QIcon.Off)
+        self.new_license_btn.setIcon(icon7)
+        self.new_license_btn.setIconSize(QtCore.QSize(40, 40))
+        self.new_license_btn.setObjectName("new_license_btn")
+        self.horizontalLayout_31.addWidget(self.new_license_btn)
+        self.verticalLayout_6.addLayout(self.horizontalLayout_31)
+        self.gridLayout_6.addLayout(self.verticalLayout_6, 0, 0, 1, 1)
+        spacerItem14 = QtWidgets.QSpacerItem(20, 246, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_6.addItem(spacerItem14, 1, 0, 1, 1)
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap(":/main/license.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.tab.addTab(self.tab3, icon8, "")
+        self.gridLayout_2.addWidget(self.tab, 0, 1, 1, 1)
 
         self.retranslateUi(Form)
         self.tab.setCurrentIndex(0)
@@ -484,7 +665,16 @@ class Ui_Form(object):
         self.cancel_button.setText(_translate("Form", "Bekor qilish"))
         self.accept_button.setText(_translate("Form", "Saqlash"))
         self.tab.setTabText(self.tab.indexOf(self.tab2), _translate("Form", "Chek"))
-        self.tab.setTabText(self.tab.indexOf(self.tab3), _translate("Form", "Yangilanish"))
+        self.current_status_msg.setText(_translate("Form", "Hozirgi xolat:"))
+        self.license_status_icon.setShortcut(_translate("Form", "Ctrl+Z, Ctrl+Z"))
+        self.license_status.setText(_translate("Form", "Faol"))
+        self.remaining_days.setText(_translate("Form", "4 days remaining"))
+        self.label_4.setText(_translate("Form", "Litsenziya muddati:"))
+        self.start_date.setDisplayFormat(_translate("Form", "dd/MM/yyyy"))
+        self.label_5.setText(_translate("Form", "-"))
+        self.end_date.setDisplayFormat(_translate("Form", "dd/MM/yyyy"))
+        self.new_license_btn.setText(_translate("Form", "Yangi litsenziya"))
+        self.tab.setTabText(self.tab.indexOf(self.tab3), _translate("Form", "Litsenziya"))
 import res_rc
 
 

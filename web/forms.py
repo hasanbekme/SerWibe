@@ -164,6 +164,7 @@ class OrderCompletionForm(Form):
         self.instance.place_fee = self.instance.room_service_cost
         self.instance.paid_money = cash_money + credit_card
         self.instance.save()
+        self.instance.update_stock()
         if self.instance.order_type == 'table':
             self.instance.table.is_available = True
             self.instance.table.save()

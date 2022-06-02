@@ -1,11 +1,7 @@
-import os
 import sys
 
-from PyQt5.QtCore import QSettings
-
-import res_rc
-
 import django
+from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import QApplication
 
 from SourceFiles.tray_icon import MyTray
@@ -33,13 +29,16 @@ if __name__ == '__main__':
             app = QApplication(sys.argv)
             tray_icon = MyTray()
             tray_icon.server = Thread(target=run_server, args=[], daemon=True)
-            tray_icon.server.start()
-            tray_icon.setVisible(True)
             tray_icon.stop_action.triggered.connect(app.quit)
             tray_icon.stop_action.triggered.connect(tray_icon.server.stop)
             tray_icon.s_w.autostart.stateChanged.connect(set_autostart)
-
-            tray_icon.main_frame.showMaximized()
+            if tray_icon.license.is_allowed_today():
+                tray_icon.server.start()
+                tray_icon.main_frame.showMaximized()
+            else:
+                tray_icon.s_w.show()
+                tray_icon.s_w.tab.setCurrentIndex(2)
+            tray_icon.setVisible(True)
             sys.exit(app.exec())
     except Exception as ex:
         logging.error(ex)

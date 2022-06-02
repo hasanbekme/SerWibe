@@ -2,6 +2,8 @@ import os
 
 import django
 
+from SourceFiles.activation_dialog import ActivationDialog
+from utils.activation import LicenseInfo
 from web.context_pro import _, languages, get_lang_code
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'SerWibe.settings')
@@ -11,8 +13,8 @@ import webbrowser
 from datetime import datetime
 
 import win32print
-from PyQt5.QtCore import QSettings, QThread
-from PyQt5.QtGui import QCloseEvent
+from PyQt5.QtCore import QSettings, QThread, pyqtSignal
+from PyQt5.QtGui import QCloseEvent, QIcon
 from PyQt5.QtWidgets import QWidget
 
 from Resources.ui import settings_widget
@@ -46,9 +48,12 @@ def open_id_bot():
 
 
 class SettingsWidget(QWidget, settings_widget.Ui_Form):
-    def __init__(self):
+    check_license_signal = pyqtSignal(LicenseInfo)
+
+    def __init__(self, license_info):
         super().__init__()
         self.setupUi(self)
+        self.license: LicenseInfo = license_info
         self.translate_ui()
         self.settings = Settings()
         self.startup_settings = QSettings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
@@ -60,6 +65,7 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.admin_report.clicked.connect(self.send_admin_report)
         self.id_bot.clicked.connect(open_id_bot)
         self.admin_id_edit.textChanged.connect(self.admin_id_changed)
+        self.new_license_btn.pressed.connect(self.add_activation)
 
     def translate_ui(self):
         self.tab.setTabText(0, _('s_1'))
@@ -81,6 +87,40 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.printer_size_label.setText(_('s_17'))
         self.cancel_button.setText(_('s_18'))
         self.accept_button.setText(_('s_19'))
+        self.current_status_msg.setText(_('ac_3'))
+        self.license_status.setText(_('ac_4'))
+        self.label_4.setText(_('ac_7'))
+        self.new_license_btn.setText(_('ac_8'))
+        self.check_license()
+
+    def add_activation(self):
+        self.activation_frame = ActivationDialog(self.license, self)
+        self.activation_frame.accepted.connect(self.update_license_info)
+        self.activation_frame.exec_()
+
+    def update_license_info(self):
+        self.license = LicenseInfo()
+        self.translate_ui()
+        self.check_license_signal.emit(self.license)
+
+    def check_license(self):
+        if self.license.is_allowed_today():
+            self.license_status.setText(_('ac_4'))
+            self.license_status.setStyleSheet("QLabel {color : green; }")
+            self.license_status_icon.setIcon(QIcon(":/main/unlocked.png"))
+            self.remaining_days.setText(f"{(self.license.end_date - datetime.today()).days + 1} {_('ac_6')}")
+            self.start_date.setDate(self.license.start_date)
+            self.start_date.setReadOnly(True)
+            self.end_date.setDate(self.license.end_date)
+            self.end_date.setReadOnly(True)
+            self.remaining_days.setVisible(True)
+            self.license_info.setVisible(True)
+        else:
+            self.license_status.setStyleSheet("QLabel {color : red; }")
+            self.license_status_icon.setIcon(QIcon(":/main/locked.png"))
+            self.license_status.setText(_('ac_5'))
+            self.license_info.setVisible(False)
+            self.remaining_days.setVisible(False)
 
     def send_admin_report(self):
         self.report_thread = ReportThread()
@@ -141,4 +181,5 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
 
     def closeEvent(self, e: QCloseEvent):
         e.ignore()
+        self.tab.setCurrentIndex(0)
         self.hide()

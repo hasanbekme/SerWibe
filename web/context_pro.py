@@ -464,7 +464,7 @@ settings_window = {
     "uz": {
         "s_1": "Asosiy",
         "s_2": "Chek",
-        "s_3": "Yangilash",
+        "s_3": "Litsenziya",
         "s_4": "Asosiy sozlamalar",
         "s_5": "Avto boshlash:",
         "s_6": "Til:",
@@ -485,7 +485,7 @@ settings_window = {
     'uzk': {
         "s_1": "Асосий",
         "s_2": "Чек",
-        "s_3": "Янгилаш",
+        "s_3": "Лицензия",
         "s_4": "Асосий созламалар",
         "s_5": "Авто бошлаш:",
         "s_6": "Тил:",
@@ -502,6 +502,33 @@ settings_window = {
         "s_17": "Принтер ўлчами:",
         "s_18": "Бекор қилиш",
         "s_19": "Сақлаш",
+    }
+}
+
+activation_dialog = {
+    'uz': {
+        "ac_1": "Litsenziya qo'shish",
+        "ac_2": "Aktivlashtirish",
+        "ac_3": "Hozirgi xolat:",
+        "ac_4": "Faol",
+        "ac_5": "Faol emas",
+        "ac_6": "kun qoldi",
+        "ac_7": "Litsenziya muddati",
+        "ac_8": "Yangi litsenziya",
+        "ac_9": "Litsenziya muvaffaqiyatli amalga oshirildi.",
+        "ac_10": "Litsenziya kodi xato kiritildi!!!",
+    },
+    'uzk': {
+        "ac_1": "Лицензия қўшиш",
+        "ac_2": "Активлаштириш",
+        "ac_3": "Ҳозирги холат:",
+        "ac_4": "Фаол",
+        "ac_5": "Фаол эмас",
+        "ac_6": "кун қолди",
+        "ac_7": "Лицензия муддати",
+        "ac_8": "Янги лицензия",
+        "ac_9": "Лицензия муваффақиятли амалга оширилди.",
+        "ac_10": "Лицензия коди хато киритилди!!!",
     }
 }
 
@@ -570,6 +597,7 @@ def base(request):
     baseL[lang].update(waiter[lang])
     baseL[lang].update(settings_window[lang])
     baseL[lang].update(receipt_info[lang])
+    baseL[lang].update(activation_dialog[lang])
     context = baseL[lang]
     return context
 

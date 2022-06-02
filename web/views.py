@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout, get_user
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Sum
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 
 from utils.data_processing import get_trading_table, food_trading_data, get_dashboard_info, get_expenses_data, \
@@ -101,7 +102,7 @@ def print_order(request, order_id):
     if is_admin(request):
         order_model = get_object_or_404(Order, id=order_id)
         print_receipt(order=order_model)
-        return redirect('orders')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         return redirect('room')
 
@@ -327,7 +328,7 @@ def food_edit(request, pk):
         food = get_object_or_404(Food, pk=pk)
         if request.method == "POST":
             form = FoodForm(request.POST, request.FILES, instance=food)
-            formset = IngredientFormSet(request.post, request.FILES, instance=food)
+            formset = IngredientFormSet(request.POST, request.FILES, instance=food)
             if form.is_valid():
                 model = form.save(commit=False)
                 if formset.is_valid():
