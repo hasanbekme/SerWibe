@@ -9,6 +9,7 @@ from web.context_pro import _, languages, get_lang_code
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'SerWibe.settings')
 django.setup()
 
+from web.models import Order
 import webbrowser
 from datetime import datetime
 
@@ -77,6 +78,7 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.admin_id_edit.textChanged.connect(self.admin_id_changed)
         self.new_license_btn.pressed.connect(self.add_activation)
         self.open_from_browser.stateChanged.connect(self.open_setting_changed)
+        self.clear_database_btn.clicked.connect(self.clear_database)
 
     def translate_ui(self):
         self.tab.setTabText(0, _('s_1'))
@@ -103,7 +105,19 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.license_status.setText(_('ac_4'))
         self.label_4.setText(_('ac_7'))
         self.new_license_btn.setText(_('ac_8'))
+        self.clear_database_btn.setText(_('s_22'))
         self.check_license()
+
+    def clear_database(self):
+        alert_dialog = QMessageBox()
+        alert_dialog.setIcon(QMessageBox.Question)
+        alert_dialog.setText(_('s_23'))
+        alert_dialog.setWindowTitle(_('s_22'))
+        alert_dialog.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+
+        returnValue = alert_dialog.exec()
+        if returnValue == QMessageBox.Ok:
+            Order.objects.filter(is_completed=True).delete()
 
     def add_activation(self):
         self.activation_frame = ActivationDialog(self.license, self)

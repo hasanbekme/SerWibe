@@ -483,7 +483,9 @@ settings_window = {
         "s_18": "Bekor qilish",
         "s_19": "Saqlash",
         "s_20": "Brauzerda ochish",
-        "s_21": "Internet mavjud emas, iltimos tekshirib qayta urining!!!"
+        "s_21": "Internet mavjud emas, iltimos tekshirib qayta urining!!!",
+        "s_22": "Bazani tozalash",
+        "s_23": "Buyurtmalar tarixini tozalashga rozimisiz?",
     },
     'uzk': {
         "s_1": "Асосий",
@@ -506,7 +508,9 @@ settings_window = {
         "s_18": "Бекор қилиш",
         "s_19": "Сақлаш",
         "s_20": "Браузерда очиш",
-        "s_21": "Интернет мавжуд эмас, илтимос текшириб қайта урининг!!!"
+        "s_21": "Интернет мавжуд эмас, илтимос текшириб қайта урининг!!!",
+        "s_22": "Базани тозалаш",
+        "s_23": "Буюртмалар тарихини тозалашга розимисиз?",
     }
 }
 

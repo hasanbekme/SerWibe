@@ -491,6 +491,56 @@ border: 2px solid rgb(47, 231, 247);
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="clear_database_btn">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+background-color: white;
+border-radius: 5px;
+border: 2px solid #ff1f1f;
+}
+QPushButton:hover {
+color: white;
+background-color: #ff3333;
+}
+QPushButton:pressed {
+color: white;
+background-color: #ff0a0a;
+border: 2px solid #ff0a0a;
+}</string>
+           </property>
+           <property name="text">
+            <string>Bazani tozalash</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normalon>:/main/delete_database.png</normalon>
+             <disabledoff>:/main/send_logs.png</disabledoff>
+            </iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="verticalSpacer">
            <property name="orientation">
             <enum>Qt::Vertical</enum>

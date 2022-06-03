@@ -286,12 +286,40 @@ class Ui_Form(object):
         self.send_logs.setIconSize(QtCore.QSize(40, 40))
         self.send_logs.setObjectName("send_logs")
         self.verticalLayout_2.addWidget(self.send_logs)
+        self.clear_database_btn = QtWidgets.QPushButton(self.tab1)
+        self.clear_database_btn.setMinimumSize(QtCore.QSize(0, 50))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        self.clear_database_btn.setFont(font)
+        self.clear_database_btn.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.clear_database_btn.setStyleSheet("QPushButton {\n"
+"background-color: white;\n"
+"border-radius: 5px;\n"
+"border: 2px solid #ff1f1f;\n"
+"}\n"
+"QPushButton:hover {\n"
+"color: white;\n"
+"background-color: #ff3333;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"color: white;\n"
+"background-color: #ff0a0a;\n"
+"border: 2px solid #ff0a0a;\n"
+"}")
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap(":/main/delete_database.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon5.addPixmap(QtGui.QPixmap(":/main/send_logs.png"), QtGui.QIcon.Disabled, QtGui.QIcon.Off)
+        self.clear_database_btn.setIcon(icon5)
+        self.clear_database_btn.setIconSize(QtCore.QSize(40, 40))
+        self.clear_database_btn.setObjectName("clear_database_btn")
+        self.verticalLayout_2.addWidget(self.clear_database_btn)
         spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.MinimumExpanding)
         self.verticalLayout_2.addItem(spacerItem3)
         self.gridLayout_3.addLayout(self.verticalLayout_2, 0, 0, 1, 1)
-        icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap(":/main/main_settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
-        self.tab.addTab(self.tab1, icon5, "")
+        icon6 = QtGui.QIcon()
+        icon6.addPixmap(QtGui.QPixmap(":/main/main_settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.tab.addTab(self.tab1, icon6, "")
         self.tab2 = QtWidgets.QWidget()
         self.tab2.setObjectName("tab2")
         self.gridLayout = QtWidgets.QGridLayout(self.tab2)
@@ -494,9 +522,9 @@ class Ui_Form(object):
         self.horizontalLayout_5.addWidget(self.accept_button)
         self.verticalLayout.addLayout(self.horizontalLayout_5)
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
-        icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap(":/main/receipt.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
-        self.tab.addTab(self.tab2, icon6, "")
+        icon7 = QtGui.QIcon()
+        icon7.addPixmap(QtGui.QPixmap(":/main/receipt.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.tab.addTab(self.tab2, icon7, "")
         self.tab3 = QtWidgets.QWidget()
         self.tab3.setObjectName("tab3")
         self.gridLayout_6 = QtWidgets.QGridLayout(self.tab3)
@@ -631,10 +659,10 @@ class Ui_Form(object):
 "background-color: rgb(47, 231, 247);\n"
 "border: 2px solid rgb(47, 231, 247);\n"
 "}")
-        icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap(":/main/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
-        icon7.addPixmap(QtGui.QPixmap(":/main/submit_document.png"), QtGui.QIcon.Disabled, QtGui.QIcon.Off)
-        self.new_license_btn.setIcon(icon7)
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap(":/main/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon8.addPixmap(QtGui.QPixmap(":/main/submit_document.png"), QtGui.QIcon.Disabled, QtGui.QIcon.Off)
+        self.new_license_btn.setIcon(icon8)
         self.new_license_btn.setIconSize(QtCore.QSize(40, 40))
         self.new_license_btn.setObjectName("new_license_btn")
         self.horizontalLayout_31.addWidget(self.new_license_btn)
@@ -642,9 +670,9 @@ class Ui_Form(object):
         self.gridLayout_6.addLayout(self.verticalLayout_6, 0, 0, 1, 1)
         spacerItem15 = QtWidgets.QSpacerItem(20, 246, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_6.addItem(spacerItem15, 1, 0, 1, 1)
-        icon8 = QtGui.QIcon()
-        icon8.addPixmap(QtGui.QPixmap(":/main/license.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
-        self.tab.addTab(self.tab3, icon8, "")
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap(":/main/license.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.tab.addTab(self.tab3, icon9, "")
         self.gridLayout_2.addWidget(self.tab, 0, 1, 1, 1)
 
         self.retranslateUi(Form)
@@ -664,6 +692,7 @@ class Ui_Form(object):
         self.label.setText(_translate("Form", "Admin ID:"))
         self.admin_report.setText(_translate("Form", "Adminga xisobot"))
         self.send_logs.setText(_translate("Form", "Xatolik xaqida ma\'lumot"))
+        self.clear_database_btn.setText(_translate("Form", "Bazani tozalash"))
         self.tab.setTabText(self.tab.indexOf(self.tab1), _translate("Form", "Asosiy"))
         self.title.setText(_translate("Form", "Chek ma\'lumotlari"))
         self.company_name.setText(_translate("Form", "Tashkilot nomi:"))
