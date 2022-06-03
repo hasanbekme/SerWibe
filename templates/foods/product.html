@@ -23,7 +23,7 @@
                         <td class="bg-primary text-white">{{ prod_03 }}</td>
                         <td class="bg-primary text-white">{{ prod_04 }}</td>
                         <td class="bg-primary text-white text-center">{{ prod_05 }}</td>
-                        <td class="bg-primary text-white">{{ prod_06 }}</td>
+                        <td class="bg-primary text-white">{{ prod_06_ }}</td>
                         <td class="bg-primary text-white">
                             <div class="dropdown">
                                 <button class="btn btn-primary p-0 dropdown-toggle"
@@ -54,7 +54,11 @@
                                 <td class="text-center"><i class="fa fa-times-circle-o" aria-hidden="true"
                                                            style="font-size: 2em; color:red"></i></td>
                             {% endif %}
-                            <td><span class="moneyed">{{ food.price }}</span> {{ prod_10 }}</td>
+                            <td><span class="moneyed">{{ food.price }}</span> {{ prod_10 }} 
+                                 {% if food.expenditure %}
+                                <br> <span class="moneyed">{{ food.expenditure }}</span> {{ prod_10 }}
+                                 {% endif %}
+                            </td>
                             <td>{{ food.category.title }}</td>
                             <td><a href="{% url 'food_edit' pk=food.pk %}">
                                 <button type="button" class="btn btn-warning"><i class="fa fa-edit"></i> {{ prod_08 }}</button>
