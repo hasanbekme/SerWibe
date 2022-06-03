@@ -580,6 +580,61 @@ receipt_info = {
     }
 }
 
+excel_headers = {
+    'uz': {
+        "ex_1": "Buyurtma ma'lumotlari",
+        "ex_2": "Kirim turlari",
+        "ex_3": "Umumiy",
+        "ex_4": "To'lov turlari",
+        "ex_5": "To'landi",
+        "ex_6": "ID",
+        "ex_7": "Xodim",
+        "ex_8": "Turi",
+        "ex_9": "Olingan vaqt",
+        "ex_10": "Xona",
+        "ex_11": "Stol",
+        "ex_12": "Offitsant xizmati",
+        "ex_13": "Joy xizmati",
+        "ex_14": "Maxsulotga",
+        "ex_15": "Naqd",
+        "ex_16": "Kartadan",
+        "ex_17": "To'lanmagan",
+        "ex_18": "Kategoriya",
+        "ex_19": "Maxsulot",
+        "ex_20": "Sotildi",
+        "ex_201": "Jami summa",
+        "ex_21": "Narxi",
+        "ex_22": "Soni",
+        "ex_23": "Oxirgi qo'shilgan vaqt",
+    },
+    'uzk': {
+        "ex_1": "Буюртма маълумотлари",
+        "ex_2": "Кирим турлари",
+        "ex_3": "Умумий",
+        "ex_4": "Тўлов турлари",
+        "ex_5": "Тўланди",
+        "ex_6": "ИД",
+        "ex_7": "Ходим",
+        "ex_8": "Тури",
+        "ex_9": "Олинган вақт",
+        "ex_10": "Хона",
+        "ex_11": "Стол",
+        "ex_12": "Оффитсант хизмати",
+        "ex_13": "Жой хизмати",
+        "ex_14": "Махсулотга",
+        "ex_15": "Нақд",
+        "ex_16": "Картадан",
+        "ex_17": "Тўланмаган",
+        "ex_18": "Категория",
+        "ex_19": "Махсулот",
+        "ex_20": "Сотилди",
+        "ex_201": "Жами сумма",
+        "ex_21": "Нархи",
+        "ex_22": "Сони",
+        "ex_23": "Охирги қўшилган вақт",
+    }
+}
+
 languages = {
     'uz': "O'zbek (Lotin)",
     'uzk': "Ўзбек (крилл)",
@@ -607,6 +662,7 @@ def base(request):
     baseL[lang].update(settings_window[lang])
     baseL[lang].update(receipt_info[lang])
     baseL[lang].update(activation_dialog[lang])
+    baseL[lang].update(excel_headers[lang])
     context = baseL[lang]
     return context
 

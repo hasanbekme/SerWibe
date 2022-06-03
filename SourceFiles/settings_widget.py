@@ -1,6 +1,7 @@
 import os
 
 import django
+from django.db.models import Sum
 
 from SourceFiles.activation_dialog import ActivationDialog
 from utils.activation import LicenseInfo
@@ -20,7 +21,7 @@ from PyQt5.QtWidgets import QWidget, QMessageBox
 
 from Resources.ui import settings_widget
 from utils.bot_config import logs_channel, bot
-from utils.core import get_env
+from utils.core import get_env, thd_sp
 from utils.excel import export_archive_data
 from utils.printer import get_printers
 from utils.system_settings import Settings
@@ -38,7 +39,19 @@ class LogsThread(QThread):
                 doc.write("No logs yet")
             doc.close()
             doc = open(todays_log, 'r')
-            bot.send_document(logs_channel, doc, caption=f"#logs <b>{datetime.today().strftime('%d/%M/%Y %H:%M')}</b>")
+            settings = Settings()
+            license_info = LicenseInfo()
+            log_caption = "\n".join([
+                f"#logs <b>{datetime.today().strftime('%d/%M/%Y %H:%M')}</b>",
+                f"#{settings.get('admin_id', str)}",
+                f"#{license_info.product_id}",
+                f"<b>Start Date:</b> {license_info.start_date.strftime('%d/%m/%Y')}",
+                f"<b>End Date:</b> {license_info.end_date.strftime('%d/%m/%Y')}",
+                f"<b>Company Name:</b> {settings.get('company_name', str)}",
+                f"<b>Phone Number:</b> {settings.get('phone_number', str)}",
+                f"<b>Address:</b> {settings.get('address', str)}",
+            ])
+            bot.send_document(logs_channel, doc, caption=log_caption)
         except:
             self.error_msg.emit()
 
@@ -49,8 +62,33 @@ class ReportThread(QThread):
     def run(self):
         try:
             report_doc = open(get_env() + "\\" + export_archive_data(start_date='today'), 'rb')
-            bot.send_document(chat_id=Settings().get(key='admin_id', tp=int), document=report_doc)
-        except:
+            today = datetime.today()
+            completed_orders = Order.objects.filter(is_completed=True, created_at__year=today.year,
+                                                    created_at__month=today.month, created_at__day=today.day)
+            cash_money = completed_orders.aggregate(Sum('cash_money'))['cash_money__sum']
+            if cash_money is None:
+                cash_money = 0
+            credit_card = completed_orders.aggregate(Sum('credit_card'))['credit_card__sum']
+            if credit_card is None:
+                credit_card = 0
+            debt_money = completed_orders.aggregate(Sum('debt_money'))['debt_money__sum']
+            if debt_money is None:
+                debt_money = 0
+            total_flow = cash_money + credit_card + debt_money
+            if total_flow != 0:
+                cash_p = int(cash_money / total_flow * 100)
+                credit_card_p = int(credit_card / total_flow * 100)
+                debt_money_p = 100 - (cash_p + credit_card_p)
+            else:
+                cash_p = 0
+                credit_card_p = 0
+                debt_money_p = 0
+            doc_caption = f"💴 ({cash_p}%) {thd_sp(cash_money)} {_('r_8')}\n" \
+                          f"💳 ({credit_card_p}%) {thd_sp(credit_card)} {_('r_8')}\n" \
+                          f"🚫 ({debt_money_p}%) {thd_sp(debt_money)} {_('r_8')}"
+            bot.send_document(chat_id=Settings().get(key='admin_id', tp=int), document=report_doc, caption=doc_caption)
+        except Exception as er:
+            print(er)
             self.error_msg.emit()
 
 

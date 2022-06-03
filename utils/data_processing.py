@@ -36,9 +36,9 @@ class FoodTrade:
         return res
 
 
-def get_trading_table(category=None, start_date=None, end_date=None):
+def get_trading_table(category=None, start_date=None, end_date=None, order_type=None):
     final_models = OrderItem.objects.filter(order__is_completed=True)
-    food_models = Food.objects.all()
+    food_models = Food.objects.all().order_by('category')
     if start_date == 'today':
         final_models = final_models.filter(order__created_at__day=today.day, order__created_at__month=today.month,
                                            order__created_at__year=today.year)
@@ -60,6 +60,9 @@ def get_trading_table(category=None, start_date=None, end_date=None):
     if category is not None and category != '':
         food_models = food_models.filter(category_id=category)
         final_models = final_models.filter(meal__category_id=category)
+
+    if order_type is not None:
+        final_models = final_models.filter(order__order_type=order_type)
 
     res = list(map(lambda x: FoodTrade(final_models, x), food_models))
     return res, sum([x.total_sale for x in res]), date_string
@@ -237,7 +240,8 @@ def get_dashboard_info(start_date=None, end_date=None):
 def get_expenses_data(start_date=None, end_date=None):
     expense_models = Expense.objects.all()
     if start_date == 'today':
-        expense_models = expense_models.filter(created_at__day=today.day)
+        expense_models = expense_models.filter(created_at__day=today.day, created_at__month=today.month,
+                                               created_at__year=today.year)
     elif start_date == "week":
         expense_models = expense_models.filter(created_at__gt=get_start_of_the_week())
     elif start_date == "month":
