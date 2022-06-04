@@ -16,6 +16,7 @@ class FoodTrade:
         self.pk = instance.pk
         self.title = instance.title
         self.category = instance.category
+        self.expenditure = instance.expenditure
         self.photo = instance.photo
         self.image = instance.image
         self.price = instance.price

@@ -606,6 +606,10 @@ excel_headers = {
         "ex_21": "Narxi",
         "ex_22": "Soni",
         "ex_23": "Oxirgi qo'shilgan vaqt",
+        "ex_24": "Tan narxi",
+        "ex_25": "Narxi",
+        "ex_26": "Shu yerda",
+        "ex_27": "Olib ketilgan",
     },
     'uzk': {
         "ex_1": "Буюртма маълумотлари",
@@ -632,6 +636,10 @@ excel_headers = {
         "ex_21": "Нархи",
         "ex_22": "Сони",
         "ex_23": "Охирги қўшилган вақт",
+        "ex_24": "Тан нархи",
+        "ex_25": "Нархи",
+        "ex_26": "Шу ерда",
+        "ex_27": "Олиб кетилган",
     }
 }
 

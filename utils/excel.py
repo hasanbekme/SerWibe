@@ -13,8 +13,8 @@ def export_archive_data(start_date=None, end_date=None, waiter=None, order_type=
     stock_info = Product.objects.all()
     wb = load_workbook(get_templates_folder() + "\\excel\\archive.xlsx")
     tp = {
-        'table': "Shu yerda",
-        'pickup': "Olib ketilgan"
+        'table': _('ex_26'),
+        'pickup': _('ex_27'),
     }
     sheet = wb.worksheets[0]
     trading_sheet = wb.worksheets[1]
@@ -37,10 +37,12 @@ def export_archive_data(start_date=None, end_date=None, waiter=None, order_type=
     sheet['L2'] = _('ex_15')
     sheet['M2'] = _('ex_16')
     sheet['N2'] = _('ex_17')
-    trading_sheet['B1'] = _('ex_18')
-    trading_sheet['C1'] = _('ex_19')
-    trading_sheet['D1'] = _('ex_20')
-    trading_sheet['E1'] = _('ex_201')
+    trading_sheet['B1'] = _('ex_19')
+    trading_sheet['C1'] = _('ex_18')
+    trading_sheet['D1'] = _('ex_24')
+    trading_sheet['E1'] = _('ex_25')
+    trading_sheet['F1'] = _('ex_20')
+    trading_sheet['G1'] = _('ex_201')
     stock_sheet['B1'] = _('ex_19')
     stock_sheet['C1'] = _('ex_21')
     stock_sheet['D1'] = _('ex_22')
@@ -60,7 +62,9 @@ def export_archive_data(start_date=None, end_date=None, waiter=None, order_type=
         c += 1
     c = 1
     for food_type in trading_info:
-        trading_sheet.append([c, food_type.category.title, food_type.title, food_type.total_sold, food_type.total_sale])
+        trading_sheet.append(
+            [c, food_type.title, food_type.category.title, food_type.expenditure, food_type.price, food_type.total_sold,
+             food_type.total_sale])
         c += 1
     c = 1
     for product in stock_info:
