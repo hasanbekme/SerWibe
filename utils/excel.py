@@ -20,6 +20,10 @@ def export_archive_data(start_date=None, end_date=None, waiter=None, order_type=
     trading_sheet = wb.worksheets[1]
     stock_sheet = wb.worksheets[2]
 
+    sheet.title = _('ex_001')
+    trading_sheet.title = _('ex_002')
+    stock_sheet.title = _('ex_003')
+
     sheet['B1'] = _('ex_1')
     sheet['H1'] = _('ex_2')
     sheet['K1'] = _('ex_3')

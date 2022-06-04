@@ -119,6 +119,7 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.clear_database_btn.clicked.connect(self.clear_database)
 
     def translate_ui(self):
+        self.setWindowTitle(_('s_0'))
         self.tab.setTabText(0, _('s_1'))
         self.tab.setTabText(1, _('s_2'))
         self.tab.setTabText(2, _('s_3'))

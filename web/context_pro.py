@@ -463,6 +463,7 @@ waiter = {
 
 settings_window = {
     "uz": {
+        "s_0": "Sozlamalar",
         "s_1": "Asosiy",
         "s_2": "Chek",
         "s_3": "Litsenziya",
@@ -488,6 +489,7 @@ settings_window = {
         "s_23": "Buyurtmalar tarixini tozalashga rozimisiz?",
     },
     'uzk': {
+        "s_0": "Созламалар",
         "s_1": "Асосий",
         "s_2": "Чек",
         "s_3": "Лицензия",
@@ -582,6 +584,9 @@ receipt_info = {
 
 excel_headers = {
     'uz': {
+        "ex_001": "Buyurtmalar",
+        "ex_002": "Savdo",
+        "ex_003": "Ombor",
         "ex_1": "Buyurtma ma'lumotlari",
         "ex_2": "Kirim turlari",
         "ex_3": "Umumiy",
@@ -612,6 +617,9 @@ excel_headers = {
         "ex_27": "Olib ketilgan",
     },
     'uzk': {
+        "ex_001": "Буюртмалар",
+        "ex_002": "Савдо",
+        "ex_003": "Омбор",
         "ex_1": "Буюртма маълумотлари",
         "ex_2": "Кирим турлари",
         "ex_3": "Умумий",
