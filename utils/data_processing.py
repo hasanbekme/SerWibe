@@ -3,6 +3,7 @@ from datetime import datetime, timedelta, date
 from django.db.models import Sum
 
 from utils.date_config import get_days_before, get_start_of_the_week, get_start_of_the_month
+from web.context_pro import _
 from web.models import OrderItem, Food, Order, Worker, Category, Table, Expense
 
 today = date.today()
@@ -43,7 +44,7 @@ def get_trading_table(category=None, start_date=None, end_date=None, order_type=
     if start_date == 'today':
         final_models = final_models.filter(order__created_at__day=today.day, order__created_at__month=today.month,
                                            order__created_at__year=today.year)
-        date_string = today.strftime("Bugun, %d/%m/%Y")
+        date_string = today.strftime(f"{_('ord_00')}, %d/%m/%Y")
     elif start_date == 'week':
         final_models = final_models.filter(order__created_at__gt=get_start_of_the_week())
         date_string = f"{get_start_of_the_week().strftime('%d/%m/%Y')} - {today.strftime('%d/%m/%Y')}"
@@ -178,7 +179,7 @@ def get_dashboard_info(start_date=None, end_date=None):
     yvalues = []
 
     if start_date == "today":
-        time_interval = f"Bugun, {start_loop.strftime('%H:%M')} - {end_loop.strftime('%H:%M')}"
+        time_interval = f"{_('ord_00')}, {start_loop.strftime('%H:%M')} - {end_loop.strftime('%H:%M')}"
     else:
         time_interval = f"{start_loop.strftime('%d/%m/%Y')} - {end_loop.strftime('%d/%m/%Y')}"
 
@@ -277,7 +278,7 @@ def get_archive_data(start_date=None, end_date=None, waiter=None, order_type=Non
         if start_date == 'today':
             order_models = order_models.filter(created_at__day=today.day, created_at__month=today.month,
                                                created_at__year=today.year)
-            date_string = today.strftime("Bugun, %d/%m/%Y")
+            date_string = today.strftime(f"{_('ord_00')}, %d/%m/%Y")
         elif start_date == 'week':
             order_models = order_models.filter(created_at__gt=get_start_of_the_week())
             date_string = f"{get_start_of_the_week().strftime('%d/%m/%Y')} - {today.strftime('%d/%m/%Y')}"

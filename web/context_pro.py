@@ -329,6 +329,7 @@ expense = {
 
 trad = {
     "uz": {
+        "ord_00": "Bugun",
         "ord_01": "dan",
         "ord_02": "gacha",
         "ord_03": "Filter",
@@ -348,6 +349,7 @@ trad = {
         "ord_17": "Sana",
     },
     "uzk": {
+        "ord_00": "Бугун",
         "ord_01": "дан",
         "ord_02": "гача",
         "ord_03": "Филтер",
