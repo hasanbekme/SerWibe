@@ -66,7 +66,7 @@
         <a href="{% url 'table' pk=room.pk %}" style="padding:0" class="centered" id="centered"></a>
 
         <button type="button" style="float: right; width: 70%; height: 55px; background-color: white; border:none;"
-                class="h4 font-weight-bold text-danger">
+                class="h4 font-weight-bold text-danger" onclick="document.location.href = 'complateUrl';">
             <span id="allsumm" class="moneyed">{{ order.needed_payment }}</span> {{ waiter_03 }} <i class="fa fa-check-circle"
                                                                          aria-hidden="true"></i>
         </button>
