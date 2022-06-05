@@ -1,23 +1,11 @@
 {% extends 'base2.html' %}
 {% block content %}
-
-    <div class="topmenu" style="position: fixed; top: 0px;">
-        <a class="btn btn-light text-danger p-1 " href="/room">
-            <i class="fa fa-home" style="font-size:3em"></i>
-        </a>
-{#        <a class="btn btn-light ml-3 topmenu-room" href="{% url 'table' pk=room.pk %}">#}
-{#            <div class="h2 text-primary topmenu-room-span" id="roomname" style="line-height:45px">{{ room.title }}</div>#}
-{#        </a>#}
-        <a class="btn btn-light  p-1 ml-3" href="#">
-            <span class="h2 text-primary"
-                  style="height: 34px; display: inline-block; font-size: 1.7em;  margin-top: 6px;">№{{ table.number }}</span>
-        </a>
-    </div>
+<form method="POST" enctype="multipart/form-data">
     <main style="width: 100%;">
         <div class="container">
             <div class="row" id="filtercontent">
 
-                    <div style="height: 80px;  z-index:-1" class="col-12">
+                    <div style="height: 20px;  z-index:-1" class="col-12">
                         
                     </div>      
                 <div class="card col-11 col-sm-10 col-lg-6 m-auto p-3 shadow text-left">
@@ -120,7 +108,7 @@
         </div>
 
     </main>
-   
+</form>
 
 
 <script type="text/javascript">
