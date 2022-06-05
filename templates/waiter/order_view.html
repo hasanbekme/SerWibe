@@ -55,7 +55,8 @@
        style="position:fixed; right: 22%; bottom: 80px; border-radius: 50%; background:white; color: #075295; width:50px; height:50px; padding:10px; box-shadow: 0px 0px 8px 2px #000000aa; opacity: 0.9;">
         <i class='fa fa-plus' style="font-size:2.4em"></i>
     </a>
-    <a class="plussed2 " onclick="if (confirm('O`chirishga rozimisiz')){ document.location.href = '{% url 'order_delete' pk=order.pk %}'; }"
+
+    <a class="plussed2 " data-toggle="modal" data-target="#exampleModal"
        style="position:fixed; right: 39%; bottom: 80px; border-radius: 50%; background:white; color: #075295; width:50px; height:50px; padding:10px; box-shadow: 0px 0px 8px 2px #000000aa; opacity: 0.9;">
         <i class='fa fa-trash' style="font-size:2.4em"></i>
     </a>
@@ -64,13 +65,33 @@
                                                                aria-hidden="true"></i></a>
         <a href="{% url 'table' pk=room.pk %}" style="padding:0" class="centered" id="centered"></a>
 
-        <button type="submit" style="float: right; width: 70%; height: 55px; background-color: white; border:none;"
+        <button type="button" style="float: right; width: 70%; height: 55px; background-color: white; border:none;"
                 class="h4 font-weight-bold text-danger">
             <span id="allsumm" class="moneyed">{{ order.needed_payment }}</span> {{ waiter_03 }} <i class="fa fa-check-circle"
                                                                          aria-hidden="true"></i>
         </button>
 
     </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{ waiter_12 }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ waiter_13 }}</button>
+        <button type="button" class="btn btn-primary"  onclick="document.location.href = '{% url 'order_delete' pk=order.pk %}';">{{ waiter_14 }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
     <script type="text/javascript">
         var vr = document.getElementById("roomname");
