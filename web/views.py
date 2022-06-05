@@ -770,10 +770,11 @@ def order_item_delete(request, pk):
 def order_delete(request, pk):
     if is_waiter(request):
         order_model = get_object_or_404(Order, pk=pk)
+        order_room_number = order_model.table.room.pk
         order_model.table.is_available = True
         order_model.table.save()
         order_model.delete()
-        return redirect('my_orders')
+        return redirect('table', pk=order_room_number)
     else:
         return redirect('dashboard')
 
@@ -809,7 +810,7 @@ def complete_order_waiter(request, pk):
                 form = OrderCompletionForm(request.POST, instance=order)
                 if form.is_valid():
                     form.save()
-                    return redirect('my_orders')
+                    return redirect('table', pk=order.table.room.pk)
             else:
                 form = OrderCompletionForm()
             return render(request, "waiter/complete.html",
