@@ -17,9 +17,9 @@
         <div class="container">
             <div class="row" id="filtercontent">
 
-                    <div style="height: 80px;  z-index:-1" class="col-12">
-                        
-                    </div>      
+                <div style="height: 80px;  z-index:-1" class="col-12">
+
+                </div>
                 {% for item in orderitems %}
                     <div class="col-11 col-md-5 cardproduct card m-auto shadow text-white bg-white row"
                          style="margin-bottom: 15px!important;" catename="{{ item.meal.category.title }}">
@@ -31,7 +31,8 @@
                              style="line-height: 27px; padding: 0">
                             {{ item.meal.title }}
                         </div>
-                        <a href="{% url 'delete_order_item' pk=item.pk %}" type="button" class="fa fa-trash btn btn-danger"
+                        <a href="{% url 'delete_order_item' pk=item.pk %}" type="button"
+                           class="fa fa-trash btn btn-danger"
                            style="position: absolute; right:2px; top:2px;"></a>
                         <span id="{{ item.meal.id }}p"
                               style="position:absolute; right: 5%; bottom: 5px; font-weight:700; font-size: 1.7em;"
@@ -39,10 +40,10 @@
                                 class="text-primary">x</span class="moneyed">{{ item.meal.price }} {{ waiter_03 }}</span>
                     </div>
                 {% endfor %}
-                
-                    <div style="height: 80px; " class="col-12">
-                        
-                    </div>    
+
+                <div style="height: 80px; " class="col-12">
+
+                </div>
             </div>
         </div>
 
@@ -66,31 +67,35 @@
         <a href="{% url 'table' pk=room.pk %}" style="padding:0" class="centered" id="centered"></a>
 
         <button type="button" style="float: right; width: 70%; height: 55px; background-color: white; border:none;"
-                class="h4 font-weight-bold text-danger" onclick="document.location.href = 'complateUrl';">
-            <span id="allsumm" class="moneyed">{{ order.needed_payment }}</span> {{ waiter_03 }} <i class="fa fa-check-circle"
-                                                                         aria-hidden="true"></i>
+                class="h4 font-weight-bold text-danger"
+                onclick="document.location.href = '{% url 'waiter_order_complete' pk=order.pk %}'">
+            <span id="allsumm" class="moneyed">{{ order.needed_payment }}</span> {{ waiter_03 }} <i
+                class="fa fa-check-circle"
+                aria-hidden="true"></i>
         </button>
 
     </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        {{ waiter_12 }}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ waiter_13 }}</button>
-        <button type="button" class="btn btn-primary"  onclick="document.location.href = '{% url 'order_delete' pk=order.pk %}';">{{ waiter_14 }}</button>
-      </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ waiter_12 }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ waiter_13 }}</button>
+                    <button type="button" class="btn btn-primary"
+                            onclick="document.location.href = '{% url 'order_delete' pk=order.pk %}';">{{ waiter_14 }}</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 
     <script type="text/javascript">

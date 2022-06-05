@@ -50,6 +50,7 @@ urlpatterns = [
     path('room/<int:pk_room>/<int:pk_table>/add_item', views.add_item, name='add_item'),
     path('order_item/<int:pk>/delete', views.order_item_delete, name='delete_order_item'),
     path('order/<int:pk>/view', views.waiter_order, name='waiter_order'),
+    path('waiter_order/<int:pk>/complete', views.complete_order_waiter, name='waiter_order_complete'),
     path('order/<int:pk>/delete', views.order_delete, name='order_delete'),
     path('my_orders', views.my_orders, name='my_orders'),
     path('my_profile', views.my_profile, name='my_profile'),

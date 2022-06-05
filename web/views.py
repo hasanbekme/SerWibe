@@ -800,6 +800,24 @@ def my_orders(request):
 
 
 @login_required(login_url='/')
+def complete_order_waiter(request, pk):
+    if is_waiter(request):
+        order = get_object_or_404(Order, pk=pk)
+        order_items = order.orderitem_set.all()
+        if request.method == "POST":
+            form = OrderCompletionForm(request.POST, instance=order)
+            if form.is_valid():
+                form.save()
+                return redirect('my_orders')
+        else:
+            form = OrderCompletionForm()
+        return render(request, "waiter/complete.html",
+                      context={'form': form, 'order': order, 'orderitems': order_items, 'tax': get_tax()})
+    else:
+        return redirect('dashboard')
+
+
+@login_required(login_url='/')
 def my_profile(request):
     if is_waiter(request):
         user = get_user(request)
