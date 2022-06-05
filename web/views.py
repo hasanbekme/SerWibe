@@ -15,7 +15,7 @@ from utils.excel import export_archive_data
 from utils.payment_receipt import print_receipt
 from utils.request_processing import get_user, is_waiter, is_admin, pickup_items_add
 from utils.request_processing import order_items_add
-from utils.system_settings import get_tax
+from utils.system_settings import get_tax, Settings
 from .forms import CreateUserForm, CategoryForm, FoodForm, RoomForm, TableForm, ExpenseReasonForm, ExpenseForm, \
     OrderCompletionForm, ProductForm, NewProductForm
 from .models import Worker, Category, Food, Room, Table, Order, Expense, ExpenseReason, OrderItem, Product, \
@@ -801,20 +801,23 @@ def my_orders(request):
 
 @login_required(login_url='/')
 def complete_order_waiter(request, pk):
-    if is_waiter(request):
-        order = get_object_or_404(Order, pk=pk)
-        order_items = order.orderitem_set.all()
-        if request.method == "POST":
-            form = OrderCompletionForm(request.POST, instance=order)
-            if form.is_valid():
-                form.save()
-                return redirect('my_orders')
+    order = get_object_or_404(Order, pk=pk)
+    if Settings().get('access_to_waiter', tp=bool):
+        if is_waiter(request):
+            order_items = order.orderitem_set.all()
+            if request.method == "POST":
+                form = OrderCompletionForm(request.POST, instance=order)
+                if form.is_valid():
+                    form.save()
+                    return redirect('my_orders')
+            else:
+                form = OrderCompletionForm()
+            return render(request, "waiter/complete.html",
+                          context={'form': form, 'order': order, 'orderitems': order_items, 'tax': get_tax()})
         else:
-            form = OrderCompletionForm()
-        return render(request, "waiter/complete.html",
-                      context={'form': form, 'order': order, 'orderitems': order_items, 'tax': get_tax()})
+            return redirect('dashboard')
     else:
-        return redirect('dashboard')
+        return redirect('waiter_order', pk=order.table.pk)
 
 
 @login_required(login_url='/')
