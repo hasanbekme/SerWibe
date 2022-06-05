@@ -450,6 +450,10 @@ waiter = {
         "waiter_12": "O`chirishga rozimisiz",
         "waiter_13": "Yopish",
         "waiter_14": "O`chirish",
+        "waiter_15": "Naqd pul",
+        "waiter_16": "Plastik karta",
+        "waiter_17": "To`lanmagan",
+        "waiter_18": "Xizmat",
     },
     "uzk": {
         "waiter_01": "ХОНАЛАР",
@@ -466,6 +470,10 @@ waiter = {
         "waiter_12": "Ўчиришга розимисиз",
         "waiter_13": "Ёпиш",
         "waiter_14": "Ўчириш",
+        "waiter_15": "Нақд пул",
+        "waiter_16": "Пластик карта",
+        "waiter_17": "Тўланмаган",
+        "waiter_18": "Хизмат",
     }
 }
 

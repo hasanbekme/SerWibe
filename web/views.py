@@ -827,11 +827,23 @@ def my_profile(request):
         user = get_user(request)
         today = date.today()
         order_models = Order.objects.filter(waiter=user, created_at__gt=today)
-        orders_amount = order_models.aggregate(Sum('waiter_fee'))['waiter_fee__sum']
+        orders_amount = order_models.aggregate(Sum('paid_money'))['paid_money__sum']
+        orders_amount_cash = order_models.aggregate(Sum('cash_money'))['cash_money__sum']
+        orders_amount_card = order_models.aggregate(Sum('credit_card'))['credit_card__sum']
+        orders_amount_debt = order_models.aggregate(Sum('debt_money'))['debt_money__sum']
+        orders_amount_tax = order_models.aggregate(Sum('waiter_fee'))['waiter_fee__sum']
         if orders_amount is None:
             orders_amount = 0
+        if orders_amount_cash is None:
+            orders_amount_cash = 0
+        if orders_amount_card is None:
+            orders_amount_card = 0
+        if orders_amount_debt is None:
+            orders_amount_debt = 0
+        if orders_amount_tax is None:
+            orders_amount_tax = 0
         return render(request, 'waiter/my_profile.html',
-                      {'user': user, 'orders_count': order_models.count(), 'orders_amount': orders_amount})
+                      {'user': user, 'orders_count': order_models.count(), 'orders_amount': orders_amount, "orders_amount_cash":orders_amount_cash, "orders_amount_card":orders_amount_card, "orders_amount_debt":orders_amount_debt, "orders_amount_tax":orders_amount_tax})
     else:
         return redirect('dashboard')
 

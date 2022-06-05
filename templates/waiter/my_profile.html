@@ -27,8 +27,24 @@
             {{ waiter_07 }}: {{ orders_count }} {{ waiter_08 }}
         </div>
         <div  class="h6">
-            <i class="fa fa-dollar ml-0 mr-3"></i>
+            <i class="fa fa-dollar  ml-1 mr-3"></i>
             {{ waiter_09 }}: <span class="moneyed">{{ orders_amount }}</span> {{ waiter_03 }}
+        </div>
+        <div  class="h6">
+            <i class="fa fa-money mr-2"></i>
+            {{ waiter_15 }}: <span class="moneyed">{{ orders_amount_cash }}</span> {{ waiter_03 }}
+        </div>
+        <div  class="h6">
+            <i class="fa fa-credit-card ml-0 mr-2"></i>
+            {{ waiter_16 }}: <span class="moneyed">{{ orders_amount_card }}</span> {{ waiter_03 }}
+        </div>
+        <div  class="h6">
+            <i class="fa fa-ban ml-1 mr-2"></i>
+            {{ waiter_17 }}: <span class="moneyed">{{ orders_amount_debt }}</span> {{ waiter_03 }}
+        </div>
+        <div  class="h6">
+            <i class="fa fa-user ml-1 mr-2"></i>
+            {{ waiter_18 }}: <span class="moneyed">{{ orders_amount_tax }}</span> {{ waiter_03 }}
         </div>
     </div>
 
