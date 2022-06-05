@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from utils.core import thd_sp
+from utils.core import thd_sp, get_env
 from utils.img import Receipt
 from utils.printer import Document
 from utils.system_settings import Settings
@@ -13,12 +13,14 @@ def print_receipt(order: Order):
     doc = Document(width=int(Settings().get("printer_width", int) * 51), printer=Settings().get("printer", str))
     doc.begin_document()
     page = Receipt(width=Settings().get("printer_width", int) * 80 - 400)
-    page.set_font(family="courbd", size=38)
-    company_name = Settings().get(key="company_name", tp=str)
-    if company_name == "":
-        company_name = "SerWibe"
-    page.text(text=company_name, space=True)
-    page.br(5)
+    if Settings().get('has_company_logo', tp=bool):
+        page.insert_image(image_path=f"{get_env()}\\company_logo.{Settings().get('company_logo', tp=str).split('.')[-1]}")
+        page.br(5)
+    if Settings().get('has_company_name', tp=bool):
+        page.set_font(family="courbd", size=38)
+        company_name = Settings().get(key="company_name", tp=str)
+        page.text(text=company_name, space=True)
+        page.br(5)
     page.set_font(family="courbd", size=12)
     if Settings().get("address", tp=str):
         page.text(f"{_('r_1')} " + Settings().get(key="address", tp=str), space=True)

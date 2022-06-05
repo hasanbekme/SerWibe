@@ -1,4 +1,5 @@
 import os
+import shutil
 
 import django
 from django.db.models import Sum
@@ -17,7 +18,7 @@ from datetime import datetime
 import win32print
 from PyQt5.QtCore import QSettings, QThread, pyqtSignal
 from PyQt5.QtGui import QCloseEvent, QIcon
-from PyQt5.QtWidgets import QWidget, QMessageBox
+from PyQt5.QtWidgets import QWidget, QMessageBox, QFileDialog
 
 from Resources.ui import settings_widget
 from utils.bot_config import logs_channel, bot
@@ -117,6 +118,11 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.new_license_btn.pressed.connect(self.add_activation)
         self.open_from_browser.stateChanged.connect(self.open_setting_changed)
         self.clear_database_btn.clicked.connect(self.clear_database)
+        self.open_folder.clicked.connect(self.changeDefaultPath)
+        self.has_name.stateChanged.connect(self.change_checkbox_states)
+        self.has_logo.stateChanged.connect(self.change_checkbox_states)
+        self.access_to_waiter.stateChanged.connect(
+            lambda x: self.settings.set(key="access_to_waiter", value=self.access_to_waiter.isChecked()))
 
     def translate_ui(self):
         self.setWindowTitle(_('s_0'))
@@ -145,6 +151,8 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.label_4.setText(_('ac_7'))
         self.new_license_btn.setText(_('ac_8'))
         self.clear_database_btn.setText(_('s_22'))
+        self.waiter_access_label.setText(_('s_26'))
+        self.logo_title.setText(_('s_25'))
         self.check_license()
 
     def clear_database(self):
@@ -187,6 +195,13 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
             self.license_info.setVisible(False)
             self.remaining_days.setVisible(False)
 
+    def change_checkbox_states(self):
+        state_logo = self.has_logo.isChecked()
+        self.default_path.setEnabled(state_logo)
+        self.open_folder.setEnabled(state_logo)
+
+        self.company_name_edit.setEnabled(self.has_name.isChecked())
+
     def send_admin_report(self):
         self.report_thread = ReportThread()
         self.report_thread.error_msg.connect(self.connection_error)
@@ -221,12 +236,23 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         else:
             self.autostart.setChecked(False)
         self.open_from_browser.setChecked(self.settings.get(key='open_from_browser', tp=bool))
+        self.access_to_waiter.setChecked(self.settings.get(key='access_to_waiter', tp=bool))
         lang_code = self.settings.get(key='lang_code', tp=str)
         if lang_code is "":
             lang_code = 'uz'
         self.language_box.setCurrentText(languages[lang_code])
         self.admin_id_edit.setText(self.settings.get(key="admin_id", tp=str))
-        self.company_name_edit.setText(self.settings.get(key="company_name", tp=str))
+        if self.settings.get(key="has_company_logo", tp=bool):
+            self.has_logo.setChecked(True)
+            self.default_path.setText(self.settings.get(key='company_logo', tp=str))
+        else:
+            self.default_path.setEnabled(False)
+            self.open_folder.setEnabled(False)
+        if self.settings.get(key="has_company_name", tp=bool):
+            self.has_name.setChecked(True)
+            self.company_name_edit.setText(self.settings.get(key="company_name", tp=str))
+        else:
+            self.company_name_edit.setEnabled(False)
         self.address_edit.setText(self.settings.get(key="address", tp=str))
         self.number_edit.setText(self.settings.get(key="phone_number", tp=str))
         self.last_message_edit.setText(self.settings.get(key="last_message", tp=str))
@@ -245,6 +271,33 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.printer_width_edit.setValue(self.settings.get(key="printer_width", tp=int))
 
     def save(self):
+        print("saving")
+        if self.has_logo.isChecked():
+            if self.default_path.text() != "":
+                self.settings.set(key="has_company_logo", value=True)
+                self.settings.set(key="company_logo", value=self.default_path.text())
+                try:
+                    shutil.copy(self.default_path.text(),
+                                get_env() + f"\\company_logo.{self.default_path.text().split('.')[-1]}")
+                except:
+                    QMessageBox.critical(self, _('s_9'), _('s_29'))
+                    return
+            else:
+                QMessageBox.critical(self, _('s_9'), _('s_27'))
+                return
+        else:
+            self.settings.set(key="has_company_logo", value=False)
+            self.settings.set(key="company_logo", value="")
+        if self.has_name.isChecked():
+            if self.company_name_edit.text() != "":
+                self.settings.set(key="has_company_name", value=True)
+                self.settings.set(key="company_name", value=self.company_name_edit.text())
+            else:
+                QMessageBox.critical(self, _('s_9'), _('s_28'))
+                return
+        else:
+            self.settings.set(key="has_company_name", value=False)
+            self.settings.set(key="company_name", value="")
         self.settings.set(key="company_name", value=self.company_name_edit.text())
         self.settings.set(key="address", value=self.address_edit.text())
         self.settings.set(key="phone_number", value=self.number_edit.text())
@@ -252,7 +305,14 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.settings.set(key="tax", value=self.tax_edit.value())
         self.settings.set(key="printer", value=self.printer.currentText())
         self.settings.set(key="printer_width", value=self.printer_width_edit.value())
+        print("ok")
         self.hide()
+
+    def changeDefaultPath(self):
+        self.save_dir = QFileDialog.getOpenFileName(self, "Select logo", './', 'Images (*.png *.jpg)')
+        print(self.save_dir)
+        if self.save_dir[0] != "":
+            self.default_path.setText(self.save_dir[0])
 
     def show(self) -> None:
         self.update_data()

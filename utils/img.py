@@ -27,6 +27,15 @@ class Receipt:
         if space:
             self.y += h
 
+    def insert_image(self, image_path: str):
+        temp_img = Image.open(image_path)
+        logo_width = int(self.width * 2 / 3)
+        logo_height = int(logo_width / temp_img.size[0] * temp_img.size[1])
+        resized = temp_img.resize((logo_width, logo_height))
+        offset = ((self.width - resized.size[0]) // 2, self.y)
+        self.image.paste(resized, offset)
+        self.y += logo_height
+
     def br(self, delta):
         self.y += int(delta * self.width / 300)
 

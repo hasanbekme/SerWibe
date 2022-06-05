@@ -489,6 +489,11 @@ settings_window = {
         "s_21": "Internet mavjud emas, iltimos tekshirib qayta urining!!!",
         "s_22": "Bazani tozalash",
         "s_23": "Buyurtmalar tarixini tozalashga rozimisiz?",
+        "s_25": "Logotip:",
+        "s_26": "Ofitsantga ruxsat:",
+        "s_27": "Logotip kiritilmagan!!!",
+        "s_28": "Tashkilot nomi kiritilmagan!!!",
+        "s_29": "Fayl ochishda xatolik yuz berdi!!!"
     },
     'uzk': {
         "s_0": "Созламалар",
@@ -515,6 +520,11 @@ settings_window = {
         "s_21": "Интернет мавжуд эмас, илтимос текшириб қайта урининг!!!",
         "s_22": "Базани тозалаш",
         "s_23": "Буюртмалар тарихини тозалашга розимисиз?",
+        "s_25": "Логотип:",
+        "s_26": "Офитсантга рухсат:",
+        "s_27": "Логотип киритилмаган!!!",
+        "s_28": "Ташкилот номи киритилмаган!!!",
+        "s_29": "Файл очишда хатолик юз берди!!!",
     }
 }
 
