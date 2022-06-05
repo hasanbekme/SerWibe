@@ -39,7 +39,6 @@ class LicenseInfo:
 
     def is_allowed_today(self):
         if self.has_license:
-            print(self.start_date, self.end_date)
             if self.start_date <= today <= self.end_date:
                 return True
             else:

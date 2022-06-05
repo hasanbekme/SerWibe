@@ -5,6 +5,7 @@ from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import QApplication
 
 from SourceFiles.tray_icon import MyTray
+from utils.activation import LicenseInfo
 from utils.core import *
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'SerWibe.settings')
@@ -33,6 +34,7 @@ if __name__ == '__main__':
             tray_icon.stop_action.triggered.connect(tray_icon.server.stop)
             tray_icon.s_w.autostart.stateChanged.connect(set_autostart)
             if tray_icon.license.is_allowed_today():
+                tray_icon.license.create_license(start_date=datetime.today(), end_date=tray_icon.license.end_date)
                 tray_icon.server.start()
                 tray_icon.open_app()
             else:
