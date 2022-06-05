@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="main">
+    <file>test.png</file>
     <file>open_folder.png</file>
     <file>delete_database.png</file>
     <file>key.png</file>

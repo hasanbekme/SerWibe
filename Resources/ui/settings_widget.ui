@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>518</width>
-    <height>647</height>
+    <height>674</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -609,96 +609,91 @@ border: 2px solid #ff0a0a;
       <attribute name="title">
        <string>Chek</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <property name="spacing">
-          <number>10</number>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="title">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
          </property>
+         <property name="font">
+          <font>
+           <family>Courier</family>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Chek ma'lumotlari</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_16">
          <item>
-          <widget class="QLabel" name="title">
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <family>Courier</family>
-             <pointsize>14</pointsize>
-            </font>
-           </property>
+          <widget class="QCheckBox" name="has_logo">
            <property name="text">
-            <string>Chek ma'lumotlari</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
+            <string/>
            </property>
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_16">
-           <item>
-            <widget class="QCheckBox" name="has_logo">
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="logo_title">
-             <property name="font">
-              <font>
-               <family>Georgia</family>
-               <pointsize>14</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Logotip:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_7">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
+          <widget class="QLabel" name="logo_title">
+           <property name="font">
+            <font>
+             <family>Georgia</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Logotip:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QLineEdit" name="default_path">
+             <property name="minimumSize">
               <size>
-               <width>40</width>
-               <height>20</height>
+               <width>250</width>
+               <height>40</height>
               </size>
              </property>
-            </spacer>
-           </item>
-           <item>
-            <layout class="QGridLayout" name="gridLayout_4">
-             <property name="spacing">
-              <number>0</number>
+             <property name="maximumSize">
+              <size>
+               <width>300</width>
+               <height>30</height>
+              </size>
              </property>
-             <item row="0" column="0">
-              <widget class="QLineEdit" name="default_path">
-               <property name="minimumSize">
-                <size>
-                 <width>250</width>
-                 <height>40</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>300</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Segoe UI Historic</family>
-                 <pointsize>13</pointsize>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">
+             <property name="font">
+              <font>
+               <family>Segoe UI Historic</family>
+               <pointsize>13</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">
 QLineEdit{
 background-color: white;
 border: 1px solid #59CDF2;
@@ -713,31 +708,31 @@ QLineEdit::focus{
 border: 1px solid #29e1ff;
 border-right: none;
 }</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="readOnly">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QPushButton" name="open_folder">
-               <property name="minimumSize">
-                <size>
-                 <width>35</width>
-                 <height>40</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>40</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton{
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QPushButton" name="open_folder">
+             <property name="minimumSize">
+              <size>
+               <width>35</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>40</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
 background-color: white;
 border: 1px solid #59CDF2;
 border-left:None;
@@ -754,479 +749,527 @@ background-color: rgb(225, 225, 225);
 border: 1px solid #59CDF2;
 border-left:None;
 }</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset>
-                 <normalon>:/main/open_folder.png</normalon>
-                </iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>22</width>
-                 <height>22</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_17">
-           <item>
-            <widget class="QCheckBox" name="has_name">
+             </property>
              <property name="text">
               <string/>
              </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="company_name">
-             <property name="font">
-              <font>
-               <family>Georgia</family>
-               <pointsize>14</pointsize>
-              </font>
+             <property name="icon">
+              <iconset>
+               <normalon>:/main/open_folder.png</normalon>
+              </iconset>
              </property>
-             <property name="text">
-              <string>Tashkilot nomi:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_8">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
+             <property name="iconSize">
               <size>
-               <width>40</width>
-               <height>20</height>
+               <width>22</width>
+               <height>22</height>
               </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="company_name_edit">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>240</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>220</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Arial</family>
-               <pointsize>14</pointsize>
-              </font>
-             </property>
-             <property name="placeholderText">
-              <string>SerWibe</string>
              </property>
             </widget>
            </item>
           </layout>
          </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_17">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="QLabel" name="address_label">
-             <property name="font">
-              <font>
-               <family>Georgia</family>
-               <pointsize>14</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Manzil:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="address_edit">
-             <property name="minimumSize">
-              <size>
-               <width>280</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>280</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Arial</family>
-               <pointsize>14</pointsize>
-              </font>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QCheckBox" name="has_name">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
-            <widget class="QLabel" name="number_label">
-             <property name="font">
-              <font>
-               <family>Georgia</family>
-               <pointsize>14</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Telefon:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="number_edit">
-             <property name="minimumSize">
-              <size>
-               <width>280</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>280</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Arial</family>
-               <pointsize>14</pointsize>
-              </font>
-             </property>
-             <property name="inputMask">
-              <string>\+\9\9\8\(99)-999-99-99</string>
-             </property>
-             <property name="placeholderText">
-              <string/>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QLabel" name="company_name">
+           <property name="font">
+            <font>
+             <family>Georgia</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Tashkilot nomi:</string>
+           </property>
+          </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <spacer name="horizontalSpacer_8">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="company_name_edit">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>240</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>220</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="placeholderText">
+            <string>SerWibe</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="address_label">
+           <property name="font">
+            <font>
+             <family>Georgia</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Manzil:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="address_edit">
+           <property name="minimumSize">
+            <size>
+             <width>280</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>280</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="number_label">
+           <property name="font">
+            <font>
+             <family>Georgia</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Telefon:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="number_edit">
+           <property name="minimumSize">
+            <size>
+             <width>280</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>280</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="inputMask">
+            <string>\+\9\9\8\(99)-999-99-99</string>
+           </property>
+           <property name="placeholderText">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <property name="spacing">
+          <number>7</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="tax_label">
+           <property name="font">
+            <font>
+             <family>Georgia</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Offitsant uchun:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
            <property name="spacing">
-            <number>7</number>
+            <number>0</number>
            </property>
            <item>
-            <widget class="QLabel" name="tax_label">
-             <property name="font">
-              <font>
-               <family>Georgia</family>
-               <pointsize>14</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Offitsant uchun:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_6">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QSpinBox" name="tax_edit">
-               <property name="minimumSize">
-                <size>
-                 <width>40</width>
-                 <height>40</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>40</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Arial</family>
-                 <pointsize>16</pointsize>
-                </font>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="tax_label_2">
-               <property name="font">
-                <font>
-                 <family>Georgia</family>
-                 <pointsize>16</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>%</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <item>
-            <widget class="QLabel" name="last_message_label">
-             <property name="font">
-              <font>
-               <family>Georgia</family>
-               <pointsize>14</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Oxirgi satr:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="last_message_edit">
+            <widget class="QSpinBox" name="tax_edit">
              <property name="minimumSize">
               <size>
-               <width>280</width>
+               <width>40</width>
                <height>40</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>280</width>
+               <width>16777215</width>
                <height>40</height>
               </size>
              </property>
              <property name="font">
               <font>
                <family>Arial</family>
-               <pointsize>14</pointsize>
+               <pointsize>16</pointsize>
               </font>
-             </property>
-             <property name="text">
-              <string>РАХМАТ</string>
-             </property>
-             <property name="placeholderText">
-              <string>РАХМАТ</string>
              </property>
             </widget>
            </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_12">
            <item>
-            <widget class="QLabel" name="cash_register">
+            <widget class="QLabel" name="tax_label_2">
              <property name="font">
               <font>
                <family>Georgia</family>
-               <pointsize>14</pointsize>
+               <pointsize>16</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>Kassa printer:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="printer">
-             <property name="minimumSize">
-              <size>
-               <width>250</width>
-               <height>35</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>250</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Segoe UI Emoji</family>
-               <pointsize>12</pointsize>
-              </font>
+              <string>%</string>
              </property>
             </widget>
            </item>
           </layout>
          </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <widget class="QLabel" name="last_message_label">
+           <property name="font">
+            <font>
+             <family>Georgia</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Oxirgi satr:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="last_message_edit">
+           <property name="minimumSize">
+            <size>
+             <width>280</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>280</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>РАХМАТ</string>
+           </property>
+           <property name="placeholderText">
+            <string>РАХМАТ</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_12">
+         <item>
+          <widget class="QLabel" name="cash_register">
+           <property name="font">
+            <font>
+             <family>Georgia</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Kassa printer:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="printer">
+           <property name="minimumSize">
+            <size>
+             <width>250</width>
+             <height>35</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>250</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Segoe UI Emoji</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QLabel" name="printer_size_label">
+           <property name="font">
+            <font>
+             <family>Georgia</family>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Printer o'lchami:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_9">
+           <property name="spacing">
+            <number>0</number>
+           </property>
            <item>
-            <widget class="QLabel" name="printer_size_label">
+            <widget class="QSpinBox" name="printer_width_edit">
+             <property name="minimumSize">
+              <size>
+               <width>40</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
+             <property name="maximum">
+              <number>210</number>
+             </property>
+             <property name="value">
+              <number>80</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="tax_label_4">
              <property name="font">
               <font>
                <family>Georgia</family>
-               <pointsize>14</pointsize>
+               <pointsize>16</pointsize>
               </font>
              </property>
              <property name="text">
-              <string>Printer o'lchami:</string>
+              <string>мм</string>
              </property>
             </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_3">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_9">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QSpinBox" name="printer_width_edit">
-               <property name="minimumSize">
-                <size>
-                 <width>40</width>
-                 <height>40</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>40</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Arial</family>
-                 <pointsize>16</pointsize>
-                </font>
-               </property>
-               <property name="maximum">
-                <number>210</number>
-               </property>
-               <property name="value">
-                <number>80</number>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="tax_label_4">
-               <property name="font">
-                <font>
-                 <family>Georgia</family>
-                 <pointsize>16</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>мм</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
            </item>
           </layout>
          </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="test_print">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+background-color: white;
+border-radius: 5px;
+border: 2px solid #6AF2F0;
+}
+QPushButton:hover {
+color: white;
+background-color: #6AF2F0;
+}
+QPushButton:pressed {
+color: white;
+background-color: rgb(47, 231, 247);
+border: 2px solid rgb(47, 231, 247);
+}</string>
+         </property>
+         <property name="text">
+          <string>Test</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/main/test.png</normalon>
+           <disabledoff>:/main/submit_document.png</disabledoff>
+          </iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_5">
-           <item>
-            <widget class="QPushButton" name="cancel_button">
-             <property name="minimumSize">
-              <size>
-               <width>130</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>130</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Segoe UI</family>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Bekor qilish</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QPushButton" name="accept_button">
-             <property name="minimumSize">
-              <size>
-               <width>130</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>130</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Segoe UI</family>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>Saqlash</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QPushButton" name="cancel_button">
+           <property name="minimumSize">
+            <size>
+             <width>130</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>130</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Bekor qilish</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="accept_button">
+           <property name="minimumSize">
+            <size>
+             <width>130</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>130</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <family>Segoe UI</family>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Saqlash</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
