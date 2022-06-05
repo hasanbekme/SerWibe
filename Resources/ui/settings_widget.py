@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(518, 647)
+        Form.resize(518, 674)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/main/settings.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
         Form.setWindowIcon(icon)
@@ -341,10 +341,7 @@ class Ui_Form(object):
         self.tab.addTab(self.tab1, icon6, "")
         self.tab2 = QtWidgets.QWidget()
         self.tab2.setObjectName("tab2")
-        self.gridLayout = QtWidgets.QGridLayout(self.tab2)
-        self.gridLayout.setObjectName("gridLayout")
-        self.verticalLayout = QtWidgets.QVBoxLayout()
-        self.verticalLayout.setSpacing(10)
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.tab2)
         self.verticalLayout.setObjectName("verticalLayout")
         self.title = QtWidgets.QLabel(self.tab2)
         self.title.setMaximumSize(QtCore.QSize(16777215, 30))
@@ -598,6 +595,34 @@ class Ui_Form(object):
         self.horizontalLayout_9.addWidget(self.tax_label_4)
         self.horizontalLayout_8.addLayout(self.horizontalLayout_9)
         self.verticalLayout.addLayout(self.horizontalLayout_8)
+        self.test_print = QtWidgets.QPushButton(self.tab2)
+        self.test_print.setMinimumSize(QtCore.QSize(0, 50))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(12)
+        self.test_print.setFont(font)
+        self.test_print.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.test_print.setStyleSheet("QPushButton {\n"
+"background-color: white;\n"
+"border-radius: 5px;\n"
+"border: 2px solid #6AF2F0;\n"
+"}\n"
+"QPushButton:hover {\n"
+"color: white;\n"
+"background-color: #6AF2F0;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"color: white;\n"
+"background-color: rgb(47, 231, 247);\n"
+"border: 2px solid rgb(47, 231, 247);\n"
+"}")
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap(":/main/test.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon8.addPixmap(QtGui.QPixmap(":/main/submit_document.png"), QtGui.QIcon.Disabled, QtGui.QIcon.Off)
+        self.test_print.setIcon(icon8)
+        self.test_print.setIconSize(QtCore.QSize(40, 40))
+        self.test_print.setObjectName("test_print")
+        self.verticalLayout.addWidget(self.test_print)
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.cancel_button = QtWidgets.QPushButton(self.tab2)
@@ -621,10 +646,9 @@ class Ui_Form(object):
         self.accept_button.setObjectName("accept_button")
         self.horizontalLayout_5.addWidget(self.accept_button)
         self.verticalLayout.addLayout(self.horizontalLayout_5)
-        self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
-        icon8 = QtGui.QIcon()
-        icon8.addPixmap(QtGui.QPixmap(":/main/receipt.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
-        self.tab.addTab(self.tab2, icon8, "")
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap(":/main/receipt.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.tab.addTab(self.tab2, icon9, "")
         self.tab3 = QtWidgets.QWidget()
         self.tab3.setObjectName("tab3")
         self.gridLayout_6 = QtWidgets.QGridLayout(self.tab3)
@@ -759,10 +783,10 @@ class Ui_Form(object):
 "background-color: rgb(47, 231, 247);\n"
 "border: 2px solid rgb(47, 231, 247);\n"
 "}")
-        icon9 = QtGui.QIcon()
-        icon9.addPixmap(QtGui.QPixmap(":/main/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
-        icon9.addPixmap(QtGui.QPixmap(":/main/submit_document.png"), QtGui.QIcon.Disabled, QtGui.QIcon.Off)
-        self.new_license_btn.setIcon(icon9)
+        icon10 = QtGui.QIcon()
+        icon10.addPixmap(QtGui.QPixmap(":/main/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        icon10.addPixmap(QtGui.QPixmap(":/main/submit_document.png"), QtGui.QIcon.Disabled, QtGui.QIcon.Off)
+        self.new_license_btn.setIcon(icon10)
         self.new_license_btn.setIconSize(QtCore.QSize(40, 40))
         self.new_license_btn.setObjectName("new_license_btn")
         self.horizontalLayout_31.addWidget(self.new_license_btn)
@@ -770,9 +794,9 @@ class Ui_Form(object):
         self.gridLayout_6.addLayout(self.verticalLayout_6, 0, 0, 1, 1)
         spacerItem18 = QtWidgets.QSpacerItem(20, 246, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout_6.addItem(spacerItem18, 1, 0, 1, 1)
-        icon10 = QtGui.QIcon()
-        icon10.addPixmap(QtGui.QPixmap(":/main/license.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
-        self.tab.addTab(self.tab3, icon10, "")
+        icon11 = QtGui.QIcon()
+        icon11.addPixmap(QtGui.QPixmap(":/main/license.png"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.tab.addTab(self.tab3, icon11, "")
         self.gridLayout_2.addWidget(self.tab, 0, 0, 1, 1)
 
         self.retranslateUi(Form)
@@ -810,6 +834,7 @@ class Ui_Form(object):
         self.cash_register.setText(_translate("Form", "Kassa printer:"))
         self.printer_size_label.setText(_translate("Form", "Printer o\'lchami:"))
         self.tax_label_4.setText(_translate("Form", "мм"))
+        self.test_print.setText(_translate("Form", "Test"))
         self.cancel_button.setText(_translate("Form", "Bekor qilish"))
         self.accept_button.setText(_translate("Form", "Saqlash"))
         self.tab.setTabText(self.tab.indexOf(self.tab2), _translate("Form", "Chek"))

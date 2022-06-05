@@ -11,6 +11,7 @@ from web.context_pro import _, languages, get_lang_code
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'SerWibe.settings')
 django.setup()
 
+from utils.payment_receipt import print_receipt_test
 from web.models import Order
 import webbrowser
 from datetime import datetime
@@ -121,6 +122,7 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.open_folder.clicked.connect(self.changeDefaultPath)
         self.has_name.stateChanged.connect(self.change_checkbox_states)
         self.has_logo.stateChanged.connect(self.change_checkbox_states)
+        self.test_print.clicked.connect(self.test_receipt)
         self.access_to_waiter.stateChanged.connect(
             lambda x: self.settings.set(key="access_to_waiter", value=self.access_to_waiter.isChecked()))
 
@@ -153,7 +155,14 @@ class SettingsWidget(QWidget, settings_widget.Ui_Form):
         self.clear_database_btn.setText(_('s_22'))
         self.waiter_access_label.setText(_('s_26'))
         self.logo_title.setText(_('s_25'))
+        self.test_print.setText(_('s_30'))
         self.check_license()
+
+    def test_receipt(self):
+        print_receipt_test(self.has_logo.isChecked(), self.default_path.text(), self.has_name.isChecked(),
+                           self.company_name_edit.text(), self.address_edit.text(), self.number_edit.text(),
+                           self.tax_edit.value(), self.last_message_edit.text(), self.printer.currentText(),
+                           self.printer_width_edit.value())
 
     def clear_database(self):
         alert_dialog = QMessageBox()

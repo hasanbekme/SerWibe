@@ -499,7 +499,8 @@ settings_window = {
         "s_26": "Ofitsantga ruxsat:",
         "s_27": "Logotip kiritilmagan!!!",
         "s_28": "Tashkilot nomi kiritilmagan!!!",
-        "s_29": "Fayl ochishda xatolik yuz berdi!!!"
+        "s_29": "Fayl ochishda xatolik yuz berdi!!!",
+        "s_30": "Test",
     },
     'uzk': {
         "s_0": "Созламалар",
@@ -531,6 +532,7 @@ settings_window = {
         "s_27": "Логотип киритилмаган!!!",
         "s_28": "Ташкилот номи киритилмаган!!!",
         "s_29": "Файл очишда хатолик юз берди!!!",
+        "s_30": "Тест",
     }
 }
 
