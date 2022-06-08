@@ -3,7 +3,7 @@
 
 #define MyAppName "SerWibe"
 #define MyAppVersion "1.0"
-#define MyAppPublisher "SerWibe Inc."
+#define MyAppPublisher "SerWibe group."
 #define MyAppURL "https://www.serwibe.uz/"
 #define MyAppExeName "SerWibe.exe"
 
@@ -22,9 +22,9 @@ DefaultDirName={autopf}\{#MyAppName}
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputDir=C:\Users\algop\Desktop
+OutputDir=C:\Users\SerWibe7\Desktop
 OutputBaseFilename=SerWibe 1.0 Setup
-SetupIconFile=C:\Users\algop\Desktop\SerWibe\icon.ico
+SetupIconFile=C:\Users\SerWibe7\Desktop\serwibe\SerWibe\icon.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -41,9 +41,9 @@ Name: {userappdata}\SerWibe\media
 Name: {userappdata}\SerWibe\media\reports
 
 [Files]
-Source: "C:\Users\algop\Desktop\SerWibe\dist\SerWibe\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\algop\Desktop\SerWibe\dist\SerWibe\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\algop\Desktop\SerWibe\db.sqlite3"; DestDir: "{userappdata}\SerWibe"
+Source: "C:\Users\SerWibe7\Desktop\serwibe\SerWibe\dist\SerWibe\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\SerWibe7\Desktop\serwibe\SerWibe\dist\SerWibe\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\SerWibe7\Desktop\serwibe\SerWibe\db.sqlite3"; DestDir: "{userappdata}\SerWibe"
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
